@@ -1,0 +1,40 @@
+version: '3.'
+
+services:
+  chanter:
+    # uses: node:9.8.0
+    build: .
+    volumes:
+    - .:/opt/node/app/chanter
+    ports:
+    - 3000:3000
+    environment:
+    - NODE_ENV=development
+    - PORT=3000
+    - MYSQL_HOST=localhost
+    - MYSQL_USER=chanter.local
+    - MYSQL_PASSWORD=unlucky
+    command: 'true'
+    depends_on:
+    - mysql
+    - redis
+    container_name: ch.chanter.webapp
+
+  mysql:
+    # uses mysql:14.14
+    build: ./docker/mysql
+    ports:
+    - 3380:3306
+    volumes:
+    - mysql-data:/var/lib/mysql
+    environment:
+    - MYSQL_ROOT_PASSWORD=root
+    container_name: ch.chanter.mysql
+
+volumes:
+  mysql-data:
+
+networks:
+  default:
+    external:
+      name: local
