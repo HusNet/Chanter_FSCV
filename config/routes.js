@@ -13,4 +13,10 @@ module.exports = function(app, router) {
         home.index(req, res, next);
     });
 
+    //login routes
+    let login = require('../app/controllers/login_ctrl');
+    router.get('/login', function(req, res, next) {
+        login.login(req, res, next);
+    });
+
 };

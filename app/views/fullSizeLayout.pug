@@ -1,0 +1,27 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport', content='width=device-width')
+        link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
+
+        title= title
+        block css
+            link(href='/public/css/materialize.min.css', rel='stylesheet')
+
+        block jsHead
+
+    body
+        nav.mapnav
+            div(class='nav-wrapper teal lighten-2')
+                ul(id='nav-mobile', class='left')
+                    li
+                        a(href='/')
+                            i(class='material-icons') menu
+
+                a(href='#', class='right brand-logo', style='margin-right:15px') Circular Economy Lab Network
+        block content
+
+
+        block jsBody
+            script(src='/public/js/materialize.min.js')
