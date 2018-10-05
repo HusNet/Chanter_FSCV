@@ -19,4 +19,10 @@ module.exports = function(app, router) {
         login.login(req, res, next);
     });
 
+    //contact routes
+    let contact = require('../app/controllers/contact_ctrl');
+    router.get('/contact', function(req, res, next) {
+        contact.contact(req, res, next);
+    });
+
 };

@@ -1,18 +1,23 @@
-let path = require('path'),
+const path = require('path'),
     rootPath = path.normalize(__dirname + '/..'),
-    env = process.env.NODE_ENV || 'development';
+    env = process.env.NODE_ENV || 'development',
+    db = require('mysql');
 
-let db_dev = 'mysql://app:unlucky@localhost/dbchanter-dev';
-let db_prod = 'myysql://app:unlucky@localhost/dbchanter-prod';
 
-let config = {
+const config = {
     development: {
         root: rootPath,
         app: {
             name: 'chanter-dev'
         },
         port: 3000,
-        db: db_dev
+        db: db.createConnection({
+            host: "localhost",
+            database: "chanter-dev",
+            user: "dev",
+            password: "unlucky",
+            multipleStatements: "true"
+        }),
     },
 
     production: {
@@ -20,8 +25,7 @@ let config = {
         app: {
             name: 'chanter-webapp'
         },
-        port: 3000,
-        db: db_prod
+        port: 80,
     }
 };
 
