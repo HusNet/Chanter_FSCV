@@ -1,6 +1,7 @@
 FROM node:9.8.0
 
 # Create app directory
+RUN mkdir -p /opt/node/app/chanter
 WORKDIR /opt/node/app/chanter
 
 # Install app dependencies
@@ -10,7 +11,7 @@ COPY package*.json ./
 RUN npm install
 
 # Bundle app source
-COPY . . 
+COPY . ./
 
 EXPOSE 3000
 
