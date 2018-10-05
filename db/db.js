@@ -10,7 +10,7 @@ const sequilize = new Sequilize('chanter', 'root', '', {
     }
 });
 
-static function dbConnect() {
+function dbConnect() {
     sequilize
         .authenticate()
         .then(() => {
