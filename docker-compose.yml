@@ -1,4 +1,4 @@
-version: '3.'
+version: '3.3'
 
 services:
   chanter:
@@ -12,12 +12,11 @@ services:
     - NODE_ENV=development
     - PORT=3000
     - MYSQL_HOST=localhost
-    - MYSQL_USER=chanter.local
+    - MYSQL_USER=chanter
     - MYSQL_PASSWORD=unlucky
     command: 'true'
     depends_on:
     - mysql
-    - redis
     container_name: ch.chanter.webapp
 
   mysql:
