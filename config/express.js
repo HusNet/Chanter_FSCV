@@ -1,5 +1,6 @@
 const
     express = require('express'),
+    session = require('express-session'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
     methodOverride = require('method-override'),
@@ -14,7 +15,18 @@ module.exports = function(app, config) {
     app.use('/public', express.static(config.root + '/public'));
     app.use(logger('dev'));
     app.use(logger('common', {stream: fs.createWriteStream('./logs/access.log', {flags: 'a'})}));
+    app.use(session({
+        key: 'sid',
+        secret: 'shhhhh, this is secret',
+        resave: true,
+        saveUninitialized: true,
+        cookie: {
+            secure: true,
+            maxAge: -1 // infinite
+        }
+    }));
     app.use(cookieParser());
+    app.use(bodyParser.urlencoded({ extended: false }));
     app.use(bodyParser.json());
     app.use(methodOverride());
 };

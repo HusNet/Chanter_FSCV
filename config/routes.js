@@ -18,11 +18,20 @@ module.exports = function(app, router) {
     router.get('/login', function(req, res, next) {
         login.login(req, res, next);
     });
+    router.post('/login', function(req, res, next) {
+        login.login_do(req, res, next);
+    });
 
     //contact routes
     let contact = require('../app/controllers/contact_ctrl');
     router.get('/contact', function(req, res, next) {
         contact.contact(req, res, next);
+    });
+
+    //admin routes
+    let admin = require('../app/controllers/admin_ctrl');
+    router.get('/admin', function(req, res, next) {
+        admin.index(req, res, next);
     });
 
 };
