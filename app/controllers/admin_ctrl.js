@@ -4,7 +4,7 @@ const C = require('../../config/appConfig');
 
 exports.login = function(req, res, next) {
 
-    res.render('/admin', {
+    res.render('admin/login', {
         title: 'Connexion to the FSCV administration panel',
         body: 'Please enter your information :'
     });
@@ -64,7 +64,7 @@ exports.login_do = function(req, res, next) {
 
         console.log('Client connected ...');
 
-        res.redirect('/admin/index');
+        res.redirect('admin/index');
 
     }
     else {
