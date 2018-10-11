@@ -91,6 +91,7 @@ CREATE TABLE Location (
   UNIQUE INDEX (LocationId));
 CREATE TABLE Admin_Login (
   AdminId int(10) NOT NULL AUTO_INCREMENT,
+  Username varchar(32) NOT NULL,
   Password varchar(32) NOT NULL, 
   UserId int(10) NOT NULL,
   PRIMARY KEY (AdminId),
@@ -118,7 +119,7 @@ ALTER TABLE Admin_Login ADD CONSTRAINT FKAdminLogin256912 FOREIGN KEY (UserId) R
 
 
 INSERT INTO `User` (Firstname, Lastname, Chorus) VALUES ('Michel', 'Blanc', 0);
-INSERT INTO Admin_Login (Password, UserId) SELECT 'unlucky', UserId FROM `User` WHERE Firstname = 'Michel' AND Lastname = 'Blanc'; 
+INSERT INTO Admin_Login (Username, Password, UserId) SELECT 'root', 'unlucky', UserId FROM `User` WHERE Firstname = 'Michel' AND Lastname = 'Blanc';
 
 
 
