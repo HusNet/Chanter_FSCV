@@ -1,3 +1,4 @@
+const C = require('../../config/appConfig');
 
 exports.login = function(req, res, next) {
 
@@ -9,6 +10,8 @@ exports.login = function(req, res, next) {
 };
 
 exports.login_do = function(req, res, next) {
+
+
     let id = req.body.id;
     let pwd = req.body.pwd;
     let session = req.session;
@@ -19,46 +22,60 @@ exports.login_do = function(req, res, next) {
     // TODO : Request DB
 
     // TODO : get clients infos from db when db query done
-        let client = {
-            _id: 1234,
-            name: 'Michel',
-            pwd: 4321,
-        };
+/*
+    C.db.connect(function(err){
+        if (err) throw err;
 
-        if(client._id != id){
+        console.log("Connected!");
 
-            res.render('login/error', {
+        let sql = "SELECT * FROM Users";
 
-                title: 'Error while connecting',
-                errorMessage:  'User unknown'
-            });
+        C.db.query(sql, function (err, result) {
+            if (err) throw err;
 
-            console.log("User unknown");
-        }
-        else if (client.pwd == pwd){
-            session.clientId = client._id;
-            session.save();
-            console.log(client);
-            console.log(session.clientId);
+            console.log("Result: " + result);
+*/
 
-            // TODO : save client and check errors
+            let client = {
+                _id: 1234,
+                name: 'Michel',
+                pwd: 4321,
+            };
 
-            console.log('Client connected ...');
+            if(client._id != id){
 
-            res.redirect('/admin');
+                res.render('login/error', {
 
-        }
-        else {
-            res.render('login/error', {
+                    title: 'Error while connecting',
+                    errorMessage:  'User unknown'
+                });
 
-                title: 'Error while connecting',
-                errorMessage:  'Wrong password'
-            });
+                console.log("User unknown");
+            }
+            else if (client.pwd == pwd){
+                session.clientId = client._id;
+                session.save();
+                console.log(client);
+                console.log(session.clientId);
 
-            console.log("Password wrong for user " + id);
-        }
+                // TODO : save client and check errors
 
+                console.log('Client connected ...');
 
-    // TODO : catch db query errors
+                res.redirect('/admin');
 
+            }
+            else {
+                res.render('login/error', {
+
+                    title: 'Error while connecting',
+                    errorMessage:  'Wrong password'
+                });
+
+                console.log("Password wrong for user " + id);
+            }
+
+        /*});
+
+    });*/
 };
