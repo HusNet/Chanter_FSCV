@@ -14,6 +14,10 @@ module.exports = function(app, config) {
     app.set('view engine', 'pug');
     app.use('/public', express.static(config.root + '/public'));
     app.use(logger('dev'));
+    let dir = './logs';
+    if (!fs.existsSync(dir)){
+        fs.mkdirSync(dir);
+    }
     app.use(logger('common', {stream: fs.createWriteStream('./logs/access.log', {flags: 'a'})}));
     app.use(session({
         key: 'sid',
