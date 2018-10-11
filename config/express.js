@@ -1,5 +1,6 @@
 const
     express = require('express'),
+    i18n = require('i18n-express'),
     session = require('express-session'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
@@ -29,4 +30,9 @@ module.exports = function(app, config) {
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(bodyParser.json());
     app.use(methodOverride());
+    app.use(i18n({
+        translationsPath: path.join(__dirname, './public/locales'),
+        siteLangs: ['fr', 'de'],
+        textsVarName: 'translation'
+    }));
 };
