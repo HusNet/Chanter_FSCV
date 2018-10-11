@@ -13,14 +13,6 @@ module.exports = function(app, router) {
         home.index(req, res, next);
     });
 
-    //login routes
-    let login = require('../app/controllers/login_ctrl');
-    router.get('/login', function(req, res, next) {
-        login.login(req, res, next);
-    });
-    router.post('/login', function(req, res, next) {
-        login.login_do(req, res, next);
-    });
 
     //contact routes
     let contact = require('../app/controllers/contact_ctrl');
@@ -28,10 +20,20 @@ module.exports = function(app, router) {
         contact.contact(req, res, next);
     });
 
-    //admin routes
+    //admin login
     let admin = require('../app/controllers/admin_ctrl');
     router.get('/admin', function(req, res, next) {
+        admin.login(req, res, next);
+    });
+
+    router.post('/admin', function(req, res, next) {
+        admin.login_do(req, res, next);
+    });
+
+    router.get('/admin/index', function(req, res, next) {
         admin.index(req, res, next);
     });
+
+
 
 };
