@@ -30,7 +30,7 @@ module.exports = function(app, router) {
         admin.login_do(req, res, next);
     });
 
-    router.get('/admin/index', function(req, res, next) {
+    router.get('/admin/dashboard', function(req, res, next) {
         admin.index(req, res, next);
     });
 

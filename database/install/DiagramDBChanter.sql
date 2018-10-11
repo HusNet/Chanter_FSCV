@@ -95,7 +95,8 @@ CREATE TABLE Admin_Login (
   Password varchar(32) NOT NULL, 
   UserId int(10) NOT NULL,
   PRIMARY KEY (AdminId),
-  UNIQUE INDEX (AdminId));
+  UNIQUE INDEX (AdminId),
+  UNIQUE INDEX (Username));
 ALTER TABLE TypeChoir ADD CONSTRAINT FKTypeChoir624557 FOREIGN KEY (SubTypeId) REFERENCES TypeChoir (TypeChoirId);
 ALTER TABLE Choir_Groups ADD CONSTRAINT FKChoir_Grou410022 FOREIGN KEY (ChoirId) REFERENCES Choir (ChoirId);
 ALTER TABLE Choir_Groups ADD CONSTRAINT FKChoir_Grou123541 FOREIGN KEY (GroupsId) REFERENCES Groups (GroupsId);

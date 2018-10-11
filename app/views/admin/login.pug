@@ -12,11 +12,10 @@ block content
                 // login form
                 form(method='POST' action='/admin')
                     div.form-group
-                        label(for='id') Id:
-                        input#id.form-control(type='text', placeholder='Id' name='id' required)
-                        label(for='pwd') Password:
+                        label(for='username') Username:
+                        input#username.form-control(type='text', placeholder='Username' name='username' required)
+                        label(for='pwd') Password
                         input#pwd.form-control(type='password', placeholder='********' name='pwd' required)
                     button.btn.btn-primary(type='submit') Log in
-
 
                 block error
