@@ -97,3 +97,59 @@ exports.menu = function (req, res, next) {
     });
 
 };
+
+exports.page = function(req, res, next) {
+
+    res.render('admin/page', {
+        title: 'page : page',
+
+    });
+};
+
+exports.choir = function(req, res, next) {
+
+    res.render('admin/choir', {
+        title: 'page choeur',
+
+    });
+};
+
+exports.person = function(req, res, next) {
+
+    res.render('admin/person', {
+        title: 'page : personnes',
+
+    });
+};
+
+exports.news = function(req, res, next) {
+
+    res.render('admin/news', {
+        title: 'page : news',
+
+    });
+};
+
+exports.service = function(req, res, next) {
+
+    res.render('admin/service', {
+        title: 'page : services',
+
+    });
+};
+
+exports.user = function(req, res, next) {
+
+    res.render('admin/user', {
+        title: 'page : user',
+
+    });
+};
+
+exports.export = function(req, res, next) {
+
+    res.render('admin/export', {
+        title: 'page : export',
+
+    });
+};

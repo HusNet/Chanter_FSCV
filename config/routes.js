@@ -38,4 +38,32 @@ module.exports = function(app, router) {
         admin.menu(req, res, next);
     });
 
+    router.get('/admin/page', function(req, res, next) {
+        admin.page(req, res, next);
+    });
+
+    router.get('/admin/choir', function(req, res, next) {
+        admin.choir(req, res, next);
+    });
+
+    router.get('/admin/person', function(req, res, next) {
+        admin.person(req, res, next);
+    });
+
+    router.get('/admin/news', function(req, res, next) {
+        admin.news(req, res, next);
+    });
+
+    router.get('/admin/service', function(req, res, next) {
+        admin.service(req, res, next);
+    });
+
+    router.get('/admin/user', function(req, res, next) {
+        admin.user(req, res, next);
+    });
+
+    router.get('/admin/export', function(req, res, next) {
+        admin.export(req, res, next);
+    });
+
 };
