@@ -4,5 +4,14 @@
   "ABOUT": "Übrigens",
   "LOGIN": "Anmeldung",
   "HOMEPAGE": "Startseite",
-  "FSCV": "FSCV"
+  "FSCV": "FSCV",
+  "DASHBOARD": "Dashboard",
+  "MENU": "Menü",
+  "PAGE": "Seite",
+  "CHOIR": "Chor",
+  "PERSON": "Person",
+  "NEWS": "Nachrichten",
+  "SERVICE": "Service",
+  "USER": "Benutzer",
+  "EXPORT": "Export"
 }

@@ -34,6 +34,8 @@ module.exports = function(app, router) {
         admin.index(req, res, next);
     });
 
-
+    router.get('/admin/menu', function(req, res, next) {
+        admin.menu(req, res, next);
+    });
 
 };

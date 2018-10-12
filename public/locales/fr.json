@@ -4,5 +4,14 @@
   "ABOUT": "A propos",
   "LOGIN": "Connexion",
   "HOMEPAGE": "Page d'accueil",
-  "FSCV": "FSCV"
+  "FSCV": "FSCV",
+  "DASHBOARD": "Tableau de bord",
+  "MENU": "Menu",
+  "PAGE": "Page",
+  "CHOIR": "Choeur",
+  "PERSON": "Personne",
+  "NEWS": "News",
+  "SERVICE": "Services",
+  "USER": "Utilisateur",
+  "EXPORT": "Export"
 }

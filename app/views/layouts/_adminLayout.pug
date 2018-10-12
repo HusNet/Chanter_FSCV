@@ -1,5 +1,5 @@
-    doctype html
-html(lang='en')
+doctype html
+html(lang='fr')
     head
         meta(charset='UTF-8')
         meta(name='viewport', content='width=device-width')
@@ -19,23 +19,27 @@ html(lang='en')
                         a(href='#')
                             i(class='material-icons') menu
                     li
-                        a(href='#') Dashboard
+                        a(href='/admin/index') #{translation.DASHBOARD}
                     li
-                        a(href='#') Menu
+                        a(href='/admin/menu') #{translation.MENU}
                     li
-                        a(href='#') Pages
+                        a(href='/admin/page') #{translation.PAGE}
                     li
-                        a(href='#') Choeur
+                        a(href='/admin/choir') #{translation.CHOIR}
                     li
-                        a(href='#') Personnes
+                        a(href='/admin/person') #{translation.PERSON}
                     li
-                        a(href='#') News
+                        a(href='/admin/news') #{translation.NEWS}
                     li
-                        a(href='#') Services
+                        a(href='/admin/service') #{translation.SERVICE}
                     li
-                        a(href='#') User
+                        a(href='/admin/user') #{translation.USER}
                     li
-                        a(href='#') Export
+                        a(href='/admin/export') #{translation.EXPORT}
+                    li
+                        a(href='?clang=fr') fr
+                    li
+                        a(href='?clang=de') de
 
 
                 a(href='/', class='right brand-logo', style='margin-right:15px') Chanter.ch

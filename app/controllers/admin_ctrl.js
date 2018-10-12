@@ -85,7 +85,15 @@ exports.login_do = function(req, res, next) {
 exports.index = function(req, res, next) {
 
     res.render('admin/index', {
-        title: 'Bienvenue sur l\'admin du site Chanter.ch',
-
+        title: 'Bienvenue sur l\'admin du site Chanter.ch'
     });
+
+};
+
+exports.menu = function (req, res, next) {
+
+    res.render('admin/menu', {
+        title: 'Add/Edit/Remove Menu'
+    });
+
 };
