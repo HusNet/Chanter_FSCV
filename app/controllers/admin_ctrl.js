@@ -13,7 +13,6 @@ exports.login = function(req, res, next) {
 
 exports.login_do = function(req, res, next) {
 
-
     let id = req.body.id;
     let pwd = req.body.pwd;
     let session = req.session;

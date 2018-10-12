@@ -1,3 +1,8 @@
 {
-  "WELCOME_MSG": "Bienvenue sur le site Chanter.ch"
+  "WELCOME_MSG": "Bienvenue sur le site Chanter.ch",
+  "CONTACT": "Contact",
+  "ABOUT": "A propos",
+  "LOGIN": "Connexion",
+  "HOMEPAGE": "Page d'accueil",
+  "FSCV": "FSCV"
 }

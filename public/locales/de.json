@@ -1,3 +1,8 @@
 {
-  "WELCOME_MSG": "Willkommen"
+  "WELCOME_MSG": "Willkommen",
+  "CONTACT": "Kontakt",
+  "ABOUT": "Übrigens",
+  "LOGIN": "Anmeldung",
+  "HOMEPAGE": "Startseite",
+  "FSCV": "FSCV"
 }
