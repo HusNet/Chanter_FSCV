@@ -13,7 +13,8 @@ CREATE TABLE `User` (
   UNIQUE INDEX (UserId));
 CREATE TABLE Choir (
   ChoirId       int(10) NOT NULL AUTO_INCREMENT, 
-  Name          varchar(255) NOT NULL, 
+  RoleId	int(10),
+  Name          varchar(255) NOT NULL,
   FundationYear date, 
   Church        tinyint(1) DEFAULT 0 NOT NULL, 
   Gospel        tinyint(1) DEFAULT 0 NOT NULL, 
@@ -74,11 +75,11 @@ CREATE TABLE Role (
 CREATE TABLE Choir_Committee (
   ChoirId int(10) NOT NULL, 
   RoleId  int(10) NOT NULL, 
-  Year    date) NOT NULL;
+  Year    date NOT NULL);
 CREATE TABLE Group_Committee (
   GroupsId int(10) NOT NULL, 
   RoleId   int(10) NOT NULL, 
-  Year     date);
+  Year     date NOT NULL);
 CREATE TABLE User_Role (
   UserId int(10) NOT NULL, 
   RoleId int(10) NOT NULL);
@@ -118,22 +119,4 @@ ALTER TABLE Admin_Login ADD CONSTRAINT FKAdminLogin256912 FOREIGN KEY (UserId) R
 
 
 INSERT INTO `User` (Firstname, Lastname, Chorus) VALUES ('Michel', 'Blanc', 0);
-INSERT INTO Admin_Login (Password, UserId) SELECT 'unlucky', UserId FROM `User` WHERE Firstname = 'Michel' AND Lastname = 'Blanc'; 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+INSERT INTO Admin_Login (Password, UserId) SELECT 'unlucky', UserId FROM `User` WHERE Firstname = 'Michel' AND Lastname = 'Blanc';
