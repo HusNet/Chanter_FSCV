@@ -28,16 +28,18 @@ module.exports = function(app, config) {
         secret: 'shhhhh, this is secret',
         resave: true,
         saveUninitialized: true,
-        cookie: {
+        /*cookie: {
             secure: true,
             maxAge: -1 // infinite
-        }
+        }*/
     }));
    app.use(i18n({
         translationsPath: path.join(__dirname, '../public/locales'),
         siteLangs: ['fr', 'de'],
         defaultLocale: 'fr',
-        textsVarName: 'translation'
+        textsVarName: 'translation',
+
+
     }));
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(bodyParser.json());

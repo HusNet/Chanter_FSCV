@@ -13,5 +13,17 @@
   "NEWS": "News",
   "SERVICE": "Services",
   "USER": "Utilisateur",
-  "EXPORT": "Export"
+  "EXPORT": "Export",
+  "LASTNAME": "Nom de famille",
+  "FIRSTNAME": "Prénom",
+  "PHONEPRIVATE": "Téléphone portable",
+  "PHONEPROF": "Téléphone professionnel",
+  "CHORUS": "Choeur",
+  "EMAIL": "Email",
+  "ROLE" : "Role",
+  "ADD" : "AJOUTER",
+  "UPDATE" : "MODIFIER",
+  "DELETE" : "SUPPRIMER"
+
+
 }
