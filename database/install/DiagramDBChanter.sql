@@ -120,8 +120,9 @@ ALTER TABLE Admin_Login ADD CONSTRAINT FKAdminLogin256912 FOREIGN KEY (UserId) R
 
 
 INSERT INTO `User` (Firstname, Lastname, Chorus) VALUES ('Michel', 'Blanc', 0);
-INSERT INTO Admin_Login (Username, Password, UserId) SELECT 'root', 'unlucky', UserId FROM `User` WHERE Firstname = 'Michel' AND Lastname = 'Blanc';
-
+INSERT INTO `Admin_Login` (Username, Password, UserId) SELECT 'root', 'unlucky', UserId FROM `User` WHERE Firstname = 'Michel' AND Lastname = 'Blanc';
+INSERT INTO `Role` (Name) VALUES ('SuperAdmin');
+INSERT INTO `User_Role` (RoleId, UserId) SELECT RoleId FROM `Role` WHERE Name = 'SuperAdmin' AND UserId FROM `User` WHERE Firstname = 'Michel' AND Lastname = 'Blanc';
 
 
 

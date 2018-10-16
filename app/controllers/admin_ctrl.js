@@ -6,6 +6,10 @@ const AdminLoginDb = require('../controllers/database/admin_login_db');
 // login page
 exports.login = function(req, res, next) {
 
+    if (req.session) {
+        res.redirect('admin/dashboard');
+    }
+
     res.render('admin/login', {
         title: 'Connexion to the FSCV administration panel',
         body: 'Please enter your information :'
@@ -25,7 +29,6 @@ exports.login_do = function(req, res, next) {
     console.log(username + " is trying to connect");
 
     // DB connection
-    console.log("Connecting to DB");
     C.db.connect(function(err) {
         if (err) throw err;
 
@@ -33,15 +36,12 @@ exports.login_do = function(req, res, next) {
         let query = AdminLoginDb.getByUsername(username);
 
         // querying db
-        console.log("Querying DB");
         C.db.query(query, function (err, rows, fields) {
             if (err) throw(err);
 
             // populate with db output
             if (rows[0] !== `undefined`)
                 adminLogin = new AdminLogin(rows[0]);
-
-            console.log("User password : " + adminLogin.Password);
 
             if(adminLogin === 'undefined'){
 
@@ -54,13 +54,10 @@ exports.login_do = function(req, res, next) {
                 console.log("User unknown");
             }
             else if (adminLogin.Password == pwd){
-                session.userId = adminLogin.userId;
+                session.id = adminLogin.userId;
                 session.save();
-                console.log(session.userId);
 
-                // TODO : save client and check errors
-
-                console.log('Client ' + session.userId + ' connected ...');
+                console.log('Client ' + session.id + ' connected ...');
 
                 res.redirect('admin/dashboard');
 
@@ -81,6 +78,15 @@ exports.login_do = function(req, res, next) {
     });
 };
 
+// logout
+exports.logout_do = function(req, res, next) {
+
+    req.session.destroy();
+
+    res.redirect('home');
+}
+
+
 //affichage de la page admin
 exports.index = function(req, res, next) {
 
@@ -89,3 +95,7 @@ exports.index = function(req, res, next) {
 
     });
 };
+
+function isAdmin(req){
+
+}

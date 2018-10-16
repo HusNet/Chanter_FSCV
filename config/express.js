@@ -19,6 +19,7 @@ module.exports = function(app, config) {
         fs.mkdirSync(dir);
     }
     app.use(logger('common', {stream: fs.createWriteStream('./logs/access.log', {flags: 'a'})}));
+    app.set('trust proxy', 1) // trust first proxy
     app.use(session({
         key: 'sid',
         secret: 'shhhhh, this is secret',
