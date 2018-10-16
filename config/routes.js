@@ -13,7 +13,6 @@ module.exports = function(app, router) {
         home.index(req, res, next);
     });
 
-
     //contact routes
     let contact = require('../app/controllers/contact_ctrl');
     router.get('/contact', function(req, res, next) {
@@ -31,7 +30,7 @@ module.exports = function(app, router) {
     });
 
     router.get('/admin/dashboard', function(req, res, next) {
-        admin.index(req, res, next);
+        admin.dashboard(req, res, next);
     });
 
     router.get('/admin/menu', function(req, res, next) {
@@ -66,4 +65,7 @@ module.exports = function(app, router) {
         admin.export(req, res, next);
     });
 
+    router.get('/admin/logout_do', function(req, res, next) {
+        admin.logout_do(req, res, next);
+    });
 };

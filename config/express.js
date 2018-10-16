@@ -27,12 +27,13 @@ module.exports = function(app, config) {
     app.use(session({
         key: 'sid',
         secret: 'shhhhh, this is secret',
+        authenticated: false,
         resave: true,
         saveUninitialized: true,
-        /*cookie: {
+        cookie: {
             secure: true,
             maxAge: -1 // infinite
-        }*/
+        }
     }));
    app.use(i18n({
         translationsPath: path.join(__dirname, '../public/locales'),
