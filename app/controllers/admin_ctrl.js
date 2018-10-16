@@ -90,8 +90,8 @@ exports.logout_do = function(req, res, next) {
 //affichage de la page admin
 exports.index = function(req, res, next) {
 
-    res.render('admin/index', {
-        title: 'Bienvenue sur l\'admin du site Chanter.ch'
+    res.render('admin/dashboard', {
+        title: 'Bienvenue sur l\'admin du site Chanter.ch',
     });
 
 };
@@ -156,12 +156,9 @@ exports.export = function(req, res, next) {
 
     res.render('admin/export', {
         title: 'page : export',
-    res.render('admin/dashboard', {
-        title: 'Bienvenue sur l\'admin du site Chanter.ch',
-
     });
 };
 
 function isAdmin(req){
 
-}
+};
