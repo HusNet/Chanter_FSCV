@@ -6,7 +6,7 @@ const AdminLoginDb = require('../controllers/database/admin_login_db');
 // login page
 exports.login = function(req, res, next) {
 
-    if (req.session) {
+    if (req.session.authenticated === false) {
         res.redirect('admin/dashboard');
     }
 
@@ -54,8 +54,9 @@ exports.login_do = function(req, res, next) {
                 console.log("User unknown");
             }
             else if (adminLogin.Password == pwd){
-                session.id = adminLogin.userId;
-                session.save();
+                req.session.id = adminLogin.userId;
+                req.session.authenticated = true;
+                req.session.save();
 
                 console.log('Client ' + session.id + ' connected ...');
 
@@ -64,7 +65,6 @@ exports.login_do = function(req, res, next) {
             }
             else {
                 res.render('admin/error', {
-
                     title: 'Error while connecting',
                     errorMessage:  'Wrong password'
                 });
@@ -80,8 +80,8 @@ exports.logout_do = function(req, res, next) {
 
     req.session.destroy();
 
-    res.redirect('home');
-}
+    res.redirect('/');
+};
 
 
 //affichage de la page admin

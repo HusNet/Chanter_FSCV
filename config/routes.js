@@ -65,4 +65,7 @@ module.exports = function(app, router) {
         admin.export(req, res, next);
     });
 
+    router.get('/admin/logout_do', function(req, res, next) {
+        admin.logout_do(req, res, next);
+    });
 };
