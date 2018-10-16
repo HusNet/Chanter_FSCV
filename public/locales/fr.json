@@ -1,0 +1,29 @@
+{
+  "WELCOME_MSG": "Bienvenue sur le site Chanter.ch",
+  "CONTACT": "Contact",
+  "ABOUT": "A propos",
+  "LOGIN": "Connexion",
+  "HOMEPAGE": "Page d'accueil",
+  "FSCV": "FSCV",
+  "DASHBOARD": "Tableau de bord",
+  "MENU": "Menu",
+  "PAGE": "Page",
+  "CHOIR": "Choeur",
+  "PERSON": "Personne",
+  "NEWS": "News",
+  "SERVICE": "Services",
+  "USER": "Utilisateur",
+  "EXPORT": "Export",
+  "LASTNAME": "Nom de famille",
+  "FIRSTNAME": "Prénom",
+  "PHONEPRIVATE": "Téléphone portable",
+  "PHONEPROF": "Téléphone professionnel",
+  "CHORUS": "Choeur",
+  "EMAIL": "Email",
+  "ROLE" : "Role",
+  "ADD" : "AJOUTER",
+  "UPDATE" : "MODIFIER",
+  "DELETE" : "SUPPRIMER"
+
+
+}

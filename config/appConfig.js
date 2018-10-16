@@ -26,7 +26,16 @@ const config = {
             name: 'chanter-webapp'
         },
         port: 80,
+    },
+
+    i18n: {
+        translationsPath: path.join(__dirname, '../public/locales'),
+        siteLangs: ['fr', 'de'],
+        defaultLocale: 'fr',
+        textsVarName: 'translation'
     }
+
+
 };
 
 module.exports = config[env];

@@ -1,0 +1,40 @@
+extends ../layouts/_adminLayout
+
+block content
+
+    h1.display-4.m-b-2 #{translation.PERSON}
+
+    div.form-group
+
+        div(class='row')
+            div(class='column')
+                label #{translation.LASTNAME}:
+                input#lastnameP.form-control(type='text', placeholder='Lastname' name='lastnameP' required)
+
+            div(class='column')
+                label #{translation.FIRSTNAME}:
+                input#firstnameP.form-control(type='text', placeholder='Firstname' name='firstnameP' required)
+
+            div(class='column')
+                label #{translation.PHONEPRIVATE}:
+                input#phonePrivateP.form-control(type='text', placeholder='Phone private' name='phonePrivateP' required)
+
+            div(class='column')
+                label #{translation.PHONEPROF}
+                input#phoneProf.form-control(type='text', placeholder='Phone prof' name='phoneProf' required)
+
+            div(class='column')
+                label #{translation.CHORUS}:
+                input#chorusP.form-control(type='text', placeholder='Chorus' name='chorusP' required)
+
+            div(class='column')
+                label #{translation.EMAIL}:
+                input#emailP.form-control(type='text', placeholder='Email' name='emailP' required)
+
+            div(class='column')
+                label #{translation.ROLE}:
+                input#roleP.form-control(type='text', placeholder='Role' name='roleP' required)
+
+        button.btn.btn-primary(type='submit') #{translation.ADD}
+        button.btn.btn-primary(type='submit') #{translation.UPDATE}
+        button.btn.btn-primary(type='submit') #{translation.DELETE}

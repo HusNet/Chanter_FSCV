@@ -1,5 +1,5 @@
 doctype html
-html(lang='en')
+html(lang='fr')
     head
         meta(charset='UTF-8')
         meta(name='viewport', content='width=device-width')
@@ -8,6 +8,7 @@ html(lang='en')
         title= title
         block css
             link(href='/public/assets/css/materialize.min.css', rel='stylesheet')
+            link(href='/public/assets/css/chanter.css', rel='stylesheet')
 
     body
 
@@ -18,17 +19,25 @@ html(lang='en')
                         a(href='#')
                             i(class='material-icons') menu
                     li
-                        a(href='/') Homepage
+                        a(href='/') #{translation.HOMEPAGE}
                     li
-                        a(href='#') FSCV
+                        a(href='#') #{translation.FSCV}
                     li
-                        a(href='contact') Contact
+                        a(href='contact') #{translation.CONTACT}
                     li
-                        a(href='#') About
+                        a(href='#') #{translation.ABOUT}
                     li
-                        a(href='/admin') Login
+                        a(href='/admin') #{translation.LOGIN}
+                    li
+                        a(href='?clang=fr') fr
+
+                    li
+                        a(href='?clang=de') de
+
+
 
                 a(href='/', class='right brand-logo', style='margin-right:15px') Chanter.ch
+
         div(class='container')
             block content
 

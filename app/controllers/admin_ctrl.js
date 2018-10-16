@@ -90,6 +90,72 @@ exports.logout_do = function(req, res, next) {
 //affichage de la page admin
 exports.index = function(req, res, next) {
 
+    res.render('admin/index', {
+        title: 'Bienvenue sur l\'admin du site Chanter.ch'
+    });
+
+};
+
+exports.menu = function (req, res, next) {
+
+    res.render('admin/menu', {
+        title: 'Add/Edit/Remove Menu'
+    });
+
+};
+
+exports.page = function(req, res, next) {
+
+    res.render('admin/page', {
+        title: 'page : page',
+
+    });
+};
+
+exports.choir = function(req, res, next) {
+
+    res.render('admin/choir', {
+        title: 'page choeur',
+
+    });
+};
+
+exports.person = function(req, res, next) {
+
+    res.render('admin/person', {
+        title: 'page : personnes',
+
+    });
+};
+
+exports.news = function(req, res, next) {
+
+    res.render('admin/news', {
+        title: 'page : news',
+
+    });
+};
+
+exports.service = function(req, res, next) {
+
+    res.render('admin/service', {
+        title: 'page : services',
+
+    });
+};
+
+exports.user = function(req, res, next) {
+
+    res.render('admin/user', {
+        title: 'page : user',
+
+    });
+};
+
+exports.export = function(req, res, next) {
+
+    res.render('admin/export', {
+        title: 'page : export',
     res.render('admin/dashboard', {
         title: 'Bienvenue sur l\'admin du site Chanter.ch',
 
