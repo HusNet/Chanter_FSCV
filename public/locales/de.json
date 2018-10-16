@@ -24,6 +24,7 @@
 
   "ADD" : "Addieren",
   "UPDATE" : "Aktualisieren",
-  "DELETE" : "Löschen"
+  "DELETE" : "Löschen",
+  "LOGOUT" : "Abmeldung"
 
 }

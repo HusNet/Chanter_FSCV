@@ -23,7 +23,6 @@
   "ROLE" : "Role",
   "ADD" : "AJOUTER",
   "UPDATE" : "MODIFIER",
-  "DELETE" : "SUPPRIMER"
-
-
+  "DELETE" : "SUPPRIMER",
+  "LOGOUT" : "Déconnexion"
 }
