@@ -49,6 +49,10 @@ module.exports = function(app, router) {
         admin.person(req, res, next);
     });
 
+    router.post('/admin/person', function(req, res, next) {
+        admin.admin_person_insert(req, res, next);
+    });
+
     router.get('/admin/news', function(req, res, next) {
         admin.news(req, res, next);
     });

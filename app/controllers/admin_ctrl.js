@@ -1,6 +1,8 @@
 const C = require('../../config/appConfig');
 const AdminLogin = require('../models/admin_login');
 const AdminLoginDb = require('../controllers/database/admin_login_db');
+const UserModel = require('../models/user');
+const AdminUserDb = require('../controllers/database/admin_person_db');
 
 
 // login page
@@ -28,9 +30,6 @@ exports.login_do = function(req, res, next) {
 
     console.log(username + " is trying to connect");
 
-    // DB connection
-    C.db.connect(function(err) {
-        if (err) throw err;
 
         // get the query
         let query = AdminLoginDb.getByUsername(username);
@@ -60,7 +59,9 @@ exports.login_do = function(req, res, next) {
 
                 console.log('Client ' + session.id + ' connected ...');
 
+
                 res.redirect('admin/dashboard');
+
 
             }
             else {
@@ -72,10 +73,9 @@ exports.login_do = function(req, res, next) {
                 console.log("Password wrong for user " + adminLogin.Username);
             }
 
-
-
         });
-    });
+
+
 };
 
 // logout
@@ -127,6 +127,47 @@ exports.person = function(req, res, next) {
 
     });
 };
+
+
+
+exports.admin_person_insert = function(req, res, next) {
+
+    let lastname = req.body.lastnameP;
+    let firstname = req.body.firstnameP;
+    let phonePrivate = req.body.phonePrivateP;
+    let phoneProf = req.body.phoneProfP;
+    let email = req.body.emailP;
+    //let startAbo = req.body.startAboP;
+
+    console.log(req.body.startAboP);
+
+    var usermodel = new UserModel({
+        Lastname: lastname,
+        Firstname: firstname,
+        Phone: phonePrivate,
+        PhoneProf: phoneProf,
+        Email: email,
+        //StartAbo: new Date()
+
+    });
+    console.log(" trying to create a new person...");
+
+    console.log(usermodel);
+
+
+    // get the query
+    let query = AdminUserDb.insertNewPerson(usermodel);
+
+    // querying db
+    C.db.query(query, function (err, rows, fields) {
+        if (err) throw(err);
+        console.log("1 record inserted");
+
+    });
+    res.redirect('/admin/person');
+
+};
+
 
 exports.news = function(req, res, next) {
 
