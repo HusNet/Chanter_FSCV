@@ -128,8 +128,6 @@ exports.person = function(req, res, next) {
 };
 
 
-
-
 exports.admin_person_insert = function(req, res, next) {
 
     let lastname = req.body.lastnameP;
