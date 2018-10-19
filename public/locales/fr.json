@@ -14,8 +14,13 @@
   "SERVICE": "Services",
   "USER": "Utilisateur",
   "EXPORT": "Export",
+  "TITLE": "Titre",
+  "CONTENT_NEWS": "Contenu de la news",
+  "ADD_TRANSLATE": "Ajouter une traduction ?",
   "LASTNAME": "Nom de famille",
   "FIRSTNAME": "Prénom",
+  "USERNAME": "Nom d'utilisateur",
+  "PASSWORD": "Mot de passe",
   "PHONEPRIVATE": "Téléphone portable",
   "PHONEPROF": "Téléphone professionnel",
   "CHORUS": "Choeur",
@@ -24,5 +29,7 @@
   "ADD" : "AJOUTER",
   "UPDATE" : "MODIFIER",
   "DELETE" : "SUPPRIMER",
-  "LOGOUT" : "Déconnexion"
+  "LOGOUT" : "Déconnexion",
+  "TITLE_ADMIN_USER": "Ajouter un nouvel utilisateur",
+  "TITLE_ADMIN_NEWS": "Ajouter une news"
 }
