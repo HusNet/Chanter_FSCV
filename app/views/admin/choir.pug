@@ -2,4 +2,131 @@ extends ../layouts/_adminLayout
 
 block content
     h1= title
+    div
+        .row
+            form.col.s12
+                .row
+                    .input-field.col.s6
+                        input#choeur_name.validate(type='text' name='name')
+                        label(for='choeur_name') Nom du choeur
+                    .input-field.col.s6
+                        input#effectif.validate(type='text' name='effectif')
+                        label(for='effectif') Effectif
+                .row
+                    .input-field.col.s2
+                        input#NPA.validate(type='text' name='npa')
+                        label(for='NPA') NPA
+                    .input-field.col.s4
+                        input#lieu.validate(type='text' name='lieu')
+                        label(for='lieu') Lieu
+                    .input-field.col.s4
+                        input#Annee.validate(type='text' name='annee')
+                        label(for='Annee') Année de fondation
 
+                .row
+                    .input-field.col.s8
+                        input#homepage.validate(type='text' name='homepage')
+                        label(for='homepage') Homepage
+                    label Browser Select
+                    select.browser-default.col.s4
+                        option(value='Français', disabled='', selected='', name='langue') Langue
+                        option(value='1') Français
+                        option(value='2') Allemand
+
+                .row
+                    select.browser-default.col.s4
+                        option(value='', disabled='', selected='', name='presidentName') Nom du président
+                        option(value='1') Option 1
+                        option(value='2') Option 2
+                        option(value='3') Option 3
+                    p.col.s2 Adressage du courrier:
+
+                    p.col.s2
+                        label
+                            input(name='lang', type='radio', name='president')
+                            span Président
+                    p.col.s2
+                        label
+                            input(name='lang', type='radio', name='directeur')
+                            span Directeur
+                    p.col.s2
+                        label
+                            input(name='lang', type='radio' name='vide')
+                            span Vide
+
+                .row
+                    select.browser-default.col.s4
+                        option(value='', disabled='', selected='', name='directeurName') Nom du directeur
+                        option(value='1') Option 1
+                        option(value='2') Option 2
+                        option(value='3') Option 3
+                    p.col.s2 Type de Choeur:
+                    select.browser-default.col.s2
+                        option(value='', disabled='', selected='', name='typeChoeur')
+                        option(value='1') Option 1
+                        option(value='2') Option 2
+                        option(value='3') Option 3
+                    p.col.s2
+                        label
+                            input(name='lang', type='checkbox')
+                            span Ch.d'église
+                    p.col.s2
+                        label
+                            input(name='lang', type='checkbox')
+                            span Ch.Gospel
+
+                .row
+                    select.browser-default.col.s4
+                        option(value='', disabled='', selected='',name='caissier') Nom du caissier
+                        option(value='1') Option 1
+                    p.col.s2 Fédération cantonale:
+                    p.col.s2
+                        label
+                            input(name='lang', type='radio', name='fscv')
+                            span Membre FSCV
+                    p.col.s3
+                        label
+                            input(name='lang', type='radio', name='nonfscv')
+                            span Non-Membre FSCV
+
+                .row
+                    select.browser-default.col.s4
+                        option(value='', disabled='', selected='') Nom du Secrétariat
+                        option(value='1') Option 1
+                    .input-field.col.s6
+                        input#dateFSCV.validate(type='text')
+                        label(for='dateFSCV') Date entrée Fédération
+
+                .row
+                    p.col.s3 Union Suisse des Chorales:
+                    p.col.s2
+                        label
+                            input(name='lang', type='radio')
+                            span Membre USC
+                    p.col.s3
+                        label
+                            input(name='lang', type='radio')
+                            span Non-Membre USC
+                    .input-field.col.s4
+                        input#dateUSC.validate(type='text')
+                        label(for='dateUSC') Date entrée USC
+
+                .row
+                    select.browser-default.col.s4
+                        option(value='', disabled='', selected='') Grpmts + Régions
+                        option(value='1') Option 1
+                    .input-field.col.s4
+                        input#dateGrpmts.validate(type='text')
+                        label(for='dateGrpmts') Date entrée Grpmts
+                .row
+                    select.browser-default.col.s4
+                        option(value='', disabled='', selected='') Décanat(OCV)
+                        option(value='1') Option 1
+                    .input-field.col.s4
+                        input#GrpmtsAutre.validate(type='text')
+                        label(for='GrpmtsAutre') Autre Grpmts (OCV par ex.)
+
+                .row
+                    .input-field.col.s12
+                        input#remarque.validate(type='text')
+                        label(for='remarque') Remarques

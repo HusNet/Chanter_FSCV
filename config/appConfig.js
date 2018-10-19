@@ -12,7 +12,7 @@ const config = {
         },
         port: 3000,
         db: db.createConnection({
-            host: "mariadb",        // need the container name
+            host: "mariadb",
             database: "chanter-dev",
             user: "dev",
             password: "unlucky",
