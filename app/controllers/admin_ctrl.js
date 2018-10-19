@@ -6,9 +6,8 @@ const AdminLoginDb = require('../controllers/database/admin_login_db');
 // login page
 exports.login = function(req, res, next) {
 
-    if (req.session.authenticated === false) {
-        res.redirect('admin/dashboard');
-    }
+    if (req.session.user)
+        res.redirect('/admin/dashboard');
 
     res.render('admin/login', {
         title: 'Connexion to the FSCV administration panel',
@@ -54,14 +53,10 @@ exports.login_do = function(req, res, next) {
                 console.log("User unknown");
             }
             else if (adminLogin.Password == pwd){
-                req.session.id = adminLogin.userId;
-                req.session.authenticated = true;
-                req.session.save();
-
-                console.log('Client ' + session.id + ' connected ...');
-
-                res.redirect('admin/dashboard');
-
+                session.user = adminLogin.AdminId;
+                session.save(function() {
+                    res.redirect('admin/dashboard');
+                });
             }
             else {
                 res.render('admin/error', {
@@ -71,25 +66,26 @@ exports.login_do = function(req, res, next) {
 
                 console.log("Password wrong for user " + adminLogin.Username);
             }
-
-
-
         });
     });
 };
 
 // logout
 exports.logout_do = function(req, res, next) {
-
-    req.session.destroy();
-
-    res.redirect('/');
+    req.session.reload(function(err) {
+        console.log("\n\nlogoutReload");
+        console.log(req.session);
+        req.session.destroy(function(err) {
+            console.log("\n\nLogoutDestroy");
+            console.log(req.session);
+            res.redirect('/');
+        })
+    });
 };
 
 
 //affichage de la page admin
 exports.dashboard = function(req, res, next) {
-
     res.render('admin/dashboard', {
         title: 'Bienvenue sur l\'admin du site Chanter.ch',
     });
@@ -159,6 +155,11 @@ exports.export = function(req, res, next) {
     });
 };
 
-function isAdmin(req){
-
+exports.authenticationTest = function(req, res, next){
+    req.session.reload(function(err) {
+        console.log("\n\nAuthentication");
+        console.log(req.session);
+        if(typeof req.session.user === 'undefined')
+            res.redirect('/admin');
+    })
 };
