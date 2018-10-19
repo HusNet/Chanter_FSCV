@@ -188,4 +188,4 @@ exports.export = function(req, res, next) {
 
 function isAdmin(req){
 
-}
+};

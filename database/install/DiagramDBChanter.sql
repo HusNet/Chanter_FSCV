@@ -120,10 +120,12 @@ ALTER TABLE Location ADD CONSTRAINT FKLocation474649 FOREIGN KEY (LocationId) RE
 ALTER TABLE Admin_Login ADD CONSTRAINT FKAdminLogin256912 FOREIGN KEY (UserId) REFERENCES `User` (UserId);
 
 
-INSERT INTO `User` (Firstname, Lastname, Chorus) VALUES ('Michel', 'Blanc', 0);
-INSERT INTO `Admin_Login` (Username, Password, UserId) SELECT 'root', 'unlucky', UserId FROM `User` WHERE Firstname = 'Michel' AND Lastname = 'Blanc';
+INSERT INTO `User` (Firstname, Lastname, Chorus) VALUES ('Juste', 'Le Blanc', 0);
+INSERT INTO `Admin_Login` (Username, Password, UserId) SELECT 'root', 'unlucky', UserId FROM `User` WHERE Firstname = 'Juste' AND Lastname = 'Le Blanc';
 INSERT INTO `Role` (Name) VALUES ('SuperAdmin');
-INSERT INTO `User_Role` (RoleId, UserId) SELECT RoleId FROM `Role` WHERE Name = 'SuperAdmin' AND UserId FROM `User` WHERE Firstname = 'Michel' AND Lastname = 'Blanc';
+SET @roleId = (SELECT RoleId FROM `Role` WHERE Name = 'SuperAdmin');
+SET @userId = (SELECT UserId FROM `User` WHERE Firstname = 'Juste' AND Lastname = 'Le Blanc');
+INSERT INTO `User_Role` (RoleId, UserId) VALUES (@roleId, @userId);
 
 
 
