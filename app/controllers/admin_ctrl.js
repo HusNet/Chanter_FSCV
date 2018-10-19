@@ -1,7 +1,7 @@
 const C = require('../../config/appConfig');
 const AdminLogin = require('../models/admin_login');
 const AdminLoginDb = require('../controllers/database/admin_login_db');
-
+const AdminAddNewsDb = require('../controllers/database/admin_page_db');
 
 // login page
 exports.login = function(req, res, next) {
@@ -131,10 +131,29 @@ exports.person = function(req, res, next) {
 exports.news = function(req, res, next) {
 
     res.render('admin/news', {
-        title: 'page : news',
 
     });
 };
+
+exports.add_news = function(req, res, next) {
+
+    let title = req.body.title;
+    let content = 'test'; // req.body.editor
+    let user = 1; // req.session.user
+    let date_publish = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    let lang = 'fr';
+    let idPageLang = 1; // id de la meme page mais dans l'autre langue
+    let isNews = 1; // req.body.isNews
+
+    let query = AdminAddNewsDb.addNews(title, content, user, date_publish, lang, idPageLang, isNews);
+
+    C.db.query(query, function (err, rows, fields) {
+        if (err) throw(err);
+        console.log("1 record inserted");
+
+    });
+    res.redirect('/admin/news');
+}
 
 exports.service = function(req, res, next) {
 
@@ -147,9 +166,17 @@ exports.service = function(req, res, next) {
 exports.user = function(req, res, next) {
 
     res.render('admin/user', {
-        title: 'page : user',
+        title: 'Ajouter un utilisateur',
 
     });
+};
+
+exports.add_user = function(req, res, next) {
+
+    res.render('admin/user', {
+        title: 'Utilisateur ajouté avec succès'
+    });
+
 };
 
 exports.export = function(req, res, next) {
@@ -161,4 +188,4 @@ exports.export = function(req, res, next) {
 
 function isAdmin(req){
 
-}
+};

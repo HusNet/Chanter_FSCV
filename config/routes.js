@@ -53,6 +53,10 @@ module.exports = function(app, router) {
         admin.news(req, res, next);
     });
 
+    router.post('/admin/news', function(req, res, next) {
+        admin.add_news(req, res, next);
+    });
+
     router.get('/admin/service', function(req, res, next) {
         admin.service(req, res, next);
     });
@@ -60,6 +64,10 @@ module.exports = function(app, router) {
     router.get('/admin/user', function(req, res, next) {
         admin.user(req, res, next);
     });
+
+    router.post('/admin/user', function (req, res, next) {
+        admin.add_user(req, res, next);
+    })
 
     router.get('/admin/export', function(req, res, next) {
         admin.export(req, res, next);
