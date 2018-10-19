@@ -59,9 +59,17 @@ module.exports = function(app, router) {
         admin.person(req, res, next);
     });
 
+    router.post('/admin/person', function(req, res, next) {
+        admin.admin_person_insert(req, res, next);
+    });
+
     router.get('/admin/news', function(req, res, next) {
         admin.authenticationTest(req, res, next);
         admin.news(req, res, next);
+    });
+
+    router.post('/admin/news', function(req, res, next) {
+        admin.add_news(req, res, next);
     });
 
     router.get('/admin/service', function(req, res, next) {
@@ -73,6 +81,10 @@ module.exports = function(app, router) {
         admin.authenticationTest(req, res, next);
         admin.user(req, res, next);
     });
+
+    router.post('/admin/user', function (req, res, next) {
+        admin.add_user(req, res, next);
+    })
 
     router.get('/admin/export', function(req, res, next) {
         admin.authenticationTest(req, res, next);

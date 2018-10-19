@@ -1,6 +1,9 @@
 const C = require('../../config/appConfig');
 const AdminLogin = require('../models/admin_login');
 const AdminLoginDb = require('../controllers/database/admin_login_db');
+const AdminAddNewsDb = require('../controllers/database/admin_page_db');
+const UserModel = require('../models/user');
+const AdminUserDb = require('../controllers/database/admin_person_db');
 
 
 // login page
@@ -27,9 +30,6 @@ exports.login_do = function(req, res, next) {
 
     console.log(username + " is trying to connect");
 
-    // DB connection
-    C.db.connect(function(err) {
-        if (err) throw err;
 
         // get the query
         let query = AdminLoginDb.getByUsername(username);
@@ -66,8 +66,9 @@ exports.login_do = function(req, res, next) {
 
                 console.log("Password wrong for user " + adminLogin.Username);
             }
+
         });
-    });
+
 };
 
 // logout
@@ -111,7 +112,7 @@ exports.page = function(req, res, next) {
 exports.choir = function(req, res, next) {
 
     res.render('admin/choir', {
-        title: 'page choeur',
+        title: 'Gérer vos choeurs',
 
     });
 };
@@ -124,13 +125,72 @@ exports.person = function(req, res, next) {
     });
 };
 
+
+exports.admin_person_insert = function(req, res, next) {
+
+    let lastname = req.body.lastnameP;
+    let firstname = req.body.firstnameP;
+    let phonePrivate = req.body.phonePrivateP;
+    let phoneProf = req.body.phoneProfP;
+    let email = req.body.emailP;
+    //let startAbo = req.body.startAboP;
+
+    console.log(req.body.startAboP);
+
+    var usermodel = new UserModel({
+        Lastname: lastname,
+        Firstname: firstname,
+        Phone: phonePrivate,
+        PhoneProf: phoneProf,
+        Email: email,
+        //StartAbo: new Date()
+
+    });
+    console.log(" trying to create a new person...");
+
+    console.log(usermodel);
+
+
+    // get the query
+    let query = AdminUserDb.insertNewPerson(usermodel);
+
+    // querying db
+    C.db.query(query, function (err, rows, fields) {
+        if (err) throw(err);
+        console.log("1 record inserted");
+
+    });
+    res.redirect('/admin/person');
+
+};
+
+
 exports.news = function(req, res, next) {
 
     res.render('admin/news', {
-        title: 'page : news',
 
     });
 };
+
+exports.add_news = function(req, res, next) {
+
+    let title = req.body.title;
+    let content = 'test'; // req.body.editor
+    let user = 1; // req.session.user
+    let date_publish = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    let lang = 'fr';
+    let idPageLang = 1; // id de la meme page mais dans l'autre langue
+    let isNews = 1; // req.body.isNews
+
+    let query = AdminAddNewsDb.addNews(title, content, user, date_publish, lang, idPageLang, isNews);
+
+    C.db.query(query, function (err, rows, fields) {
+        if (err) throw(err);
+        console.log("1 record inserted");
+
+    });
+    res.redirect('/admin/news');
+}
 
 exports.service = function(req, res, next) {
 
@@ -143,9 +203,17 @@ exports.service = function(req, res, next) {
 exports.user = function(req, res, next) {
 
     res.render('admin/user', {
-        title: 'page : user',
+        title: 'Ajouter un utilisateur',
 
     });
+};
+
+exports.add_user = function(req, res, next) {
+
+    res.render('admin/user', {
+        title: 'Utilisateur ajouté avec succès'
+    });
+
 };
 
 exports.export = function(req, res, next) {

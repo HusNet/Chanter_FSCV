@@ -5,10 +5,8 @@ CREATE TABLE `User` (
   Firstname  varchar(128) NOT NULL, 
   Phone      varchar(20), 
   PhoneProf  varchar(20), 
-  Email      varchar(64), 
-  NbDiapason int(1), 
-  StartAbo   date, 
-  Chorus     tinyint(1) DEFAULT 0 NOT NULL, 
+  Email      varchar(64),
+  StartAbo   date,
   PRIMARY KEY (UserId), 
   UNIQUE INDEX (UserId));
 CREATE TABLE Choir (

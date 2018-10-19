@@ -14,17 +14,24 @@
   "SERVICE": "Service",
   "USER": "Benutzer",
   "EXPORT": "Export",
+  "TITLE": "Titel",
+  "CONTENT_NEWS": "Inhalt der Nachrichten",
+  "ADD_TRANSLATE": "Eine Übersetzung hinzufügen?",
   "LASTNAME": "Nachname",
   "FIRSTNAME": "Vorname",
+  "USERNAME": "Benutzername",
+  "PASSWORD": "Passwort",
   "PHONEPRIVATE": "Handy-Nummer",
   "PHONEPROF": "Geschäftstelefonnummer",
-  "CHORUS": "Chor",
   "EMAIL": "E-Mail",
   "ROLE" : "Rolle",
-
+  "STARTABO": "Abonnementbeginn",
   "ADD" : "Addieren",
   "UPDATE" : "Aktualisieren",
   "DELETE" : "Löschen",
-  "LOGOUT" : "Abmeldung"
+  "LOGOUT" : "Abmeldung",
+
+  "TITLE_ADMIN_USER": "Einen neuen Benutzer hinzufügen",
+  "TITLE_ADMIN_NEWS": "Eine Nachricht hinzufügen"
 
 }
