@@ -112,7 +112,7 @@ exports.page = function(req, res, next) {
 exports.choir = function(req, res, next) {
 
     res.render('admin/choir', {
-        title: 'Gérer vos choeurs',
+        title: 'page : choeurs',
 
     });
 };

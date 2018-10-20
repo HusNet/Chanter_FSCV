@@ -1,132 +1,141 @@
 extends ../layouts/_adminLayout
 
 block content
-    h1= title
-    div
+
+    h1 #{translation.TITLE_ADMIN_CHOIR}
+
+
+    form.col.s12
         .row
-            form.col.s12
-                .row
-                    .input-field.col.s6
-                        input#choeur_name.validate(type='text' name='name')
-                        label(for='choeur_name') Nom du choeur
-                    .input-field.col.s6
-                        input#effectif.validate(type='text' name='effectif')
-                        label(for='effectif') Effectif
-                .row
-                    .input-field.col.s2
-                        input#NPA.validate(type='text' name='npa')
-                        label(for='NPA') NPA
-                    .input-field.col.s4
-                        input#lieu.validate(type='text' name='lieu')
-                        label(for='lieu') Lieu
-                    .input-field.col.s4
-                        input#Annee.validate(type='text' name='annee')
-                        label(for='Annee') Année de fondation
+            .input-field.col.s6
+                label(for='choeur_name') #{translation.CHOIR_NAME}
+                input#choeur_name.form-control(type='text' name='choeur_name' required)
+            .input-field.col.s6
+                label(for='effectif') #{translation.EFFECTIVE}
+                input#effectif.form-control(type='text' name='effectif' required)
 
-                .row
-                    .input-field.col.s8
-                        input#homepage.validate(type='text' name='homepage')
-                        label(for='homepage') Homepage
-                    label Browser Select
-                    select.browser-default.col.s4
-                        option(value='Français', disabled='', selected='', name='langue') Langue
-                        option(value='1') Français
-                        option(value='2') Allemand
+        .row
+            .input-field.col.s2
+                label(for='NPA') #{translation.POSTE_CODE}
+                input#NPA.form-control(type='text' name='npa' required)
+            .input-field.col.s4
+                label(for='lieu') #{translation.LOCATION}
+                input#lieu.form-control(type='text' name='lieu' required)
 
-                .row
-                    select.browser-default.col.s4
-                        option(value='', disabled='', selected='', name='presidentName') Nom du président
-                        option(value='1') Option 1
-                        option(value='2') Option 2
-                        option(value='3') Option 3
-                    p.col.s2 Adressage du courrier:
+            .input-field.col.s4
+                label(for='foundation') #{translation.DATE_FOUNDATION}
+                input#foundation.form-control(type='text' name='foundation' required)
 
-                    p.col.s2
-                        label
-                            input(name='lang', type='radio', name='president')
-                            span Président
-                    p.col.s2
-                        label
-                            input(name='lang', type='radio', name='directeur')
-                            span Directeur
-                    p.col.s2
-                        label
-                            input(name='lang', type='radio' name='vide')
-                            span Vide
 
-                .row
-                    select.browser-default.col.s4
-                        option(value='', disabled='', selected='', name='directeurName') Nom du directeur
-                        option(value='1') Option 1
-                        option(value='2') Option 2
-                        option(value='3') Option 3
-                    p.col.s2 Type de Choeur:
-                    select.browser-default.col.s2
-                        option(value='', disabled='', selected='', name='typeChoeur')
-                        option(value='1') Option 1
-                        option(value='2') Option 2
-                        option(value='3') Option 3
-                    p.col.s2
-                        label
-                            input(name='lang', type='checkbox')
-                            span Ch.d'église
-                    p.col.s2
-                        label
-                            input(name='lang', type='checkbox')
-                            span Ch.Gospel
+        .row
+            .input-field.col.s8
+                label(for='homepage') #{translation.HOMEPAGES}
+                input#homepage.form-control(type='text' name='homepage' required)
 
-                .row
-                    select.browser-default.col.s4
-                        option(value='', disabled='', selected='',name='caissier') Nom du caissier
-                        option(value='1') Option 1
-                    p.col.s2 Fédération cantonale:
-                    p.col.s2
-                        label
-                            input(name='lang', type='radio', name='fscv')
-                            span Membre FSCV
-                    p.col.s3
-                        label
-                            input(name='lang', type='radio', name='nonfscv')
-                            span Non-Membre FSCV
+            p.col.s2
+                label
+                    input(name='fr', type='checkbox')
+                    span #{translation.FRENCH}
+            p.col.s2
+                label
+                    input(name='de', type='checkbox')
+                    span #{translation.GERMAN}
 
-                .row
-                    select.browser-default.col.s4
-                        option(value='', disabled='', selected='') Nom du Secrétariat
-                        option(value='1') Option 1
-                    .input-field.col.s6
-                        input#dateFSCV.validate(type='text')
-                        label(for='dateFSCV') Date entrée Fédération
+        .row
+            select.browser-default.col.s4
+                option(value='', disabled='', selected='', name='presidentName') #{translation.NAME_PRESIDENT}
+                option(value='1') Option 1
 
-                .row
-                    p.col.s3 Union Suisse des Chorales:
-                    p.col.s2
-                        label
-                            input(name='lang', type='radio')
-                            span Membre USC
-                    p.col.s3
-                        label
-                            input(name='lang', type='radio')
-                            span Non-Membre USC
-                    .input-field.col.s4
-                        input#dateUSC.validate(type='text')
-                        label(for='dateUSC') Date entrée USC
+            p.col.s2 #{translation.MAIL_ADDRESSING}
 
-                .row
-                    select.browser-default.col.s4
-                        option(value='', disabled='', selected='') Grpmts + Régions
-                        option(value='1') Option 1
-                    .input-field.col.s4
-                        input#dateGrpmts.validate(type='text')
-                        label(for='dateGrpmts') Date entrée Grpmts
-                .row
-                    select.browser-default.col.s4
-                        option(value='', disabled='', selected='') Décanat(OCV)
-                        option(value='1') Option 1
-                    .input-field.col.s4
-                        input#GrpmtsAutre.validate(type='text')
-                        label(for='GrpmtsAutre') Autre Grpmts (OCV par ex.)
+            p.col.s2
+                label
+                    input(name='president', type='radio')
+                    span #{translation.PRESIDENT}
+            p.col.s2
+                label
+                    input(name='director', type='radio')
+                    span #{translation.DIRECTOR}
+            p.col.s2
+                label
+                    input(name='empty',type='radio')
+                    span #{translation.EMPTY}
+                    // à garder le champ vide??
 
-                .row
-                    .input-field.col.s12
-                        input#remarque.validate(type='text')
-                        label(for='remarque') Remarques
+        .row
+            select.browser-default.col.s4
+                option(value='', disabled='', selected='', name='directorName') #{translation.NAME_DIRECTOR}
+                option(value='1') Option 1
+
+            select.browser-default.col.s2
+                option(value='', disabled='', selected='', name='typeChoeur') #{translation.TYPE_CHOIR}
+                option(value='1') Option 1
+
+            p.col.s2
+                label
+                    input(name='church_leader', type='checkbox')
+                    span #{translation.CHURCH_LEADER}
+            p.col.s3
+                label
+                    input(name='gospel_leader', type='checkbox')
+                    span #{translation.GOSPEL_LEADER}
+
+        .row
+            select.browser-default.col.s4
+                option(value='', disabled='', selected='',name='cashier') #{translation.NAME_CASHIER}
+                option(value='1') Option 1
+            p.col.s2 #{translation.CANTONAL_FEDERATION}
+            p.col.s2
+                label
+                    input(type='radio', name='fscv')
+                    span #{translation.MEMBER_FSCV}
+            p.col.s3
+                label
+                    input(type='radio', name='noFSCV')
+                    span #{translation.NOT_FSCV}
+
+        .row
+            select.browser-default.col.s4
+                option(value='', disabled='', selected='') #{translation.NAME_SECRETARIAT}
+                option(value='1') Option 1
+            .input-field.col.s6
+                label(for='dateFSCV') #{translation.DATE_FSCV}
+                input#dateFSCV.form-control(type='text' name='dateFSCV' )
+
+
+        .row
+            p.col.s3 #{translation.SWISS_CHOIR_UNION}:
+            p.col.s2
+                label
+                    input(type='radio', name='USC')
+                    span #{translation.MEMBER_USC}
+            p.col.s3
+                label
+                    input(type='radio', name='noUSC')
+                    span #{translation.NOT_USC}
+            .input-field.col.s4
+                label(for='dateUSC') #{translation.DATE_USC}
+                input#dateUSC.form-control(type='text' name='dateUSC')
+
+
+        .row
+            select.browser-default.col.s4
+                option(value='', disabled='', selected='') #{translation.GRPMTS_REGION}
+                option(value='1') Option 1
+            .input-field.col.s4
+                input#dateGrpmts.datepicker(type='date', placeholder='')
+                label(for='dateGrpmts') #{translation.DATE_GRPMTS}
+        .row
+            select.browser-default.col.s4
+                option(value='', disabled='', selected='') #{translation.DECANAT}
+                option(value='1') Option 1
+            .input-field.col.s4
+                label(for='otherGrpmts') #{translation.OTHER_GRPMTS}
+                input#otherGrpmts.form-control(type='text' name='otherGrpmts')
+
+
+        .row
+            .input-field.col.s12
+                label(for='comments') #{translation.COMMENTS}
+                input#comments.form-control(type='text' name='comments')
+
