@@ -98,6 +98,18 @@ CREATE TABLE Admin_Login (
   PRIMARY KEY (AdminId),
   UNIQUE INDEX (AdminId),
   UNIQUE INDEX (Username));
+CREATE TABLE Page (
+  PageId int(10) NOT NULL AUTO_INCREMENT,
+  Title VARCHAR(45) NOT NULL,
+  Content LONGTEXT NOT NULL,
+  Published_date date NOT NULL,
+  Updated_date date DEFAULT NULL,
+  Lang varchar(2) NOT NULL,
+  IdPageLang int(11),
+  IsNews tinyint(1) NOT NULL,
+  AdminId int(11) NOT NULL,
+  PRIMARY KEY (PageId),
+  UNIQUE INDEX (PageId));
 ALTER TABLE TypeChoir ADD CONSTRAINT FKTypeChoir624557 FOREIGN KEY (SubTypeId) REFERENCES TypeChoir (TypeChoirId);
 ALTER TABLE Choir_Groups ADD CONSTRAINT FKChoir_Grou410022 FOREIGN KEY (ChoirId) REFERENCES Choir (ChoirId);
 ALTER TABLE Choir_Groups ADD CONSTRAINT FKChoir_Grou123541 FOREIGN KEY (GroupsId) REFERENCES Groups (GroupsId);
@@ -118,6 +130,7 @@ ALTER TABLE User_Role ADD CONSTRAINT FKUser_Role58648 FOREIGN KEY (RoleId) REFER
 ALTER TABLE Location ADD CONSTRAINT FKLocation496233 FOREIGN KEY (LocationId) REFERENCES `User` (UserId);
 ALTER TABLE Location ADD CONSTRAINT FKLocation474649 FOREIGN KEY (LocationId) REFERENCES Choir (ChoirId);
 ALTER TABLE Admin_Login ADD CONSTRAINT FKAdminLogin256912 FOREIGN KEY (UserId) REFERENCES `User` (UserId);
+ALTER TABLE Page ADD CONSTRAINT FKPage265487 FOREIGN KEY (AdminId) REFERENCES `Admin_Login` (AdminId);
 
 
 INSERT INTO `User` (Firstname, Lastname, Chorus) VALUES ('Juste', 'Le Blanc', 0);
