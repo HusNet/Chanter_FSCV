@@ -5,10 +5,8 @@ CREATE TABLE `User` (
   Firstname  varchar(128) NOT NULL, 
   Phone      varchar(20), 
   PhoneProf  varchar(20), 
-  Email      varchar(64), 
-  NbDiapason int(1), 
-  StartAbo   date, 
-  Chorus     tinyint(1) DEFAULT 0 NOT NULL, 
+  Email      varchar(64),
+  StartAbo   date,
   PRIMARY KEY (UserId), 
   UNIQUE INDEX (UserId));
 CREATE TABLE Choir (
@@ -141,6 +139,17 @@ SET @userId = (SELECT UserId FROM `User` WHERE Firstname = 'Juste' AND Lastname 
 INSERT INTO `User_Role` (RoleId, UserId) VALUES (@roleId, @userId);
 
 
+
+INSERT INTO `Role` (Name, Picture) VALUES ('Director', null);
+INSERT INTO `Role` (Name, Picture) VALUES ('Director_2', null);
+INSERT INTO `Role` (Name, Picture) VALUES ('President', null);
+INSERT INTO `Role` (Name, Picture) VALUES ('Secretary', null);
+INSERT INTO `Role` (Name, Picture) VALUES ('Admin', null);
+INSERT INTO `Role` (Name, Picture) VALUES ('WebMaster', null);
+INSERT INTO `Role` (Name, Picture) VALUES ('Editor', null);
+INSERT INTO `Role` (Name, Picture) VALUES ('Translator', null);
+INSERT INTO `Role` (Name, Picture) VALUES ('DataManager', null);
+INSERT INTO `Role` (Name, Picture) VALUES ('NewsletterManager', null);
 
 
 

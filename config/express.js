@@ -27,12 +27,11 @@ module.exports = function(app, config) {
     app.use(session({
         key: 'sid',
         secret: 'shhhhh, this is secret',
-        authenticated: false,
-        resave: true,
-        saveUninitialized: true,
+        resave: false,
+        saveUninitialized: false,
         cookie: {
-            secure: true,
-            maxAge: -1 // infinite
+            secure: false,
+            maxAge: null // infinite
         }
     }));
    app.use(i18n({
@@ -47,5 +46,10 @@ module.exports = function(app, config) {
     app.use(bodyParser.json());
     app.use(methodOverride());
 
-
+    app.use((req, res, next) => {
+        if (req.cookies.user_sid && !req.session.user) {
+            res.clearCookie('sid');
+        }
+        next();
+    });
 };

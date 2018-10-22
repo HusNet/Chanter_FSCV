@@ -4,37 +4,74 @@ block content
 
     h1.display-4.m-b-2 #{translation.PERSON}
 
-    form(method='POST' action='/choir')
+    form(method='POST' action='/admin/person')
         div.form-group
 
             div(class='row')
                 div(class='column')
-                    label #{translation.LASTNAME}:
+                    label(for='lastnameP') #{translation.LASTNAME}:
                     input#lastnameP.form-control(type='text', placeholder='Lastname' name='lastnameP' required)
 
                 div(class='column')
-                    label #{translation.FIRSTNAME}:
+                    label(for='firstnameP') #{translation.FIRSTNAME}:
                     input#firstnameP.form-control(type='text', placeholder='Firstname' name='firstnameP' required)
 
                 div(class='column')
-                    label #{translation.PHONEPRIVATE}:
+                    label(for='phonePrivateP') #{translation.PHONEPRIVATE}:
                     input#phonePrivateP.form-control(type='text', placeholder='Phone private' name='phonePrivateP' required)
 
                 div(class='column')
-                    label #{translation.PHONEPROF}
-                    input#phoneProf.form-control(type='text', placeholder='Phone prof' name='phoneProf' required)
+                    label(for='phoneProfP') #{translation.PHONEPROF}
+                    input#phoneProfP.form-control(type='text', placeholder='Phone prof' name='phoneProf' required)
 
                 div(class='column')
-                    label #{translation.CHORUS}:
-                    input#chorusP.form-control(type='text', placeholder='Chorus' name='chorusP' required)
-
-                div(class='column')
-                    label #{translation.EMAIL}:
+                    label(for='emailP') #{translation.EMAIL}:
                     input#emailP.form-control(type='text', placeholder='Email' name='emailP' required)
 
                 div(class='column')
+                    label(for='startAboP') #{translation.STARTABO}:
+                    input#startAboP.form-control(type='date', placeholder='Abo' name='startaboP')
+
+                div(class='column')
                     label #{translation.ROLE}:
-                    input#roleP.form-control(type='text', placeholder='Role' name='roleP' required)
+                    p
+                    label
+                        input(name='presidentP', type='checkbox')
+                        span #{translation.PRESIDENT}
+                    p
+                    label
+                        input(name='directorP', type='checkbox')
+                        span #{translation.DIRECTOR}
+                    p
+                    label
+                        input(name='directorP', type='checkbox')
+                        span #{translation.CASHIER}
+                    p
+                        label
+                            input(name='directorP', type='checkbox')
+                            span #{translation.SECRETARY}
+                        p
+                            label
+                                input(name='directorP', type='checkbox')
+                                span #{translation.COMITE}
+                        p
+                            label
+                                input(name='directorP', type='checkbox')
+                                span #{translation.AUTRE}
+
+                    //input#roleNameP.form-control(list='roleslist', name='roleP')
+                    //datalist#roleslist
+                        option SuperAdmin
+                        option Director
+                        option Director
+                        option Director
+                        option Director
+
+
+
+
+
+
 
             button.btn.btn-primary(type='submit') #{translation.ADD}
             button.btn.btn-primary(type='submit') #{translation.UPDATE}

@@ -21,8 +21,13 @@ module.exports = function(app, router) {
 
     //admin login
     let admin = require('../app/controllers/admin_ctrl');
+
     router.get('/admin', function(req, res, next) {
         admin.login(req, res, next);
+    });
+
+    router.get('/admin/logout_do', function(req, res, next) {
+        admin.logout_do(req, res, next);
     });
 
     router.post('/admin', function(req, res, next) {
@@ -30,26 +35,36 @@ module.exports = function(app, router) {
     });
 
     router.get('/admin/dashboard', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
         admin.dashboard(req, res, next);
     });
 
     router.get('/admin/menu', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
         admin.menu(req, res, next);
     });
 
     router.get('/admin/page', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
         admin.page(req, res, next);
     });
 
     router.get('/admin/choir', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
         admin.choir(req, res, next);
     });
 
     router.get('/admin/person', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
         admin.person(req, res, next);
     });
 
+    router.post('/admin/person', function(req, res, next) {
+        admin.admin_person_insert(req, res, next);
+    });
+
     router.get('/admin/news', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
         admin.news(req, res, next);
     });
 
@@ -58,10 +73,12 @@ module.exports = function(app, router) {
     });
 
     router.get('/admin/service', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
         admin.service(req, res, next);
     });
 
     router.get('/admin/user', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
         admin.user(req, res, next);
     });
 
@@ -70,10 +87,8 @@ module.exports = function(app, router) {
     })
 
     router.get('/admin/export', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
         admin.export(req, res, next);
     });
 
-    router.get('/admin/logout_do', function(req, res, next) {
-        admin.logout_do(req, res, next);
-    });
 };
