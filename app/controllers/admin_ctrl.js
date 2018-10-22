@@ -195,13 +195,11 @@ exports.add_news = function(req, res, next) {
     });
 
     let query = AdminAddNewsDb.addNews(news);
-    //let query = AdminAddNewsDb.addNews(title, content, user, date_publish, lang, idPageLang, isNews);
 
     C.db.query(query, function (err, rows, fields) {
         if (err) throw(err);
-        console.log("1 record inserted");
-
     });
+
     res.redirect('/admin/news');
 }
 
