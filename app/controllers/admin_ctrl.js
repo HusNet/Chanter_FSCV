@@ -3,6 +3,7 @@ const AdminLogin = require('../models/admin_login');
 const AdminLoginDb = require('../controllers/database/admin_login_db');
 const AdminAddNewsDb = require('../controllers/database/admin_page_db');
 const UserModel = require('../models/user');
+const PageModel = require('../models/page');
 const AdminUserDb = require('../controllers/database/admin_person_db');
 
 
@@ -182,7 +183,19 @@ exports.add_news = function(req, res, next) {
     let idPageLang = 1; // id de la meme page mais dans l'autre langue
     let isNews = 1; // req.body.isNews
 
-    let query = AdminAddNewsDb.addNews(title, content, user, date_publish, lang, idPageLang, isNews);
+    let news = new PageModel({
+        Title: title,
+        Content: content,
+        AdminId: user,
+        Published_date: date_publish,
+        Updated_date: date_publish,
+        Lang: lang,
+        IsNews: isNews,
+        IdPageLang: idPageLang
+    });
+
+    let query = AdminAddNewsDb.addNews(news);
+    //let query = AdminAddNewsDb.addNews(title, content, user, date_publish, lang, idPageLang, isNews);
 
     C.db.query(query, function (err, rows, fields) {
         if (err) throw(err);
