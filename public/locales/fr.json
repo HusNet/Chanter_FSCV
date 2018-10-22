@@ -66,5 +66,11 @@
   "GRPMTS_REGION":"Grpmts + Régions",
   "DECANAT":" Décanat(OCV)",
   "OTHER_GRPMTS":"Autre Grpmts (OCV par ex.)",
-  "COMMENTS": "Remarques"
+  "COMMENTS": "Remarques",
+  "PRESIDENT": "Président",
+  "DIRECTOR": "Directeur",
+  "CASHIER": "Caissier",
+  "SECRETARY": "Secrétaire",
+  "COMITE": "Comité",
+  "AUTRE": "Autre"
 }

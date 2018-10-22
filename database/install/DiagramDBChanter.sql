@@ -127,6 +127,17 @@ INSERT INTO `User_Role` (RoleId, UserId) VALUES (@roleId, @userId);
 
 
 
+INSERT INTO `Role` (Name, Picture) VALUES ('Director', null);
+INSERT INTO `Role` (Name, Picture) VALUES ('Director_2', null);
+INSERT INTO `Role` (Name, Picture) VALUES ('President', null);
+INSERT INTO `Role` (Name, Picture) VALUES ('Secretary', null);
+INSERT INTO `Role` (Name, Picture) VALUES ('Admin', null);
+INSERT INTO `Role` (Name, Picture) VALUES ('WebMaster', null);
+INSERT INTO `Role` (Name, Picture) VALUES ('Editor', null);
+INSERT INTO `Role` (Name, Picture) VALUES ('Translator', null);
+INSERT INTO `Role` (Name, Picture) VALUES ('DataManager', null);
+INSERT INTO `Role` (Name, Picture) VALUES ('NewsletterManager', null);
+
 
 
 
