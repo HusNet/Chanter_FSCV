@@ -342,7 +342,8 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `chanter-dev`.`Menu_has_Page` (
   `Menu_idMenu` INT NULL,
   `Page_PageId` INT(10) NULL,
-  PRIMARY KEY (`Menu_idMenu`, `Page_PageId`),
+  `SubMenu_idMenu` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`Menu_idMenu`, `Page_PageId`, `SubMenu_idMenu`),
   INDEX `fk_Menu_has_Page_Page1_idx` (`Page_PageId` ASC),
   INDEX `fk_Menu_has_Page_Menu1_idx` (`Menu_idMenu` ASC),
   CONSTRAINT `fk_Menu_has_Page_Menu1`
