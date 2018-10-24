@@ -83,6 +83,7 @@ module.exports = function(app, router) {
     });
 
     router.post('/admin/user', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
         admin.add_user(req, res, next);
     })
 
