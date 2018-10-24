@@ -33,6 +33,8 @@
   "LOGOUT" : "Déconnexion",
   "TITLE_ADMIN_USER": "Ajouter un nouvel utilisateur",
   "TITLE_ADMIN_NEWS": "Ajouter une news",
+  "FR": "Français",
+  "DE": "Allemand",
 
   "TITLE_ADMIN_CHOIR": "Ajouter un nouveau choeur",
   "CHOIR_NAME": "Nom du choeur",

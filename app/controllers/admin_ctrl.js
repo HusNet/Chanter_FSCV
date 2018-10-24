@@ -203,28 +203,45 @@ exports.news = function(req, res, next) {
 
 exports.add_news = function(req, res, next) {
 
-    let title = req.body.title;
-    let content = 'test'; // req.body.editor
+    let titleFr = req.body.titlefr;
+    let titleDe = req.body.titlede;
+    let contentFr = req.body.contentfr;
+    let contentDe = req.body.contentde;
     let user = 1; // req.session.user
     let date_publish = new Date().toISOString().slice(0, 19).replace('T', ' ');
-    let lang = 'fr';
     let idPageLang = 1; // id de la meme page mais dans l'autre langue
     let isNews = 1; // req.body.isNews
 
-    let news = new PageModel({
-        Title: title,
-        Content: content,
+    let newsFr = new PageModel({
+        Title: titleFr,
+        Content: contentFr,
         AdminId: user,
         Published_date: date_publish,
         Updated_date: date_publish,
-        Lang: lang,
+        Lang: 'fr',
         IsNews: isNews,
         IdPageLang: idPageLang
     });
 
-    let query = AdminPageDb.addNews(news);
+    let newsDe = new PageModel({
+        Title: titleDe,
+        Content: contentDe,
+        AdminId: user,
+        Published_date: date_publish,
+        Updated_date: date_publish,
+        Lang: 'de',
+        IsNews: isNews,
+        IdPageLang: idPageLang
+    });
 
-    C.db.query(query, function (err, rows, fields) {
+    let queryFr = AdminPageDb.addNews(newsFr);
+    let queryDe = AdminPageDb.addNews(newsDe);
+
+    C.db.query(queryFr, function (err, rows, fields) {
+        if (err) throw(err);
+    });
+
+    C.db.query(queryDe, function (err, rows, fields) {
         if (err) throw(err);
     });
 
