@@ -88,5 +88,11 @@
   "ERNEN":"Ernen",
   "CLEAR":"Réinitialiser",
   "COMITE": "Comité",
-  "AUTRE": "Autre"
+  "AUTRE": "Autre",
+  "TITLE_ADMIN_MENU": "Menu",
+  "IS_MAIN": "est le menu principal",
+  "ADD_MENU": "Ajouter un menu",
+  "UPDATE_MENU": "Modifier un menu",
+  "DELETE_MENU": "Supprimer un menu",
+  "SELECT_MENU": "Sélectionnez le menu à modifier"
 }

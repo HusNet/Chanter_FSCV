@@ -1,0 +1,20 @@
+extends menu
+
+block add_menu
+
+    form(method='POST' action='/admin/menu/add', id='add_menu')
+        div.form-group
+
+            div(class='row')
+                div(class='column')
+                    label(for='add_title') #{translation.TITLE}:
+                    input#add_title.form-control(type='text', placeholder='Title' name='title' required)
+
+                div(class='column')
+                    p
+                    label
+                        input(name='mainMenu', type='checkbox')
+                        span #{translation.IS_MAIN}
+
+        button.btn.btn-primary(type='submit') #{translation.ADD}
+

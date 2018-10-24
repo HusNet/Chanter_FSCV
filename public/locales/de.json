@@ -88,6 +88,11 @@
   "ERNEN":"Ernen",
   "CLEAR":"Zurücksetzen",
   "COMITE": "Bord",
-  "AUTRE": "Andere"
-
+  "AUTRE": "Andere",
+  "TITLE_ADMIN_MENU": "Menü",
+  "IS_MAIN": "ist der Hauptmenü",
+  "ADD_MENU": "Menü hinzufügen",
+  "UPDATE_MENU": "Menü veränderung",
+  "DELETE_MENU": "Menü entfernen",
+  "SELECT_MENU": "Wählen Sie den Menü"
 }

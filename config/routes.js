@@ -9,18 +9,19 @@ module.exports = function(app, router) {
 
     //home routes
     let home = require('../app/controllers/home_ctrl');
+    //admin login
+    let admin = require('../app/controllers/admin_ctrl');
+    //contact routes
+    let contact = require('../app/controllers/contact_ctrl');
+    let adminMenu = require('../app/controllers/admin_menu_ctrl');
+
     router.get('/', function(req, res, next) {
         home.index(req, res, next);
     });
 
-    //contact routes
-    let contact = require('../app/controllers/contact_ctrl');
     router.get('/contact', function(req, res, next) {
         contact.contact(req, res, next);
     });
-
-    //admin login
-    let admin = require('../app/controllers/admin_ctrl');
 
     router.get('/admin', function(req, res, next) {
         admin.login(req, res, next);
@@ -37,11 +38,6 @@ module.exports = function(app, router) {
     router.get('/admin/dashboard', function(req, res, next) {
         admin.authenticationTest(req, res, next);
         admin.dashboard(req, res, next);
-    });
-
-    router.get('/admin/menu', function(req, res, next) {
-        admin.authenticationTest(req, res, next);
-        admin.menu(req, res, next);
     });
 
     router.get('/admin/page', function(req, res, next) {
@@ -85,11 +81,40 @@ module.exports = function(app, router) {
     router.post('/admin/user', function (req, res, next) {
         admin.authenticationTest(req, res, next);
         admin.add_user(req, res, next);
-    })
+    });
 
     router.get('/admin/export', function(req, res, next) {
         admin.authenticationTest(req, res, next);
         admin.export(req, res, next);
     });
+
+// *** MENU ROUTES
+
+    router.get('/admin/menu', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminMenu.menu(req, res, next);
+    });
+
+    router.get('/admin/menu/add', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        res.render('admin/menu/menu_add');
+    });
+
+    router.post('/admin/menu/add', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminMenu.insertMenu(req, res, next);
+    });
+
+    router.get('/admin/menu/update', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminMenu.getAllMenus(req, res, next);
+    });
+
+    router.get('/admin/menu/delete', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminMenu.getAllMenus(req, res, next);
+    });
+
+// *** END
 
 };

@@ -1,0 +1,19 @@
+extends menu
+
+block delete_menu
+
+    form(method='POST' action='/admin/menu', id='delete_menu', style='display:none;')
+        div.form-group
+
+            div(class='row')
+                div(class='column')
+                    label(for='delete_title') #{translation.TITLE}:
+                    input#delete_title.form-control(type='text', placeholder='Title' name='title' required)
+
+                div(class='column')
+                    p
+                    label
+                        input(name='mainMenu', type='checkbox')
+                        span #{translation.IS_MAIN}
+
+        button.btn.btn-primary(type='submit') #{translation.DELETE}

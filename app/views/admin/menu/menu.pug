@@ -1,0 +1,22 @@
+extends ../../layouts/_adminLayout
+
+block content
+
+    h1.display-4.m-b-2 #{translation.TITLE_ADMIN_MENU}
+
+    form(method='GET' action='/admin/menu/add')
+        button.btn.btn-primary(onclick='toggle_add_menu()') #{translation.ADD_MENU}
+    form(method='GET' action='/admin/menu/update')
+        button.btn.btn-primary(onclick='toggle_edit_menu()') #{translation.UPDATE_MENU}
+    form(method='GET' action='/admin/menu/delete')
+        button.btn.btn-primary(onclick='toggle_delete_menu()') #{translation.DELETE_MENU}
+
+
+    // ADD MENU
+    block add_menu
+
+    // EDIT MENU
+    block edit_menu
+
+    // DELETE MENU
+    block delete_menu
