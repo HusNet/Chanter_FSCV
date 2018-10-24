@@ -86,17 +86,7 @@
   "BRIG":"Brig",
   "VISP":"Visp",
   "ERNEN":"Ernen",
-  "CLEAR":"Réinitialiser"
-
-
-
-
-
-  "COMMENTS": "Remarques",
-  "PRESIDENT": "Président",
-  "DIRECTOR": "Directeur",
-  "CASHIER": "Caissier",
-  "SECRETARY": "Secrétaire",
+  "CLEAR":"Réinitialiser",
   "COMITE": "Comité",
   "AUTRE": "Autre"
 }
