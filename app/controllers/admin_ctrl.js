@@ -266,7 +266,8 @@ exports.authenticationTest = function(req, res, next){
     req.session.reload(function(err) {
         console.log("\n\nAuthentication");
         console.log(req.session);
-        if(typeof req.session.user === 'undefined')
+        // uncomment while dev
+        //if(typeof req.session.user === 'undefined')
             res.redirect('/admin');
-    })
+    });
 };
