@@ -21,6 +21,7 @@ DROP TABLE IF EXISTS `Menu_has_Page`;
 DROP TABLE IF EXISTS `Page`;
 DROP TABLE IF EXISTS `Role`;
 DROP TABLE IF EXISTS `TypeChoir`;
+DROP TABLE IF EXISTS `Translations`;
 DROP TABLE IF EXISTS `User`;
 DROP TABLE IF EXISTS `User_Choir`;
 DROP TABLE IF EXISTS `User_Role`;
@@ -364,9 +365,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `chanter-dev`.`Config` (
   `idConfig` INT NOT NULL,
-  `MainMenuId` INT NULL DEFAULT NULL,
+  `MainMenuId` INT(10) NULL DEFAULT NULL,
   `HomePageId` INT(10) NULL DEFAULT NULL,
-  PRIMARY KEY (`idConfig`),
+  PRIMARY KEY (`idConfig`, `MainMenuId`, `HomePageId`),
   INDEX `fk_Config_Menu1_idx` (`MainMenuId` ASC),
   INDEX `fk_Config_Page1_idx` (`HomePageId` ASC),
   CONSTRAINT `fk_Config_Menu1`
@@ -381,6 +382,29 @@ CREATE TABLE IF NOT EXISTS `chanter-dev`.`Config` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `chanter-dev`.`Translations`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `chanter-dev`.`Translations` (
+  `idFR` INT NOT NULL,
+  `idDE` INT NOT NULL,
+  INDEX `fk_Translations_1_idx` (`idFR` ASC),
+  INDEX `fk_Translations_DE_idx` (`idDE` ASC),
+  CONSTRAINT `fk_Translations_FR`
+    FOREIGN KEY (`idFR`)
+    REFERENCES `chanter-dev`.`Page` (`PageId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Translations_DE`
+    FOREIGN KEY (`idDE`)
+    REFERENCES `chanter-dev`.`Page` (`PageId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+
 -- -----------------------------------------------------
 -- Data for table `chanter-dev`.`Admin_Login`
 -- -----------------------------------------------------
@@ -390,6 +414,14 @@ INSERT INTO `chanter-dev`.`Admin_Login` (`AdminId`, `Username`, `Password`, `Use
 
 COMMIT;
 
+-- -----------------------------------------------------
+-- Data for table `chanter-dev`.`Menu`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `chanter-dev`;
+INSERT INTO `chanter-dev`.`Menu` (`idMenu`, `Name`) VALUES (1, 'Main');
+
+COMMIT;
 
 -- -----------------------------------------------------
 -- Data for table `chanter-dev`.`Page`
@@ -400,13 +432,12 @@ INSERT INTO `chanter-dev`.`Page` (`PageId`, `Title`, `Content`, `Published_date`
 
 COMMIT;
 
-
 -- -----------------------------------------------------
 -- Data for table `chanter-dev`.`Config`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `chanter-dev`;
-INSERT INTO `chanter-dev`.`Config` (`idConfig`, `MainMenuId`, `HomePageId`) VALUES (1, null, 1);
+INSERT INTO `chanter-dev`.`Config` (`idConfig`, `MainMenuId`, `HomePageId`) VALUES (1, 1, 1);
 
 COMMIT;
 
