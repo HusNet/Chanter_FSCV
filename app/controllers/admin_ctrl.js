@@ -117,6 +117,11 @@ exports.choir = function(req, res, next) {
     });
 };
 
+exports.add_Choir = function(req, res, next){
+
+
+}
+
 exports.person = function(req, res, next) {
 
     res.render('admin/person', {

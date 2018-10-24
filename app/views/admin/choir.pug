@@ -5,7 +5,7 @@ block content
     h1 #{translation.TITLE_ADMIN_CHOIR}
 
 
-    form.col.s12
+    form.col.s12(id='myForm')
         .row
             .input-field.col.s6
                 label(for='choeur_name') #{translation.CHOIR_NAME}
@@ -24,7 +24,7 @@ block content
 
             .input-field.col.s4
                 label(for='foundation') #{translation.DATE_FOUNDATION}
-                input#foundation.form-control(type='text' name='foundation' required)
+                input#foundation.datepicker(type='date' name='foundation',placeholder='', required)
 
 
         .row
@@ -42,34 +42,42 @@ block content
                     span #{translation.GERMAN}
 
         .row
-            select.browser-default.col.s4
-                option(value='', disabled='', selected='', name='presidentName') #{translation.NAME_PRESIDENT}
-                option(value='1') Option 1
+            .input-field.col.s4
+                label(for='presidentName') #{translation.NAME_PRESIDENT}
+                input#presidentName.form-control(type='text' name='presidentName', required,)
+                a.waves-effect.waves-light.btn-small #{translation.PRESIDENT} #{translation.ALREADY_EXISTING}
 
             p.col.s2 #{translation.MAIL_ADDRESSING}
 
             p.col.s2
                 label
-                    input(name='president', type='radio')
+                    input(name='president', type='checkbox')
                     span #{translation.PRESIDENT}
             p.col.s2
                 label
-                    input(name='director', type='radio')
+                    input(name='director', type='checkbox')
                     span #{translation.DIRECTOR}
             p.col.s2
                 label
-                    input(name='empty',type='radio')
+                    input(name='empty',type='checkbox')
                     span #{translation.EMPTY}
                     // à garder le champ vide??
 
         .row
-            select.browser-default.col.s4
-                option(value='', disabled='', selected='', name='directorName') #{translation.NAME_DIRECTOR}
-                option(value='1') Option 1
+            .input-field.col.s4
+                label(for='directorName') #{translation.NAME_DIRECTOR}
+                input#directorName.form-control(type='text' name='directorName', required)
+                a.waves-effect.waves-light.btn-small #{translation.DIRECTOR} #{translation.ALREADY_EXISTING}
+
 
             select.browser-default.col.s2
                 option(value='', disabled='', selected='', name='typeChoeur') #{translation.TYPE_CHOIR}
-                option(value='1') Option 1
+                option(value='1') #{translation.ADULT}
+                option(value='2') #{translation.TEEN}
+                option(value='3') #{translation.KID}
+                option(value='4') #{translation.MIXT}
+                option(value='5') #{translation.WOMEN}
+                option(value='6') #{translation.MEN}
 
             p.col.s2
                 label
@@ -81,61 +89,80 @@ block content
                     span #{translation.GOSPEL_LEADER}
 
         .row
-            select.browser-default.col.s4
-                option(value='', disabled='', selected='',name='cashier') #{translation.NAME_CASHIER}
-                option(value='1') Option 1
+            .input-field.col.s4
+                label(for='cashier') #{translation.NAME_CASHIER}
+                input#cashier.form-control(type='text' name='cashier', required,)
+                a.waves-effect.waves-light.btn-small #{translation.CASHIER} #{translation.ALREADY_EXISTING}
+
             p.col.s2 #{translation.CANTONAL_FEDERATION}
             p.col.s2
                 label
-                    input(type='radio', name='fscv')
+                    input(type='checkbox', name='fscv')
                     span #{translation.MEMBER_FSCV}
             p.col.s3
                 label
-                    input(type='radio', name='noFSCV')
+                    input(type='checkbox', name='noFSCV')
                     span #{translation.NOT_FSCV}
 
         .row
-            select.browser-default.col.s4
-                option(value='', disabled='', selected='') #{translation.NAME_SECRETARIAT}
-                option(value='1') Option 1
+            .input-field.col.s4
+                label(for='secretary') #{translation.NAME_SECRETARIAT}
+                input#secretary.form-control(type='text' name='secretary', required,)
+                a.waves-effect.waves-light.btn-small #{translation.SECRETARY} #{translation.ALREADY_EXISTING}
             .input-field.col.s6
                 label(for='dateFSCV') #{translation.DATE_FSCV}
-                input#dateFSCV.form-control(type='text' name='dateFSCV' )
-
+                input#dateFSCV.datepicker(type='date' name='dateFSCV', placeholder='')
 
         .row
             p.col.s3 #{translation.SWISS_CHOIR_UNION}:
             p.col.s2
                 label
-                    input(type='radio', name='USC')
+                    input(type='checkbox', name='USC')
                     span #{translation.MEMBER_USC}
             p.col.s3
                 label
-                    input(type='radio', name='noUSC')
+                    input(type='checkbox', name='noUSC')
                     span #{translation.NOT_USC}
             .input-field.col.s4
+                input#dateUSC.datepicker(type='date', placeholder='')
                 label(for='dateUSC') #{translation.DATE_USC}
-                input#dateUSC.form-control(type='text' name='dateUSC')
 
 
         .row
             select.browser-default.col.s4
                 option(value='', disabled='', selected='') #{translation.GRPMTS_REGION}
-                option(value='1') Option 1
+                option(value='1') #{translation.GROUP_GSCBV}
+                option(value='2') #{translation.GROUP_UCC}
+                option(value='3') #{translation.GROUP_GCVC}
+                option(value='4') #{translation.GROUP_OCV}
+
             .input-field.col.s4
                 input#dateGrpmts.datepicker(type='date', placeholder='')
                 label(for='dateGrpmts') #{translation.DATE_GRPMTS}
         .row
             select.browser-default.col.s4
                 option(value='', disabled='', selected='') #{translation.DECANAT}
-                option(value='1') Option 1
+                option(value='1') #{translation.WELTICH}
+                option(value='2') #{translation.LEUK}
+                option(value='3') #{translation.RARON}
+                option(value='4') #{translation.BRIG}
+                option(value='5') #{translation.VISP}
+                option(value='6') #{translation.ERNEN}
             .input-field.col.s4
                 label(for='otherGrpmts') #{translation.OTHER_GRPMTS}
                 input#otherGrpmts.form-control(type='text' name='otherGrpmts')
 
-
         .row
             .input-field.col.s12
-                label(for='comments') #{translation.COMMENTS}
-                input#comments.form-control(type='text' name='comments')
+                label.active(for='comments') #{translation.COMMENTS}
+                textarea#comments.materialize-textarea
 
+        .row
+            button.btn.btn-primary.col.s3(type='submit') #{translation.ADD}
+            button.btn.btn-primary.col.s3(type='submit',onclick="myFunction()") #{translation.CLEAR}
+
+
+    script.
+        function myFunction() {
+            document.getElementById("myForm").reset();
+        }
