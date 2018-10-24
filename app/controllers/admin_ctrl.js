@@ -1,8 +1,9 @@
 const C = require('../../config/appConfig');
 const AdminLogin = require('../models/admin_login');
 const AdminLoginDb = require('../controllers/database/admin_login_db');
-const AdminAddNewsDb = require('../controllers/database/admin_page_db');
+const AdminPageDb = require('../controllers/database/admin_page_db');
 const UserModel = require('../models/user');
+const PageModel = require('../models/page');
 const AdminUserDb = require('../controllers/database/admin_person_db');
 
 
@@ -172,6 +173,29 @@ exports.admin_person_insert = function(req, res, next) {
 
 exports.news = function(req, res, next) {
 
+    let query = AdminPageDb.getNews();
+    let news = [];
+
+    C.db.query(query, function (err, rows, fields) {
+        if (err) throw(err);
+
+        for(let i = 0; i < rows.length; i++) {
+            let temp = new PageModel({
+                Title: rows[i].Title,
+                Content: rows[i].Content,
+                Published_date: rows[i].Published_date,
+                Updated_date: rows[i].Updated_date,
+                Lang: rows[i].Lang,
+                IdPageLang: rows[i].IdPageLang,
+                IsNews: rows[i].IsNews,
+                AdminId: rows[i].AdminId
+            });
+            news.push(temp);
+        }
+    });
+
+    console.log(news);
+
     res.render('admin/news', {
 
     });
@@ -187,13 +211,23 @@ exports.add_news = function(req, res, next) {
     let idPageLang = 1; // id de la meme page mais dans l'autre langue
     let isNews = 1; // req.body.isNews
 
-    let query = AdminAddNewsDb.addNews(title, content, user, date_publish, lang, idPageLang, isNews);
+    let news = new PageModel({
+        Title: title,
+        Content: content,
+        AdminId: user,
+        Published_date: date_publish,
+        Updated_date: date_publish,
+        Lang: lang,
+        IsNews: isNews,
+        IdPageLang: idPageLang
+    });
+
+    let query = AdminPageDb.addNews(news);
 
     C.db.query(query, function (err, rows, fields) {
         if (err) throw(err);
-        console.log("1 record inserted");
-
     });
+
     res.redirect('/admin/news');
 }
 

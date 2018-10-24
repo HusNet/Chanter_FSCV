@@ -33,8 +33,44 @@ block content
                     input#startAboP.form-control(type='date', placeholder='Abo' name='startaboP')
 
                 div(class='column')
-                    label(for='roleNameP') #{translation.ROLE}:
-                    input#roleNameP.form-control(type='text', placeholder='Role' name='roleP' required)
+                    label #{translation.ROLE}:
+                    p
+                    label
+                        input(name='presidentP', type='checkbox')
+                        span #{translation.PRESIDENT}
+                    p
+                    label
+                        input(name='directorP', type='checkbox')
+                        span #{translation.DIRECTOR}
+                    p
+                    label
+                        input(name='directorP', type='checkbox')
+                        span #{translation.CASHIER}
+                    p
+                        label
+                            input(name='directorP', type='checkbox')
+                            span #{translation.SECRETARY}
+                        p
+                            label
+                                input(name='directorP', type='checkbox')
+                                span #{translation.COMITE}
+                        p
+                            label
+                                input(name='directorP', type='checkbox')
+                                span #{translation.AUTRE}
+
+                    //input#roleNameP.form-control(list='roleslist', name='roleP')
+                    //datalist#roleslist
+                        option SuperAdmin
+                        option Director
+                        option Director
+                        option Director
+                        option Director
+
+
+
+
+
 
 
             button.btn.btn-primary(type='submit') #{translation.ADD}

@@ -87,5 +87,12 @@
   "VISP":"Visp",
   "ERNEN":"Ernen",
   "CLEAR":"Zurücksetzen"
+  "COMMENTS": "Bemerkungen",
+  "PRESIDENT": "Präsident",
+  "DIRECTOR": "Direktor",
+  "CASHIER": "Kassierer",
+  "SECRETARY": "Sekretärin",
+  "COMITE": "Bord",
+  "AUTRE": "Andere"
 
 }
