@@ -101,7 +101,7 @@ module.exports = function(app, router) {
     });
 
     router.post('/admin/news/news_edit', function (req, res, next) {
-
+        adminPage.edit_news(req, res, next);
     });
 
     router.get('/admin/news/news_delete', function (req, res, next) {

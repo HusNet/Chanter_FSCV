@@ -4,6 +4,12 @@ exports.addNews = function(news) {
             "VALUES ('" + news.Title + "', '" + news.Content + "', '" + news.AdminId + "', '" + news.Published_date + "', '" + news.Updated_date + "', '" + news.Lang + "', '" + news.IdPageLang + "', '" + news.IsNews + "')";
 };
 
+exports.editNews = function(id, title, content, updated_date) {
+    return  "UPDATE Page " +
+            "SET `Title` = '" + title + "', `Content` = '" + content + "', `Updated_date` = '" + updated_date + "' " +
+            "WHERE `PageId` = " + id;
+};
+
 exports.getNews = function() {
     return "SELECT * FROM Page WHERE `IsNews` = 1";
 };

@@ -79,6 +79,21 @@ exports.form_edit_news = function(req, res, next) {
     });
 };
 
+exports.edit_news = function (req, res, next) {
+    let idNews = req.body.idNews;
+    let title = req.body.title;
+    let content = req.body.contentUpdated;
+    let updated_date = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    let query = AdminPageDb.editNews(idNews, title, content, updated_date);
+
+    C.db.query(query, function (err, rows, fields) {
+        if (err) throw(err);
+
+        res.redirect('/admin/news');
+    });
+
+};
+
 /**
  *
  * PAGE PART
