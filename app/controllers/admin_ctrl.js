@@ -205,8 +205,6 @@ exports.export = function(req, res, next) {
 
 exports.authenticationTest = function(req, res, next){
     req.session.reload(function(err) {
-        console.log("\n\nAuthentication");
-        console.log(req.session);
 
         // delete in prod
         req.session.user = 1;

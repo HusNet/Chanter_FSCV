@@ -1,0 +1,11 @@
+extends menu
+
+block result
+
+    br
+    br
+
+    if success
+        div.success #{translation.DELETION_SUCCESS}
+    else
+        div.failed #{translation.DELETION_FAILURE}, #{translation.MENU_IS_MAIN}

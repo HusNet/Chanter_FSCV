@@ -2,20 +2,26 @@ extends menu
 
 block edit_menu
 
-    form(method='POST' action='/admin/menu', id='edit_menu')
-        div.form-group
+    script.
+        document.getElementById('a_menu_add').classList.remove('active');
+        document.getElementById('a_menu_edit').classList.add('active');
+        document.getElementById('a_menu_delete').classList.remove('active');
 
-            label.control-label.requiredField(for='propertyType')
-                | #{translation.SELECT_MENU}
-                span.asteriskField
-            .col-xs-12
-                select#propertyType.select.form-control.input-lg(form='edit_menu', name='propertyType')
-                    option(value='0', selected= true) -- Select --
-                    option(value='6', selected= true) Home
-                    option(value='7', selected= true) Condo
-                    option(value='10', selected= true) Single Family Home
-                    option(value='11', selected= true) Town House
-                    option(value='12', selected= true) City Apartment
-                    option(value='13', selected= true) Villa
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.dropdown-trigger');
+            var instances = M.Dropdown.init(elems, {});
+        });
+    br
+    br
+    br
+    br
 
-        button.btn.btn-primary(type='submit') #{translation.UPDATE}
+    a.dropdown-trigger.btn(href="#", data-target='dropdown_menu_list') #{translation.SELECT_MENU}
+
+    ul#dropdown_menu_list.dropdown-content
+        each menu in menus
+            li
+                a(href='/admin/menu/edit?id=' + menu.idMenu)= menu.Name
+
+    block edit_selected_id
+

@@ -42,11 +42,6 @@ module.exports = function(app, router) {
         admin.dashboard(req, res, next);
     });
 
-    router.get('/admin/page', function(req, res, next) {
-        admin.authenticationTest(req, res, next);
-        admin.page(req, res, next);
-    });
-
     router.get('/admin/choir', function(req, res, next) {
         admin.authenticationTest(req, res, next);
         admin.choir(req, res, next);
@@ -80,7 +75,7 @@ module.exports = function(app, router) {
 
     // *** END PERSON ROUTES
 
-// *** NEWS ROUTES
+    // *** NEWS ROUTES
 
     router.get('/admin/news', function(req, res, next) {
         admin.authenticationTest(req, res, next);
@@ -112,7 +107,7 @@ module.exports = function(app, router) {
 
     });
 
-// *** END
+    // *** END NEWS ROUTES
 
     router.get('/admin/service', function(req, res, next) {
         admin.authenticationTest(req, res, next);
@@ -134,7 +129,9 @@ module.exports = function(app, router) {
         admin.export(req, res, next);
     });
 
-// *** MENU ROUTES
+    // *** END
+
+    // *** MENU ROUTES
 
     router.get('/admin/menu', function(req, res, next) {
         admin.authenticationTest(req, res, next);
@@ -151,16 +148,39 @@ module.exports = function(app, router) {
         adminMenu.insertMenu(req, res, next);
     });
 
-    router.get('/admin/menu/update', function(req, res, next) {
+    router.get('/admin/menu/edit', function(req, res, next) {
         admin.authenticationTest(req, res, next);
-        adminMenu.getAllMenus(req, res, next);
+
+        if (req.query.id)
+            adminMenu.getMenuById(req, res, next);
+        else
+            adminMenu.getAllMenusEdit(req, res, next);
+    });
+
+    router.post('/admin/menu/edit', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminMenu.updateMenu(req, res, next);
     });
 
     router.get('/admin/menu/delete', function(req, res, next) {
         admin.authenticationTest(req, res, next);
-        adminMenu.getAllMenus(req, res, next);
+
+        if (req.query.id)
+            adminMenu.deleteMenu(req, res, next);
+        else
+            adminMenu.getAllMenusDelete(req, res, next);
     });
 
-// *** END
+    // *** END MENU ROUTES
+
+    // *** PAGE ROUTES
+
+    router.get('/admin/page', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        admin.page(req, res, next);
+    });
+
+    // *** END PAGE ROUTES
+
 
 };

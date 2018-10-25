@@ -2,6 +2,11 @@ extends menu
 
 block add_menu
 
+    script.
+        document.getElementById('a_menu_add').classList.add('active');
+        document.getElementById('a_menu_edit').classList.remove('active');
+        document.getElementById('a_menu_delete').classList.remove('active');
+
     form(method='POST' action='/admin/menu/add', id='add_menu')
         div.form-group
 
@@ -13,8 +18,9 @@ block add_menu
                 div(class='column')
                     p
                     label
-                        input(name='mainMenu', type='checkbox')
+                        input#add_is_main(name='mainMenu', type='checkbox' value='true')
                         span #{translation.IS_MAIN}
+
 
         button.btn.btn-primary(type='submit') #{translation.ADD}
 

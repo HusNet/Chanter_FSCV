@@ -94,14 +94,20 @@
   "CLEAR":"Réinitialiser",
   "COMITE": "Comité",
   "AUTRE": "Autre",
+
   "TITLE_ADMIN_MENU": "Menu",
   "IS_MAIN": "est le menu principal",
   "ADD_MENU": "Ajouter un menu",
   "UPDATE_MENU": "Modifier un menu",
   "DELETE_MENU": "Supprimer un menu",
-  "SELECT_MENU": "Sélectionnez le menu à modifier",
-
-
+  "SELECT_MENU": "Sélectionnez le menu",
+  "CREATION_SUCCESS": "Création réussie",
+  "CREATION_FAILED": "Erreur lors de la création",
+  "EDITION_SUCCESS": "Edition réussie",
+  "EDITION_FAILURE": "Erreur lors de l'édition",
+  "DELETION_SUCCESS": "Suppression réussie",
+  "DELETION_FAILURE": "Erreur lors de la suppression",
+  "MENU_IS_MAIN": "Vous ne pouvez pas supprimer le menu principal!",
   "ADD_PERSON": "Ajouter une personne",
   "UPDATE_PERSON": "Modifier une personne",
   "DELETE_PERSON": "Supprimer une personne"
