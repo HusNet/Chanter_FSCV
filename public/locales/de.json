@@ -33,7 +33,9 @@
   "LOGOUT" : "Abmeldung",
 
   "TITLE_ADMIN_USER": "Einen neuen Benutzer hinzufügen",
-  "TITLE_ADMIN_NEWS": "Eine Nachricht hinzufügen",
+  "TITLE_ADMIN_NEWS": "Alle Nachrichten",
+  "TITLE_ADMIN_ADD_NEWS": "Eine Nachricht hinzufügen",
+  "TITLE_ADMIN_EDIT_NEWS": "Bearbeiten einer Nachricht",
   "FR": "Französisch",
   "DE": "Deutsch",
 

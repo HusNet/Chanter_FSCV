@@ -7,3 +7,7 @@ exports.addNews = function(news) {
 exports.getNews = function() {
     return "SELECT * FROM Page WHERE `IsNews` = 1";
 };
+
+exports.getNewsById = function (id) {
+  return "SELECT * FROM Page WHERE `IsNews` = 1 AND `PageId` = " + id;
+};

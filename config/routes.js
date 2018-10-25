@@ -15,6 +15,7 @@ module.exports = function(app, router) {
     let contact = require('../app/controllers/contact_ctrl');
     let adminMenu = require('../app/controllers/admin_menu_ctrl');
     let adminPerson = require('../app/controllers/admin_person_ctrl');
+    let adminPage = require('../app/controllers/admin_page_ctrl');
 
     router.get('/', function(req, res, next) {
         home.index(req, res, next);
@@ -51,7 +52,7 @@ module.exports = function(app, router) {
         admin.choir(req, res, next);
     });
 
-    // *** MENU ROUTES
+    // *** PERSON ROUTES
     router.get('/admin/person', function(req, res, next) {
         admin.authenticationTest(req, res, next);
         adminPerson.person(req, res, next);
@@ -79,14 +80,39 @@ module.exports = function(app, router) {
 
     // *** END PERSON ROUTES
 
+// *** NEWS ROUTES
+
     router.get('/admin/news', function(req, res, next) {
         admin.authenticationTest(req, res, next);
-        admin.news(req, res, next);
+        adminPage.news(req, res, next);
     });
 
-    router.post('/admin/news', function(req, res, next) {
-        admin.add_news(req, res, next);
+    router.get('/admin/news/news_add', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminPage.form_news(req, res, next);
     });
+
+    router.post('/admin/news/news_add', function(req, res, next) {
+        adminPage.add_news(req, res, next);
+    });
+
+    router.get('/admin/news/news_edit', function (req, res, next) {
+        adminPage.form_edit_news(req, res, next);
+    });
+
+    router.post('/admin/news/news_edit', function (req, res, next) {
+
+    });
+
+    router.get('/admin/news/news_delete', function (req, res, next) {
+
+    });
+
+    router.post('/admin/news/news_delete', function (req, res, next) {
+
+    });
+
+// *** END
 
     router.get('/admin/service', function(req, res, next) {
         admin.authenticationTest(req, res, next);
