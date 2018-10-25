@@ -42,17 +42,70 @@ module.exports = function(app, router) {
         admin.dashboard(req, res, next);
     });
 
-    router.get('/admin/page', function(req, res, next) {
-        admin.authenticationTest(req, res, next);
-        admin.page(req, res, next);
-    });
 
     router.get('/admin/choir', function(req, res, next) {
         admin.authenticationTest(req, res, next);
         admin.choir(req, res, next);
     });
 
-    // *** PERSON ROUTES
+
+    router.get('/admin/service', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        admin.service(req, res, next);
+    });
+
+    router.get('/admin/user', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        admin.user(req, res, next);
+    });
+
+    router.post('/admin/user', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        admin.add_user(req, res, next);
+    });
+
+    router.get('/admin/export', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        admin.export(req, res, next);
+    });
+
+
+// *** PAGE ROUTES
+
+    router.get('/admin/page', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminPage.page(req, res, next);
+    });
+
+    router.get('/admin/page/page_add', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminPage.form_page(req, res, next);
+    });
+
+    router.post('/admin/page/page_add', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminPage.add_page(req, res, next);
+    });
+
+    router.get('/admin/page/page_delete', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminPage.delete_page(req, res, next);
+    });
+
+    router.get('/admin/page/page_edit', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminPage.form_edit_page(req, res, next);
+    });
+
+    router.post('/admin/page/page_edit', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminPage.edit_page(req, res, next);
+    });
+
+// *** END PAGE ROUTES
+
+// *** PERSON ROUTES
+
     router.get('/admin/person', function(req, res, next) {
         admin.authenticationTest(req, res, next);
         adminPerson.person(req, res, next);
@@ -86,7 +139,7 @@ module.exports = function(app, router) {
 
     // *** END PERSON ROUTES
 
-// *** NEWS ROUTES
+    // *** NEWS ROUTES
 
     router.get('/admin/news', function(req, res, next) {
         admin.authenticationTest(req, res, next);
@@ -99,48 +152,28 @@ module.exports = function(app, router) {
     });
 
     router.post('/admin/news/news_add', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
         adminPage.add_news(req, res, next);
     });
 
     router.get('/admin/news/news_edit', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
         adminPage.form_edit_news(req, res, next);
     });
 
     router.post('/admin/news/news_edit', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
         adminPage.edit_news(req, res, next);
     });
 
     router.get('/admin/news/news_delete', function (req, res, next) {
-
-    });
-
-    router.post('/admin/news/news_delete', function (req, res, next) {
-
-    });
-
-// *** END
-
-    router.get('/admin/service', function(req, res, next) {
         admin.authenticationTest(req, res, next);
-        admin.service(req, res, next);
+        adminPage.delete_news(req, res, next);
     });
 
-    router.get('/admin/user', function(req, res, next) {
-        admin.authenticationTest(req, res, next);
-        admin.user(req, res, next);
-    });
+    // *** END NEWS ROUTES
 
-    router.post('/admin/user', function (req, res, next) {
-        admin.authenticationTest(req, res, next);
-        admin.add_user(req, res, next);
-    });
-
-    router.get('/admin/export', function(req, res, next) {
-        admin.authenticationTest(req, res, next);
-        admin.export(req, res, next);
-    });
-
-// *** MENU ROUTES
+    // *** MENU ROUTES
 
     router.get('/admin/menu', function(req, res, next) {
         admin.authenticationTest(req, res, next);
@@ -157,16 +190,30 @@ module.exports = function(app, router) {
         adminMenu.insertMenu(req, res, next);
     });
 
-    router.get('/admin/menu/update', function(req, res, next) {
+    router.get('/admin/menu/edit', function(req, res, next) {
         admin.authenticationTest(req, res, next);
-        adminMenu.getAllMenus(req, res, next);
+
+        if (req.query.id)
+            adminMenu.getMenuById(req, res, next);
+        else
+            adminMenu.getAllMenusEdit(req, res, next);
+    });
+
+    router.post('/admin/menu/edit', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminMenu.updateMenu(req, res, next);
     });
 
     router.get('/admin/menu/delete', function(req, res, next) {
         admin.authenticationTest(req, res, next);
-        adminMenu.getAllMenus(req, res, next);
+
+        if (req.query.id)
+            adminMenu.deleteMenu(req, res, next);
+        else
+            adminMenu.getAllMenusDelete(req, res, next);
     });
 
-// *** END
+    // *** END MENU ROUTES
+
 
 };

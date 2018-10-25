@@ -1,0 +1,21 @@
+extends ../../layouts/_adminLayout
+block content
+    h1 #{translation.TITLE_ADMIN_PAGE}
+    br
+    ul.collection.with-header
+        if pages.length
+            each val in pages
+                li.collection-item
+                    div
+                        | #{val.Title}
+                        a.secondary-content(href='/admin/page/page_delete?id=' + val.PageId)
+                            i.material-icons clear
+                        a.secondary-content(href='/admin/page/page_edit?id=' + val.PageId)
+                            i.material-icons create
+        else
+            li.collection-item
+                div
+                    | #{translation.NO_PAGE_AVAILABLE}
+    br
+    a.btn-floating.btn-large.waves-effect.waves-light.green(href='/admin/page/page_add')
+        i.material-icons add

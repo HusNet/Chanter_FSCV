@@ -1,0 +1,24 @@
+extends menu_edit
+
+block edit_selected_id
+
+    br
+    br
+
+    form(method = 'POST' action = '/admin/menu/edit', id = 'edit_menu')
+        div.form-group
+
+            div(class='row')
+                div(class='column')
+                    input(name='id_selected_menu', type='hidden', value=menu.idMenu)
+                    label(for='edit_title') #{translation.TITLE}:
+                    input#edit_title.form-control(type='text', placeholder='Title', name='title', required, value=menu.Name)
+
+                div(class='column')
+                    label
+                        input(name='mainMenu', type='checkbox', checked=menu.idMenu===config.MainMenuId)
+                        span #{translation.IS_MAIN}
+
+        br
+
+        button.btn.btn-primary(type='submit') #{translation.UPDATE}
