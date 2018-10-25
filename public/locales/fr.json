@@ -32,7 +32,9 @@
   "DELETE" : "SUPPRIMER",
   "LOGOUT" : "Déconnexion",
   "TITLE_ADMIN_USER": "Ajouter un nouvel utilisateur",
-  "TITLE_ADMIN_NEWS": "Ajouter une news",
+  "TITLE_ADMIN_NEWS": "Toutes les news",
+  "TITLE_ADMIN_ADD_NEWS": "Ajouter une news",
+  "TITLE_ADMIN_EDIT_NEWS": "Editer une news",
   "FR": "Français",
   "DE": "Allemand",
 
