@@ -1,5 +1,6 @@
 const C = require('../../config/appConfig');
 const AdminPageDb = require('../controllers/database/admin_page_db');
+const PageModel = require('../models/page');
 
 /**
  *
@@ -65,7 +66,7 @@ exports.add_news = function(req, res, next) {
         if (err) throw(err);
     });
 
-    res.redirect('admin/news/news');
+    res.redirect('/admin/news');
 };
 
 exports.form_edit_news = function(req, res, next) {
@@ -91,7 +92,17 @@ exports.edit_news = function (req, res, next) {
 
         res.redirect('/admin/news');
     });
+};
 
+exports.delete_news = function (req, res, next) {
+    let idNews = req.query.id;
+    let query = AdminPageDb.deleteNews(idNews);
+
+    C.db.query(query, function (err, rows, fields) {
+        if (err) throw(err);
+
+        res.redirect('/admin/news');
+    });
 };
 
 /**

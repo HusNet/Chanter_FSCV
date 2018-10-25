@@ -17,3 +17,7 @@ exports.getNews = function() {
 exports.getNewsById = function (id) {
   return "SELECT * FROM Page WHERE `IsNews` = 1 AND `PageId` = " + id;
 };
+
+exports.deleteNews = function(id) {
+  return "DELETE FROM Page WHERE `PageId` = " + id;
+};
