@@ -42,12 +42,70 @@ module.exports = function(app, router) {
         admin.dashboard(req, res, next);
     });
 
+
     router.get('/admin/choir', function(req, res, next) {
         admin.authenticationTest(req, res, next);
         admin.choir(req, res, next);
     });
 
-    // *** PERSON ROUTES
+
+    router.get('/admin/service', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        admin.service(req, res, next);
+    });
+
+    router.get('/admin/user', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        admin.user(req, res, next);
+    });
+
+    router.post('/admin/user', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        admin.add_user(req, res, next);
+    });
+
+    router.get('/admin/export', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        admin.export(req, res, next);
+    });
+
+
+// *** PAGE ROUTES
+
+    router.get('/admin/page', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminPage.page(req, res, next);
+    });
+
+    router.get('/admin/page/page_add', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminPage.form_page(req, res, next);
+    });
+
+    router.post('/admin/page/page_add', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminPage.add_page(req, res, next);
+    });
+
+    router.get('/admin/page/page_delete', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminPage.delete_page(req, res, next);
+    });
+
+    router.get('/admin/page/page_edit', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminPage.form_edit_page(req, res, next);
+    });
+
+    router.post('/admin/page/page_edit', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminPage.edit_page(req, res, next);
+    });
+
+// *** END PAGE ROUTES
+
+// *** PERSON ROUTES
+
     router.get('/admin/person', function(req, res, next) {
         admin.authenticationTest(req, res, next);
         adminPerson.person(req, res, next);
@@ -88,48 +146,26 @@ module.exports = function(app, router) {
     });
 
     router.post('/admin/news/news_add', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
         adminPage.add_news(req, res, next);
     });
 
     router.get('/admin/news/news_edit', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
         adminPage.form_edit_news(req, res, next);
     });
 
     router.post('/admin/news/news_edit', function (req, res, next) {
-
+        admin.authenticationTest(req, res, next);
+        adminPage.edit_news(req, res, next);
     });
 
     router.get('/admin/news/news_delete', function (req, res, next) {
-
-    });
-
-    router.post('/admin/news/news_delete', function (req, res, next) {
-
+        admin.authenticationTest(req, res, next);
+        adminPage.delete_news(req, res, next);
     });
 
     // *** END NEWS ROUTES
-
-    router.get('/admin/service', function(req, res, next) {
-        admin.authenticationTest(req, res, next);
-        admin.service(req, res, next);
-    });
-
-    router.get('/admin/user', function(req, res, next) {
-        admin.authenticationTest(req, res, next);
-        admin.user(req, res, next);
-    });
-
-    router.post('/admin/user', function (req, res, next) {
-        admin.authenticationTest(req, res, next);
-        admin.add_user(req, res, next);
-    });
-
-    router.get('/admin/export', function(req, res, next) {
-        admin.authenticationTest(req, res, next);
-        admin.export(req, res, next);
-    });
-
-    // *** END
 
     // *** MENU ROUTES
 
@@ -172,15 +208,6 @@ module.exports = function(app, router) {
     });
 
     // *** END MENU ROUTES
-
-    // *** PAGE ROUTES
-
-    router.get('/admin/page', function(req, res, next) {
-        admin.authenticationTest(req, res, next);
-        admin.page(req, res, next);
-    });
-
-    // *** END PAGE ROUTES
 
 
 };
