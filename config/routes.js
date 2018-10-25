@@ -63,7 +63,7 @@ module.exports = function(app, router) {
         res.render('admin/person/person_add');
     });
 
-    router.post('/admin/person/add', function(req, res, next) {
+    router.post('/admin/person/person_add', function(req, res, next) {
         adminPerson.admin_person_insert(req, res, next);
     });
 
