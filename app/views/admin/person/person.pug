@@ -4,11 +4,11 @@ block content
 
     h1.display-4.m-b-2 #{translation.TITLE_ADMIN_PERSON}
 
-    form(method='GET' action='/admin/person/add')
+    form(method='GET' action='/admin/person/person_add')
         button.btn.btn-primary(onclick='toggle_add_person()') #{translation.ADD_PERSON}
-    form(method='GET' action='/admin/person/update')
-        button.btn.btn-primary(onclick='toggle_edit_person()') #{translation.UPDATE_PERSON}
-    form(method='GET' action='/admin/person/delete')
+    form(method='GET' action='/admin/person/person_edit')
+        button.btn.btn-primary(onclick='toggle_edit_person()') #{translation.EDIT_PERSON}
+    form(method='GET' action='/admin/person/person_delete')
         button.btn.btn-primary(onclick='toggle_delete_person()') #{translation.DELETE_PERSON}
 
 

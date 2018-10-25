@@ -6,6 +6,10 @@ exports.insertNewPerson = function (usermodel) {
 }
 
 
-exports.getIdOfUserFromEmail = function (email) {
-    return "SELECT UserId FROM `User` WHERE `Email` = '" + email + "'";
+exports.getIdOfUserFromEmail = function (lastname, firstname, email) {
+    return "SELECT UserId FROM `User` WHERE `Lastname` = '" + lastname + "' AND `Firstname` = '" + firstname + "' AND `Email` = '" + email + "'";
+}
+
+exports.deletePerson = function (lastname,firstname) {
+    return "DELETE FROM `User` WHERE `Lastname` = '" + lastname + "' AND `Firstname` = '" + firstname + "' ";
 }
