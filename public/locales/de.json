@@ -9,6 +9,7 @@
   "MENU": "Menü",
   "PAGE": "Seite",
   "CHOIR": "Chor",
+  "TITLE_ADMIN_PERSON": "Person",
   "PERSON": "Person",
   "NEWS": "Nachrichten",
   "SERVICE": "Service",
@@ -96,5 +97,10 @@
   "ADD_MENU": "Menü hinzufügen",
   "UPDATE_MENU": "Menü veränderung",
   "DELETE_MENU": "Menü entfernen",
-  "SELECT_MENU": "Wählen Sie den Menü"
+  "SELECT_MENU": "Wählen Sie den Menü",
+
+
+  "ADD_PERSON": "Jemand hinzufügen",
+  "UPDATE_PERSON": "Jemand veränderung",
+  "DELETE_PERSON": "Jemand entfernen"
 }

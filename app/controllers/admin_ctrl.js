@@ -5,7 +5,8 @@ const AdminPageDb = require('../controllers/database/admin_page_db');
 const UserModel = require('../models/user');
 const PageModel = require('../models/page');
 const AdminUserDb = require('../controllers/database/admin_person_db');
-const AdminMenuCtrl = require('../../app/controllers/admin_menu_ctrl');
+const AdminRoleDb = require('../controllers/database/admin_role_db');
+const AdminRoleUserDb = require('../controllers/database/admin_user_role_db');
 
 
 // login page
@@ -117,57 +118,10 @@ exports.add_Choir = function(req, res, next){
 
 }
 
-exports.person = function(req, res, next) {
-
-    res.render('admin/person', {
-        title: 'page : personnes',
-
-    });
-};
-
-
-exports.admin_person_insert = function(req, res, next) {
-
-    let lastname = req.body.lastnameP;
-    let firstname = req.body.firstnameP;
-    let phonePrivate = req.body.phonePrivateP;
-    let phoneProf = req.body.phoneProfP;
-    let email = req.body.emailP;
-    //let startAbo = req.body.startAboP;
-
-    console.log(req.body.startAboP);
-
-    var usermodel = new UserModel({
-        Lastname: lastname,
-        Firstname: firstname,
-        Phone: phonePrivate,
-        PhoneProf: phoneProf,
-        Email: email,
-        //StartAbo: new Date()
-
-    });
-    console.log(" trying to create a new person...");
-
-    console.log(usermodel);
-
-
-    // get the query
-    let query = AdminUserDb.insertNewPerson(usermodel);
-
-    // querying db
-    C.db.query(query, function (err, rows, fields) {
-        if (err) throw(err);
-        console.log("1 record inserted");
-
-    });
-    res.redirect('/admin/person');
-
-};
-
-
 exports.news = function(req, res, next) {
 
     let query = AdminPageDb.getNews();
+    let news = [];
 
     C.db.query(query, function (err, rows, fields) {
         if (err) throw(err);
@@ -211,15 +165,11 @@ exports.add_news = function(req, res, next) {
     let queryFr = AdminPageDb.addNews(newsFr);
     let queryDe = AdminPageDb.addNews(newsDe);
 
-    C.db.query(queryFr, function (err, rows, fields) {
+    C.db.query(query, function (err, rows, fields) {
         if (err) throw(err);
     });
 
-    C.db.query(queryDe, function (err, rows, fields) {
-        if (err) throw(err);
-    });
-
-    res.redirect('admin/news');
+    res.redirect('/admin/news');
 }
 
 exports.service = function(req, res, next) {

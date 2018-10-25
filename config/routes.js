@@ -14,6 +14,7 @@ module.exports = function(app, router) {
     //contact routes
     let contact = require('../app/controllers/contact_ctrl');
     let adminMenu = require('../app/controllers/admin_menu_ctrl');
+    let adminPerson = require('../app/controllers/admin_person_ctrl');
 
     router.get('/', function(req, res, next) {
         home.index(req, res, next);
@@ -50,14 +51,33 @@ module.exports = function(app, router) {
         admin.choir(req, res, next);
     });
 
+    // *** MENU ROUTES
     router.get('/admin/person', function(req, res, next) {
         admin.authenticationTest(req, res, next);
-        admin.person(req, res, next);
+        adminPerson.person(req, res, next);
     });
 
-    router.post('/admin/person', function(req, res, next) {
-        admin.admin_person_insert(req, res, next);
+   router.get('/admin/person/add', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        res.render('admin/person/person_add');
     });
+
+    router.post('/admin/person/add', function(req, res, next) {
+        adminPerson.admin_person_insert(req, res, next);
+    });
+
+    router.get('/admin/person/update', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        res.render('admin/person/person_update');
+    });
+
+    router.get('/admin/person/delete', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        res.render('admin/person/person_delete');
+    });
+
+
+    // *** END PERSON ROUTES
 
     router.get('/admin/news', function(req, res, next) {
         admin.authenticationTest(req, res, next);

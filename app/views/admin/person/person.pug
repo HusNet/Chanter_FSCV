@@ -1,0 +1,22 @@
+extends ../../layouts/_adminLayout
+
+block content
+
+    h1.display-4.m-b-2 #{translation.TITLE_ADMIN_PERSON}
+
+    form(method='GET' action='/admin/person/add')
+        button.btn.btn-primary(onclick='toggle_add_person()') #{translation.ADD_PERSON}
+    form(method='GET' action='/admin/person/update')
+        button.btn.btn-primary(onclick='toggle_edit_person()') #{translation.UPDATE_PERSON}
+    form(method='GET' action='/admin/person/delete')
+        button.btn.btn-primary(onclick='toggle_delete_person()') #{translation.DELETE_PERSON}
+
+
+    // ADD PERSON
+    block person_add_block
+
+    // EDIT PERSON
+    block person_edit_block
+
+    // DELETE PERSON
+    block person_delete_block
