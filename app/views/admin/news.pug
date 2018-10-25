@@ -8,16 +8,15 @@ block content
 
     br
 
-
-
-    br
+    each val in news
+        li= val.Title
 
     form.col.s12(method='POST' action='/admin/news')
 
         h3 #{translation.FR}
 
         .input-field.col.s6
-            input#titlefr.validate(type='text' name="title" required="required")
+            input#titlefr.validate(type='text' name="titlefr" required="required")
             label(for='titlefr') #{translation.TITLE}
 
         #editor
@@ -27,7 +26,7 @@ block content
         h3 #{translation.DE}
 
         .input-field.col.s6
-            input#titlede.validate(type='text' name="title" required="required")
+            input#titlede.validate(type='text' name="titlede" required="required")
             label(for='titlede') #{translation.TITLE}
 
         #editor_translate
@@ -38,6 +37,8 @@ block content
             button.btn.waves-effect.waves-light(type='submit' name='action')
                 | #{translation.ADD}
                 i.material-icons.right send
+
+
 
     script.
         var contentDe = document.getElementById('contentde');
@@ -54,13 +55,11 @@ block content
         quillFr.on('text-change', function () {
             var justHtml = quillFr.root.innerHTML;
             contentFr.value = justHtml;
-            console.log(justHtml);
         });
 
         quillDe.on('text-change', function () {
             var justHtml = quillFr.root.innerHTML;
             contentDe.value = justHtml;
-            console.log(justHtml);
         });
 
     script(src='//cdn.quilljs.com/1.3.6/quill.core.js')

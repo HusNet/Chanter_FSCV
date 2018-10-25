@@ -174,30 +174,10 @@ exports.admin_person_insert = function(req, res, next) {
 exports.news = function(req, res, next) {
 
     let query = AdminPageDb.getNews();
-    let news = [];
 
     C.db.query(query, function (err, rows, fields) {
         if (err) throw(err);
-
-        for(let i = 0; i < rows.length; i++) {
-            let temp = new PageModel({
-                Title: rows[i].Title,
-                Content: rows[i].Content,
-                Published_date: rows[i].Published_date,
-                Updated_date: rows[i].Updated_date,
-                Lang: rows[i].Lang,
-                IdPageLang: rows[i].IdPageLang,
-                IsNews: rows[i].IsNews,
-                AdminId: rows[i].AdminId
-            });
-            news.push(temp);
-        }
-    });
-
-    console.log(news);
-
-    res.render('admin/news', {
-
+        res.render('admin/news', {news: rows})
     });
 };
 
@@ -245,7 +225,7 @@ exports.add_news = function(req, res, next) {
         if (err) throw(err);
     });
 
-    res.redirect('/admin/news');
+    res.redirect('admin/news');
 }
 
 exports.service = function(req, res, next) {
