@@ -5,6 +5,7 @@ const AdminPageDb = require('../controllers/database/admin_page_db');
 const UserModel = require('../models/user');
 const PageModel = require('../models/page');
 const AdminUserDb = require('../controllers/database/admin_person_db');
+const AdminMenuCtrl = require('../../app/controllers/admin_menu_ctrl');
 
 
 // login page
@@ -94,13 +95,6 @@ exports.dashboard = function(req, res, next) {
 
 };
 
-exports.menu = function (req, res, next) {
-
-    res.render('admin/menu', {
-        title: 'Add/Edit/Remove Menu'
-    });
-
-};
 
 exports.page = function(req, res, next) {
 

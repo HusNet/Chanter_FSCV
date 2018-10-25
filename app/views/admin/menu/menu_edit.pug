@@ -1,0 +1,21 @@
+extends menu
+
+block edit_menu
+
+    form(method='POST' action='/admin/menu', id='edit_menu')
+        div.form-group
+
+            label.control-label.requiredField(for='propertyType')
+                | #{translation.SELECT_MENU}
+                span.asteriskField
+            .col-xs-12
+                select#propertyType.select.form-control.input-lg(form='edit_menu', name='propertyType')
+                    option(value='0', selected= true) -- Select --
+                    option(value='6', selected= true) Home
+                    option(value='7', selected= true) Condo
+                    option(value='10', selected= true) Single Family Home
+                    option(value='11', selected= true) Town House
+                    option(value='12', selected= true) City Apartment
+                    option(value='13', selected= true) Villa
+
+        button.btn.btn-primary(type='submit') #{translation.UPDATE}
