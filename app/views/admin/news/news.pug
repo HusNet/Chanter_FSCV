@@ -9,14 +9,21 @@ block content
     br
 
     ul.collection.with-header
-        each val in news
+        if news.length
+            each val in news
+                li.collection-item
+                    div
+                        | #{val.Title}
+                        | |
+                        | #{val.Lang}
+                        a.secondary-content(href='/admin/news/news_delete?id=' + val.PageId)
+                            i.material-icons clear
+                        a.secondary-content(href='/admin/news/news_edit?id=' + val.PageId)
+                            i.material-icons create
+        else
             li.collection-item
                 div
-                    | #{val.Title}
-                    a.secondary-content(href='/admin/news/news_delete?id=' + val.PageId)
-                        i.material-icons clear
-                    a.secondary-content(href='/admin/news/news_edit?id=' + val.PageId)
-                        i.material-icons create
+                    | #{translation.NO_NEWS_AVAILABLE}
 
     br
 
