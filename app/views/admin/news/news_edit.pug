@@ -17,6 +17,8 @@ block content
         #editor
 
         input#content.validate(type='hidden' name='content' value='' + news[0].Content)
+        input#contentUpdated.validate(type='hidden' name='contentUpdated')
+        input#idNews.validate(type='hidden' name='idNews' value='' + news[0].PageId)
 
         p
             button.btn.waves-effect.waves-light(type='submit' name='action')
@@ -27,16 +29,17 @@ block content
 
     script.
         var content = document.getElementById('content').value;
+        var contentUpdate = document.getElementById('contentUpdated');
 
         var quill = new Quill('#editor', {
             theme: 'snow'
         });
 
-        quill.insertText(0, content, true);
-
         quill.on('text-change', function () {
             var justHtml = quill.root.innerHTML;
-            content.value = justHtml;
+            contentUpdate.value = justHtml;
         });
+
+        quill.insertText(0, content, true);
 
     script(src='//cdn.quilljs.com/1.3.6/quill.core.js')
