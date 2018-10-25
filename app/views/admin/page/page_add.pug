@@ -1,0 +1,62 @@
+extends ../../layouts/_adminLayout
+
+block content
+    script(src='//cdn.quilljs.com/1.3.6/quill.min.js')
+    link(href='//cdn.quilljs.com/1.3.6/quill.snow.css', rel='stylesheet')
+
+    h1 #{translation.TITLE_ADMIN_ADD_PAGE}
+
+    br
+
+    form.col.s12(method='POST' action='/admin/page/page_add')
+
+        h3 #{translation.FR}
+
+        .input-field.col.s6
+            input#titlefr.validate(type='text' name="titlefr" required="required")
+            label(for='titlefr') #{translation.TITLE}
+
+        #editor
+
+        input#contentfr.validate(type='hidden' name='contentfr')
+
+        h3 #{translation.DE}
+
+        .input-field.col.s6
+            input#titlede.validate(type='text' name="titlede" required="required")
+            label(for='titlede') #{translation.TITLE}
+
+        #editor_translate
+
+        input#contentde.validate(type='hidden' name='contentde')
+
+        p
+            button.btn.waves-effect.waves-light(type='submit' name='action')
+                | #{translation.ADD}
+                i.material-icons.right send
+
+
+
+    script.
+        var contentDe = document.getElementById('contentde');
+        var contentFr = document.getElementById('contentfr');
+
+        var quillFr = new Quill('#editor', {
+            theme: 'snow'
+        });
+
+        var quillDe = new Quill('#editor_translate', {
+            theme: 'snow'
+        });
+
+        quillFr.on('text-change', function () {
+            var justHtml = quillFr.root.innerHTML;
+            contentFr.value = justHtml;
+        });
+
+        quillDe.on('text-change', function () {
+            var justHtml = quillFr.root.innerHTML;
+            contentDe.value = justHtml;
+        });
+
+    script(src='//cdn.quilljs.com/1.3.6/quill.core.js')

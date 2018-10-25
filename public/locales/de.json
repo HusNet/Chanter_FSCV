@@ -35,8 +35,12 @@
   "TITLE_ADMIN_USER": "Einen neuen Benutzer hinzufügen",
   "TITLE_ADMIN_NEWS": "Alle Nachrichten",
   "TITLE_ADMIN_ADD_NEWS": "Eine Nachricht hinzufügen",
+  "TITLE_ADMIN_ADD_PAGE": "Eine Seite hinzufügen",
   "TITLE_ADMIN_EDIT_NEWS": "Bearbeiten einer Nachricht",
+  "TITLE_ADMIN_EDIT_PAGE": "Eine Seite bearbeiten",
   "NO_NEWS_AVAILABLE": "Keine Nachrichten verfügbar",
+  "NO_PAGE_AVAILABLE": "Keine Seite verfügbar",
+  "TITLE_ADMIN_PAGE": "Alle Seiten",
   "FR": "Französisch",
   "DE": "Deutsch",
 
