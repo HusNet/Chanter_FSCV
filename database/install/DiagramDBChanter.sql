@@ -327,9 +327,7 @@ CREATE TABLE IF NOT EXISTS `chanter-dev`.`Menu_has_Page` (
   `Page_PageId` INT(10) NULL,
   `Menu_SubMenu` INT(10) NULL,
   `Order` INT(10) NOT NULL,
-  INDEX `fk_Menu_has_Page_Page1_idx` (`Page_PageId` ASC),
   PRIMARY KEY (`Menu_idMenu`),
-  INDEX `fk_Menu_has_Page_SubMenu1_idx` (`Menu_SubMenu` ASC),
   CONSTRAINT `fk_Menu_has_Page_Menu1`
     FOREIGN KEY (`Menu_idMenu`)
     REFERENCES `chanter-dev`.`Menu` (`idMenu`)
@@ -447,25 +445,6 @@ INSERT INTO `chanter-dev`.`Menu` (`idMenu`, `Name`) VALUES (1, 'Main Menu');
 COMMIT;
 
 -- -----------------------------------------------------
--- Data for table `chanter-dev`.`Menu_has_Page`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `chanter-dev`;
-INSERT INTO `chanter-dev`.`Menu_has_Page` (`Menu_idMenu`, `Page_PageId`, `Order`) VALUES (1, 1, 0);
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `chanter-dev`.`Config`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `chanter-dev`;
-INSERT INTO `chanter-dev`.`Config` (`idConfig`, `MainMenuId`, `HomePageId`) VALUES (1, 1, 1);
-
-COMMIT;
-
--- -----------------------------------------------------
 -- Data for table `chanter-dev`.`Role`
 -- -----------------------------------------------------
 START TRANSACTION;
@@ -533,6 +512,26 @@ INSERT INTO `chanter-dev`.`Page` (`PageId`, `Title`, `Content`, `Published_date`
 
 COMMIT;
 
+
+-- -----------------------------------------------------
+-- Data for table `chanter-dev`.`Menu_has_Page`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `chanter-dev`;
+INSERT INTO `chanter-dev`.`Menu_has_Page` (`Menu_idMenu`, `Page_PageId`, `Order`) VALUES (1, 1, 0);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `chanter-dev`.`Config`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `chanter-dev`;
+INSERT INTO `chanter-dev`.`Config` (`idConfig`, `MainMenuId`, `HomePageId`) VALUES (1, 1, 1);
+
+COMMIT;
+
 -- -----------------------------------------------------
 -- Insertions of test datas
 -- -----------------------------------------------------
@@ -546,14 +545,3 @@ SET @userId = (SELECT UserId FROM `User` WHERE Firstname = 'Juste' AND Lastname 
 INSERT INTO `User_Role` (RoleId, UserId) VALUES (@roleId, @userId);
 
 COMMIT;
-
-
-
-
-
-
-
-
-
-
-
