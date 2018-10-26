@@ -119,8 +119,6 @@ exports.page = function(req, res, next) {
     C.db.query(query, function (err, rows, fields) {
         if (err) throw(err);
 
-
-
         res.render('admin/page/page', {pages: rows})
     });
 };
