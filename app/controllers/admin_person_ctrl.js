@@ -34,14 +34,13 @@ exports.admin_person_add = function(req, res, next) {
     let arrayRoleSelected = [director, director2, president, secretary, cashier, comite, other];
     let arrayRoleNames = ['Director', 'Director_2', 'President', 'Secretary', 'Cashier', 'Comite', 'Other'];
 
-    var usermodel = new UserModel({
+    let usermodel = new UserModel({
         Lastname: lastname,
         Firstname: firstname,
         Phone: phonePrivate,
         PhoneProf: phoneProf,
         Email: email,
         StartAbo: startAbo
-
     });
 
     console.log(" trying to create a new person...");
@@ -53,53 +52,123 @@ exports.admin_person_add = function(req, res, next) {
     // query the db to insert a new person
     C.db.query(queryInsertUser, function (err, rows, fields) {
         if (err) throw(err);
-        console.log("1 record inserted");
-
-        console.log(" trying to get the id of the user...");
-        // Get the id of the user inserted just before with the lasname, firstname and email
-        let queryIdUser = AdminUserDb.getIdOfUserFromEmail(lastname, firstname, email);
-        C.db.query(queryIdUser, function (err, resUserId, fields) {
-            if (err) throw(err);
-            if (resUserId[0] !== `undefined`)
-                userId = (resUserId[0].UserId); //Return the id user
-            console.log('User Id founded : ' + userId);
-
-            console.log(" If 'on' get the id of the role and insert the userid and the role id in table user_role.... ");
-            // If the box was checked for the role
-            // Insert the id of the role with the id of theuser
-            for (let i in arrayRoleSelected) {
-                if (arrayRoleSelected[i] != undefined)
+        if (rows.length === 0) // if the user doesn't exist
+        {
+            res.render('admin/person/person_added', {success: false});
+        }
+        else{
+            console.log("1 record inserted");
+            console.log(" trying to get the id of the user...");
+            // Get the id of the user inserted just before with the lasname, firstname and email
+            let queryIdUser = AdminUserDb.getIdOfUserFromEmail(lastname, firstname, email);
+            C.db.query(queryIdUser, function (err, resUserId, fields) {
+                if (err) throw(err);
+                if (resUserId.length === 0) // if the user doesn't exist
                 {
-                    //query get id of the role
-                    let queryRoleId = AdminRoleDb.getIdRole(arrayRoleNames[i]);
-                    C.db.query(queryRoleId, function (err, resRoleId, fields) {
-                        if (err) throw(err);
-                        if (resRoleId[0] !== `undefined`)
-                            roleId = (resRoleId[0].RoleId); //Get the id of the role
-                        console.log('Role Id founded : ' + roleId);
-
-                        //insert the id of the role and the id of the user
-                        //in the table user_role
-                        let queryInsertUserRole = AdminRoleUserDb.insertUserRole(userId, roleId)
-                        C.db.query(queryInsertUserRole, function (err, rows, fields) {
-                            if (err) throw(err);
-                            console.log("1 record inserted");
-                        });
-                    });
+                    res.render('admin/person/person_added', {success: false});
                 }
-            }
-        });
+                else{
+                    userId = (resUserId[0].UserId); //Return the id user
+                    console.log('User Id founded : ' + userId);
+
+                    console.log(" If 'on' get the id of the role and insert the userid and the role id in table user_role.... ");
+                    // If the box was checked for the role
+                    // Insert the id of the role with the id of theuser
+                    for (let i in arrayRoleSelected) {
+                        if (arrayRoleSelected[i] != undefined)
+                        {
+                            //query get id of the role
+                            let queryRoleId = AdminRoleDb.getIdRole(arrayRoleNames[i]);
+                            C.db.query(queryRoleId, function (err, resRoleId, fields) {
+                                if (err) throw(err);
+                                if (resRoleId[0] !== `undefined`)
+                                    roleId = (resRoleId[0].RoleId); //Get the id of the role
+                                console.log('Role Id founded : ' + roleId);
+
+                                //insert the id of the role and the id of the user
+                                //in the table user_role
+                                let queryInsertUserRole = AdminRoleUserDb.insertUserRole(userId, roleId)
+                                C.db.query(queryInsertUserRole, function (err, rows, fields) {
+                                    if (err) throw(err);
+                                    console.log("1 record inserted");
+                                    res.render('admin/person/person_added', {success: true});
+                                });
+                            });
+                        }
+                    }
+                }
+            });
+        }
     });
-    res.redirect('/admin/person/person_add');
+
 };
 
+
+exports.admin_person_edit_searchUser = function(req, res, next) {
+
+    let lastname = req.body.lastnameP;
+    let firstname = req.body.firstnameP;
+    let email = req.body.emailP;
+
+    // Search the user in the db
+    let queryUser = AdminUserDb.getIdOfUserFromEmail(lastname, firstname, email);
+    C.db.query(queryUser, function (err, resultUser, fields) {
+        if (err) throw(err);
+        console.log(resultUser.UserId);
+        if (resultUser.length === 0) // if the user doesn't exist
+        {
+            res.render('admin/person/person_edited', {success: false});
+        }
+        else {
+
+            console.log(resultUser);
+            res.render('admin/person/person_edit_result', {userS: resultUser})
+
+        }
+    });
+
+};
+
+exports.admin_person_edit_resultSearch = function (req, res, next){
+    res.render('admin/person/person_edited', {success: true});
+}
 
 exports.admin_person_delete = function(req, res, next) {
 
     let lastname = req.body.lastnameP;
     let firstname = req.body.firstnameP;
-    let personDeleted = null;
+    let userId = null;
+
+    // Search for the Id of the user to delete
+    let queryIdUser = AdminUserDb.getIdOfUser(lastname, firstname);
+    C.db.query(queryIdUser, function (err, resUserId, fields) {
+        if (err) throw(err);
+        console.log('result of user id ' + resUserId[0]);
+        if (resUserId.length === 0) // if the user doesn't exist
+        {
+            res.render('admin/person/person_deleted', {success: false});
+        }
+        if (resUserId[0] !== undefined){
+            userId = (resUserId[0].UserId); //Return the id user
+            console.log('User Id founded : ' + userId);
+
+            // Delete all the roles attached to this user
+            let queryDeleteUserrole = AdminRoleUserDb.deleteUserRoleFromUserId(userId);
+            C.db.query(queryDeleteUserrole, function (err, resDelUserRole, fields) {
+                if (err) throw(err);
+                console.log ('rows deleted');
+
+                //Delete the user in the DB
+                let queryDeleteUser = AdminUserDb.deletePerson(lastname, firstname);
+                C.db.query(queryDeleteUser, function (err, resDelUserRole, fields) {
+                    if (err) throw(err);
+                    console.log ('rows deleted');
+
+                    res.render('admin/person/person_deleted', {success: true});
+                });
+            });
+        }
+    });
 
 };
-
 
