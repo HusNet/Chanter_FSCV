@@ -1,0 +1,27 @@
+extends ../../layouts/_adminLayout
+
+block content
+
+    h1.display-4.m-b-2  #{translation.TITLE_ADMIN_CHOIR}
+
+    form(method='GET' action='/admin/choir/add')
+        button.btn.btn-primary(onclick='toggle_add_choir()') #{translation.ADD_CHOIR}
+    form(method='GET' action='/admin/choir/update')
+        button.btn.btn-primary(onclick='toggle_edit_choir()') #{translation.UPDATE_CHOIR}
+    form(method='GET' action='/admin/choir/delete')
+        button.btn.btn-primary(onclick='toggle_delete_choir()') #{translation.DELETE_CHOIR}
+
+
+
+    //ADD CHOIR
+    block add_choir
+    //EDIT CHOIR
+    block edit_choir
+    //DELETE CHOIR
+    block delete_choir
+
+
+
+
+
+
