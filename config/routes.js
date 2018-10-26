@@ -171,14 +171,24 @@ module.exports = function(app, router) {
         adminPerson.admin_person_add(req, res, next);
     });
 
-    router.get('/admin/person/person_edit', function(req, res, next) {
+    router.get('/admin/person/person_edit_search', function(req, res, next) {
         admin.authenticationTest(req, res, next);
-        res.render('admin/person/person_edit');
+        res.render('admin/person/person_edit_search');
     });
 
-    router.post('/admin/person/person_edit', function(req, res, next) {
+    router.post('/admin/person/person_edit_search', function(req, res, next) {
         admin.authenticationTest(req, res, next);
-        adminPerson.admin_person_edit(req, res, next);
+        adminPerson.admin_person_edit_searchUser(req, res, next);
+    });
+
+    router.get('/admin/person/person_edit_result', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        res.render('admin/person/person_edit_result');
+    });
+
+    router.post('/admin/person/person_edit_result', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminPerson.admin_person_edit_resultSearch(req, res, next);
     });
 
     router.get('/admin/person/person_delete', function(req, res, next) {

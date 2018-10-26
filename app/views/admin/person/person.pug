@@ -5,7 +5,7 @@ block content
     h1.display-4.m-b-2 #{translation.TITLE_ADMIN_PERSON}
 
     a#a_person_add.btn.btn-primary(href="/admin/person/person_add") #{translation.ADD_PERSON}
-    a#a_person_edit.btn.btn-primary(href="/admin/person/person_edit") #{translation.EDIT_PERSON}
+    a#a_person_edit.btn.btn-primary(href="/admin/person/person_edit_search") #{translation.EDIT_PERSON}
     a#a_person_delete.btn.btn-primary(href="/admin/person/person_delete") #{translation.DELETE_PERSON}
 
     //Result of the insert - delete - update
@@ -19,4 +19,7 @@ block content
 
     // DELETE PERSON
     block person_delete_block
+
+    // BLOC RESULT OF THE RESEARCH
+    block resultSearch
 

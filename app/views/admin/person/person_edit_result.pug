@@ -1,0 +1,69 @@
+extends person_edit_search
+
+block resultSearch
+
+    h2 #{translation.EDIT} #{userS[0].Lastname} #{userS[0].Firstname}
+
+    br
+
+    form(method='POST' action='/admin/person/person_edit_result')
+
+        div.form-group
+            div(class='row')
+                div(class='column')
+                    label(for='lastnameP') #{translation.LASTNAME}:
+                    input#lastnameP.form-control(type='text', value='' + userS[0].Lastname, name='lastnameP', required)
+
+                div(class='column')
+                    label(for='firstnameP') #{translation.FIRSTNAME}:
+                    input#firstnameP.form-control(type='text', value='' + userS[0].Firstname, name='firstnameP', required)
+
+                div(class='column')
+                    label(for='phonePrivateP') #{translation.PHONEPRIVATE}:
+                    input#phonePrivateP.form-control(type='text', value='' + userS[0].Phone, name='phonePrivateP', required)
+
+                div(class='column')
+                    label(for='phoneProfP') #{translation.PHONEPRIVATE}:
+                    input#phoneProfP.form-control(type='text', value='' + userS[0].PhoneProf, name='phoneProfP', required)
+
+                div(class='column')
+                    label(for='emailP') #{translation.EMAIL}:
+                    input#emailP.form-control(type='text', value='' + userS[0].Email, name='emailP', required)
+
+                div(class='column')
+                    label(for='startAboP') #{translation.STARTABO}:
+                    input#startAboP.form-control(type='date', value='' + userS[0].StartAbo, name='startaboP')
+
+                div(class='column')
+                    label #{translation.ROLE}:
+                    p
+                    label
+                        input(name='directorP', type='checkbox')
+                        span #{translation.DIRECTOR}
+                    p
+                    label
+                        input(name='director2P', type='checkbox')
+                        span #{translation.DIRECTOR} 2
+                    p
+                    label
+                        input(name='presidentP', type='checkbox')
+                        span #{translation.PRESIDENT}
+                    p
+                    label
+                        input(name='secretaryP', type='checkbox')
+                        span #{translation.SECRETARY}
+                    p
+                    label
+                        input(name='cashierP', type='checkbox')
+                        span #{translation.CASHIER}
+                    p
+                        label
+                            input(name='comiteP', type='checkbox')
+                            span #{translation.COMITE}
+                    p
+                        label
+                            input(name='autreP', type='checkbox')
+                            span #{translation.AUTRE}
+
+        button.btn.btn-primary(type='submit' name='action') #{translation.EDIT_PERSON}
+

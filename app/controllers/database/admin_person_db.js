@@ -6,7 +6,7 @@ exports.insertNewPerson = function (usermodel) {
 }
 
 exports.getIdOfUserFromEmail = function (lastname, firstname, email) {
-    return "SELECT UserId FROM `User` WHERE `Lastname` = '" + lastname + "' AND `Firstname` = '" + firstname + "' AND `Email` = '" + email + "'";
+    return "SELECT * FROM `User` WHERE `Lastname` = '" + lastname + "' AND `Firstname` = '" + firstname + "' AND `Email` = '" + email + "'";
 }
 
 exports.getIdOfUser = function (lastname, firstname) {

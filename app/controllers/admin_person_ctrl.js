@@ -30,8 +30,6 @@ exports.admin_person_add = function(req, res, next) {
     let userId = null;
     let roleId = null;
 
-    console.log('aaaaaaaaaaa'  + startAbo);
-
     //create a table with information about the roles selected
     let arrayRoleSelected = [director, director2, president, secretary, cashier, comite, other];
     let arrayRoleNames = ['Director', 'Director_2', 'President', 'Secretary', 'Cashier', 'Comite', 'Other'];
@@ -106,12 +104,34 @@ exports.admin_person_add = function(req, res, next) {
 };
 
 
-exports.admin_person_edit = function(req, res, next) {
+exports.admin_person_edit_searchUser = function(req, res, next) {
 
+    let lastname = req.body.lastnameP;
+    let firstname = req.body.firstnameP;
+    let email = req.body.emailP;
 
+    // Search the user in the db
+    let queryUser = AdminUserDb.getIdOfUserFromEmail(lastname, firstname, email);
+    C.db.query(queryUser, function (err, resultUser, fields) {
+        if (err) throw(err);
+        console.log(resultUser.UserId);
+        if (resultUser.length === 0) // if the user doesn't exist
+        {
+            res.render('admin/person/person_edited', {success: false});
+        }
+        else {
+
+            console.log(resultUser);
+            res.render('admin/person/person_edit_result', {userS: resultUser})
+
+        }
+    });
 
 };
 
+exports.admin_person_edit_resultSearch = function (req, res, next){
+    res.render('admin/person/person_edited', {success: true});
+}
 
 exports.admin_person_delete = function(req, res, next) {
 
