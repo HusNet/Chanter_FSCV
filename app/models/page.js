@@ -1,6 +1,7 @@
 const C = require('../../config/appConfig');
 
 function page(rows) {
+    this.PageId = rows.PageId;
     this.Title = rows.Title;
     this.Content = rows.Content;
     this.Published_date = rows.Published_date;
