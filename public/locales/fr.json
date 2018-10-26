@@ -44,7 +44,7 @@
   "FR": "Français",
   "DE": "Allemand",
 
-  "TITLE_ADMIN_CHOIR": "Ajouter un nouveau choeur",
+  "TITLE_ADMIN_CHOIR": "Les Choeurs",
   "CHOIR_NAME": "Nom du choeur",
   "EFFECTIVE": "Effectif",
   "POSTE_CODE": "NPA",
@@ -60,7 +60,6 @@
   "PRESIDENT":"Président",
   "NAME_DIRECTOR":"Nom du Directeur",
   "DIRECTOR":"Directeur",
-  "EMPTY":"Vide",
   "MAIL_ADDRESSING":"Adressage du courrier",
   "TYPE_CHOIR":"Type de Choeur",
   "CHURCH_LEADER":"Ch. d'église",
@@ -105,7 +104,7 @@
   "ADD_MENU": "Ajouter un menu",
   "UPDATE_MENU": "Modifier un menu",
   "DELETE_MENU": "Supprimer un menu",
-  "SELECT_MENU": "Sélectionnez le menu",
+  "SELECT_MENU": "Sélectionnez le menu à modifier",
   "CREATION_SUCCESS": "Création réussie",
   "CREATION_FAILED": "Erreur lors de la création",
   "EDITION_SUCCESS": "Edition réussie",
@@ -114,7 +113,11 @@
   "DELETION_FAILURE": "Erreur lors de la suppression",
   "MENU_IS_MAIN": "Vous ne pouvez pas supprimer le menu principal!",
   "ADD_PERSON": "Ajouter une personne",
-  "EDIT_PERSON": "Modifier une personne",
+  "UPDATE_PERSON": "Modifier une personne",
   "DELETE_PERSON": "Supprimer une personne",
+  "ADD_CHOIR": "Ajouter un choeur",
+  "UPDATE_CHOIR": "Modifier un choeur",
+  "DELETE_CHOIR": "Supprimer un choeur",
+  "EDIT_PERSON": "Modifier une personne",
   "SEARCH_PERSON" : "Rechercher"
 }
