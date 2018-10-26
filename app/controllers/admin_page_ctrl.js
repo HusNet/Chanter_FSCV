@@ -31,7 +31,7 @@ exports.add_news = function(req, res, next) {
     let contentDe = AdminUtilsDb.replaceSimpleQuote(req.body.contentde);
     let user = req.session.user;
     let date_publish = new Date().toISOString().slice(0, 19).replace('T', ' ');
-    let idPageLang = 1; // id de la meme page mais dans l'autre langue
+    let idPageLang = 0; // id de la meme page mais dans l'autre langue
     let isNews = 1;
 
     let newsFr = new PageModel({
@@ -119,7 +119,9 @@ exports.page = function(req, res, next) {
     C.db.query(query, function (err, rows, fields) {
         if (err) throw(err);
 
-        res.render('admin/page/page', {pages: rows})
+        let data = AdminUtilsDb.exportPageData(rows);
+
+        res.render('admin/page/page', {pages: rows, datas: data})
     });
 };
 
@@ -134,7 +136,7 @@ exports.add_page = function (req, res, next) {
     let contentDe = AdminUtilsDb.replaceSimpleQuote(req.body.contentde);
     let user = req.session.user;
     let date_publish = new Date().toISOString().slice(0, 19).replace('T', ' ');
-    let idPageLang = 1; // id de la meme page mais dans l'autre langue
+    let idPageLang = 0; // id de la meme page mais dans l'autre langue
     let isNews = 0;
 
     let newsFr = new PageModel({
@@ -231,7 +233,7 @@ exports.link_page = function (req, res, next) {
         C.db.query(query2, function (err, rows, fields) {
             if (err) throw(err);
 
-            res.redirect('/admin/page');
+            res.redirect('/admin/page/page_link');
         });
     });
 };
