@@ -208,3 +208,30 @@ exports.edit_page = function (req, res, next) {
         res.redirect('/admin/page');
     });
 };
+
+exports.form_link_page = function (req, res, next) {
+    let query = AdminPageDb.getPages();
+
+    C.db.query(query, function (err, rows, fields) {
+        if (err) throw(err);
+
+        res.render('admin/page/page_link', {pages: rows});
+    });
+};
+
+exports.link_page = function (req, res, next) {
+    let idPageFr = req.body.idFr;
+    let idPageDe = req.body.idDe;
+    let query1 = AdminPageDb.linkPage(idPageFr, idPageDe);
+    let query2 = AdminPageDb.linkPage(idPageDe, idPageFr);
+
+    C.db.query(query1, function (err, rows, fields) {
+        if (err) throw(err);
+
+        C.db.query(query2, function (err, rows, fields) {
+            if (err) throw(err);
+
+            res.redirect('/admin/page');
+        });
+    });
+};

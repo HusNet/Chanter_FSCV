@@ -135,6 +135,16 @@ module.exports = function(app, router) {
         adminPage.edit_page(req, res, next);
     });
 
+    router.get('/admin/page/page_link', function (req, res, next) {
+       admin.authenticationTest(req, res, next);
+       adminPage.form_link_page(req, res, next);
+    });
+
+    router.post('/admin/page/page_link', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminPage.link_page(req, res, next);
+    });
+
 // *** END PAGE ROUTES
 
     router.get('/admin/choir/update', function(req, res, next) {
