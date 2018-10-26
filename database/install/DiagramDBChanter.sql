@@ -40,6 +40,7 @@ CREATE TABLE IF NOT EXISTS `chanter-dev`.`User` (
   `PhoneProf` VARCHAR(20) NULL DEFAULT NULL,
   `Email` VARCHAR(64) NULL DEFAULT NULL,
   `StartAbo` DATE NULL DEFAULT NULL,
+  `Newsletter` TINYINT(1) NULL DEFAULT 0,
   PRIMARY KEY (`UserId`),
   UNIQUE INDEX `UserId` (`UserId` ASC))
 ENGINE = InnoDB
