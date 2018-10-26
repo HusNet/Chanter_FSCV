@@ -33,9 +33,9 @@ exports.getPages = function() {
     return "SELECT * FROM Page WHERE `IsNews` = 0";
 };
 
-exports.addPage = function(news) {
+exports.addPage = function(page) {
     return  "INSERT INTO Page (`Title`, `Content`, `AdminId`, `Published_date`, `Updated_date`, `Lang`, `IdPageLang`, `IsNews`) " +
-        "VALUES ('" + news.Title + "', '" + news.Content + "', '" + news.AdminId + "', '" + news.Published_date + "', '" + news.Updated_date + "', '" + news.Lang + "', '" + news.IdPageLang + "', '" + news.IsNews + "')";
+        "VALUES ('" + page.Title + "', '" + page.Content + "', '" + page.AdminId + "', '" + page.Published_date + "', '" + page.Updated_date + "', '" + page.Lang + "', '" + page.IdPageLang + "', '" + page.IsNews + "')";
 };
 
 exports.deletePage = function(id) {

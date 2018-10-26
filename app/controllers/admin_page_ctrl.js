@@ -82,7 +82,7 @@ exports.form_edit_news = function(req, res, next) {
 };
 
 exports.edit_news = function (req, res, next) {
-    let idNews = req.body.idPage;
+    let idNews = req.body.idNews;
     let title = AdminUtilsDb.replaceSimpleQuote(req.body.title);
     let content = AdminUtilsDb.replaceSimpleQuote(req.body.contentUpdated);
     let updated_date = new Date().toISOString().slice(0, 19).replace('T', ' ');
