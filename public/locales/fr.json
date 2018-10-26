@@ -107,7 +107,7 @@
   "DELETE_MENU": "Supprimer un menu",
   "SELECT_MENU": "Sélectionnez le menu",
   "CREATION_SUCCESS": "Création réussie",
-  "CREATION_FAILED": "Erreur lors de la création",
+  "CREATION_FAILURE": "Erreur lors de la création",
   "EDITION_SUCCESS": "Edition réussie",
   "EDITION_FAILURE": "Erreur lors de l'édition",
   "DELETION_SUCCESS": "Suppression réussie",

@@ -121,20 +121,28 @@ module.exports = function(app, router) {
         adminPerson.admin_person_add(req, res, next);
     });
 
-    router.post('/admin/person/person_delete', function(req, res, next) {
-        admin.authenticationTest(req, res, next);
-        adminPerson.admin_person_delete(req, res, next);
-    });
-
     router.get('/admin/person/person_edit', function(req, res, next) {
         admin.authenticationTest(req, res, next);
         res.render('admin/person/person_edit');
+    });
+
+    router.post('/admin/person/person_edit', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminPerson.admin_person_edit(req, res, next);
     });
 
     router.get('/admin/person/person_delete', function(req, res, next) {
         admin.authenticationTest(req, res, next);
         res.render('admin/person/person_delete');
     });
+
+    router.post('/admin/person/person_delete', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminPerson.admin_person_delete(req, res, next);
+    });
+
+
+
 
 
     // *** END PERSON ROUTES

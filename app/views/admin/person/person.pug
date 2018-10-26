@@ -8,6 +8,9 @@ block content
     a#a_person_edit.btn.btn-primary(href="/admin/person/person_edit") #{translation.EDIT_PERSON}
     a#a_person_delete.btn.btn-primary(href="/admin/person/person_delete") #{translation.DELETE_PERSON}
 
+    //Result of the insert - delete - update
+    block result
+
     // ADD PERSON
     block person_add_block
 
@@ -16,3 +19,4 @@ block content
 
     // DELETE PERSON
     block person_delete_block
+

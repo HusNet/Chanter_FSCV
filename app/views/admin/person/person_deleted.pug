@@ -1,0 +1,13 @@
+extends person
+
+block result
+
+    br
+    br
+
+    if success
+        div.success
+        p #{translation.DELETION_SUCCESS}
+    else
+        div.failed
+        p #{translation.DELETION_FAILURE}

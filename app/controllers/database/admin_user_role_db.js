@@ -4,3 +4,6 @@ exports.insertUserRole = function (idUser, idRole) {
         "VALUES ('" + idUser + "', '" + idRole + "')";
 }
 
+exports.deleteUserRoleFromUserId = function(userId){
+    return "DELETE FROM `User_Role` WHERE `UserId` = '" + userId + "'";
+}
