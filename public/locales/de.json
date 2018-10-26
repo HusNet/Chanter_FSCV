@@ -120,5 +120,6 @@
   "ADD_PERSON": "Jemand hinzufügen",
   "EDIT_PERSON": "Jemand veränderung",
   "DELETE_PERSON": "Jemand entfernen",
-  "SEARCH_PERSON" : "Suchen"
+  "SEARCH_PERSON" : "Suchen",
+  "EDIT": "Modifikation für"
 }

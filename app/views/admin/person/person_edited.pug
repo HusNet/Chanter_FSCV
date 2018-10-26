@@ -1,0 +1,13 @@
+extends person
+
+block result
+
+    br
+    br
+
+    if success
+        div.success
+        p #{translation.EDITION_SUCCESS}
+    else
+        div.failed
+        p #{translation.EDITION_FAILURE}

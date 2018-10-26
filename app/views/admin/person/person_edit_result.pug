@@ -1,39 +1,38 @@
-extends person
+extends person_edit_search
 
-block person_add_block
+block resultSearch
 
-    h2 #{translation.ADD_PERSON}
+    h2 #{translation.EDIT} #{userS[0].Lastname} #{userS[0].Firstname}
 
     br
 
-    form(method='POST' action='/admin/person/person_add')
+    form(method='POST' action='/admin/person/person_edit_result')
 
         div.form-group
-
             div(class='row')
                 div(class='column')
                     label(for='lastnameP') #{translation.LASTNAME}:
-                    input#lastnameP.form-control(type='text', placeholder='Lastname', name='lastnameP', required)
+                    input#lastnameP.form-control(type='text', value='' + userS[0].Lastname, name='lastnameP', required)
 
                 div(class='column')
                     label(for='firstnameP') #{translation.FIRSTNAME}:
-                    input#firstnameP.form-control(type='text', placeholder='Firstname', name='firstnameP', required)
+                    input#firstnameP.form-control(type='text', value='' + userS[0].Firstname, name='firstnameP', required)
 
                 div(class='column')
                     label(for='phonePrivateP') #{translation.PHONEPRIVATE}:
-                    input#phonePrivateP.form-control(type='text', placeholder='Phone private', name='phonePrivateP', required)
+                    input#phonePrivateP.form-control(type='text', value='' + userS[0].Phone, name='phonePrivateP', required)
 
                 div(class='column')
                     label(for='phoneProfP') #{translation.PHONEPRIVATE}:
-                    input#phoneProfP.form-control(type='text', placeholder='Phone prof', name='phoneProfP', required)
+                    input#phoneProfP.form-control(type='text', value='' + userS[0].PhoneProf, name='phoneProfP', required)
 
                 div(class='column')
                     label(for='emailP') #{translation.EMAIL}:
-                    input#emailP.form-control(type='text', placeholder='Email', name='emailP', required)
+                    input#emailP.form-control(type='text', value='' + userS[0].Email, name='emailP', required)
 
                 div(class='column')
                     label(for='startAboP') #{translation.STARTABO}:
-                    input#startAboP.form-control(type='date', placeholder='Abo', name='startaboP')
+                    input#startAboP.form-control(type='date', value='' + userS[0].StartAbo, name='startaboP')
 
                 div(class='column')
                     label #{translation.ROLE}:
@@ -66,5 +65,5 @@ block person_add_block
                             input(name='autreP', type='checkbox')
                             span #{translation.AUTRE}
 
-        button.btn.btn-primary(type='submit' name='action') #{translation.ADD}
+        button.btn.btn-primary(type='submit' name='action') #{translation.EDIT_PERSON}
 
