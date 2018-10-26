@@ -115,6 +115,7 @@
   "MENU_IS_MAIN": "Sie können das Hauptmenü nicht entfernen!",
 
   "ADD_PERSON": "Jemand hinzufügen",
-  "UPDATE_PERSON": "Jemand veränderung",
-  "DELETE_PERSON": "Jemand entfernen"
+  "EDIT_PERSON": "Jemand veränderung",
+  "DELETE_PERSON": "Jemand entfernen",
+  "SEARCH_PERSON" : "Suchen"
 }

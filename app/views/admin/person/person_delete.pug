@@ -2,4 +2,23 @@ extends person
 
 block person_delete_block
 
-    p delete personne
+    h2 #{translation.DELETE_PERSON}
+
+        br
+
+        form(method='POST' action='/admin/person/person_delete')
+
+            div.form-group
+
+                div(class='row')
+                    div(class='column')
+                        label(for='lastnameP') #{translation.LASTNAME}:
+                        input#lastnameP.form-control(type='text', placeholder='Lastname' name='lastnameP' required)
+
+                    div(class='column')
+                        label(for='firstnameP') #{translation.FIRSTNAME}:
+                        input#firstnameP.form-control(type='text', placeholder='Firstname' name='firstnameP' required)
+
+
+            button.btn.btn-primary(type='submit' name='action') #{translation.DELETE}
+

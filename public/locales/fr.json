@@ -71,7 +71,7 @@
   "MEMBER_FSCV":"Membre FSCV",
   "NOT_FSCV": "Non membre FSCV",
   "NAME_SECRETARIAT":"Nom du Secrétariat",
-  "SECRETARY":"Secrétaires",
+  "SECRETARY":"Secrétaire",
   "SWISS_CHOIR_UNION":"Union Suisse des Chorales",
   "MEMBER_USC":"Membre USC",
   "NOT_USC":"Non-Membre USC",
@@ -114,6 +114,7 @@
   "DELETION_FAILURE": "Erreur lors de la suppression",
   "MENU_IS_MAIN": "Vous ne pouvez pas supprimer le menu principal!",
   "ADD_PERSON": "Ajouter une personne",
-  "UPDATE_PERSON": "Modifier une personne",
-  "DELETE_PERSON": "Supprimer une personne"
+  "EDIT_PERSON": "Modifier une personne",
+  "DELETE_PERSON": "Supprimer une personne",
+  "SEARCH_PERSON" : "Rechercher"
 }
