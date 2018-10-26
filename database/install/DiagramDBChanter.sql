@@ -1,4 +1,4 @@
---------------------------------------------
+-- -----------------------------------------------------
 -- Schema chanter-dev
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `chanter-dev` DEFAULT CHARACTER SET utf8 ;
@@ -28,6 +28,21 @@ DROP TABLE IF EXISTS `User_Role`;
 
 SET FOREIGN_KEY_CHECKS = 1;
 
+
+-- -----------------------------------------------------
+-- Table `chanter-dev`.`Location`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `chanter-dev`.`Location` (
+  `LocationId` INT(10) NOT NULL,
+  `Address` INT(11) NULL DEFAULT NULL,
+  `NPA` VARCHAR(20) NOT NULL,
+  `City` VARCHAR(64) NOT NULL,
+  PRIMARY KEY (`LocationId`),
+  UNIQUE INDEX `LocationId` (`LocationId` ASC))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
 -- -----------------------------------------------------
 -- Table `chanter-dev`.`User`
 -- -----------------------------------------------------
@@ -41,10 +56,17 @@ CREATE TABLE IF NOT EXISTS `chanter-dev`.`User` (
   `Email` VARCHAR(64) NULL DEFAULT NULL,
   `StartAbo` DATE NULL DEFAULT NULL,
   `Newsletter` TINYINT(1) NULL DEFAULT 0,
+  `LocationId` INT(10) NULL DEFAULT NULL,
   PRIMARY KEY (`UserId`),
-  UNIQUE INDEX `UserId` (`UserId` ASC))
+  UNIQUE INDEX `UserId` (`UserId` ASC),
+  INDEX `fk_User_Location1_idx` (`LocationId` ASC),
+  CONSTRAINT `fk_User_Location1`
+    FOREIGN KEY (`LocationId`)
+    REFERENCES `chanter-dev`.`Location` (`LocationId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
+AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -55,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `chanter-dev`.`Admin_Login` (
   `AdminId` INT(10) NOT NULL AUTO_INCREMENT,
   `Username` VARCHAR(32) NOT NULL,
   `Password` VARCHAR(32) NOT NULL,
-  `UserId` INT(10) NULL,
+  `UserId` INT(10) NULL DEFAULT NULL,
   PRIMARY KEY (`AdminId`),
   UNIQUE INDEX `AdminId` (`AdminId` ASC),
   UNIQUE INDEX `Username` (`Username` ASC),
@@ -64,6 +86,7 @@ CREATE TABLE IF NOT EXISTS `chanter-dev`.`Admin_Login` (
     FOREIGN KEY (`UserId`)
     REFERENCES `chanter-dev`.`User` (`UserId`))
 ENGINE = InnoDB
+AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -90,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `chanter-dev`.`Role` (
   PRIMARY KEY (`RoleId`),
   UNIQUE INDEX `RoleId` (`RoleId` ASC))
 ENGINE = InnoDB
-AUTO_INCREMENT = 12
+AUTO_INCREMENT = 26
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -109,16 +132,23 @@ CREATE TABLE IF NOT EXISTS `chanter-dev`.`Choir` (
   `WebPage` VARCHAR(128) NULL DEFAULT NULL,
   `EffectifId` INT(10) NOT NULL,
   `Mailing` INT(10) NULL DEFAULT NULL,
+  `LocationId` INT(10) NULL DEFAULT NULL,
   PRIMARY KEY (`ChoirId`),
   UNIQUE INDEX `ChoirId` (`ChoirId` ASC),
   INDEX `FKChoir605558` (`EffectifId` ASC),
   INDEX `FKChoir973543` (`RoleId` ASC),
+  INDEX `fk_Choir_Location1_idx` (`LocationId` ASC),
   CONSTRAINT `FKChoir605558`
     FOREIGN KEY (`EffectifId`)
     REFERENCES `chanter-dev`.`Effectif` (`EffectifId`),
   CONSTRAINT `FKChoir973543`
     FOREIGN KEY (`RoleId`)
-    REFERENCES `chanter-dev`.`Role` (`RoleId`))
+    REFERENCES `chanter-dev`.`Role` (`RoleId`),
+  CONSTRAINT `fk_Choir_Location1`
+    FOREIGN KEY (`LocationId`)
+    REFERENCES `chanter-dev`.`Location` (`LocationId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -179,6 +209,73 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
+-- Table `chanter-dev`.`Menu`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `chanter-dev`.`Menu` (
+  `idMenu` INT(11) NOT NULL AUTO_INCREMENT,
+  `Name` VARCHAR(45) NOT NULL,
+  `idParentMenu` INT(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`idMenu`),
+  INDEX `ParentMenuKey` (`idParentMenu` ASC),
+  CONSTRAINT `ParentMenuKey`
+    FOREIGN KEY (`idParentMenu`)
+    REFERENCES `chanter-dev`.`Menu` (`idMenu`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 2
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `chanter-dev`.`Page`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `chanter-dev`.`Page` (
+  `PageId` INT(10) NOT NULL AUTO_INCREMENT,
+  `Title` VARCHAR(45) NOT NULL,
+  `Content` LONGTEXT NOT NULL,
+  `Published_date` DATE NOT NULL,
+  `Updated_date` DATE NULL DEFAULT NULL,
+  `Lang` VARCHAR(2) NOT NULL,
+  `IdPageLang` INT(11) NULL DEFAULT NULL,
+  `IsNews` TINYINT(1) NOT NULL,
+  `AdminId` INT(11) NOT NULL,
+  PRIMARY KEY (`PageId`),
+  UNIQUE INDEX `PageId` (`PageId` ASC),
+  INDEX `FKPage265487` (`AdminId` ASC),
+  CONSTRAINT `FKPage265487`
+    FOREIGN KEY (`AdminId`)
+    REFERENCES `chanter-dev`.`Admin_Login` (`AdminId`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 2
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `chanter-dev`.`Config`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `chanter-dev`.`Config` (
+  `idConfig` INT(11) NOT NULL,
+  `MainMenuId` INT(11) NOT NULL,
+  `HomePageId` INT(10) NOT NULL,
+  PRIMARY KEY (`idConfig`, `MainMenuId`, `HomePageId`),
+  INDEX `fk_Config_Menu1_idx` (`MainMenuId` ASC),
+  INDEX `fk_Config_Page1_idx` (`HomePageId` ASC),
+  CONSTRAINT `fk_Config_Menu1`
+    FOREIGN KEY (`MainMenuId`)
+    REFERENCES `chanter-dev`.`Menu` (`idMenu`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Config_Page1`
+    FOREIGN KEY (`HomePageId`)
+    REFERENCES `chanter-dev`.`Page` (`PageId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
 -- Table `chanter-dev`.`Group_Committee`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `chanter-dev`.`Group_Committee` (
@@ -193,26 +290,6 @@ CREATE TABLE IF NOT EXISTS `chanter-dev`.`Group_Committee` (
   CONSTRAINT `FKGroup_Comm945528`
     FOREIGN KEY (`GroupsId`)
     REFERENCES `chanter-dev`.`Groups` (`GroupsId`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `chanter-dev`.`Location`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `chanter-dev`.`Location` (
-  `LocationId` INT(10) NOT NULL,
-  `Address` INT(11) NULL DEFAULT NULL,
-  `NPA` VARCHAR(20) NOT NULL,
-  `City` VARCHAR(64) NOT NULL,
-  PRIMARY KEY (`LocationId`),
-  UNIQUE INDEX `LocationId` (`LocationId` ASC),
-  CONSTRAINT `FKLocation474649`
-    FOREIGN KEY (`LocationId`)
-    REFERENCES `chanter-dev`.`Choir` (`ChoirId`),
-  CONSTRAINT `FKLocation496233`
-    FOREIGN KEY (`LocationId`)
-    REFERENCES `chanter-dev`.`User` (`UserId`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -250,24 +327,45 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `chanter-dev`.`Page`
+-- Table `chanter-dev`.`Menu_has_Page`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `chanter-dev`.`Page` (
-  `PageId` INT(10) NOT NULL AUTO_INCREMENT,
-  `Title` VARCHAR(45) NOT NULL,
-  `Content` LONGTEXT NOT NULL,
-  `Published_date` DATE NOT NULL,
-  `Updated_date` DATE NULL DEFAULT NULL,
-  `Lang` VARCHAR(2) NOT NULL,
-  `IdPageLang` INT(11) NULL DEFAULT NULL,
-  `IsNews` TINYINT(1) NOT NULL,
-  `AdminId` INT(11) NOT NULL,
-  PRIMARY KEY (`PageId`),
-  UNIQUE INDEX `PageId` (`PageId` ASC),
-  INDEX `FKPage265487` (`AdminId` ASC),
-  CONSTRAINT `FKPage265487`
-    FOREIGN KEY (`AdminId`)
-    REFERENCES `chanter-dev`.`Admin_Login` (`AdminId`))
+CREATE TABLE IF NOT EXISTS `chanter-dev`.`Menu_has_Page` (
+  `Menu_idMenu` INT(11) NOT NULL,
+  `Page_PageId` INT(10) NOT NULL,
+  PRIMARY KEY (`Menu_idMenu`, `Page_PageId`),
+  INDEX `fk_Menu_has_Page_Page1_idx` (`Page_PageId` ASC),
+  CONSTRAINT `fk_Menu_has_Page_Menu1`
+    FOREIGN KEY (`Menu_idMenu`)
+    REFERENCES `chanter-dev`.`Menu` (`idMenu`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Menu_has_Page_Page1`
+    FOREIGN KEY (`Page_PageId`)
+    REFERENCES `chanter-dev`.`Page` (`PageId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `chanter-dev`.`Translations`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `chanter-dev`.`Translations` (
+  `idFR` INT(11) NOT NULL,
+  `idDE` INT(11) NOT NULL,
+  INDEX `fk_Translations_1_idx` (`idFR` ASC),
+  INDEX `fk_Translations_DE_idx` (`idDE` ASC),
+  CONSTRAINT `fk_Translations_DE`
+    FOREIGN KEY (`idDE`)
+    REFERENCES `chanter-dev`.`Page` (`PageId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Translations_FR`
+    FOREIGN KEY (`idFR`)
+    REFERENCES `chanter-dev`.`Page` (`PageId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -326,87 +424,6 @@ CREATE TABLE IF NOT EXISTS `chanter-dev`.`User_Role` (
     REFERENCES `chanter-dev`.`Role` (`RoleId`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `chanter-dev`.`Menu`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `chanter-dev`.`Menu` (
-  `idMenu` INT NOT NULL AUTO_INCREMENT,
-  `Name` VARCHAR(45) NOT NULL,
-  `idParentMenu` INT NULL,
-  PRIMARY KEY (`idMenu`),
-  CONSTRAINT `ParentMenuKey`
-  FOREIGN KEY (`idParentMenu`)
-  REFERENCES `Menu` (`idMenu`)
-  ON DELETE NO ACTION
-  ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
--- -----------------------------------------------------
--- Table `chanter-dev`.`Menu_has_Page`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `chanter-dev`.`Menu_has_Page` (
-  `Menu_idMenu` INT NULL,
-  `Page_PageId` INT(10) NULL,
-  PRIMARY KEY (`Menu_idMenu`, `Page_PageId`),
-  INDEX `fk_Menu_has_Page_Page1_idx` (`Page_PageId` ASC),
-  CONSTRAINT `fk_Menu_has_Page_Menu1`
-    FOREIGN KEY (`Menu_idMenu`)
-    REFERENCES `chanter-dev`.`Menu` (`idMenu`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Menu_has_Page_Page1`
-    FOREIGN KEY (`Page_PageId`)
-    REFERENCES `chanter-dev`.`Page` (`PageId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `chanter-dev`.`Config`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `chanter-dev`.`Config` (
-  `idConfig` INT NOT NULL,
-  `MainMenuId` INT NULL DEFAULT NULL,
-  `HomePageId` INT(10) NULL DEFAULT NULL,
-  PRIMARY KEY (`idConfig`, `MainMenuId`, `HomePageId`),
-  INDEX `fk_Config_Menu1_idx` (`MainMenuId` ASC),
-  INDEX `fk_Config_Page1_idx` (`HomePageId` ASC),
-  CONSTRAINT `fk_Config_Menu1`
-    FOREIGN KEY (`MainMenuId`)
-    REFERENCES `chanter-dev`.`Menu` (`idMenu`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Config_Page1`
-    FOREIGN KEY (`HomePageId`)
-    REFERENCES `chanter-dev`.`Page` (`PageId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `chanter-dev`.`Translations`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `chanter-dev`.`Translations` (
-  `idFR` INT NOT NULL,
-  `idDE` INT NOT NULL,
-  INDEX `fk_Translations_1_idx` (`idFR` ASC),
-  INDEX `fk_Translations_DE_idx` (`idDE` ASC),
-  CONSTRAINT `fk_Translations_FR`
-    FOREIGN KEY (`idFR`)
-    REFERENCES `chanter-dev`.`Page` (`PageId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Translations_DE`
-    FOREIGN KEY (`idDE`)
-    REFERENCES `chanter-dev`.`Page` (`PageId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
 -- -----------------------------------------------------
 -- Data for table `chanter-dev`.`Admin_Login`
 -- -----------------------------------------------------
