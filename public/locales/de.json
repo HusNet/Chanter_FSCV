@@ -121,5 +121,9 @@
   "EDIT_PERSON": "Jemand veränderung",
   "DELETE_PERSON": "Jemand entfernen",
   "SEARCH_PERSON" : "Suchen",
-  "EDIT": "Modifikation für"
+  "EDIT": "Modifikation für",
+  "NEWSLETTER": "Newsletter erhalten",
+  "ADDRESS": "Adresse",
+  "NPA": "NPA",
+  "CITY": "Stadt"
 }

@@ -7,6 +7,8 @@ function user(rows) {
     this.PhoneProf = rows.PhoneProf;
     this.Email = rows.Email;
     this.StartAbo = rows.StartAbo;
+    this.Newsletter = rows.Newsletter;
+    this.LocationId = rows.LocationId;
 
 }
 
