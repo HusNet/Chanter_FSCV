@@ -3,7 +3,6 @@ const AdminLogin = require('../models/admin_login');
 const AdminLoginDb = require('../controllers/database/admin_login_db');
 const AdminPageDb = require('../controllers/database/admin_page_db');
 const UserModel = require('../models/user');
-const PageModel = require('../models/page');
 const AdminUserDb = require('../controllers/database/admin_person_db');
 const AdminRoleDb = require('../controllers/database/admin_role_db');
 const AdminRoleUserDb = require('../controllers/database/admin_user_role_db');
@@ -118,60 +117,6 @@ exports.printUserbyRole = function(req, res, next){
 
 }
 
-exports.news = function(req, res, next) {
-
-    let query = AdminPageDb.getNews();
-    let news = [];
-
-    C.db.query(query, function (err, rows, fields) {
-        if (err) throw(err);
-        res.render('admin/news', {news: rows})
-    });
-};
-
-exports.add_news = function(req, res, next) {
-
-    let titleFr = req.body.titlefr;
-    let titleDe = req.body.titlede;
-    let contentFr = req.body.contentfr;
-    let contentDe = req.body.contentde;
-    let user = 1; // req.session.user
-    let date_publish = new Date().toISOString().slice(0, 19).replace('T', ' ');
-    let idPageLang = 1; // id de la meme page mais dans l'autre langue
-    let isNews = 1; // req.body.isNews
-
-    let newsFr = new PageModel({
-        Title: titleFr,
-        Content: contentFr,
-        AdminId: user,
-        Published_date: date_publish,
-        Updated_date: date_publish,
-        Lang: 'fr',
-        IsNews: isNews,
-        IdPageLang: idPageLang
-    });
-
-    let newsDe = new PageModel({
-        Title: titleDe,
-        Content: contentDe,
-        AdminId: user,
-        Published_date: date_publish,
-        Updated_date: date_publish,
-        Lang: 'de',
-        IsNews: isNews,
-        IdPageLang: idPageLang
-    });
-
-    let queryFr = AdminPageDb.addNews(newsFr);
-    let queryDe = AdminPageDb.addNews(newsDe);
-
-    C.db.query(query, function (err, rows, fields) {
-        if (err) throw(err);
-    });
-
-    res.redirect('/admin/news');
-}
-
 exports.service = function(req, res, next) {
 
     res.render('admin/service', {
@@ -205,8 +150,6 @@ exports.export = function(req, res, next) {
 
 exports.authenticationTest = function(req, res, next){
     req.session.reload(function(err) {
-        console.log("\n\nAuthentication");
-        console.log(req.session);
 
         // delete in prod
         req.session.user = 1;

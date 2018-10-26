@@ -35,7 +35,12 @@
   "TITLE_ADMIN_USER": "Einen neuen Benutzer hinzufügen",
   "TITLE_ADMIN_NEWS": "Alle Nachrichten",
   "TITLE_ADMIN_ADD_NEWS": "Eine Nachricht hinzufügen",
+  "TITLE_ADMIN_ADD_PAGE": "Eine Seite hinzufügen",
   "TITLE_ADMIN_EDIT_NEWS": "Bearbeiten einer Nachricht",
+  "TITLE_ADMIN_EDIT_PAGE": "Eine Seite bearbeiten",
+  "NO_NEWS_AVAILABLE": "Keine Nachrichten verfügbar",
+  "NO_PAGE_AVAILABLE": "Keine Seite verfügbar",
+  "TITLE_ADMIN_PAGE": "Alle Seiten",
   "FR": "Französisch",
   "DE": "Deutsch",
 
@@ -55,6 +60,7 @@
   "PRESIDENT":"Präsident",
   "NAME_DIRECTOR":"Name des Direktors",
   "DIRECTOR":"Direktor",
+  "EMPTY":"Leer",
   "MAIL_ADDRESSING":"Adressierung von Post",
   "TYPE_CHOIR":"Chortyp",
   "CHURCH_LEADER":"Kirche Ch.",
@@ -93,6 +99,7 @@
   "CLEAR":"Zurücksetzen",
   "COMITE": "Bord",
   "AUTRE": "Andere",
+
   "TITLE_ADMIN_MENU": "Menü",
   "IS_MAIN": "ist der Hauptmenü",
   "ADD_MENU": "Menü hinzufügen",
@@ -102,7 +109,16 @@
   "ADD_CHOIR": "Einen Chor hinzufügen",
   "UPDATE_CHOIR": "Einen Chor ändern",
   "DELETE_CHOIR": "Einen Chor löschen",
+  "CREATION_SUCCESS": "Erstellung erfolgreich",
+  "CREATION_FAILURE": "Fehler beim Erstellen",
+  "EDITION_SUCCESS": "Veränderung erfolgreich",
+  "EDITION_FAILURE": "Fehler beim Veränderung",
+  "DELETION_SUCCESS": "Entfernung erfolgreich",
+  "DELETION_FAILURE": "Fehler beim Entfernung",
+  "MENU_IS_MAIN": "Sie können das Hauptmenü nicht entfernen!",
+
   "ADD_PERSON": "Jemand hinzufügen",
-  "UPDATE_PERSON": "Jemand veränderung",
-  "DELETE_PERSON": "Jemand entfernen"
+  "EDIT_PERSON": "Jemand veränderung",
+  "DELETE_PERSON": "Jemand entfernen",
+  "SEARCH_PERSON" : "Suchen"
 }

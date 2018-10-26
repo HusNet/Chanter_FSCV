@@ -2,18 +2,30 @@ extends menu
 
 block delete_menu
 
-    form(method='POST' action='/admin/menu', id='delete_menu', style='display:none;')
-        div.form-group
+    script.
+        document.getElementById('a_menu_add').classList.remove('active');
+        document.getElementById('a_menu_edit').classList.remove('active');
+        document.getElementById('a_menu_delete').classList.add('active');
 
-            div(class='row')
-                div(class='column')
-                    label(for='delete_title') #{translation.TITLE}:
-                    input#delete_title.form-control(type='text', placeholder='Title' name='title' required)
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.dropdown-trigger');
+            var instances = M.Dropdown.init(elems, {});
+        });
 
-                div(class='column')
-                    p
-                    label
-                        input(name='mainMenu', type='checkbox')
-                        span #{translation.IS_MAIN}
+        function confirmDelete(id, name) {
+            if (confirm("Delete " + name + " ?"))
+                window.location.href = '/admin/menu/delete?id=' + id;
+        }
+    br
+    br
+    br
+    br
 
-        button.btn.btn-primary(type='submit') #{translation.DELETE}
+    a.dropdown-trigger.btn(href="#", data-target='dropdown_menu_list') #{translation.SELECT_MENU}
+
+    ul#dropdown_menu_list.dropdown-content
+        each menu in menus
+            li
+                a(onclick='confirmDelete(' + menu.idMenu + ', "' + menu.Name + '")')= menu.Name
+
+

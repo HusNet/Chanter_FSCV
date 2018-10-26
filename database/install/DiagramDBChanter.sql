@@ -84,7 +84,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `chanter-dev`.`Role` (
   `RoleId` INT(10) NOT NULL AUTO_INCREMENT,
-  `Name` ENUM('Director', 'Director_2', 'President', 'Cashier', 'Secretary', 'SuperAdmin', 'Admin', 'WebMaster', 'Translator', 'Editor', 'DataManager', 'NewsletterManager') NULL DEFAULT NULL,
+  `Name` ENUM('Director', 'Director_2', 'President', 'Cashier', 'Secretary', 'SuperAdmin', 'Admin', 'WebMaster', 'Translator', 'Editor', 'DataManager', 'NewsletterManager', 'Committee', 'Other') NULL DEFAULT NULL,
   `Picture` VARCHAR(64) NULL DEFAULT NULL,
   PRIMARY KEY (`RoleId`),
   UNIQUE INDEX `RoleId` (`RoleId` ASC))
@@ -333,9 +333,14 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `chanter-dev`.`Menu` (
   `idMenu` INT NOT NULL AUTO_INCREMENT,
   `Name` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idMenu`))
+  `idParentMenu` INT NULL,
+  PRIMARY KEY (`idMenu`),
+  CONSTRAINT `ParentMenuKey`
+  FOREIGN KEY (`idParentMenu`)
+  REFERENCES `Menu` (`idMenu`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `chanter-dev`.`Menu_has_Page`
@@ -343,10 +348,8 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `chanter-dev`.`Menu_has_Page` (
   `Menu_idMenu` INT NULL,
   `Page_PageId` INT(10) NULL,
-  `SubMenu_idMenu` INT NULL DEFAULT NULL,
-  PRIMARY KEY (`Menu_idMenu`, `Page_PageId`, `SubMenu_idMenu`),
+  PRIMARY KEY (`Menu_idMenu`, `Page_PageId`),
   INDEX `fk_Menu_has_Page_Page1_idx` (`Page_PageId` ASC),
-  INDEX `fk_Menu_has_Page_Menu1_idx` (`Menu_idMenu` ASC),
   CONSTRAINT `fk_Menu_has_Page_Menu1`
     FOREIGN KEY (`Menu_idMenu`)
     REFERENCES `chanter-dev`.`Menu` (`idMenu`)
@@ -365,7 +368,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `chanter-dev`.`Config` (
   `idConfig` INT NOT NULL,
-  `MainMenuId` INT(10) NULL DEFAULT NULL,
+  `MainMenuId` INT NULL DEFAULT NULL,
   `HomePageId` INT(10) NULL DEFAULT NULL,
   PRIMARY KEY (`idConfig`, `MainMenuId`, `HomePageId`),
   INDEX `fk_Config_Menu1_idx` (`MainMenuId` ASC),
@@ -403,8 +406,6 @@ CREATE TABLE IF NOT EXISTS `chanter-dev`.`Translations` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-
-
 -- -----------------------------------------------------
 -- Data for table `chanter-dev`.`Admin_Login`
 -- -----------------------------------------------------
@@ -414,14 +415,6 @@ INSERT INTO `chanter-dev`.`Admin_Login` (`AdminId`, `Username`, `Password`, `Use
 
 COMMIT;
 
--- -----------------------------------------------------
--- Data for table `chanter-dev`.`Menu`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `chanter-dev`;
-INSERT INTO `chanter-dev`.`Menu` (`idMenu`, `Name`) VALUES (1, 'Main');
-
-COMMIT;
 
 -- -----------------------------------------------------
 -- Data for table `chanter-dev`.`Page`
@@ -429,6 +422,15 @@ COMMIT;
 START TRANSACTION;
 USE `chanter-dev`;
 INSERT INTO `chanter-dev`.`Page` (`PageId`, `Title`, `Content`, `Published_date`, `Updated_date`, `Lang`, `IdPageLang`, `IsNews`, `AdminId`) VALUES (1, 'Default', 'This is the default page', '2018-01-01', NULL, 'En', NULL, 0, 1);
+
+COMMIT;
+
+-- -----------------------------------------------------
+-- Data for table `chanter-dev`.`Admin_Login`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `chanter-dev`;
+INSERT INTO `chanter-dev`.`Menu` (`idMenu`, `Name`) VALUES (1, 'Main Menu');
 
 COMMIT;
 
@@ -451,7 +453,7 @@ INSERT INTO `chanter-dev`.`Role` (`Name`) VALUES ('Director_2');
 INSERT INTO `chanter-dev`.`Role` (`Name`) VALUES ('President');
 INSERT INTO `chanter-dev`.`Role` (`Name`) VALUES ('Secretary');
 INSERT INTO `chanter-dev`.`Role` (`Name`) VALUES ('Cashier');
-INSERT INTO `chanter-dev`.`Role` (`Name`) VALUES ('Comite');
+INSERT INTO `chanter-dev`.`Role` (`Name`) VALUES ('Committee');
 INSERT INTO `chanter-dev`.`Role` (`Name`) VALUES ('Other');
 INSERT INTO `chanter-dev`.`Role` (`Name`) VALUES ('Admin');
 INSERT INTO `chanter-dev`.`Role` (`Name`) VALUES ('WebMaster');
