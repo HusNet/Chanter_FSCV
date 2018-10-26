@@ -13,9 +13,12 @@ module.exports = function(app, router) {
     let admin = require('../app/controllers/admin_ctrl');
     //contact routes
     let contact = require('../app/controllers/contact_ctrl');
-    let adminMenu = require('../app/controllers/admin_menu_ctrl');
+
     let adminPerson = require('../app/controllers/admin_person_ctrl');
     let adminPage = require('../app/controllers/admin_page_ctrl');
+
+    let choir = require('../app/controllers/admin_choir_ctrl');
+
 
     router.get('/', function(req, res, next) {
         home.index(req, res, next);
@@ -46,13 +49,53 @@ module.exports = function(app, router) {
         admin.authenticationTest(req, res, next);
         admin.page(req, res, next);
     });
-
+// ** Choir start routes
     router.get('/admin/choir', function(req, res, next) {
         admin.authenticationTest(req, res, next);
-        admin.choir(req, res, next);
+        choir.choir(req, res, next);
     });
 
-    // *** PERSON ROUTES
+    router.get('/admin/choir/add', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        choir.getRoleByName('SuperAdmin').then(function (PersonPresident) {
+            choir.getRoleByName('SuperAdmin').then(function (PersonDirector) {
+                choir.getRoleByName('SuperAdmin').then(function (PersonSecretaire) {
+                    choir.getRoleByName('SuperAdmin').then(function (PersonCaissier) {
+                        res.render('admin/choir/choir_add',{
+                            PersonPresident:PersonPresident,
+                            PersonDirector:PersonDirector,
+                            PersonSecretaire:PersonSecretaire,
+                            PersonCaissier:PersonCaissier
+                        });
+                    })
+                })
+            })
+        })
+
+    });
+
+    router.post('/admin/choir/add', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminMenu.insertChoir(req, res, next);
+    });
+
+    router.get('/admin/choir/update', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminMenu.getAllChoir(req, res, next);
+    });
+
+    router.get('/admin/choir/delete', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminMenu.getAllChoir(req, res, next);
+    });
+    router.get('/admin/choir/GetRole/:roleName', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        choir.getRoleByName(req, res, next);
+    });
+
+
+// ** Choir end routes
+
     router.get('/admin/person', function(req, res, next) {
         admin.authenticationTest(req, res, next);
         adminPerson.person(req, res, next);

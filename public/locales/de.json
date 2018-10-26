@@ -39,9 +39,9 @@
   "FR": "Französisch",
   "DE": "Deutsch",
 
-  "TITLE_ADMIN_CHOIR": "Einen neuen Chor hinzufügen",
+  "TITLE_ADMIN_CHOIR": "die Chöre",
   "CHOIR_NAME": "Name des Chores",
-  "EFFECTIVE": "EFFEKTIV",
+  "EFFECTIVE": "Effektiv",
   "POSTE_CODE": "POSTCODE",
   "LOCATION": "Ort",
   "DATE_FOUNDATION": "Datum der Gründung",
@@ -55,7 +55,6 @@
   "PRESIDENT":"Präsident",
   "NAME_DIRECTOR":"Name des Direktors",
   "DIRECTOR":"Direktor",
-  "EMPTY":"Leer",
   "MAIL_ADDRESSING":"Adressierung von Post",
   "TYPE_CHOIR":"Chortyp",
   "CHURCH_LEADER":"Kirche Ch.",
@@ -100,8 +99,9 @@
   "UPDATE_MENU": "Menü veränderung",
   "DELETE_MENU": "Menü entfernen",
   "SELECT_MENU": "Wählen Sie den Menü",
-
-
+  "ADD_CHOIR": "Einen Chor hinzufügen",
+  "UPDATE_CHOIR": "Einen Chor ändern",
+  "DELETE_CHOIR": "Einen Chor löschen",
   "ADD_PERSON": "Jemand hinzufügen",
   "UPDATE_PERSON": "Jemand veränderung",
   "DELETE_PERSON": "Jemand entfernen"

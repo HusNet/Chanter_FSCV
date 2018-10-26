@@ -39,7 +39,7 @@
   "FR": "Français",
   "DE": "Allemand",
 
-  "TITLE_ADMIN_CHOIR": "Ajouter un nouveau choeur",
+  "TITLE_ADMIN_CHOIR": "Les Choeurs",
   "CHOIR_NAME": "Nom du choeur",
   "EFFECTIVE": "Effectif",
   "POSTE_CODE": "NPA",
@@ -55,7 +55,6 @@
   "PRESIDENT":"Président",
   "NAME_DIRECTOR":"Nom du Directeur",
   "DIRECTOR":"Directeur",
-  "EMPTY":"Vide",
   "MAIL_ADDRESSING":"Adressage du courrier",
   "TYPE_CHOIR":"Type de Choeur",
   "CHURCH_LEADER":"Ch. d'église",
@@ -100,9 +99,10 @@
   "UPDATE_MENU": "Modifier un menu",
   "DELETE_MENU": "Supprimer un menu",
   "SELECT_MENU": "Sélectionnez le menu à modifier",
-
-
   "ADD_PERSON": "Ajouter une personne",
   "UPDATE_PERSON": "Modifier une personne",
-  "DELETE_PERSON": "Supprimer une personne"
+  "DELETE_PERSON": "Supprimer une personne",
+  "ADD_CHOIR": "Ajouter un choeur",
+  "UPDATE_CHOIR": "Modifier un choeur",
+  "DELETE_CHOIR": "Supprimer un choeur"
 }

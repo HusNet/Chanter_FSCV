@@ -113,7 +113,7 @@ exports.choir = function(req, res, next) {
     });
 };
 
-exports.add_Choir = function(req, res, next){
+exports.printUserbyRole = function(req, res, next){
 
 
 }

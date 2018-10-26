@@ -18,7 +18,6 @@ exports.getAllMenus = function (req, res, next){
     });
 };
 
-
 exports.insertMenu = function (req, res, next) {
 
 };
