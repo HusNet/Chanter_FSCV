@@ -48,6 +48,6 @@ exports.getPageById = function (id) {
 
 exports.editPage = function(id, title, content, updated_date) {
     return  "UPDATE Page " +
-        "SET `Title` = '" + title + "', `Content` = '" + content + "', `Updated_date` = '" + updated_date + "' " +
-        "WHERE `PageId` = " + id;
+            "SET `Title` = '" + title + "', `Content` = '" + content + "', `Updated_date` = '" + updated_date + "' " +
+            "WHERE `PageId` = " + id;
 };

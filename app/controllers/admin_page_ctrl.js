@@ -1,5 +1,6 @@
 const C = require('../../config/appConfig');
 const AdminPageDb = require('../controllers/database/admin_page_db');
+const AdminUtilsDb = require('../controllers/database/utils/db_utils');
 const PageModel = require('../models/page');
 
 /**
@@ -24,10 +25,10 @@ exports.form_news = function(req, res, next) {
 
 exports.add_news = function(req, res, next) {
 
-    let titleFr = req.body.titlefr;
-    let titleDe = req.body.titlede;
-    let contentFr = req.body.contentfr;
-    let contentDe = req.body.contentde;
+    let titleFr = AdminUtilsDb.replaceSimpleQuote(req.body.titlefr);
+    let titleDe = AdminUtilsDb.replaceSimpleQuote(req.body.titlede);
+    let contentFr = AdminUtilsDb.replaceSimpleQuote(req.body.contentfr);
+    let contentDe = AdminUtilsDb.replaceSimpleQuote(req.body.contentde);
     let user = req.session.user;
     let date_publish = new Date().toISOString().slice(0, 19).replace('T', ' ');
     let idPageLang = 1; // id de la meme page mais dans l'autre langue
@@ -81,9 +82,9 @@ exports.form_edit_news = function(req, res, next) {
 };
 
 exports.edit_news = function (req, res, next) {
-    let idNews = req.body.idNews;
-    let title = req.body.title;
-    let content = req.body.contentUpdated;
+    let idNews = req.body.idPage;
+    let title = AdminUtilsDb.replaceSimpleQuote(req.body.title);
+    let content = AdminUtilsDb.replaceSimpleQuote(req.body.contentUpdated);
     let updated_date = new Date().toISOString().slice(0, 19).replace('T', ' ');
     let query = AdminPageDb.editNews(idNews, title, content, updated_date);
 
@@ -127,10 +128,10 @@ exports.form_page = function(req, res, next) {
 };
 
 exports.add_page = function (req, res, next) {
-    let titleFr = req.body.titlefr;
-    let titleDe = req.body.titlede;
-    let contentFr = req.body.contentfr;
-    let contentDe = req.body.contentde;
+    let titleFr = AdminUtilsDb.replaceSimpleQuote(req.body.titlefr);
+    let titleDe = AdminUtilsDb.replaceSimpleQuote(req.body.titlede);
+    let contentFr = AdminUtilsDb.replaceSimpleQuote(req.body.contentfr);
+    let contentDe = AdminUtilsDb.replaceSimpleQuote(req.body.contentde);
     let user = req.session.user;
     let date_publish = new Date().toISOString().slice(0, 19).replace('T', ' ');
     let idPageLang = 1; // id de la meme page mais dans l'autre langue
@@ -196,8 +197,8 @@ exports.form_edit_page = function(req, res, next) {
 
 exports.edit_page = function (req, res, next) {
     let idPage = req.body.idPage;
-    let title = req.body.title;
-    let content = req.body.contentUpdated;
+    let title = AdminUtilsDb.replaceSimpleQuote(req.body.title);
+    let content = AdminUtilsDb.replaceSimpleQuote(req.body.contentUpdated);
     let updated_date = new Date().toISOString().slice(0, 19).replace('T', ' ');
     let query = AdminPageDb.editPage(idPage, title, content, updated_date);
 
