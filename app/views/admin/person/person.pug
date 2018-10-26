@@ -4,13 +4,9 @@ block content
 
     h1.display-4.m-b-2 #{translation.TITLE_ADMIN_PERSON}
 
-    form(method='GET' action='/admin/person/person_add')
-        button.btn.btn-primary(onclick='toggle_add_person()') #{translation.ADD_PERSON}
-    form(method='GET' action='/admin/person/person_edit')
-        button.btn.btn-primary(onclick='toggle_edit_person()') #{translation.EDIT_PERSON}
-    form(method='GET' action='/admin/person/person_delete')
-        button.btn.btn-primary(onclick='toggle_delete_person()') #{translation.DELETE_PERSON}
-
+    a#a_person_add.btn.btn-primary(href="/admin/person/person_add") #{translation.ADD_PERSON}
+    a#a_person_edit.btn.btn-primary(href="/admin/person/person_edit") #{translation.EDIT_PERSON}
+    a#a_person_delete.btn.btn-primary(href="/admin/person/person_delete") #{translation.DELETE_PERSON}
 
     // ADD PERSON
     block person_add_block
