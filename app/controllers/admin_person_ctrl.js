@@ -26,22 +26,23 @@ exports.admin_person_add = function(req, res, next) {
     let cashier = req.body.cashierP;
     let comite = req.body.comiteP;
     let other = req.body.autreP;
-    //let startAbo = req.body.startaboP;
+    let startAbo = req.body.startaboP;
     let userId = null;
     let roleId = null;
+
+    console.log('aaaaaaaaaaa'  + startAbo);
 
     //create a table with information about the roles selected
     let arrayRoleSelected = [director, director2, president, secretary, cashier, comite, other];
     let arrayRoleNames = ['Director', 'Director_2', 'President', 'Secretary', 'Cashier', 'Comite', 'Other'];
 
-    var usermodel = new UserModel({
+    let usermodel = new UserModel({
         Lastname: lastname,
         Firstname: firstname,
         Phone: phonePrivate,
         PhoneProf: phoneProf,
         Email: email,
-        //StartAbo: startAbo
-
+        StartAbo: startAbo
     });
 
     console.log(" trying to create a new person...");
@@ -107,7 +108,7 @@ exports.admin_person_add = function(req, res, next) {
 
 exports.admin_person_edit = function(req, res, next) {
 
-    res.redirect('/admin/person/person_edit');
+
 
 };
 
