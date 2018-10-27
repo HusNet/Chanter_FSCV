@@ -16,6 +16,7 @@ module.exports = function(app, router) {
     let adminMenu = require('../app/controllers/admin_menu_ctrl');
     let adminPerson = require('../app/controllers/admin_person_ctrl');
     let adminPage = require('../app/controllers/admin_page_ctrl');
+    let adminExport = require('../app/controllers/admin_export_ctrl');
 
     let choir = require('../app/controllers/admin_choir_ctrl');
 
@@ -67,11 +68,34 @@ module.exports = function(app, router) {
         admin.add_user(req, res, next);
     });
 
+// *** PAGE EXPORT
+
     router.get('/admin/export', function(req, res, next) {
         admin.authenticationTest(req, res, next);
-        admin.export(req, res, next);
+        adminExport.select_export(req, res, next);
     });
 
+    router.get('/admin/export/export_choir', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminExport.export_form_choir(req, res, next);
+    });
+
+    router.post('/admin/export/export_choir', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminExport.export_choir(req, res, next);
+    });
+
+    router.get('/admin/export/export_person', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminExport.export_form_person(req, res, next);
+    });
+
+    router.post('/admin/export/export_person', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminExport.export_person(req, res, next);
+    });
+
+// *** END EXPORT ROUTES
 
 // *** PAGE ROUTES
 

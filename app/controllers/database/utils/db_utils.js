@@ -25,4 +25,4 @@ exports.exportPageData = function (rows) {
     query += "COMMIT;\n";
 
     return query;
-}
+};
