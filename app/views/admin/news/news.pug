@@ -25,5 +25,21 @@ block content
 
     br
 
-    a.btn-floating.btn-large.waves-effect.waves-light.green(href='/admin/news/news_add')
-        i.material-icons add
+    div.fixed-action-btn
+        a.btn-floating.btn-large.red
+            i.material-icons menu
+        ul
+            li
+                a.btn-floating.btn-large.waves-effect.waves-light.green(href='/admin/news/news_add')
+                    i.material-icons add
+            li
+                a.btn-floating.btn-large.waves-effect.waves-light.yellow(href='/admin/news/news_link')
+                    i.material-icons insert_link
+
+    script.
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.fixed-action-btn');
+            var instances = M.FloatingActionButton.init(elems, {
+                direction: 'left'
+            });
+        });

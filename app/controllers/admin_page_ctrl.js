@@ -59,15 +59,33 @@ exports.add_news = function(req, res, next) {
     let queryFr = AdminPageDb.addNews(newsFr);
     let queryDe = AdminPageDb.addNews(newsDe);
 
+    // insert fr news
     C.db.query(queryFr, function (err, rows, fields) {
         if (err) throw(err);
-    });
 
-    C.db.query(queryDe, function (err, rows, fields) {
-        if (err) throw(err);
-    });
+        let insertedIdFr = rows.insertId;
 
-    res.redirect('/admin/news');
+        // insert de news
+        C.db.query(queryDe, function (err, rows, fields) {
+            if (err) throw(err);
+
+            let insertedIdDe = rows.insertId;
+            let queryLink = AdminPageDb.linkPage(insertedIdFr, insertedIdDe);
+            let queryLink2 = AdminPageDb.linkPage(insertedIdDe, insertedIdFr);
+
+            // link fr to de
+            C.db.query(queryLink, function (err, rows, fields) {
+                if (err) throw(err);
+
+                // link de to fr
+                C.db.query(queryLink2, function (err, rows, fields) {
+                    if (err) throw(err);
+
+                    res.redirect('/admin/news');
+                });
+            });
+        });
+    });
 };
 
 exports.form_edit_news = function(req, res, next) {
@@ -103,6 +121,33 @@ exports.delete_news = function (req, res, next) {
         if (err) throw(err);
 
         res.redirect('/admin/news');
+    });
+};
+
+exports.form_link_news = function (req, res, next) {
+    let query = AdminPageDb.getNews();
+
+    C.db.query(query, function (err, rows, fields) {
+        if (err) throw(err);
+
+        res.render('admin/news/news_link', {news: rows});
+    });
+};
+
+exports.link_news = function (req, res, next) {
+    let idPageFr = req.body.idFr;
+    let idPageDe = req.body.idDe;
+    let query1 = AdminPageDb.linkPage(idPageFr, idPageDe);
+    let query2 = AdminPageDb.linkPage(idPageDe, idPageFr);
+
+    C.db.query(query1, function (err, rows, fields) {
+        if (err) throw(err);
+
+        C.db.query(query2, function (err, rows, fields) {
+            if (err) throw(err);
+
+            res.redirect('/admin/news/news_link');
+        });
     });
 };
 

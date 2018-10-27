@@ -249,6 +249,16 @@ module.exports = function(app, router) {
         adminPage.delete_news(req, res, next);
     });
 
+    router.get('/admin/news/news_link', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminPage.form_link_news(req, res, next);
+    });
+
+    router.post('/admin/news/news_link', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminPage.link_news(req, res, next);
+    });
+
     // *** END NEWS ROUTES
 
     // *** MENU ROUTES
