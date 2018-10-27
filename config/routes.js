@@ -84,36 +84,6 @@ module.exports = function(app, router) {
         admin.authenticationTest(req, res, next);
         adminPage.form_page(req, res, next);
     });
-    // ** Choir start routes
-    router.get('/admin/choir', function(req, res, next) {
-        admin.authenticationTest(req, res, next);
-        choir.choir(req, res, next);
-    });
-
-    router.get('/admin/choir/add', function(req, res, next) {
-        admin.authenticationTest(req, res, next);
-        choir.getRoleByName('SuperAdmin').then(function (PersonPresident) {
-            choir.getRoleByName('SuperAdmin').then(function (PersonDirector) {
-                choir.getRoleByName('SuperAdmin').then(function (PersonSecretaire) {
-                    choir.getRoleByName('SuperAdmin').then(function (PersonCaissier) {
-                        res.render('admin/choir/choir_add',{
-                            PersonPresident:PersonPresident,
-                            PersonDirector:PersonDirector,
-                            PersonSecretaire:PersonSecretaire,
-                            PersonCaissier:PersonCaissier
-                        });
-                    })
-                })
-            })
-        })
-
-    });
-
-    router.post('/admin/choir/add', function(req, res, next) {
-        admin.authenticationTest(req, res, next);
-        adminMenu.insertChoir(req, res, next);
-        adminPage.form_page(req, res, next);
-    });
 
     router.post('/admin/page/page_add', function (req, res, next) {
         admin.authenticationTest(req, res, next);
@@ -147,6 +117,37 @@ module.exports = function(app, router) {
 
 // *** END PAGE ROUTES
 
+// ** Choir start routes
+    router.get('/admin/choir', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        choir.choir(req, res, next);
+    });
+
+    router.get('/admin/choir/add', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        choir.getRoleByName('SuperAdmin').then(function (PersonPresident) {
+            choir.getRoleByName('SuperAdmin').then(function (PersonDirector) {
+                choir.getRoleByName('SuperAdmin').then(function (PersonSecretaire) {
+                    choir.getRoleByName('SuperAdmin').then(function (PersonCaissier) {
+                        res.render('admin/choir/choir_add',{
+                            PersonPresident:PersonPresident,
+                            PersonDirector:PersonDirector,
+                            PersonSecretaire:PersonSecretaire,
+                            PersonCaissier:PersonCaissier
+                        });
+                    })
+                })
+            })
+        })
+
+    });
+
+    router.post('/admin/choir/add', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminMenu.insertChoir(req, res, next);
+        adminPage.form_page(req, res, next);
+    });
+
     router.get('/admin/choir/update', function(req, res, next) {
         admin.authenticationTest(req, res, next);
         adminMenu.getAllChoir(req, res, next);
@@ -160,7 +161,6 @@ module.exports = function(app, router) {
         admin.authenticationTest(req, res, next);
         choir.getRoleByName(req, res, next);
     });
-
 
 // ** Choir end routes
 
@@ -210,10 +210,6 @@ module.exports = function(app, router) {
         admin.authenticationTest(req, res, next);
         adminPerson.admin_person_delete(req, res, next);
     });
-
-
-
-
 
     // *** END PERSON ROUTES
 
