@@ -57,3 +57,7 @@ exports.linkPage = function (idPage, idToLink) {
             "SET `IdPageLang` = '" + idToLink + "'" +
             "WHERE `PageId` = " + idPage;
 };
+
+exports.getCorrespondingPage = function (idPage) {
+    return "SELECT * FROM Page WHERE `IdPageLang` = " + idPage + " LIMIT 1";
+};
