@@ -119,9 +119,7 @@ exports.page = function(req, res, next) {
     C.db.query(query, function (err, rows, fields) {
         if (err) throw(err);
 
-        let data = AdminUtilsDb.exportPageData(rows);
-
-        res.render('admin/page/page', {pages: rows, datas: data})
+        res.render('admin/page/page', {pages: rows})
     });
 };
 
@@ -164,15 +162,37 @@ exports.add_page = function (req, res, next) {
     let queryFr = AdminPageDb.addPage(newsFr);
     let queryDe = AdminPageDb.addPage(newsDe);
 
+    // insert fr page
     C.db.query(queryFr, function (err, rows, fields) {
         if (err) throw(err);
+
+        let insertedIdFr = rows.insertId;
+
+        // insert de page
+        C.db.query(queryDe, function (err, rows, fields) {
+            if (err) throw(err);
+
+            let insertedIdDe = rows.insertId;
+            let queryLink = AdminPageDb.linkPage(insertedIdFr, insertedIdDe);
+            let queryLink2 = AdminPageDb.linkPage(insertedIdDe, insertedIdFr);
+
+            // link fr to de
+            C.db.query(queryLink, function (err, rows, fields) {
+                if (err) throw(err);
+
+                // link de to fr
+                C.db.query(queryLink2, function (err, rows, fields) {
+                    if (err) throw(err);
+
+                    res.redirect('/admin/page');
+                });
+            });
+        });
     });
 
-    C.db.query(queryDe, function (err, rows, fields) {
-        if (err) throw(err);
-    });
 
-    res.redirect('/admin/page');
+
+
 };
 
 exports.delete_page = function (req, res, next) {

@@ -9,7 +9,7 @@ block content
             select#idFr(name='idFr')
                 option(value='', disabled='', selected='') Choose your option
                 each val in pages
-                    if val.Lang === 'fr' && val.IdPageLang === 0
+                    if val.Lang === 'fr'
                         option(value=''+val.PageId) #{val.Title}
 
             label #{translation.FR}
@@ -20,7 +20,7 @@ block content
             select#idDe(name='idDe')
                 option(value='', disabled='', selected='') Choose your option
                 each val in pages
-                    if val.Lang === 'de' && val.IdPageLang === 0
+                    if val.Lang === 'de'
                         option(value=''+val.PageId) #{val.Title}
 
             label #{translation.DE}
