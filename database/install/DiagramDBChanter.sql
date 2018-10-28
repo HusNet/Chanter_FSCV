@@ -62,8 +62,7 @@ CREATE TABLE IF NOT EXISTS `chanter-dev`.`User` (
   INDEX `fk_User_Location1_idx` (`LocationId` ASC),
   CONSTRAINT `fk_User_Location1`
     FOREIGN KEY (`LocationId`)
-    REFERENCES `chanter-dev`.`Location` (`LocationId`)
-    ON DELETE NO ACTION
+    REFERENCES `chanter-dev`.`Location` (`LocationId`) ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 AUTO_INCREMENT = 3
