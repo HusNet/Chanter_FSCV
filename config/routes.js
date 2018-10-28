@@ -16,6 +16,7 @@ module.exports = function(app, router) {
     let adminMenu = require('../app/controllers/admin_menu_ctrl');
     let adminPerson = require('../app/controllers/admin_person_ctrl');
     let adminPage = require('../app/controllers/admin_page_ctrl');
+    let adminExport = require('../app/controllers/admin_export_ctrl');
 
     let choir = require('../app/controllers/admin_choir_ctrl');
 
@@ -67,11 +68,34 @@ module.exports = function(app, router) {
         admin.add_user(req, res, next);
     });
 
+// *** PAGE EXPORT
+
     router.get('/admin/export', function(req, res, next) {
         admin.authenticationTest(req, res, next);
-        admin.export(req, res, next);
+        adminExport.select_export(req, res, next);
     });
 
+    router.get('/admin/export/export_choir', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminExport.export_form_choir(req, res, next);
+    });
+
+    router.post('/admin/export/export_choir', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminExport.export_choir(req, res, next);
+    });
+
+    router.get('/admin/export/export_person', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminExport.export_form_person(req, res, next);
+    });
+
+    router.post('/admin/export/export_person', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminExport.export_person(req, res, next);
+    });
+
+// *** END EXPORT ROUTES
 
 // *** PAGE ROUTES
 
@@ -84,7 +108,40 @@ module.exports = function(app, router) {
         admin.authenticationTest(req, res, next);
         adminPage.form_page(req, res, next);
     });
-    // ** Choir start routes
+
+    router.post('/admin/page/page_add', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminPage.add_page(req, res, next);
+    });
+
+    router.get('/admin/page/page_delete', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminPage.delete_page(req, res, next);
+    });
+
+    router.get('/admin/page/page_edit', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminPage.form_edit_page(req, res, next);
+    });
+
+    router.post('/admin/page/page_edit', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminPage.edit_page(req, res, next);
+    });
+
+    router.get('/admin/page/page_link', function (req, res, next) {
+       admin.authenticationTest(req, res, next);
+       adminPage.form_link_page(req, res, next);
+    });
+
+    router.post('/admin/page/page_link', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminPage.link_page(req, res, next);
+    });
+
+// *** END PAGE ROUTES
+
+// ** Choir start routes
     router.get('/admin/choir', function(req, res, next) {
         admin.authenticationTest(req, res, next);
         choir.choir(req, res, next);
@@ -115,28 +172,6 @@ module.exports = function(app, router) {
         adminPage.form_page(req, res, next);
     });
 
-    router.post('/admin/page/page_add', function (req, res, next) {
-        admin.authenticationTest(req, res, next);
-        adminPage.add_page(req, res, next);
-    });
-
-    router.get('/admin/page/page_delete', function (req, res, next) {
-        admin.authenticationTest(req, res, next);
-        adminPage.delete_page(req, res, next);
-    });
-
-    router.get('/admin/page/page_edit', function (req, res, next) {
-        admin.authenticationTest(req, res, next);
-        adminPage.form_edit_page(req, res, next);
-    });
-
-    router.post('/admin/page/page_edit', function (req, res, next) {
-        admin.authenticationTest(req, res, next);
-        adminPage.edit_page(req, res, next);
-    });
-
-// *** END PAGE ROUTES
-
     router.get('/admin/choir/update', function(req, res, next) {
         admin.authenticationTest(req, res, next);
         adminMenu.getAllChoir(req, res, next);
@@ -150,7 +185,6 @@ module.exports = function(app, router) {
         admin.authenticationTest(req, res, next);
         choir.getRoleByName(req, res, next);
     });
-
 
 // ** Choir end routes
 
@@ -201,10 +235,6 @@ module.exports = function(app, router) {
         adminPerson.admin_person_delete(req, res, next);
     });
 
-
-
-
-
     // *** END PERSON ROUTES
 
     // *** NEWS ROUTES
@@ -237,6 +267,16 @@ module.exports = function(app, router) {
     router.get('/admin/news/news_delete', function (req, res, next) {
         admin.authenticationTest(req, res, next);
         adminPage.delete_news(req, res, next);
+    });
+
+    router.get('/admin/news/news_link', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminPage.form_link_news(req, res, next);
+    });
+
+    router.post('/admin/news/news_link', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminPage.link_news(req, res, next);
     });
 
     // *** END NEWS ROUTES

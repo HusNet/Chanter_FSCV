@@ -1,0 +1,15 @@
+extends ../../layouts/_adminLayout
+
+block content
+
+    h1.display-4.m-b-2 #{translation.TITLE_ADMIN_EXPORT_CHOIR}
+
+    form.col.s12(method='POST' action='/admin/export/export_choir')
+
+        
+
+        p
+            button.btn.waves-effect.waves-light(type='submit' name='action')
+                | #{translation.ADD}
+                i.material-icons.right send
+

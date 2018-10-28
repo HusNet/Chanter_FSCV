@@ -31,7 +31,7 @@ exports.add_news = function(req, res, next) {
     let contentDe = AdminUtilsDb.replaceSimpleQuote(req.body.contentde);
     let user = req.session.user;
     let date_publish = new Date().toISOString().slice(0, 19).replace('T', ' ');
-    let idPageLang = 1; // id de la meme page mais dans l'autre langue
+    let idPageLang = 0; // id de la meme page mais dans l'autre langue
     let isNews = 1;
 
     let newsFr = new PageModel({
@@ -59,15 +59,33 @@ exports.add_news = function(req, res, next) {
     let queryFr = AdminPageDb.addNews(newsFr);
     let queryDe = AdminPageDb.addNews(newsDe);
 
+    // insert fr news
     C.db.query(queryFr, function (err, rows, fields) {
         if (err) throw(err);
-    });
 
-    C.db.query(queryDe, function (err, rows, fields) {
-        if (err) throw(err);
-    });
+        let insertedIdFr = rows.insertId;
 
-    res.redirect('/admin/news');
+        // insert de news
+        C.db.query(queryDe, function (err, rows, fields) {
+            if (err) throw(err);
+
+            let insertedIdDe = rows.insertId;
+            let queryLink = AdminPageDb.linkPage(insertedIdFr, insertedIdDe);
+            let queryLink2 = AdminPageDb.linkPage(insertedIdDe, insertedIdFr);
+
+            // link fr to de
+            C.db.query(queryLink, function (err, rows, fields) {
+                if (err) throw(err);
+
+                // link de to fr
+                C.db.query(queryLink2, function (err, rows, fields) {
+                    if (err) throw(err);
+
+                    res.redirect('/admin/news');
+                });
+            });
+        });
+    });
 };
 
 exports.form_edit_news = function(req, res, next) {
@@ -106,6 +124,33 @@ exports.delete_news = function (req, res, next) {
     });
 };
 
+exports.form_link_news = function (req, res, next) {
+    let query = AdminPageDb.getNews();
+
+    C.db.query(query, function (err, rows, fields) {
+        if (err) throw(err);
+
+        res.render('admin/news/news_link', {news: rows});
+    });
+};
+
+exports.link_news = function (req, res, next) {
+    let idPageFr = req.body.idFr;
+    let idPageDe = req.body.idDe;
+    let query1 = AdminPageDb.linkPage(idPageFr, idPageDe);
+    let query2 = AdminPageDb.linkPage(idPageDe, idPageFr);
+
+    C.db.query(query1, function (err, rows, fields) {
+        if (err) throw(err);
+
+        C.db.query(query2, function (err, rows, fields) {
+            if (err) throw(err);
+
+            res.redirect('/admin/news/news_link');
+        });
+    });
+};
+
 /**
  *
  * PAGE PART
@@ -134,7 +179,7 @@ exports.add_page = function (req, res, next) {
     let contentDe = AdminUtilsDb.replaceSimpleQuote(req.body.contentde);
     let user = req.session.user;
     let date_publish = new Date().toISOString().slice(0, 19).replace('T', ' ');
-    let idPageLang = 1; // id de la meme page mais dans l'autre langue
+    let idPageLang = 0; // id de la meme page mais dans l'autre langue
     let isNews = 0;
 
     let newsFr = new PageModel({
@@ -162,15 +207,37 @@ exports.add_page = function (req, res, next) {
     let queryFr = AdminPageDb.addPage(newsFr);
     let queryDe = AdminPageDb.addPage(newsDe);
 
+    // insert fr page
     C.db.query(queryFr, function (err, rows, fields) {
         if (err) throw(err);
+
+        let insertedIdFr = rows.insertId;
+
+        // insert de page
+        C.db.query(queryDe, function (err, rows, fields) {
+            if (err) throw(err);
+
+            let insertedIdDe = rows.insertId;
+            let queryLink = AdminPageDb.linkPage(insertedIdFr, insertedIdDe);
+            let queryLink2 = AdminPageDb.linkPage(insertedIdDe, insertedIdFr);
+
+            // link fr to de
+            C.db.query(queryLink, function (err, rows, fields) {
+                if (err) throw(err);
+
+                // link de to fr
+                C.db.query(queryLink2, function (err, rows, fields) {
+                    if (err) throw(err);
+
+                    res.redirect('/admin/page');
+                });
+            });
+        });
     });
 
-    C.db.query(queryDe, function (err, rows, fields) {
-        if (err) throw(err);
-    });
 
-    res.redirect('/admin/page');
+
+
 };
 
 exports.delete_page = function (req, res, next) {
@@ -206,5 +273,32 @@ exports.edit_page = function (req, res, next) {
         if (err) throw(err);
 
         res.redirect('/admin/page');
+    });
+};
+
+exports.form_link_page = function (req, res, next) {
+    let query = AdminPageDb.getPages();
+
+    C.db.query(query, function (err, rows, fields) {
+        if (err) throw(err);
+
+        res.render('admin/page/page_link', {pages: rows});
+    });
+};
+
+exports.link_page = function (req, res, next) {
+    let idPageFr = req.body.idFr;
+    let idPageDe = req.body.idDe;
+    let query1 = AdminPageDb.linkPage(idPageFr, idPageDe);
+    let query2 = AdminPageDb.linkPage(idPageDe, idPageFr);
+
+    C.db.query(query1, function (err, rows, fields) {
+        if (err) throw(err);
+
+        C.db.query(query2, function (err, rows, fields) {
+            if (err) throw(err);
+
+            res.redirect('/admin/page/page_link');
+        });
     });
 };

@@ -51,3 +51,13 @@ exports.editPage = function(id, title, content, updated_date) {
             "SET `Title` = '" + title + "', `Content` = '" + content + "', `Updated_date` = '" + updated_date + "' " +
             "WHERE `PageId` = " + id;
 };
+
+exports.linkPage = function (idPage, idToLink) {
+    return  "UPDATE Page " +
+            "SET `IdPageLang` = '" + idToLink + "'" +
+            "WHERE `PageId` = " + idPage;
+};
+
+exports.getCorrespondingPage = function (idPage) {
+    return "SELECT * FROM Page WHERE `IdPageLang` = " + idPage + " LIMIT 1";
+};
