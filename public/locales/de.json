@@ -28,7 +28,6 @@
   "ROLE" : "Rolle",
   "STARTABO": "Abonnementbeginn",
   "ADD" : "Addieren",
-  "LINK" : "Lügnerin",
   "UPDATE" : "Aktualisieren",
   "DELETE" : "Löschen",
   "LOGOUT" : "Abmeldung",
@@ -39,11 +38,6 @@
   "TITLE_ADMIN_ADD_PAGE": "Eine Seite hinzufügen",
   "TITLE_ADMIN_EDIT_NEWS": "Bearbeiten einer Nachricht",
   "TITLE_ADMIN_EDIT_PAGE": "Eine Seite bearbeiten",
-  "TITLE_ADMIN_PAGE_LINK": "Verlinkung von Seiten",
-  "TITLE_ADMIN_NEWS_LINK": "Link-Neuigkeiten",
-  "TITLE_ADMIN_EXPORT": "Daten exportieren",
-  "TITLE_ADMIN_EXPORT_CHOIR": "Chöre exportieren",
-  "TITLE_ADMIN_EXPORT_PERSON": "Menschen exportieren",
   "NO_NEWS_AVAILABLE": "Keine Nachrichten verfügbar",
   "NO_PAGE_AVAILABLE": "Keine Seite verfügbar",
   "TITLE_ADMIN_PAGE": "Alle Seiten",
@@ -127,9 +121,5 @@
   "EDIT_PERSON": "Jemand veränderung",
   "DELETE_PERSON": "Jemand entfernen",
   "SEARCH_PERSON" : "Suchen",
-  "EDIT": "Modifikation für",
-  "NEWSLETTER": "Newsletter erhalten",
-  "ADDRESS": "Adresse",
-  "NPA": "NPA",
-  "CITY": "Stadt"
+  "LIST_CHOIR": "Chorliste"
 }

@@ -17,8 +17,8 @@ module.exports = function(app, router) {
     let adminPerson = require('../app/controllers/admin_person_ctrl');
     let adminPage = require('../app/controllers/admin_page_ctrl');
     let adminExport = require('../app/controllers/admin_export_ctrl');
+    let adminChoir = require('../app/controllers/admin_choir_ctrl');
 
-    let choir = require('../app/controllers/admin_choir_ctrl');
 
 
     router.get('/', function(req, res, next) {
@@ -172,6 +172,28 @@ module.exports = function(app, router) {
         adminPage.form_page(req, res, next);
     });
 
+    router.post('/admin/page/page_add', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminPage.add_page(req, res, next);
+    });
+
+    router.get('/admin/page/page_delete', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminPage.delete_page(req, res, next);
+    });
+
+    router.get('/admin/page/page_edit', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminPage.form_edit_page(req, res, next);
+    });
+
+    router.post('/admin/page/page_edit', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminPage.edit_page(req, res, next);
+    });
+
+// *** END PAGE ROUTES
+
     router.get('/admin/choir/update', function(req, res, next) {
         admin.authenticationTest(req, res, next);
         adminMenu.getAllChoir(req, res, next);
@@ -185,6 +207,7 @@ module.exports = function(app, router) {
         admin.authenticationTest(req, res, next);
         choir.getRoleByName(req, res, next);
     });
+
 
 // ** Choir end routes
 
@@ -323,5 +346,48 @@ module.exports = function(app, router) {
 
     // *** END MENU ROUTES
 
+    // ** CHOIR ROUTES
 
+        //ROUTE INDEX
+    router.get('/admin/choir', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminChoir.choir(req, res, next);
+    });
+
+        // ROUTE PRINT FORM (pas oublier pour la prés de changer SuperAdmin en prési,director...)
+    router.get('/admin/choir/add', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminChoir.getRoleByName('SuperAdmin').then(function (PersonPresident) {
+            adminChoir.getRoleByName('SuperAdmin').then(function (PersonDirector) {
+                adminChoir.getRoleByName('SuperAdmin').then(function (PersonSecretaire) {
+                    adminChoir.getRoleByName('SuperAdmin').then(function (PersonCaissier) {
+                        res.render('admin/choir/choir_add',{
+                            PersonPresident:PersonPresident,
+                            PersonDirector:PersonDirector,
+                            PersonSecretaire:PersonSecretaire,
+                            PersonCaissier:PersonCaissier
+                        });
+                    })
+                })
+            })
+        })
+
+    });
+
+
+        //DELETE CHOIR
+    router.get('/admin/choir/delete', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+
+        if (req.query.id)
+            adminChoir.deleteChoir(req, res, next);
+        else
+            adminChoir.getAllChoirDelete(req, res, next);
+    });
+
+
+
+
+
+// ** CHOIR END ROUTES
 };

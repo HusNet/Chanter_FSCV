@@ -2,6 +2,10 @@ exports.getRoleByName = function(roleName) {
     return "SELECT * FROM User INNER JOIN User_Role ON User.UserId = User_Role.UserId INNER JOIN Role ON User_Role.RoleId = Role.RoleId WHERE Role.Name = '" + roleName + "'";
 };
 
-exports.getAllChoir = function () {
+exports.getAllChoir = function(){
     return "SELECT * FROM Choir";
-};
+}
+
+exports.delete = function(id){
+    return "DELETE FROM Choir WHERE ChoirId = " + id;
+}

@@ -21,7 +21,20 @@ module.exports = {
         })
 
     },
-    add_choir : function (req,res,next){
+    getAllChoirDelete : function(req,res, next){
+        C.db.query(AdminChoirDb.getAllChoir(),function(err, rows, fields){
+            if (err) throw(err);
+            res.render('admin/choir/choir_delete', {choirs:rows});
+        });
+    },
+    deleteChoir : function(req, res, next){
+        C.db.query(AdminChoirDb.delete(req.query.id),function (err, rows,fields){
+            if (err) throw (err);
+            res.redirect('/admin/choir/delete')
+
+        });
+    }
+    /*add_choir : function (req,res,next){
         let dataToInsert = {}
         dataToInsert.choeurname = req.body.choeur_name;
         dataToInsert.effectiv = req.body.effectif;
@@ -52,6 +65,7 @@ module.exports = {
         dataToInsert.comments = req.body.comment;
 
 
-    }
+    }*/
+
 
 }
