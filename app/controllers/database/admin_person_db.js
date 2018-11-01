@@ -5,7 +5,7 @@ exports.insertNewPerson = function (usermodel) {
         "'" + usermodel.PhoneProf + "', '" + usermodel.Email + "', '" + usermodel.StartAbo + "', '" + usermodel.Newsletter + "', '" + usermodel.LocationId +"')";
 }
 
-exports.getIdOfUserFromEmail = function (lastname, firstname, email) {
+exports.getUser = function (lastname, firstname, email) {
     return "SELECT * FROM `User` " +
         "WHERE `Lastname` = '" + lastname + "' AND `Firstname` = '" + firstname + "' AND `Email` = '" + email + "'";
 }
@@ -17,3 +17,9 @@ exports.deletePersonAndLocation = function (LocationId) {
         "WHERE Location.LocationId = '" + LocationId + "'";
 
 }
+
+exports.editPerson = function(id, title, content, updated_date) {
+    return  "UPDATE Page " +
+        "SET `Title` = '" + title + "', `Content` = '" + content + "', `Updated_date` = '" + updated_date + "' " +
+        "WHERE `PageId` = " + id;
+};

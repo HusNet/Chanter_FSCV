@@ -2,9 +2,10 @@ extends person_edit_search
 
 block resultSearch
 
-    h2 #{translation.EDIT} #{userS[0].Lastname} #{userS[0].Firstname}
+    h2 #{translation.EDIT} #{userResult[0].Lastname} #{userResult[0].Firstname} #{roleResult.Director} #{roleResult.Director_2}
 
     br
+
 
     form(method='POST' action='/admin/person/person_edit_result')
 
@@ -12,57 +13,79 @@ block resultSearch
             div(class='row')
                 div(class='column')
                     label(for='lastnameP') #{translation.LASTNAME}:
-                    input#lastnameP.form-control(type='text', value='' + userS[0].Lastname, name='lastnameP', required)
+                    input#lastnameP.form-control(type='text', value='' + userResult[0].Lastname, name='lastnameP', required)
 
                 div(class='column')
                     label(for='firstnameP') #{translation.FIRSTNAME}:
-                    input#firstnameP.form-control(type='text', value='' + userS[0].Firstname, name='firstnameP', required)
+                    input#firstnameP.form-control(type='text', value='' + userResult[0].Firstname, name='firstnameP', required)
 
                 div(class='column')
                     label(for='phonePrivateP') #{translation.PHONEPRIVATE}:
-                    input#phonePrivateP.form-control(type='text', value='' + userS[0].Phone, name='phonePrivateP', required)
+                    input#phonePrivateP.form-control(type='text', value='' + userResult[0].Phone, name='phonePrivateP', required)
 
                 div(class='column')
                     label(for='phoneProfP') #{translation.PHONEPRIVATE}:
-                    input#phoneProfP.form-control(type='text', value='' + userS[0].PhoneProf, name='phoneProfP', required)
+                    input#phoneProfP.form-control(type='text', value='' + userResult[0].PhoneProf, name='phoneProfP', required)
 
                 div(class='column')
                     label(for='emailP') #{translation.EMAIL}:
-                    input#emailP.form-control(type='text', value='' + userS[0].Email, name='emailP', required)
+                    input#emailP.form-control(type='text', value='' + userResult[0].Email, name='emailP', required)
+
+                div(class='column')
+                    label(for='addressP') #{translation.ADDRESS}:
+                    input#addressP.form-control(type='text', value='' + locationResult[0].Address , name='addressP', required)
+
+                div(class='column')
+                    label(for='npaP') #{translation.NPA}:
+                    input#npaP.form-control(type='number', value='' + locationResult[0].NPA, name='npaP', required)
+
+                div(class='column')
+                    label(for='cityP') #{translation.CITY}:
+                    input#cityP.form-control(type='text', value='' + locationResult[0].City , name='cityP', required)
+
 
                 div(class='column')
                     label(for='startAboP') #{translation.STARTABO}:
-                    input#startAboP.form-control(type='date', value='' + userS[0].StartAbo, name='startaboP')
+                    input#startAboP.form-control(type='date', value='' + userResult[0].StartAbo, name='startaboP')
+
+
+
+                div(class='column')
+                    P
+                    label
+                        input(name='newsLetterP', type='checkbox')
+                        span #{translation.NEWSLETTER}
+
 
                 div(class='column')
                     label #{translation.ROLE}:
                     p
                     label
-                        input(name='directorP', type='checkbox')
+                        input(name='directorP', type='checkbox', checked=(roleResult.Director === 'on'))
                         span #{translation.DIRECTOR}
                     p
                     label
-                        input(name='director2P', type='checkbox')
+                        input(name='director2P', type='checkbox', checked=(roleResult.Director_2 === 'on'))
                         span #{translation.DIRECTOR} 2
                     p
                     label
-                        input(name='presidentP', type='checkbox')
+                        input(name='presidentP', type='checkbox', checked=(roleResult.President === 'on'))
                         span #{translation.PRESIDENT}
                     p
                     label
-                        input(name='secretaryP', type='checkbox')
+                        input(name='secretaryP', type='checkbox', checked=(roleResult.Secretary === 'on'))
                         span #{translation.SECRETARY}
                     p
                     label
-                        input(name='cashierP', type='checkbox')
+                        input(name='cashierP', type='checkbox', checked=(roleResult.Cashier === 'on'))
                         span #{translation.CASHIER}
                     p
                         label
-                            input(name='comiteP', type='checkbox')
+                            input(name='comiteP', type='checkbox', checked=(roleResult.Committee === 'on'))
                             span #{translation.COMITE}
                     p
                         label
-                            input(name='autreP', type='checkbox')
+                            input(name='autreP', type='checkbox', checked=(roleResult.Other === 'on'))
                             span #{translation.AUTRE}
 
         button.btn.btn-primary(type='submit' name='action') #{translation.EDIT_PERSON}

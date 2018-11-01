@@ -147,9 +147,126 @@ exports.admin_person_add = function(req, res, next) {
 
 exports.admin_person_edit = function(req, res, next) {
 
-    res.redirect('/admin/person/person_edit');
+    let lastname = req.body.lastnameP;
+    let firstname = req.body.firstnameP;
+    let email = req.body.emailP;
 
+    let arrayResRole = {Director : 'undefined', Director_2: 'undefined', President: 'undefined', Secretary: 'undefined', Cashier: 'undefined', Committee: 'undefined', Other: 'undefined'};
+    let arrayRoleNames = ['Director', 'Director_2', 'President', 'Secretary', 'Cashier', 'Committee', 'Other'];
+
+    // Get the user searched in the db
+    let queryUser = AdminUserDb.getUser(lastname, firstname, email);
+    C.db.query(queryUser, function (err, resUser, fields) {
+        if (err) throw(err);
+        if (resUser.length === 0) // if the user doesn't exist
+        {
+            res.render('admin/person/person_edited', {success: false});
+        }
+        if (resUser[0] !== undefined) {
+            console.log('Name of User founded: ' + resUser[0].Lastname);
+
+            // Get all information about the location of the user
+            let queryLocation = AdminLocationDb.getLocationFromId(resUser[0].LocationId);
+            C.db.query(queryLocation, function (err, resLocation, fields) {
+                if (err) throw(err);
+                if (resLocation.length === 0) // if the Location doesn't exist
+                {
+                    res.render('admin/person/person_edited', {success: false});
+                }
+                if (resLocation){
+                    console.log('Address of Location founded ' + resLocation[0].Address)
+
+                    //Find all the id roles of the user
+                    let queryUserRole = AdminRoleUserDb.userRoleFromUserId(resUser[0].UserId);
+                    C.db.query(queryUserRole, function (err, resUserRole, fields) {
+                        if (err) throw(err);
+                        // ! It is possible to have no result for User_role
+                        if (resUserRole.length === 0)
+                        {
+                            console.log("This user has no roles");
+                            res.render('admin/person/person_edit_result', {userResult: resUser, locationResult: resLocation});
+                        }
+
+                        if (resUserRole) {
+                            // if roles founded, return the list of the roles
+
+                            // Display wich id are founded
+                            for (let i = 0 ; i<resUserRole.length; i ++){
+                                console.log("Role Id found for user : " + resUserRole[i].RoleId)
+                            }
+
+                            // Search all the names of the id
+                            let queryRole = AdminRoleDb.getNameR(resUserRole);
+                            C.db.query(queryRole, function (err, resNameRole, fields) {
+                                if (err) throw(err);
+
+                                // Display the names of the roles for the users.
+                                for (let i = 0 ; i<resNameRole.length; i ++){
+                                    console.log(resNameRole[i].Name);
+                                }
+
+                                // Compare what we founded in the ResNameRole to the available roles and
+                                // Sets the status of'on' when the role belongs to the user in the arrayResRole
+                                for (let j = 0 ; j < arrayRoleNames.length ; j ++){
+                                    for (let k = 0 ; k < resNameRole.length ; k ++) {
+                                        if (arrayRoleNames[j] === resNameRole[k].Name) {
+                                            arrayResRole[resNameRole[k].Name] = 'on';
+                                        }
+                                    }
+                                }
+
+                                // Display the result for the roles
+                                console.log("Array of resRole  : Director " + arrayResRole.Director +
+                                    " Director 2 : " + arrayResRole.Director_2 +
+                                    " President : " + arrayResRole.President +
+                                    " Secretary : " + arrayResRole.Secretary +
+                                    " Cashier : " + arrayResRole.Cashier +
+                                    " Committee : " + arrayResRole.Committee +
+                                    " Other : " + arrayResRole.Other
+                                );
+
+                                res.render('admin/person/person_edit_result', {userResult: resUser, locationResult: resLocation, roleResult: arrayResRole});
+
+                            });
+
+                        }
+                    });
+                }
+            });
+        }
+    });
 };
+
+
+exports.admin_person_edit_result = function(req, res, next){
+
+
+    // All fields for adding a person: people, location, roles
+    let lastname = req.body.lastnameP;
+    let firstname = req.body.firstnameP;
+    let phone = req.body.phoneP;
+    let phoneProf = req.body.phoneProfP;
+    let email = req.body.emailP;
+    let newsletter = req.body.newsLetterP;
+    let address = req.body.addressP;
+    let npa = req.body.npaP;
+    let city = req.body.cityP;
+    let director = req.body.directorP;
+    let director2 = req.body.director2P;
+    let president = req.body.presidentP;
+    let secretary = req.body.secretaryP;
+    let cashier = req.body.cashierP;
+    let comite = req.body.comiteP;
+    let other = req.body.autreP;
+    let startAbo = req.body.startaboP;
+
+
+
+
+
+    res.render('admin/person/person_edited', {success: true});
+
+}
 
 
 exports.admin_person_delete = function(req, res, next) {
@@ -162,7 +279,7 @@ exports.admin_person_delete = function(req, res, next) {
 
 
     // Search the user to delete in the db with lastname, firstname and email
-    let queryUser = AdminUserDb.getIdOfUserFromEmail(lastname, firstname, email);
+    let queryUser = AdminUserDb.getUser(lastname, firstname, email);
     C.db.query(queryUser, function (err, resUser, fields) {
         if (err) throw(err);
         if (resUser.length === 0) // if the user doesn't exist

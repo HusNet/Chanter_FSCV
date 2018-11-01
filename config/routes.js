@@ -212,7 +212,7 @@ module.exports = function(app, router) {
 
     router.post('/admin/person/person_edit_search', function(req, res, next) {
         admin.authenticationTest(req, res, next);
-        adminPerson.admin_person_edit_searchUser(req, res, next);
+        adminPerson.admin_person_edit(req, res, next);
     });
 
     router.get('/admin/person/person_edit_result', function(req, res, next) {
@@ -222,7 +222,7 @@ module.exports = function(app, router) {
 
     router.post('/admin/person/person_edit_result', function(req, res, next) {
         admin.authenticationTest(req, res, next);
-        adminPerson.admin_person_edit_resultSearch(req, res, next);
+        adminPerson.admin_person_edit_result(req, res, next);
     });
 
     router.get('/admin/person/person_delete', function(req, res, next) {
