@@ -5,6 +5,16 @@ exports.insertNewPerson = function (usermodel) {
         "'" + usermodel.PhoneProf + "', '" + usermodel.Email + "', '" + usermodel.StartAbo + "', '" + usermodel.Newsletter + "', '" + usermodel.LocationId +"')";
 }
 
+
+exports.editPerson = function(userIdEdit, editUserModel) {
+    return  "UPDATE `User` " +
+        "SET `Lastname` = '" + editUserModel.Lastname + "', `Firstname` = '" + editUserModel.Firstname + "', " +
+        "`Phone` = '" + editUserModel.Phone + "', `PhoneProf` = '" + editUserModel.PhoneProf + "', " +
+        "`Email` = '" + editUserModel.Email + "', `StartAbo` = '" + editUserModel.StartAbo + "', " +
+        "`Newsletter` = '" + editUserModel.Newsletter + "'" +
+        "WHERE `UserId` = " + userIdEdit;
+};
+
 exports.getUser = function (lastname, firstname, email) {
     return "SELECT * FROM `User` " +
         "WHERE `Lastname` = '" + lastname + "' AND `Firstname` = '" + firstname + "' AND `Email` = '" + email + "'";
@@ -18,8 +28,3 @@ exports.deletePersonAndLocation = function (LocationId) {
 
 }
 
-exports.editPerson = function(id, title, content, updated_date) {
-    return  "UPDATE Page " +
-        "SET `Title` = '" + title + "', `Content` = '" + content + "', `Updated_date` = '" + updated_date + "' " +
-        "WHERE `PageId` = " + id;
-};

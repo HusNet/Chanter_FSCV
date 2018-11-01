@@ -85,7 +85,7 @@ exports.admin_person_add = function(req, res, next) {
     // query the db to insert a new person
     C.db.query(queryInsertLocation, function (err, rowsLocation, fields) {
         if (err) throw(err);
-        if (rowsLocation.length === 0) // if the user doesn't exist
+        if (rowsLocation.length === 0) // if the user is not inserted or the user doesn't exist
         {
             res.render('admin/person/person_added', {success: false});
         }
@@ -124,7 +124,7 @@ exports.admin_person_add = function(req, res, next) {
                             res.render('admin/person/person_added', {success: false});
                         }
                         // If the id of the role exists
-                        if (resRoleId.length) {
+                        else  {
                             roleId = (resRoleId[0].RoleId); //Get the id of the role
                             console.log('Role Id founded : ' + roleId);
 
@@ -164,6 +164,8 @@ exports.admin_person_edit = function(req, res, next) {
         }
         if (resUser[0] !== undefined) {
             console.log('Name of User founded: ' + resUser[0].Lastname);
+            console.log('Start abo  of User founded: ' + resUser[0].StartAbo);
+            console.log('Start abo  of User founded: ' + resUser[0].StartAbo.toISOString().slice(0, 19).replace('T', ' '));
 
             // Get all information about the location of the user
             let queryLocation = AdminLocationDb.getLocationFromId(resUser[0].LocationId);
@@ -183,13 +185,12 @@ exports.admin_person_edit = function(req, res, next) {
                         // ! It is possible to have no result for User_role
                         if (resUserRole.length === 0)
                         {
+                            // If no roles, redirect to the edit result page
                             console.log("This user has no roles");
-                            res.render('admin/person/person_edit_result', {userResult: resUser, locationResult: resLocation});
+                            res.render('admin/person/person_edit_result', {userResult: resUser, locationResult: resLocation, roleResult: arrayResRole});
                         }
-
-                        if (resUserRole) {
+                        else  {
                             // if roles founded, return the list of the roles
-
                             // Display wich id are founded
                             for (let i = 0 ; i<resUserRole.length; i ++){
                                 console.log("Role Id found for user : " + resUserRole[i].RoleId)
@@ -225,10 +226,10 @@ exports.admin_person_edit = function(req, res, next) {
                                     " Other : " + arrayResRole.Other
                                 );
 
+                                // Redirect to the result page to display all informations !
                                 res.render('admin/person/person_edit_result', {userResult: resUser, locationResult: resLocation, roleResult: arrayResRole});
 
                             });
-
                         }
                     });
                 }
@@ -258,13 +259,113 @@ exports.admin_person_edit_result = function(req, res, next){
     let cashier = req.body.cashierP;
     let comite = req.body.comiteP;
     let other = req.body.autreP;
-    let startAbo = req.body.startaboP;
+    let startAbo = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    let idUserToEdit = req.body.idUser;
+    let idLocationToEdit = req.body.idLocation;
+
+    console.log("Id of the user need to be updated : " + idUserToEdit);
+
+    // Update Person
+    // Update Location
+    // Update User_Role with Role
+
+    //Transform the check box 'on' or undefine from Newsletter to boolean
+    if (newsletter === 'on'){
+        newsletter = 1; // 1 --> true
+    }
+    else {
+        newsletter = 0; // 0 --> false
+    }
+    // Create the update user with the model
+    let editUserModel = new UserModel({
+        Lastname: lastname,
+        Firstname: firstname,
+        Phone: phone,
+        PhoneProf: phoneProf,
+        Email: email,
+        Newsletter: newsletter,
+        StartAbo: startAbo
+
+    });
+
+    // Create the update location with the model
+    let editLocationModel = new LocationModel({
+        Address: address,
+        NPA: npa,
+        City: city
+    })
+
+    console.log("Display updated models...");
+    console.log(editUserModel);
+    console.log(editLocationModel);
+    console.log("Id of the user : " + idUserToEdit);
+    console.log("Id of the Location : " + idLocationToEdit);
+
+    // Edit the location of the user
+    console.log(" trying to edit the user ...");
+    // Query for the edit the user
+    let queryEditUser = AdminUserDb.editPerson(idUserToEdit, editUserModel);
+    C.db.query(queryEditUser, function (err, rowsUserEdit, fields) {
+        if (err) throw(err);
+        if (rowsUserEdit.length === 0) // if the user is not edited
+        {
+            res.render('admin/person/person_edited', {success: false});
+        }
+        else {
+            console.log("User successfully edited ");
+
+            //Edit the location
+            console.log("Edit the location");
+            let queryEditLocation = AdminLocationDb.editLocation(idLocationToEdit, editLocationModel);
+            C.db.query(queryEditLocation, function (err, rowsEditLocation, fields) {
+                if (err) throw(err);
+                if (rowsEditLocation.length === 0) // if the user is not edited
+                {
+                    res.render('admin/person/person_edited', {success: false});
+                }
+                else {
+                    console.log("Location successfully edited ");
+
+                    //Edit the location
+                    console.log("Edit the location");
+                }
+            });
+        }
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 
     res.render('admin/person/person_edited', {success: true});
+
 
 }
 

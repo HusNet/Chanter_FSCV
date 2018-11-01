@@ -2,12 +2,14 @@ extends person_edit_search
 
 block resultSearch
 
-    h2 #{translation.EDIT} #{userResult[0].Lastname} #{userResult[0].Firstname} #{roleResult.Director} #{roleResult.Director_2}
+    h2 #{translation.EDIT} #{userResult[0].Lastname} #{userResult[0].Firstname}
 
     br
 
-
     form(method='POST' action='/admin/person/person_edit_result')
+
+        input#idUser.validate(type='hidden' name='idUser' value='' + userResult[0].UserId)
+        input#idLocation.validate(type='hidden' name='idLocation' value='' + locationResult[0].LocationId)
 
         div.form-group
             div(class='row')
@@ -20,8 +22,8 @@ block resultSearch
                     input#firstnameP.form-control(type='text', value='' + userResult[0].Firstname, name='firstnameP', required)
 
                 div(class='column')
-                    label(for='phonePrivateP') #{translation.PHONEPRIVATE}:
-                    input#phonePrivateP.form-control(type='text', value='' + userResult[0].Phone, name='phonePrivateP', required)
+                    label(for='phoneP') #{translation.PHONEPRIVATE}:
+                    input#phoneP.form-control(type='text', value='' + userResult[0].Phone, name='phonePrivateP', required)
 
                 div(class='column')
                     label(for='phoneProfP') #{translation.PHONEPRIVATE}:
@@ -53,7 +55,7 @@ block resultSearch
                 div(class='column')
                     P
                     label
-                        input(name='newsLetterP', type='checkbox')
+                        input(name='newsLetterP', type='checkbox', checked=(userResult[0].Newsletter === 1))
                         span #{translation.NEWSLETTER}
 
 
