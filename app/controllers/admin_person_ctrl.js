@@ -1,10 +1,13 @@
+//import {NULL} from "mysql";
+
 const C = require('../../config/appConfig');
 const UserModel = require('../models/user');
+const LocationModel = require('../models/location');
 const AdminUserDb = require('../controllers/database/admin_person_db');
 const AdminRoleDb = require('../controllers/database/admin_role_db');
 const AdminRoleUserDb = require('../controllers/database/admin_user_role_db');
-const RoleModel = require('../models/role');
-const UserRoleModel = require('../models/user_role');
+const AdminLocationDb = require('../controllers/database/admin_location_db');
+
 
 exports.person = function(req, res, next) {
     res.render('admin/person/person', {
@@ -12,13 +15,19 @@ exports.person = function(req, res, next) {
     });
 };
 
+// Add a personn in the DB
 exports.admin_person_add = function(req, res, next) {
 
+    // All fields for adding a person: people, location, roles
     let lastname = req.body.lastnameP;
     let firstname = req.body.firstnameP;
-    let phonePrivate = req.body.phonePrivateP;
+    let phone = req.body.phoneP;
     let phoneProf = req.body.phoneProfP;
     let email = req.body.emailP;
+    let newsletter = req.body.newsLetterP;
+    let address = req.body.addressP;
+    let npa = req.body.npaP;
+    let city = req.body.cityP;
     let director = req.body.directorP;
     let director2 = req.body.director2P;
     let president = req.body.presidentP;
@@ -30,145 +39,159 @@ exports.admin_person_add = function(req, res, next) {
     let userId = null;
     let roleId = null;
 
+    console.log(startAbo);
     //create a table with information about the roles selected
     let arrayRoleSelected = [director, director2, president, secretary, cashier, comite, other];
-    let arrayRoleNames = ['Director', 'Director_2', 'President', 'Secretary', 'Cashier', 'Comite', 'Other'];
+    let arrayRoleNames = ['Director', 'Director_2', 'President', 'Secretary', 'Cashier', 'Committee', 'Other'];
 
-    let usermodel = new UserModel({
+    //Transform the check box 'on' or undefine from Newsletter to boolean
+    if (newsletter === 'on'){
+        newsletter = 1; // 1 --> true
+    }
+    else {
+        newsletter = 0; // 0 --> false
+    }
+    if (startAbo == ''){
+        //startAbo = NULL; // data was not filled, so we need a null value for the db
+    }
+
+    // Create the user with the model
+    var usermodel = new UserModel({
         Lastname: lastname,
         Firstname: firstname,
-        Phone: phonePrivate,
+        Phone: phone,
         PhoneProf: phoneProf,
         Email: email,
+        Newsletter: newsletter,
         StartAbo: startAbo
+
     });
 
-    console.log(" trying to create a new person...");
+    // Create the location with the model
+    var locationModel = new LocationModel({
+        Address: address,
+        NPA: npa,
+        City: city
+    })
+
+    console.log("Display models...");
     console.log(usermodel);
+    console.log(locationModel);
 
-    // Insert a new person in the db
-    let queryInsertUser = AdminUserDb.insertNewPerson(usermodel);
-
+    // Create a new location for the user
+    console.log(" trying to create a new location...");
+    // Query for the insertion of the location
+    let queryInsertLocation = AdminLocationDb.insertNewLocation(locationModel);
     // query the db to insert a new person
-    C.db.query(queryInsertUser, function (err, rows, fields) {
+    C.db.query(queryInsertLocation, function (err, rowsLocation, fields) {
         if (err) throw(err);
-        if (rows.length === 0) // if the user doesn't exist
+        if (rowsLocation.length === 0) // if the user doesn't exist
         {
             res.render('admin/person/person_added', {success: false});
         }
-        else{
-            console.log("1 record inserted");
-            console.log(" trying to get the id of the user...");
-            // Get the id of the user inserted just before with the lasname, firstname and email
-            let queryIdUser = AdminUserDb.getIdOfUserFromEmail(lastname, firstname, email);
-            C.db.query(queryIdUser, function (err, resUserId, fields) {
-                if (err) throw(err);
-                if (resUserId.length === 0) // if the user doesn't exist
+        console.log("1 record inserted for location... id : " + rowsLocation.insertId);
+        // Get the id of the location
+        usermodel.LocationId = rowsLocation.insertId;
+
+        // Insert a new person in the db
+        console.log(" trying to create a new person...");
+        let queryInsertUser = AdminUserDb.insertNewPerson(usermodel);
+        // query the db to insert a new person
+        C.db.query(queryInsertUser, function (err, rowsU, fields) {
+            if (err) throw(err);
+            if (rowsU.length === 0) // if the user doesn't exist
+            {
+                res.render('admin/person/person_added', {success: false});
+            }
+            console.log("1 record inserted for user with id : " + rowsU.insertId);
+            // Id of the user
+            userId = rowsU.insertId;
+
+            // Foreach Role
+            // If the box was checked for the role
+            // Get the id of the role selected on 'on'
+            // Insert the RoleId + UserId in the table User_Role
+            for (let i in arrayRoleSelected) {
+                if (arrayRoleSelected[i] != undefined)
                 {
-                    res.render('admin/person/person_added', {success: false});
-                }
-                else{
-                    userId = (resUserId[0].UserId); //Return the id user
-                    console.log('User Id founded : ' + userId);
-
-                    console.log(" If 'on' get the id of the role and insert the userid and the role id in table user_role.... ");
-                    // If the box was checked for the role
-                    // Insert the id of the role with the id of theuser
-                    for (let i in arrayRoleSelected) {
-                        if (arrayRoleSelected[i] != undefined)
+                    //query get id of the role
+                    let queryRoleId = AdminRoleDb.getIdRole(arrayRoleNames[i]);
+                    // Query the db
+                    C.db.query(queryRoleId, function (err, resRoleId, fields) {
+                        if (err) throw(err);
+                        if (resRoleId.length === 0) // if the user doesn't exist
                         {
-                            //query get id of the role
-                            let queryRoleId = AdminRoleDb.getIdRole(arrayRoleNames[i]);
-                            C.db.query(queryRoleId, function (err, resRoleId, fields) {
-                                if (err) throw(err);
-                                if (resRoleId[0] !== `undefined`)
-                                    roleId = (resRoleId[0].RoleId); //Get the id of the role
-                                console.log('Role Id founded : ' + roleId);
+                            res.render('admin/person/person_added', {success: false});
+                        }
+                        // If the id of the role exists
+                        if (resRoleId.length) {
+                            roleId = (resRoleId[0].RoleId); //Get the id of the role
+                            console.log('Role Id founded : ' + roleId);
 
-                                //insert the id of the role and the id of the user
-                                //in the table user_role
-                                let queryInsertUserRole = AdminRoleUserDb.insertUserRole(userId, roleId)
-                                C.db.query(queryInsertUserRole, function (err, rows, fields) {
-                                    if (err) throw(err);
-                                    console.log("1 record inserted");
-                                    res.render('admin/person/person_added', {success: true});
-                                });
+                            //insert the id of the role and the id of the user
+                            //in the table user_role
+                            let queryInsertUserRole = AdminRoleUserDb.insertUserRole(userId, roleId)
+                            C.db.query(queryInsertUserRole, function (err, rows, fields) {
+                                if (err) throw(err);
+                                console.log("1 record inserted");
                             });
                         }
-                    }
+                    });
                 }
-            });
-        }
+            }
+            res.render('admin/person/person_added', {success: true});
+        });
     });
-
 };
 
 
-exports.admin_person_edit_searchUser = function(req, res, next) {
+exports.admin_person_edit = function(req, res, next) {
 
-    let lastname = req.body.lastnameP;
-    let firstname = req.body.firstnameP;
-    let email = req.body.emailP;
-
-    // Search the user in the db
-    let queryUser = AdminUserDb.getIdOfUserFromEmail(lastname, firstname, email);
-    C.db.query(queryUser, function (err, resultUser, fields) {
-        if (err) throw(err);
-        console.log(resultUser.UserId);
-        if (resultUser.length === 0) // if the user doesn't exist
-        {
-            res.render('admin/person/person_edited', {success: false});
-        }
-        else {
-
-            console.log(resultUser);
-            res.render('admin/person/person_edit_result', {userS: resultUser})
-
-        }
-    });
+    res.redirect('/admin/person/person_edit');
 
 };
 
-exports.admin_person_edit_resultSearch = function (req, res, next){
-    res.render('admin/person/person_edited', {success: true});
-}
 
 exports.admin_person_delete = function(req, res, next) {
 
+    // recover data
     let lastname = req.body.lastnameP;
     let firstname = req.body.firstnameP;
+    let email = req.body.emailP;
     let userId = null;
 
-    // Search for the Id of the user to delete
-    let queryIdUser = AdminUserDb.getIdOfUser(lastname, firstname);
-    C.db.query(queryIdUser, function (err, resUserId, fields) {
+
+    // Search the user to delete in the db with lastname, firstname and email
+    let queryUser = AdminUserDb.getIdOfUserFromEmail(lastname, firstname, email);
+    C.db.query(queryUser, function (err, resUser, fields) {
         if (err) throw(err);
-        console.log('result of user id ' + resUserId[0]);
-        if (resUserId.length === 0) // if the user doesn't exist
+        if (resUser.length === 0) // if the user doesn't exist
         {
             res.render('admin/person/person_deleted', {success: false});
         }
-        if (resUserId[0] !== undefined){
-            userId = (resUserId[0].UserId); //Return the id user
+        if (resUser[0] !== undefined){
+            userId = (resUser[0].UserId); //Return the id user
             console.log('User Id founded : ' + userId);
 
-            // Delete all the roles attached to this user
-            let queryDeleteUserrole = AdminRoleUserDb.deleteUserRoleFromUserId(userId);
-            C.db.query(queryDeleteUserrole, function (err, resDelUserRole, fields) {
+            // Delete all the roles attached to this id user
+            let queryDeleteUserRole = AdminRoleUserDb.deleteUserRoleFromUserId(userId);
+            C.db.query(queryDeleteUserRole, function (err, resDelUserRole, fields) {
                 if (err) throw(err);
-                console.log ('rows deleted');
+                console.log ('rows user_role deleted');
 
-                //Delete the user in the DB
-                let queryDeleteUser = AdminUserDb.deletePerson(lastname, firstname);
-                C.db.query(queryDeleteUser, function (err, resDelUserRole, fields) {
+                //Delete the user in the DB and the location attached
+                let queryDeleteUserLocation = AdminUserDb.deletePersonAndLocation(resUser[0].LocationId);
+                C.db.query(queryDeleteUserLocation, function (err, resDelUser, fields) {
                     if (err) throw(err);
-                    console.log ('rows deleted');
-
+                    if (resDelUser.length === 0) // if the location and user were not deleted
+                    {
+                        res.render('admin/person/person_deleted', {success: false});
+                    }
+                    console.log ('rows Location and User deleted');
                     res.render('admin/person/person_deleted', {success: true});
                 });
             });
         }
     });
-
 };
 

@@ -130,5 +130,9 @@
   "DELETE_CHOIR": "Supprimer un choeur",
   "EDIT_PERSON": "Modifier une personne",
   "SEARCH_PERSON" : "Rechercher",
-  "EDIT": "Modification pour"
+  "EDIT": "Modification pour",
+  "NEWSLETTER": "Reçevoir la newletter",
+  "ADDRESS": "Adresse",
+  "NPA": "NPA",
+  "CITY": "Ville"
 }

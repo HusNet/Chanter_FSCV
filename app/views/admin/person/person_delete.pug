@@ -19,6 +19,10 @@ block person_delete_block
                     label(for='firstnameP') #{translation.FIRSTNAME}:
                     input#firstnameP.form-control(type='text', placeholder='Firstname' name='firstnameP' required)
 
+                div(class='column')
+                    label(for='emailP') #{translation.FIRSTNAME}:
+                    input#emailP.form-control(type='text', placeholder='email' name='emailP' required)
 
+                    
         button.btn.btn-primary(type='submit' name='action') #{translation.DELETE}
 

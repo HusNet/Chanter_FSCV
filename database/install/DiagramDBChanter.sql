@@ -33,9 +33,9 @@ SET FOREIGN_KEY_CHECKS = 1;
 -- Table `chanter-dev`.`Location`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `chanter-dev`.`Location` (
-  `LocationId` INT(10) NOT NULL,
-  `Address` INT(11) NULL DEFAULT NULL,
-  `NPA` VARCHAR(20) NOT NULL,
+  `LocationId` INT(10) NOT NULL AUTO_INCREMENT,
+  `Address` VARCHAR(20) NOT NULL,
+  `NPA`  INT(11) NULL DEFAULT NULL,
   `City` VARCHAR(64) NOT NULL,
   PRIMARY KEY (`LocationId`),
   UNIQUE INDEX `LocationId` (`LocationId` ASC))
@@ -62,8 +62,7 @@ CREATE TABLE IF NOT EXISTS `chanter-dev`.`User` (
   INDEX `fk_User_Location1_idx` (`LocationId` ASC),
   CONSTRAINT `fk_User_Location1`
     FOREIGN KEY (`LocationId`)
-    REFERENCES `chanter-dev`.`Location` (`LocationId`)
-    ON DELETE NO ACTION
+    REFERENCES `chanter-dev`.`Location` (`LocationId`) ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 AUTO_INCREMENT = 3
