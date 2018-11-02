@@ -26,7 +26,22 @@ exports.getNameR = function (tabIdRole) {
 }
 
 
+exports.getIdRoleFromNameRoleList = function (tabNameRole) {
 
+    let query = "SELECT * FROM `Role` WHERE `Name` IN (";
+    tabNameRole.forEach(function(id, idx) {
+        if (idx === tabNameRole.length-1){
+            query += "'" + tabNameRole[idx] + "'";
+        }
+        else {
+            query += "'" + tabNameRole[idx] + "', ";
+        }
+    });
+    query += ");";
+    return query;
+
+
+}
 
 
 
