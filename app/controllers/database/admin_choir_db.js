@@ -5,3 +5,34 @@ exports.getRoleByName = function(roleName) {
 exports.getAllChoir = function () {
     return "SELECT * FROM Choir";
 };
+
+exports.getExportChoir = function (name, fundationYear, church, gospel, language, effectif, location) {
+    let query = "SELECT * FROM Choir";
+
+    if(name !== null || fundationYear !== null || church !== null || gospel !== null || language !== null || effectif !== null || location !== null) {
+        query += " WHERE ";
+
+        if(name !== null)
+            query += " AND `Name` = '" + name + "'";
+
+        if(fundationYear !== null)
+            query += " AND `FundationYear` = '" + fundationYear + "'";
+
+        if(church !== null)
+            query += " AND `Church` = '" + church + "'";
+
+        if(gospel !== null)
+            query += " AND `Gospel` = '" + gospel + "'";
+
+        if(language !== null)
+            query += " AND `Language` = '" + language + "'";
+
+        if(effectif !== null)
+            query += " AND `EffectifId` = " + effectif;
+
+        if(location !== null)
+            query += " AND `LocationId` = '" + location + "'";
+    }
+
+    return query;
+};

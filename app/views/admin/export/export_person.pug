@@ -3,3 +3,55 @@ extends ../../layouts/_adminLayout
 block content
 
     h1.display-4.m-b-2 #{translation.TITLE_ADMIN_EXPORT_PERSON}
+
+    form.col.s12(method='POST' action='/admin/export/export_person')
+
+        .input-field.col.s6
+            input.memberId.validate(type='text' name="memberId" id="memberId")
+            label(for='memberId') MemberId
+
+        .input-field.col.s6
+            input.lastname.validate(type='text' name="lastname" id="lastname")
+            label(for='lastname') lastname
+
+        .input-field.col.s6
+            input.firstname.validate(type='text' name="firstname" id="firstname")
+            label(for='firstname') firstname
+
+        .input-field.col.s6
+            input.phone.validate(type='text' name="phone" id="phone")
+            label(for='phone') phone
+
+        .input-field.col.s6
+            input.phoneP.validate(type='text' name="phoneP" id="phoneP")
+            label(for='phoneP') phoneP
+
+        .input-field.col.s6
+            input.email.validate(type='text' name="email" id="email")
+            label(for='email') email
+
+        .input-field.col.s6
+            input.startAbo.validate(type='text' name="startAbo" id="startAbo")
+            label(for='startAbo') startAbo
+
+        p
+            label
+                input(type='checkbox', name="newsletter", id="newsletter")
+                span newsletter
+
+        .input-field.col.s6
+            input.location.validate(type='text' name="location", id="location")
+            label(for='location') location
+
+        p
+            label
+                input.file(name='file', type='radio', value='pdf', checked='checked')
+                span pdf
+        p
+            label
+                input.file(name='file', value='xls', type='radio')
+                span xls
+        p
+            button.btn.waves-effect.waves-light(type='submit' name='action')
+                | #{translation.DOWNLOAD}
+                i.material-icons.right file_download

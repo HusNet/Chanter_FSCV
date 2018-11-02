@@ -1,6 +1,8 @@
 const C = require('../../config/appConfig');
 
 function user(rows) {
+    this.UserId = rows.UserId;
+    this.MemberId = rows.MemberId;
     this.Lastname = rows.Lastname;
     this.Firstname = rows.Firstname;
     this.Phone = rows.Phone;
@@ -9,7 +11,6 @@ function user(rows) {
     this.StartAbo = rows.StartAbo;
     this.Newsletter = rows.Newsletter;
     this.LocationId = rows.LocationId;
-
 }
 
 module.exports = user;

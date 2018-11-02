@@ -48,3 +48,8 @@ exports.deletePersonAndLocation = function (LocationId) {
 
 };
 
+
+
+exports.getAllUsers = function () {
+    return "SELECT * FROM `User`";
+};
