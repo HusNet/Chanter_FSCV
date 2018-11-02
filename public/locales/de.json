@@ -131,5 +131,7 @@
   "NEWSLETTER": "Newsletter erhalten",
   "ADDRESS": "Adresse",
   "NPA": "NPA",
-  "CITY": "Stadt"
+  "CITY": "Stadt",
+  "SEARCH_PERSON_SUCCESS": "Gefundene Person",
+  "SEARCH_PERSON_FAILURE": "Diese Person existiert nicht, bitte überprüfen Sie Ihre Angaben."
 }

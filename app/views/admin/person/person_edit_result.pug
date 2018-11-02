@@ -23,11 +23,11 @@ block resultSearch
 
                 div(class='column')
                     label(for='phoneP') #{translation.PHONEPRIVATE}:
-                    input#phoneP.form-control(type='text', value='' + userResult[0].Phone, name='phonePrivateP', required)
+                    input#phoneP.form-control(type='text',value='' + userResult[0].Phone, name='phoneP', required)
 
                 div(class='column')
-                    label(for='phoneProfP') #{translation.PHONEPRIVATE}:
-                    input#phoneProfP.form-control(type='text', value='' + userResult[0].PhoneProf, name='phoneProfP', required)
+                    label(for='phoneProfP') #{translation.PHONEPROF}:
+                    input#phoneProfP.form-control(type='text', value='' + userResult[0].PhoneProf, name='phoneProfP')
 
                 div(class='column')
                     label(for='emailP') #{translation.EMAIL}:
@@ -48,9 +48,7 @@ block resultSearch
 
                 div(class='column')
                     label(for='startAboP') #{translation.STARTABO}:
-                    input#startAboP.form-control(type='date', value='' + userResult[0].StartAbo, name='startaboP')
-
-
+                    input#startAboP.form-control(type='date', value=userResult[0].StartAbo, name='startAboP')
 
                 div(class='column')
                     P

@@ -1,5 +1,3 @@
-//import {NULL} from "mysql";
-
 const C = require('../../config/appConfig');
 const UserModel = require('../models/user');
 const LocationModel = require('../models/location');
@@ -8,7 +6,7 @@ const AdminRoleDb = require('../controllers/database/admin_role_db');
 const AdminRoleUserDb = require('../controllers/database/admin_user_role_db');
 const AdminLocationDb = require('../controllers/database/admin_location_db');
 
-
+// Request the persone page with the tree butons add/modify/delete
 exports.person = function(req, res, next) {
     res.render('admin/person/person', {
         title: 'page : personnes',
@@ -30,12 +28,17 @@ exports.admin_person_edit = function(req, res, next) {
         if (err) throw(err);
         if (resUser.length === 0) // if the user doesn't exist
         {
-            res.render('admin/person/person_edited', {success: false});
+            res.render('admin/person/person_search_for_edit', {success: false});
         }
         if (resUser[0] !== undefined) {
             console.log('Name of User founded: ' + resUser[0].Lastname);
-            console.log('Start abo  of User founded: ' + resUser[0].StartAbo);
-            console.log('Start abo  of User founded: ' + resUser[0].StartAbo.toISOString().slice(0, 19).replace('T', ' '));
+
+            //If there is a date for the abo
+            if (resUser[0].StartAbo !== null){
+                // Set the format of the date
+                resUser[0].StartAbo =  resUser[0].StartAbo.toISOString().slice(0, 10);
+            }
+
 
             // Get all information about the location of the user
             let queryLocation = AdminLocationDb.getLocationFromId(resUser[0].LocationId);
@@ -46,7 +49,7 @@ exports.admin_person_edit = function(req, res, next) {
                     res.render('admin/person/person_edited', {success: false});
                 }
                 if (resLocation){
-                    console.log('Address of Location founded ' + resLocation[0].Address)
+                    console.log('Address of Location founded ' + resLocation[0].Address);
 
                     //Find all the id roles of the user
                     let queryUserRole = AdminRoleUserDb.userRoleFromUserId(resUser[0].UserId);
@@ -111,7 +114,6 @@ exports.admin_person_edit = function(req, res, next) {
 
 exports.admin_person_edit_result = function(req, res, next){
 
-
     // All fields for adding a person: people, location, roles
     let lastname = req.body.lastnameP;
     let firstname = req.body.firstnameP;
@@ -129,7 +131,7 @@ exports.admin_person_edit_result = function(req, res, next){
     let cashier = req.body.cashierP;
     let committee = req.body.comiteP;
     let other = req.body.autreP;
-    let startAbo = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    let startAbo = req.body.startAboP;
     let idUserToEdit = req.body.idUser;
     let idLocationToEdit = req.body.idLocation;
 
@@ -137,13 +139,7 @@ exports.admin_person_edit_result = function(req, res, next){
     let arrayRoleNames = ['Director', 'Director_2', 'President', 'Secretary', 'Cashier', 'Committee', 'Other'];
     let arrayRolesForUser;
 
-
-
     console.log("Id of the user need to be updated : " + idUserToEdit);
-
-    // Update Person
-    // Update Location
-    // Update User_Role with Role
 
     //Transform the check box 'on' or undefine from Newsletter to boolean
     if (newsletter === 'on'){
@@ -169,7 +165,7 @@ exports.admin_person_edit_result = function(req, res, next){
         Address: address,
         NPA: npa,
         City: city
-    })
+    });
 
     console.log("Display updated models...");
     console.log(editUserModel);
@@ -202,10 +198,6 @@ exports.admin_person_edit_result = function(req, res, next){
                 else {
                     console.log("Location successfully edited ");
 
-                    //Edit the location
-                    console.log("Edit the location");
-
-
                     // Delete all the user_role
                     let queryDelUserRole = AdminRoleUserDb.deleteUserRoleFromUserId(idUserToEdit);
                     C.db.query(queryDelUserRole, function (err, rowsDelUserRole, fields) {
@@ -218,7 +210,6 @@ exports.admin_person_edit_result = function(req, res, next){
 
                             // Store the names of roles for the user
                             arrayRolesForUser = [];
-
                             //cpt for the arrayRolesForUser
                             let cpt = 0;
                             // Find the id of the names
@@ -234,10 +225,9 @@ exports.admin_person_edit_result = function(req, res, next){
                             console.log("Names of edited roles for the user : " + arrayRolesForUser);
 
                             if (cpt === 0){
-                                console.log("compteur : " + cpt)
+                                console.log("compteur : " + cpt);
                                 // If no roles for this user, edit successfull
                                 res.render('admin/person/person_edited', {success: true});
-
                             }
                             else {
                                 //Find the id of the Roles
@@ -250,40 +240,32 @@ exports.admin_person_edit_result = function(req, res, next){
                                     }
                                     else {
                                         // Add in the user_role table
-                                        console.log("Add all roles in the user_roles table" + rowsResultIdRoles)
+                                        console.log("Add all roles in the user_roles table" + rowsResultIdRoles);
 
-                                        for (let k = 0 ; k< rowsResultIdRoles.length ; k ++){
+                                        // For each roles founded, insert it in user_role to link it with the user
+                                        for (let k = 0 ; k < rowsResultIdRoles.length ; k ++){
                                             let queryAddRolesUserRoles = AdminRoleUserDb.insertUserRole(idUserToEdit, rowsResultIdRoles[k].RoleId);
-                                            C.db.query(queryAddRolesUserRoles, function (err, rowuserrole, fields) {
+                                            C.db.query(queryAddRolesUserRoles, function (err, rows1, fields) {
                                                 if (err) throw(err);
-
-                                                if (rowuserrole.length === 0) // no insertion
+                                                if (rows1.length === 0) // no insertion
                                                 {
                                                     res.render('admin/person/person_edited', {success: false});
                                                 }
-                                                else{
-                                                    res.render('admin/person/person_edited', {success: true});
-                                                }
                                             });
                                         }
+                                        res.render('admin/person/person_edited', {success: true});
                                     }
                                 });
-
                             }
-
                         }
-
                     });
-
                 }
-
             });
         }
     });
+};
 
-}
-
-
+// Delete a person in the DB
 exports.admin_person_delete = function(req, res, next) {
 
     // recover data
@@ -292,14 +274,13 @@ exports.admin_person_delete = function(req, res, next) {
     let email = req.body.emailP;
     let userId = null;
 
-
     // Search the user to delete in the db with lastname, firstname and email
     let queryUser = AdminUserDb.getUser(lastname, firstname, email);
     C.db.query(queryUser, function (err, resUser, fields) {
         if (err) throw(err);
         if (resUser.length === 0) // if the user doesn't exist
         {
-            res.render('admin/person/person_deleted', {success: false});
+            res.render('admin/person/person_search_for_edit', {success: false});
         }
         if (resUser[0] !== undefined){
             userId = (resUser[0].UserId); //Return the id user
@@ -364,12 +345,9 @@ exports.admin_person_add = function(req, res, next) {
     else {
         newsletter = 0; // 0 --> false
     }
-    if (startAbo == ''){
-        //startAbo = NULL; // data was not filled, so we need a null value for the db
-    }
 
     // Create the user with the model
-    var usermodel = new UserModel({
+    let usermodel = new UserModel({
         Lastname: lastname,
         Firstname: firstname,
         Phone: phone,
@@ -381,11 +359,11 @@ exports.admin_person_add = function(req, res, next) {
     });
 
     // Create the location with the model
-    var locationModel = new LocationModel({
+    let locationModel = new LocationModel({
         Address: address,
         NPA: npa,
         City: city
-    })
+    });
 
     console.log("Display models...");
     console.log(usermodel);
@@ -425,7 +403,7 @@ exports.admin_person_add = function(req, res, next) {
             // Get the id of the role selected on 'on'
             // Insert the RoleId + UserId in the table User_Role
             for (let i in arrayRoleSelected) {
-                if (arrayRoleSelected[i] != undefined)
+                if (arrayRoleSelected[i] !== undefined)
                 {
                     //query get id of the role
                     let queryRoleId = AdminRoleDb.getIdRole(arrayRoleNames[i]);
@@ -443,7 +421,7 @@ exports.admin_person_add = function(req, res, next) {
 
                             //insert the id of the role and the id of the user
                             //in the table user_role
-                            let queryInsertUserRole = AdminRoleUserDb.insertUserRole(userId, roleId)
+                            let queryInsertUserRole = AdminRoleUserDb.insertUserRole(userId, roleId);
                             C.db.query(queryInsertUserRole, function (err, rows, fields) {
                                 if (err) throw(err);
                                 console.log("1 record inserted");
@@ -456,4 +434,3 @@ exports.admin_person_add = function(req, res, next) {
         });
     });
 };
-

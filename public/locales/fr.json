@@ -130,5 +130,7 @@
   "NEWSLETTER": "Recevoir la newletter",
   "ADDRESS": "Adresse",
   "NPA": "NPA",
-  "CITY": "Ville"
+  "CITY": "Ville",
+  "SEARCH_PERSON_SUCCESS": "Personne trouvée",
+  "SEARCH_PERSON_FAILURE": "Cette personne n'existe pas, veuillez controller vos champs"
 }
