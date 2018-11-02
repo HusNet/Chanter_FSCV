@@ -1,0 +1,12 @@
+extends ../../layouts/_adminLayout
+
+block content
+
+    h1.display-4.m-b-2 #{translation.TITLE_ADMIN_EXPORT}
+
+    a#a_person_add.btn.btn-primary(href="/admin/export/export_person") #{translation.PERSON}
+        i.material-icons.right group
+    a#a_person_edit.btn.btn-primary(href="/admin/export/export_choir") #{translation.CHORUS}
+        i.material-icons.right music_note
+
+

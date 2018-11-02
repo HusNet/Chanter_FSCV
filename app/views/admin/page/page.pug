@@ -12,10 +12,29 @@ block content
                             i.material-icons clear
                         a.secondary-content(href='/admin/page/page_edit?id=' + val.PageId)
                             i.material-icons create
+                        a.secondary-content
+                            i #{val.Lang} | &nbsp;
         else
             li.collection-item
                 div
                     | #{translation.NO_PAGE_AVAILABLE}
     br
-    a.btn-floating.btn-large.waves-effect.waves-light.green(href='/admin/page/page_add')
-        i.material-icons add
+
+    div.fixed-action-btn
+        a.btn-floating.btn-large.red
+            i.material-icons menu
+        ul
+            li
+                a.btn-floating.btn-large.waves-effect.waves-light.green(href='/admin/page/page_add')
+                    i.material-icons add
+            li
+                a.btn-floating.btn-large.waves-effect.waves-light.yellow(href='/admin/page/page_link')
+                    i.material-icons insert_link
+
+    script.
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.fixed-action-btn');
+            var instances = M.FloatingActionButton.init(elems, {
+                direction: 'left'
+            });
+        });
