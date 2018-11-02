@@ -1,17 +1,20 @@
 
 exports.getPages_MenusFromMenu = function (id) {
-    return "SELECT * FROM (\n" +
-        "\tSELECT `Menu_idMenu` AS `idMenu`, `PageId` AS `idChild`, `Title` AS `Name`, 0 AS `IsMenu`, `Order` FROM `Page` \n" +
-        "\t\tJOIN `Menu_has_Page` ON `Page`.`PageId` = `Menu_has_Page`.`Page_PageId` \n" +
-        "        WHERE `PageId` IN (\n" +
-        "\t\t\tSELECT `Page_PageId` FROM `Menu_has_Page` WHERE `Menu_idMenu` = " + id + ") ) sel_1\n" +
-        "UNION ALL (\n" +
-        "\tSELECT * FROM (\n" +
-        "\t\tSELECT `Menu_idMenu` AS `idMenu`, `idMenu` AS `idChild`, `Name`, 1 AS `IsMenu`, `Order` FROM `Menu` \n" +
-        "        JOIN `Menu_has_Page` ON `Menu`.`idMenu` = `Menu_has_Page`.`Menu_SubMenu`\n" +
-        "        WHERE `idMenu` IN (\n" +
-        "\t\t\tSELECT `Menu_SubMenu` FROM `Menu_has_Page` WHERE `Menu_idMenu` = " + id + ") ) sel_2)\n" +
-        "ORDER BY `Order`;";
+    return "SELECT * FROM \n" +
+        "    (SELECT * FROM (\n" +
+        "        SELECT `Menu_idMenu` AS `idMenu`, `PageId` AS `idChild`, `Title` AS `Name`, 0 AS `IsMenu`, `Order` FROM `Page`\n" +
+        "    JOIN `Menu_has_Page` ON `Page`.`PageId` = `Menu_has_Page`.`Page_PageId`\n" +
+        "    WHERE `PageId` IN (\n" +
+        "        SELECT `Page_PageId` FROM `Menu_has_Page`) ) sel_1\n" +
+        "    UNION ALL (\n" +
+        "        SELECT * FROM (\n" +
+        "        SELECT `Menu_idMenu` AS `idMenu`, `idMenu` AS `idChild`, `Name`, 1 AS `IsMenu`, `Order` FROM `Menu`\n" +
+        "    JOIN `Menu_has_Page` ON `Menu`.`idMenu` = `Menu_has_Page`.`Menu_SubMenu`\n" +
+        "    WHERE `idMenu` IN (\n" +
+        "        SELECT `Menu_SubMenu` FROM `Menu_has_Page`) ) sel_2)\n" +
+        "    ORDER BY `Order`) sel_3\n" +
+        "    WHERE `idMenu` = " + id + ";";
+
 
 };
 

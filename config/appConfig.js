@@ -3,7 +3,6 @@ const path = require('path'),
     env = process.env.NODE_ENV || 'development',
     db = require('mysql');
 
-
 const config = {
     development: {
         root: rootPath,
