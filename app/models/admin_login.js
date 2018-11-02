@@ -1,4 +1,3 @@
-const C = require('../../config/appConfig');
 
 function AdminLogin(rows) {
     this.AdminId = rows.AdminId;

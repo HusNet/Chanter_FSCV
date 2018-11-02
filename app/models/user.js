@@ -1,4 +1,3 @@
-const C = require('../../config/appConfig');
 
 function user(rows) {
     this.Lastname = rows.Lastname;

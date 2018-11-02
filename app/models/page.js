@@ -1,4 +1,3 @@
-const C = require('../../config/appConfig');
 
 function page(rows) {
     this.PageId = rows.PageId;

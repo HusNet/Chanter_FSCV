@@ -261,10 +261,24 @@ module.exports = function(app, router) {
     router.get('/admin/menu/edit', function(req, res, next) {
         admin.authenticationTest(req, res, next);
 
-        if (req.query.id)
-            adminMenu.getMenuById(req, res, next);
+        if (req.query.id){
+            if (req.query.childOrder && req.query.nextChild)
+                adminMenu.invertChildOrder(req, res, next);
+            else if (req.query.idChild && req.query.isMenu && req.query.del)
+                adminMenu.deleteChildInMenu(req, res, next);
+            else if(req.query.idChild && req.query.isMenu)
+                adminMenu.addChildInMenu(req, res, next);
+            else
+                adminMenu.getMenuById(req, res, next);
+        }
         else
             adminMenu.getAllMenusEdit(req, res, next);
+    });
+
+    router.get('/admin/menu/json/edit', function(req, res, next){
+       admin.authenticationTest(req, res, next);
+       if (req.query.id)
+           adminMenu.getMenuByIdAsJSON(req, res, next);
     });
 
     router.post('/admin/menu/edit', function(req, res, next) {
