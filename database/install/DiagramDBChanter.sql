@@ -121,28 +121,27 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `chanter-dev`.`Choir` (
   `ChoirId` INT(10) NOT NULL AUTO_INCREMENT,
-  `RoleId` INT(10) NULL DEFAULT NULL,
   `Name` VARCHAR(255) NOT NULL,
-  `FundationYear` DATE NULL DEFAULT NULL,
-  `Church` TINYINT(1) NOT NULL DEFAULT 0,
-  `Gospel` TINYINT(1) NOT NULL DEFAULT 0,
+  `FundationYear` DATE NOT NULL,
+  `Church` TINYINT(1) NULL DEFAULT 0,
+  `Gospel` TINYINT(1) NULL DEFAULT 0,
   `Language` ENUM('Français', 'Deutsch') NOT NULL,
   `Remarks` VARCHAR(255) NULL DEFAULT NULL,
   `WebPage` VARCHAR(128) NULL DEFAULT NULL,
   `EffectifId` INT(10) NOT NULL,
   `Mailing` INT(10) NULL DEFAULT NULL,
   `LocationId` INT(10) NULL DEFAULT NULL,
+  `NamePresident` VARCHAR(255) NULL DEFAULT NULL,
+  `NameDirector` VARCHAR(255) NULL DEFAULT NULL,
+  `NameCashier` VARCHAR(255) NULL DEFAULT NULL,
+  `NameSecretary` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`ChoirId`),
   UNIQUE INDEX `ChoirId` (`ChoirId` ASC),
   INDEX `FKChoir605558` (`EffectifId` ASC),
-  INDEX `FKChoir973543` (`RoleId` ASC),
   INDEX `fk_Choir_Location1_idx` (`LocationId` ASC),
   CONSTRAINT `FKChoir605558`
     FOREIGN KEY (`EffectifId`)
     REFERENCES `chanter-dev`.`Effectif` (`EffectifId`),
-  CONSTRAINT `FKChoir973543`
-    FOREIGN KEY (`RoleId`)
-    REFERENCES `chanter-dev`.`Role` (`RoleId`),
   CONSTRAINT `fk_Choir_Location1`
     FOREIGN KEY (`LocationId`)
     REFERENCES `chanter-dev`.`Location` (`LocationId`)

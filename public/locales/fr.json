@@ -72,6 +72,7 @@
   "NAME_SECRETARIAT":"Nom du Secrétariat",
   "SECRETARY":"Secrétaire",
   "SWISS_CHOIR_UNION":"Union Suisse des Chorales",
+  "MEMBER":"Membre ou non",
   "MEMBER_USC":"Membre USC",
   "NOT_USC":"Non-Membre USC",
   "GRPMTS_REGION":"Grpmts + Régions",
@@ -120,5 +121,7 @@
   "DELETE_CHOIR": "Supprimer un choeur",
   "EDIT_PERSON": "Modifier une personne",
   "SEARCH_PERSON" : "Rechercher",
-  "LIST_CHOIR": "Liste de Choeur"
+  "LIST_CHOIR": "Liste de Choeur",
+  "LANGUAGE": "Langue",
+  "CREATION_PERSON": "Nouvelle personne"
 }

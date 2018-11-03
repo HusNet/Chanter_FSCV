@@ -121,5 +121,8 @@
   "EDIT_PERSON": "Jemand veränderung",
   "DELETE_PERSON": "Jemand entfernen",
   "SEARCH_PERSON" : "Suchen",
-  "LIST_CHOIR": "Chorliste"
+  "LIST_CHOIR": "Chorliste",
+  "LANGUAGE": "SPRACHE",
+  "MEMBER": "Mitglied oder Nicht-Mitglied",
+  "CREATION_PERSON":"Neue Person"
 }

@@ -47,12 +47,6 @@ module.exports = function(app, router) {
     });
 
 
-    router.get('/admin/choir', function(req, res, next) {
-        admin.authenticationTest(req, res, next);
-        admin.choir(req, res, next);
-    });
-
-
     router.get('/admin/service', function(req, res, next) {
         admin.authenticationTest(req, res, next);
         admin.service(req, res, next);
@@ -139,39 +133,6 @@ module.exports = function(app, router) {
         adminPage.link_page(req, res, next);
     });
 
-// *** END PAGE ROUTES
-
-// ** Choir start routes
-    router.get('/admin/choir', function(req, res, next) {
-        admin.authenticationTest(req, res, next);
-        choir.choir(req, res, next);
-    });
-
-    router.get('/admin/choir/add', function(req, res, next) {
-        admin.authenticationTest(req, res, next);
-        choir.getRoleByName('SuperAdmin').then(function (PersonPresident) {
-            choir.getRoleByName('SuperAdmin').then(function (PersonDirector) {
-                choir.getRoleByName('SuperAdmin').then(function (PersonSecretaire) {
-                    choir.getRoleByName('SuperAdmin').then(function (PersonCaissier) {
-                        res.render('admin/choir/choir_add',{
-                            PersonPresident:PersonPresident,
-                            PersonDirector:PersonDirector,
-                            PersonSecretaire:PersonSecretaire,
-                            PersonCaissier:PersonCaissier
-                        });
-                    })
-                })
-            })
-        })
-
-    });
-
-    router.post('/admin/choir/add', function(req, res, next) {
-        admin.authenticationTest(req, res, next);
-        adminMenu.insertChoir(req, res, next);
-        adminPage.form_page(req, res, next);
-    });
-
     router.post('/admin/page/page_add', function (req, res, next) {
         admin.authenticationTest(req, res, next);
         adminPage.add_page(req, res, next);
@@ -194,22 +155,59 @@ module.exports = function(app, router) {
 
 // *** END PAGE ROUTES
 
-    router.get('/admin/choir/update', function(req, res, next) {
+// *** END PAGE ROUTES
+
+//*** CHOIR ROUTES
+    router.get('/admin/choir', function(req, res, next) {
         admin.authenticationTest(req, res, next);
-        adminMenu.getAllChoir(req, res, next);
+        adminChoir.choir(req, res, next);
     });
 
+    /*router.get('/admin/choir/GetRole/:roleName', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminChoir.getRoleByName(req, res, next);
+    });*/
+
+    // méthode pour afficher formulaire avec les roles déjà existant
+    router.get('/admin/choir/add', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminChoir.getRoleByName('SuperAdmin').then(function (PersonPresident) {
+            adminChoir.getRoleByName('SuperAdmin').then(function (PersonDirector) {
+                adminChoir.getRoleByName('SuperAdmin').then(function (PersonSecretaire) {
+                    adminChoir.getRoleByName('SuperAdmin').then(function (PersonCaissier) {
+                        res.render('admin/choir/choir_add',{
+                            PersonPresident:PersonPresident,
+                            PersonDirector:PersonDirector,
+                            PersonSecretaire:PersonSecretaire,
+                            PersonCaissier:PersonCaissier
+                        });
+                    })
+                })
+            })
+        })
+
+    });
+    router.post('/admin/choir/add', function (req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminChoir.addChoir(req, res, next);
+
+    });
+
+
+
+    //DELETE CHOIR
     router.get('/admin/choir/delete', function(req, res, next) {
         admin.authenticationTest(req, res, next);
-        adminMenu.getAllChoir(req, res, next);
-    });
-    router.get('/admin/choir/GetRole/:roleName', function(req, res, next) {
-        admin.authenticationTest(req, res, next);
-        choir.getRoleByName(req, res, next);
+
+        if (req.query.id)
+            adminChoir.deleteChoir(req, res, next);
+        else
+            adminChoir.getAllChoirDelete(req, res, next);
     });
 
 
-// ** Choir end routes
+
+
 
 // *** PERSON ROUTES
 
@@ -346,48 +344,4 @@ module.exports = function(app, router) {
 
     // *** END MENU ROUTES
 
-    // ** CHOIR ROUTES
-
-        //ROUTE INDEX
-    router.get('/admin/choir', function(req, res, next) {
-        admin.authenticationTest(req, res, next);
-        adminChoir.choir(req, res, next);
-    });
-
-        // ROUTE PRINT FORM (pas oublier pour la prés de changer SuperAdmin en prési,director...)
-    router.get('/admin/choir/add', function(req, res, next) {
-        admin.authenticationTest(req, res, next);
-        adminChoir.getRoleByName('SuperAdmin').then(function (PersonPresident) {
-            adminChoir.getRoleByName('SuperAdmin').then(function (PersonDirector) {
-                adminChoir.getRoleByName('SuperAdmin').then(function (PersonSecretaire) {
-                    adminChoir.getRoleByName('SuperAdmin').then(function (PersonCaissier) {
-                        res.render('admin/choir/choir_add',{
-                            PersonPresident:PersonPresident,
-                            PersonDirector:PersonDirector,
-                            PersonSecretaire:PersonSecretaire,
-                            PersonCaissier:PersonCaissier
-                        });
-                    })
-                })
-            })
-        })
-
-    });
-
-
-        //DELETE CHOIR
-    router.get('/admin/choir/delete', function(req, res, next) {
-        admin.authenticationTest(req, res, next);
-
-        if (req.query.id)
-            adminChoir.deleteChoir(req, res, next);
-        else
-            adminChoir.getAllChoirDelete(req, res, next);
-    });
-
-
-
-
-
-// ** CHOIR END ROUTES
 };
