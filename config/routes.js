@@ -7,12 +7,10 @@ module.exports = function(app, router) {
         });
     });
 
-    //home routes
-    let home = require('../app/controllers/home_ctrl');
+    //public routes
+    let render = require('../app/controllers/render_ctrl');
     //admin login
     let admin = require('../app/controllers/admin_ctrl');
-    //contact routes
-    let contact = require('../app/controllers/contact_ctrl');
     let adminMenu = require('../app/controllers/admin_menu_ctrl');
     let adminPerson = require('../app/controllers/admin_person_ctrl');
     let adminPage = require('../app/controllers/admin_page_ctrl');
@@ -22,11 +20,7 @@ module.exports = function(app, router) {
 
 
     router.get('/', function(req, res, next) {
-        home.index(req, res, next);
-    });
-
-    router.get('/contact', function(req, res, next) {
-        contact.contact(req, res, next);
+        render.index(req, res, next);
     });
 
     router.get('/admin', function(req, res, next) {
@@ -233,7 +227,7 @@ module.exports = function(app, router) {
 
     router.post('/admin/person/person_edit_search', function(req, res, next) {
         admin.authenticationTest(req, res, next);
-        adminPerson.admin_person_edit_searchUser(req, res, next);
+        adminPerson.admin_person_edit(req, res, next);
     });
 
     router.get('/admin/person/person_edit_result', function(req, res, next) {
@@ -243,7 +237,7 @@ module.exports = function(app, router) {
 
     router.post('/admin/person/person_edit_result', function(req, res, next) {
         admin.authenticationTest(req, res, next);
-        adminPerson.admin_person_edit_resultSearch(req, res, next);
+        adminPerson.admin_person_edit_result(req, res, next);
     });
 
     router.get('/admin/person/person_delete', function(req, res, next) {
@@ -322,10 +316,24 @@ module.exports = function(app, router) {
     router.get('/admin/menu/edit', function(req, res, next) {
         admin.authenticationTest(req, res, next);
 
-        if (req.query.id)
-            adminMenu.getMenuById(req, res, next);
+        if (req.query.id){
+            if (req.query.childOrder && req.query.nextChild)
+                adminMenu.invertChildOrder(req, res, next);
+            else if (req.query.idChild && req.query.isMenu && req.query.del)
+                adminMenu.deleteChildInMenu(req, res, next);
+            else if(req.query.idChild && req.query.isMenu)
+                adminMenu.addChildInMenu(req, res, next);
+            else
+                adminMenu.getMenuById(req, res, next);
+        }
         else
             adminMenu.getAllMenusEdit(req, res, next);
+    });
+
+    router.get('/admin/menu/json/edit', function(req, res, next){
+       admin.authenticationTest(req, res, next);
+       if (req.query.id)
+           adminMenu.getMenuByIdAsJSON(req, res, next);
     });
 
     router.post('/admin/menu/edit', function(req, res, next) {

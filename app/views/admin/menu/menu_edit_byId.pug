@@ -5,12 +5,20 @@ block edit_selected_id
     br
     br
 
+
+    // config
+    // menus
+    // menu
+    // pages
+    // children
+    // available_children
+
     form(method = 'POST' action = '/admin/menu/edit', id = 'edit_menu')
         div.form-group
 
             div(class='row')
                 div(class='column')
-                    input(name='id_selected_menu', type='hidden', value=menu.idMenu)
+                    input#id_edit_hidden(name='id_selected_menu', type='hidden', value=menu.idMenu)
                     label(for='edit_title') #{translation.TITLE}:
                     input#edit_title.form-control(type='text', placeholder='Title', name='title', required, value=menu.Name)
 
@@ -19,6 +27,129 @@ block edit_selected_id
                         input(name='mainMenu', type='checkbox', checked=menu.idMenu===config.MainMenuId)
                         span #{translation.IS_MAIN}
 
-        br
 
         button.btn.btn-primary(type='submit') #{translation.UPDATE}
+
+        br
+
+    div(class='row')
+        div(class='column')
+            br
+            ul#collection_dyn.collection.with-header(onload="function(){showData();}")
+                li.collection-header
+                    div= menu.Name
+                        a.dropdown-trigger.secondary-content(href="#", data-target='dropdown_menu_page_list')
+                            i.material-icons add
+
+                        ul#dropdown_menu_page_list.dropdown-content(style="width: 100%;")
+                            each child in available_children
+                                li
+                                    a(onclick="addChildInMenu(" + child.idChild +", " + child.IsMenu + ")")
+                                        if (child.IsMenu)
+                                            | ↪&nbsp;&nbsp;
+                                        else
+                                            | 🖹&nbsp;
+                                        | #{child.Name}
+
+
+    script.
+        var config;
+        var menus;
+        var menu;
+        var pages;
+        var children;
+        var available_children;
+        var cList;
+
+        function showData() {
+            $.getJSON("/admin/menu/json/edit?id=" + document.getElementById('id_edit_hidden').value, function (data) {
+                config = data.config;
+                menus = data.menus;
+                menu = data.menu;
+                pages = data.pages;
+                children = data.children;
+                available_children = data.available_children;
+
+                $('ul#collection_dyn > :not(:first-child)').remove();
+                cList = $('ul#collection_dyn')
+
+
+                $.each(children, function (index) {
+
+                    let child = this;
+
+                    var li = $('<li/>')
+                        .addClass('collection-item')
+                        .appendTo(cList);
+
+                    var childName = "";
+                    if (child.IsMenu)
+                        childName = "↪ " + child.Name;
+                    else
+                        childName = "🖹 " + child.Name;
+                    var div = $('<div/>')
+                        .text(childName)
+                        .appendTo(li);
+
+                    var a1 = $('<a/>')
+                        .addClass('secondary-content')
+                        .click(function(){deleteChildFromMenu(child.idChild, child.IsMenu)})
+                        .appendTo(div);
+                    $('<i/>')
+                        .addClass('material-icons')
+                        .text("clear")
+                        .appendTo(a1);
+
+                    var a2 = $('<a/>')
+                        .addClass('secondary-content')
+                        .click(function(){invertChildOrder(child.Order, -1)})
+                        .appendTo(div);
+                    $('<i/>')
+                        .addClass('material-icons')
+                        .text("keyboard_arrow_up")
+                        .appendTo(a2);
+
+                    var a3 = $('<a/>')
+                        .addClass('secondary-content')
+                        .click(function(){invertChildOrder(child.Order, 1)})
+                        .appendTo(div);
+                    $('<i/>')
+                        .addClass('material-icons')
+                        .text("keyboard_arrow_down")
+                        .appendTo(a3);
+                });
+            })
+        }
+
+        function invertChildOrder(childOrder, nextChild) {
+            $.getJSON("/admin/menu/edit?id=" + document.getElementById('id_edit_hidden').value + "&childOrder=" + childOrder + "&nextChild=" + nextChild, function (data) {
+                if (data) {
+                    showData();
+                }
+            })
+
+        }
+
+        function addChildInMenu(idChild, isMenu){
+            $.getJSON("/admin/menu/edit?id=" + document.getElementById('id_edit_hidden').value + "&idChild=" + idChild + "&isMenu=" + isMenu, function (data) {
+                if (data) {
+                    showData();
+                }
+            })
+        }
+
+        function deleteChildFromMenu(idChild, isMenu){
+            $.getJSON("/admin/menu/edit?id=" + document.getElementById('id_edit_hidden').value + "&idChild=" + idChild + "&isMenu=" + isMenu + "&del=" + true, function (data){
+                if (data) {
+                    showData();
+                }
+            })
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.dropdown-trigger');
+            var instances = M.Dropdown.init(elems, {});
+        });
+
+    script(type='text/javascript')
+        | showData();

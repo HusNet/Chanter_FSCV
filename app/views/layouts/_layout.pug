@@ -11,30 +11,27 @@ html(lang='fr')
             link(href='/public/css/chanter.css', rel='stylesheet')
 
     body
-
         nav
+
             div(class='nav-wrapper teal lighten-2')
                 ul(id='nav-mobile', class='left')
+                    // mainMenu
+                    each item in mainMenu
+                        if (item.IsMenu)
+                            li #{item.Name}
+                                ul
+                                    each sub in item.content
+                                        li
+                                            a(href="/?id=" + sub.idChild) #{sub.Name}
+                        else
+                            li
+                                a(href="/?id=" + item.idChild) #{item.Name}
                     li
-                        a(href='#')
-                            i(class='material-icons') menu
-                    li
-                        a(href='/') #{translation.HOMEPAGE}
-                    li
-                        a(href='#') #{translation.FSCV}
-                    li
-                        a(href='contact') #{translation.CONTACT}
-                    li
-                        a(href='#') #{translation.ABOUT}
-                    li
-                        a(href='/admin') #{translation.LOGIN}
+                        a(href="/admin") #{translation.LOGIN}
                     li
                         a(href='?clang=fr') fr
-
                     li
                         a(href='?clang=de') de
-
-
 
                 a(href='/', class='right brand-logo', style='margin-right:15px') Chanter.ch
 

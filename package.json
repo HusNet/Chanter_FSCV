@@ -17,11 +17,14 @@
     "method-override": "^3.0.0",
     "morgan": "^1.9.1",
     "mysql": "^2.16.0",
+    "mysql-promise": "^5.0.0",
     "mysql2": "^1.6.1",
+    "node-excel-export": "^1.4.4",
     "nodemon": "^1.18.4",
     "pdfkit": "^0.8.3",
     "pug": "^2.0.3",
     "redis": "^2.8.0",
+    "remove": "^0.1.5",
     "sequelize": "^4.39.0"
   }
 }
