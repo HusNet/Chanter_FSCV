@@ -1,4 +1,3 @@
-const C = require('../../config/appConfig');
 
 function role(rows) {
     this.RoleId = rows.RoleId;

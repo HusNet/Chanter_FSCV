@@ -326,7 +326,7 @@ CREATE TABLE IF NOT EXISTS `chanter-dev`.`Menu_has_Page` (
   `Page_PageId` INT(10) NULL,
   `Menu_SubMenu` INT(10) NULL,
   `Order` INT(10) NOT NULL,
-  PRIMARY KEY (`Menu_idMenu`),
+  PRIMARY KEY (`Menu_idMenu`, `Order`),
   CONSTRAINT `fk_Menu_has_Page_Menu1`
     FOREIGN KEY (`Menu_idMenu`)
     REFERENCES `chanter-dev`.`Menu` (`idMenu`)
