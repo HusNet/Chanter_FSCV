@@ -2,15 +2,9 @@ const ChoirModel = require('../../models/choir');
 const UserModel = require('../../models/user');
 
 exports.exportChoirData = function (rows) {
-    let choirModel = [];
+     let out = 'Data for choir:\n';
 
-    rows.forEach(function (row) {
-        choirModel.push(new ChoirModel(row));
-    });
-
-    let out = 'Data for choir:\n';
-
-    choirModel.forEach(function (choir) {
+    rows.forEach(function (choir) {
         out += 'Name: ' + choir.Name + '\n';
         out += 'FundationYear: ' + choir.FundationYear + '\n';
         out += 'Church: ' + choir.Church + '\n';
@@ -18,15 +12,33 @@ exports.exportChoirData = function (rows) {
         out += 'Language: ' + choir.Language + '\n';
         out += 'Remarks: ' + choir.Remarks + '\n';
         out += 'WebPage: ' + choir.WebPage + '\n';
-        out += 'EffectifId: ' + choir.EffectifId + '\n';
+        out += 'Effectif: ' + choir.Year + ' : ' + choir.NbMembers + '\n';
         out += 'Mailing: ' + choir.Mailing + '\n';
-        out += 'LocationId: ' + choir.LocationId + '\n';
+        out += 'Location: ' + choir.Address + ' ' + choir.NPA + ' ' + choir.City + '\n';
     });
 
     return out;
 };
 
 exports.exportPersonData = function (rows) {
+   let out = 'Data for persons:\n';
+
+    rows.forEach(function (user) {
+        out += 'MemberId: ' + user.MemberId + '\n';
+        out += 'Lastname: ' + user.Lastname + '\n';
+        out += 'Firstname: ' + user.Firstname + '\n';
+        out += 'Phone: ' + user.Phone + '\n';
+        out += 'Phone Prof: ' + user.PhoneProf + '\n';
+        out += 'Email: ' + user.Email + '\n';
+        out += 'Start abo: ' + user.StartAbo + '\n';
+        out += 'Newsletter: ' + user.Newsletter + '\n';
+        out += 'Location: ' + user.Address + ' ' + user.NPA + ' ' + user.City + '\n';
+    });
+
+    return out;
+};
+
+/*exports.exportPersonData = function (rows) {
     let userModel = [];
 
     rows.forEach(function (row) {
@@ -48,4 +60,4 @@ exports.exportPersonData = function (rows) {
     });
 
     return out;
-};
+};*/

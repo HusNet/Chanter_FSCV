@@ -95,7 +95,7 @@ exports.export_choir = function (req, res, next) {
             let dataset = [];
 
             rows.forEach(function(d) {
-                dataset.push({name: d.Name, fundationYear: d.FundationYear, church: d.Church, gospel: d.Gospel, language: d.Language, effectif: d.EffectifId, location: d.LocationId});
+                dataset.push({name: d.Name, fundationYear: d.FundationYear, church: d.Church, gospel: d.Gospel, language: d.Language, effectif: d.Year + d.NbMembers, location: d.Address + " " + d.NPA + " " + d.City});
             });
 
             let merges = [];
@@ -215,7 +215,7 @@ exports.export_person = function (req, res, next) {
             let dataset = [];
 
             rows.forEach(function(d) {
-                dataset.push({memberId: d.MemberId, lastname: d.Lastname, firstname: d.Firstname, phone: d.Phone, phoneP: d.PhoneProf, email: d.Email, startAbo: d.StartAbo, newsletter: d.Newsletter, location: d.LocationId});
+                dataset.push({memberId: d.MemberId, lastname: d.Lastname, firstname: d.Firstname, phone: d.Phone, phoneP: d.PhoneProf, email: d.Email, startAbo: d.StartAbo, newsletter: d.Newsletter, location: d.Address + " " + d.NPA + " " + d.City});
             });
 
             let merges = [];
