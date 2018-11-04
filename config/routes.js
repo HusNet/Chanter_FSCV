@@ -13,6 +13,7 @@ module.exports = function(app, router) {
     let admin = require('../app/controllers/admin_ctrl');
     //contact routes
     let contact = require('../app/controllers/contact_ctrl');
+    let calendar = require('../app/controllers/calendar_ctrl');
     let adminMenu = require('../app/controllers/admin_menu_ctrl');
     let adminPerson = require('../app/controllers/admin_person_ctrl');
     let adminPage = require('../app/controllers/admin_page_ctrl');
@@ -27,6 +28,10 @@ module.exports = function(app, router) {
 
     router.get('/contact', function(req, res, next) {
         contact.contact(req, res, next);
+    });
+
+    router.get('/calendar', function (req, res, next) {
+       calendar.calendar(req, res, next);
     });
 
     router.get('/admin', function(req, res, next) {
