@@ -16,6 +16,8 @@
   "USER": "Utilisateur",
   "EXPORT": "Export",
   "TITLE": "Titre",
+  "FR_TITLE": "Titre français",
+  "DE_TITLE": "Titre allemand",
   "CONTENT_NEWS": "Contenu de la news",
   "ADD_TRANSLATE": "Ajouter une traduction ?",
   "LASTNAME": "Nom de famille",
@@ -50,7 +52,6 @@
   "TITLE_ADMIN_PAGE": "Toutes les pages",
   "FR": "Français",
   "DE": "Allemand",
-  "LANGUAGE": "Language",
 
   "TITLE_ADMIN_CHOIR": "Les Choeurs",
   "CHOIR_NAME": "Nom du choeur",
@@ -82,6 +83,7 @@
   "NAME_SECRETARIAT":"Nom du Secrétariat",
   "SECRETARY":"Secrétaire",
   "SWISS_CHOIR_UNION":"Union Suisse des Chorales",
+  "MEMBER":"Membre ou non",
   "MEMBER_USC":"Membre USC",
   "NOT_USC":"Non-Membre USC",
   "GRPMTS_REGION":"Grpmts + Régions",
@@ -130,11 +132,16 @@
   "DELETE_CHOIR": "Supprimer un choeur",
   "EDIT_PERSON": "Modifier une personne",
   "SEARCH_PERSON" : "Rechercher",
+  "LIST_CHOIR": "Liste de Choeur",
+  "LANGUAGE": "Langue",
+  "CREATION_PERSON": "Nouvelle personne",
   "EDIT": "Modification pour",
   "NEWSLETTER": "Recevoir la newletter",
   "ADDRESS": "Adresse",
   "NPA": "NPA",
   "CITY": "Ville",
   "SEARCH_PERSON_SUCCESS": "Personne trouvée",
-  "SEARCH_PERSON_FAILURE": "Cette personne n'existe pas, veuillez controller vos champs"
+  "SEARCH_PERSON_FAILURE": "Cette personne n'existe pas, veuillez controller vos champs",
+  "ADDFORMULAIRECLIENT": "Lien du formulaire pour le client",
+  "ADDFORMULAIRERESPONSE": "Lien du formulaire de réponse"
 }

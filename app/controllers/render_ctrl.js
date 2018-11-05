@@ -8,6 +8,8 @@ exports.index = function(req, res, next){
         let mainMenuId = rows[0].MainMenuId;
         C.db.query(MenuRenderDb.getMenus(), function(err, rows, fields){
 
+            // TODO : get pages from right lang (req.query.i18n_lang)
+
             // populate main menu
             let mainMenu = [];
             rows.forEach(function(item){
@@ -35,7 +37,9 @@ exports.index = function(req, res, next){
             //sort array by Order
             mainMenu.sort(function(a, b){return a.Order - b.Order});
 
-            if (req.query.id) {
+            if (req.query.err)
+                res.render('404', {mainMenu: mainMenu, title: '404 not found!'});
+            else if (req.query.id) {
                 C.db.query(MenuRenderDb.getPageContent(req.query.id), function(err, rows, fields){
                     if(err) throw(err);
                     res.render('public/render', {page: rows[0], mainMenu: mainMenu});

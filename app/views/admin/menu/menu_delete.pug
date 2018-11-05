@@ -12,8 +12,8 @@ block delete_menu
             var instances = M.Dropdown.init(elems, {});
         });
 
-        function confirmDelete(id, name) {
-            if (confirm("Delete " + name + " ?"))
+        function confirmDelete(id, name_fr, name_de) {
+            if (confirm("Delete " + name_fr + "/" + name_de + " ?"))
                 window.location.href = '/admin/menu/delete?id=' + id;
         }
     br
@@ -26,6 +26,10 @@ block delete_menu
     ul#dropdown_menu_list.dropdown-content
         each menu in menus
             li
-                a(onclick='confirmDelete(' + menu.idMenu + ', "' + menu.Name + '")')= menu.Name
+                a(onclick='confirmDelete(' + menu.idMenu + ', "' + menu.Name_fr + '", "' + menu.Name_fr + '")')
+                if (lang === 'fr')
+                    | #{menu.Name_fr}
+                if (lang === 'de')
+                    | #{menu.Name_de}
 
 

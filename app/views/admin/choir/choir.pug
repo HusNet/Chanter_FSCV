@@ -4,15 +4,13 @@ block content
 
     h1.display-4.m-b-2  #{translation.TITLE_ADMIN_CHOIR}
 
-    form(method='GET' action='/admin/choir/add')
-        button.btn.btn-primary(onclick='toggle_add_choir()') #{translation.ADD_CHOIR}
-    form(method='GET' action='/admin/choir/update')
-        button.btn.btn-primary(onclick='toggle_edit_choir()') #{translation.UPDATE_CHOIR}
-    form(method='GET' action='/admin/choir/delete')
-        button.btn.btn-primary(onclick='toggle_delete_choir()') #{translation.DELETE_CHOIR}
+    a#a_choir_add.btn.btn-primary(href="/admin/choir/add") #{translation.ADD_CHOIR}
+    a#a_choir_edit.btn.btn-primary(href="/admin/choir/edit") #{translation.UPDATE_CHOIR}
+    a#a_choir_delete.btn.btn-primary(href="/admin/choir/delete") #{translation.DELETE_CHOIR}
 
 
-
+    //Result of the insert - delete - update
+    block result
     //ADD CHOIR
     block add_choir
     //EDIT CHOIR

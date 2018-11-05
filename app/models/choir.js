@@ -1,16 +1,19 @@
 function choir(rows) {
     this.ChoirId = rows.ChoirId;
-    this.RoleId = rows.RoleId;
     this.Name = rows.Name;
-    this.FundationYear = rows.FundationYear;
+    this.FundationYear = rows.DateFoundation;
     this.Church = rows.Church;
     this.Gospel = rows.Gospel;
     this.Language = rows.Language;
-    this.Remarks = rows.Remarks;
-    this.WebPage = rows.WebPage;
+    this.Remarks = rows.Comments;
+    this.WebPage = rows.Homepage;
     this.EffectifId = rows.EffectifId;
     this.Mailing = rows.Mailing;
     this.LocationId = rows.LocationId;
+    this.NamePresident = rows.NamePresident;
+    this.NameDirector = rows.NameDirector;
+    this.NameSecretary = rows.NameSecretary;
+    this.NameCashier = rows.NameCashier;
 }
 
 module.exports = choir;

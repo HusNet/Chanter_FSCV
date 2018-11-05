@@ -1,0 +1,11 @@
+extends choir
+
+block result
+
+    br
+    br
+
+    if success
+        div.success #{translation.CREATION_SUCCESS}
+    else
+        div.failed #{translation.CREATION_FAILURE}

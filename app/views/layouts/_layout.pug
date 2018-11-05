@@ -18,14 +18,26 @@ html(lang='fr')
                     // mainMenu
                     each item in mainMenu
                         if (item.IsMenu)
-                            li #{item.Name}
-                                ul
+                            li.dropdown-trigger(data-target='dropdown_submenu')
+                                if (lang === 'fr')
+                                    | #{item.Name_fr}
+                                if (lang === 'de')
+                                    | #{item.Name_de}
+                                ul#dropdown_submenu.dropdown-content
                                     each sub in item.content
                                         li
-                                            a(href="/?id=" + sub.idChild) #{sub.Name}
+                                            a(href="/?id=" + sub.idChild)
+                                                if (lang === 'fr')
+                                                    | #{sub.Name_fr}
+                                                if (lang === 'de')
+                                                    | #{sub.Name_de}
                         else
                             li
-                                a(href="/?id=" + item.idChild) #{item.Name}
+                                a(href="/?id=" + item.idChild)
+                                    if (lang === 'fr')
+                                        | #{item.Name_fr}
+                                    if (lang === 'de')
+                                        | #{item.Name_de}
                     li
                         a(href="/admin") #{translation.LOGIN}
                     li
@@ -41,3 +53,9 @@ html(lang='fr')
 
         block js
             script(src='/public/assets/js/materialize.min.js')
+
+            script.
+                document.addEventListener('DOMContentLoaded', function () {
+                    var element = document.querySelectorAll('.dropdown-trigger');
+                    var instances = M.Dropdown.init(element, {hover: true, constrainWidth: false, coverTrigger: false});
+                });

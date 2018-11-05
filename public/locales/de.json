@@ -16,6 +16,8 @@
   "USER": "Benutzer",
   "EXPORT": "Export",
   "TITLE": "Titel",
+  "FR_TITLE": "Franzözische Titel",
+  "DE_TITLE": "Deutsche Titel",
   "CONTENT_NEWS": "Inhalt der Nachrichten",
   "ADD_TRANSLATE": "Eine Übersetzung hinzufügen?",
   "LASTNAME": "Nachname",
@@ -137,5 +139,12 @@
   "NPA": "NPA",
   "CITY": "Stadt",
   "SEARCH_PERSON_SUCCESS": "Gefundene Person",
+  "SEARCH_PERSON_FAILURE": "Diese Person existiert nicht, bitte überprüfen Sie Ihre Angaben.",
+  "ADDFORMULAIRECLIENT": "Link zum Formular für den Kunden",
+  "ADDFORMULAIRERESPONSE": "Link zum Antwortformular"
   "SEARCH_PERSON_FAILURE": "Diese Person existiert nicht, bitte überprüfen Sie Ihre Angaben."
+  "LIST_CHOIR": "Chorliste",
+  "LANGUAGE": "SPRACHE",
+  "MEMBER": "Mitglied oder Nicht-Mitglied",
+  "CREATION_PERSON":"Neue Person"
 }
