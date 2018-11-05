@@ -43,7 +43,7 @@ exports.export_choir = function (req, res, next) {
     if(req.body.location !== '')
         location = req.body.location;
 
-    let query = AdminChoirDb.getExportChoir(name, fundationYear + '-01-01', church, gospel, language, effectif, location);
+    let query = AdminChoirDb.getExportChoir(name, fundationYear, church, gospel, language, effectif, location);
     let choosenFile = req.body.file;
 
     C.db.query(query, function (err, rows, fields) {

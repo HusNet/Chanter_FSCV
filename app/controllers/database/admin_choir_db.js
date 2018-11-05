@@ -17,31 +17,30 @@ exports.getExportChoir = function (name, fundationYear, church, gospel, language
         "FROM `Choir` " +
         "INNER JOIN `Effectif` ON `Choir`.EffectifId = `Effectif`.EffectifId " +
         "INNER JOIN `Location` ON `Choir`.LocationId = `Location`.LocationId " +
-        "WHERE 1 = 1 ";
+        "WHERE 1 = 1";
 
-    if(name !== null || fundationYear !== null || church !== null || gospel !== null || language !== null || effectif !== null || npa !== null) {
+    console.log(name + " - " + fundationYear + " - " + church + " - " + gospel + " - " + language + " - " + effectif + " - " + npa);
 
-        if(name !== null)
-            query += " AND `Name` = '" + name + "'";
+    if(name !== null)
+        query += " AND `Choir`.`Name` = '" + name + "'";
 
-        if(fundationYear !== null)
-            query += " AND `FundationYear` = '" + fundationYear + "'";
+    if(fundationYear !== null)
+        query += " AND `Choir`.`FundationYear` = '" + fundationYear + "-01-01" + "'";
 
-        if(church !== null)
-            query += " AND `Church` = '" + church + "'";
+    if(church !== null)
+        query += " AND `Choir`.`Church` = '" + church + "'";
 
-        if(gospel !== null)
-            query += " AND `Gospel` = '" + gospel + "'";
+    if(gospel !== null)
+        query += " AND `Choir`.`Gospel` = '" + gospel + "'";
 
-        if(language !== null)
-            query += " AND `Language` = '" + language + "'";
+    if(language !== null)
+        query += " AND `Choir`.`Language` = '" + language + "'";
 
-        if(effectif !== null)
-            query += " AND `Effectif`.`NbMembers` = " + effectif;
+    if(effectif !== null)
+        query += " AND `Effectif`.`NbMembers` = " + effectif;
 
-        if(npa !== null)
-            query += " AND `Location`.`NPA` = '" + npa + "'";
-    }
+    if(npa !== null)
+        query += " AND `Location`.`NPA` = '" + npa + "'";
 
     return query;
 };
