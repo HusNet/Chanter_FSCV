@@ -52,28 +52,30 @@ exports.getExportPerson = function (lastname, firstname, phone, phoneProf, email
     let query = "SELECT * " +
                     "FROM `User` " +
                     "JOIN `Location` ON `User`.LocationId = `Location`.LocationId " +
-                    "WHERE 1 = 1 ";
+                    "WHERE 1 = 1";
+
+    console.log(lastname + '-' + firstname + '-' + phone + '-' + phoneProf + '-' + email + '-' + startAbo + '-' + newsletter + '-' + location);
 
     if(lastname !== null)
-        query += " AND `Lastname` = '" + lastname + "'";
+        query += " AND `User`.`Lastname` = '" + lastname + "'";
 
     if(firstname !== null)
-        query += " AND `Firstname` = '" + firstname + "'";
+        query += " AND `User`.`Firstname` = '" + firstname + "'";
 
     if(phone !== null)
-        query += " AND `Phone` = '" + phone + "'";
+        query += " AND `User`.`Phone` = '" + phone + "'";
 
     if(phoneProf !== null)
-        query += " AND `PhoneProf` = '" + phoneProf + "'";
+        query += " AND `User`.`PhoneProf` = '" + phoneProf + "'";
 
     if(email !== null)
-        query += " AND `Email` = " + email;
+        query += " AND `User`.`Email` = " + email;
 
     if(startAbo !== null)
-        query += " AND `StartAbo` = '" + startAbo + "'";
+        query += " AND `User`.`StartAbo` = '" + startAbo + "'";
 
     if(newsletter !== null)
-        query += " AND `Newsletter` = '" + newsletter + "'";
+        query += " AND `User`.`Newsletter` = '" + newsletter + "'";
 
     if(location !== null)
         query += " AND `Location`.`NPA` = '" + location + "'";

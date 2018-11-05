@@ -123,26 +123,23 @@ exports.export_form_person = function (req, res, next) {
 };
 
 exports.export_person = function (req, res, next) {
-    let memberId = null;
     let lastname = null;
     let firstname = null;
     let phone = null;
-    let phoneProf = null;
+    let phoneP = null;
     let email = null;
     let startAbo = null;
     let newsletter = null;
     let location = null;
 
-    if(req.body.memberId !== '')
-        memberId = req.body.memberId;
     if(req.body.lastname !== '')
         lastname = req.body.lastname;
     if(req.body.firstname !== '')
         firstname = req.body.firstname;
     if(req.body.phone !== '')
         phone = req.body.phone;
-    if(req.body.phoneProf !== '')
-        phoneProf = req.body.phoneProf;
+    if(req.body.phoneP !== '')
+        phoneP = req.body.phoneP;
     if(req.body.email !== '')
         email = req.body.email;
     if(req.body.startAbo !== '')
@@ -154,7 +151,7 @@ exports.export_person = function (req, res, next) {
     if(req.body.location !== '')
         location = req.body.location;
 
-    let query = AdminUserDb.getExportPerson(memberId, lastname, firstname, phone, phoneProf, email, startAbo, newsletter, location);
+    let query = AdminUserDb.getExportPerson(lastname, firstname, phone, phoneP, email, startAbo, newsletter, location);
     let choosenFile = req.body.file;
 
     C.db.query(query, function (err, rows, fields) {
@@ -171,14 +168,10 @@ exports.export_person = function (req, res, next) {
         } else if(choosenFile === 'xls') {
             // EXCEL
             let heading = [
-                ['MemberId', 'Lastname', 'Firstname', 'Phone', 'Phone prof', 'Email', 'Start Abo', 'Newsletter', 'Location']
+                ['Lastname', 'Firstname', 'Phone', 'Phone prof', 'Email', 'Start Abo', 'Newsletter', 'Location']
             ];
 
             let specification = {
-                memberId: { // <- the key should match the actual data key
-                    displayName: 'MemberId',
-                    width: 120
-                },
                 lastname: { // <- the key should match the actual data key
                     displayName: 'Lastname',
                     width: 120
@@ -215,7 +208,7 @@ exports.export_person = function (req, res, next) {
             let dataset = [];
 
             rows.forEach(function(d) {
-                dataset.push({memberId: d.MemberId, lastname: d.Lastname, firstname: d.Firstname, phone: d.Phone, phoneP: d.PhoneProf, email: d.Email, startAbo: d.StartAbo, newsletter: d.Newsletter, location: d.Address + " " + d.NPA + " " + d.City});
+                dataset.push({lastname: d.Lastname, firstname: d.Firstname, phone: d.Phone, phoneP: d.PhoneProf, email: d.Email, startAbo: d.StartAbo, newsletter: d.Newsletter, location: d.Address + " " + d.NPA + " " + d.City});
             });
 
             let merges = [];

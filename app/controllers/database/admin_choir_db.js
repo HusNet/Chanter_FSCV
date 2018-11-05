@@ -19,8 +19,6 @@ exports.getExportChoir = function (name, fundationYear, church, gospel, language
         "INNER JOIN `Location` ON `Choir`.LocationId = `Location`.LocationId " +
         "WHERE 1 = 1";
 
-    console.log(name + " - " + fundationYear + " - " + church + " - " + gospel + " - " + language + " - " + effectif + " - " + npa);
-
     if(name !== null)
         query += " AND `Choir`.`Name` = '" + name + "'";
 
