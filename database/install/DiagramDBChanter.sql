@@ -212,7 +212,8 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `chanter-dev`.`Menu` (
   `idMenu` INT(11) NOT NULL AUTO_INCREMENT,
-  `Name` VARCHAR(45) NOT NULL,
+  `Name_fr` VARCHAR(45) NOT NULL,
+  `Name_de` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idMenu`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 2
@@ -439,7 +440,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `chanter-dev`;
-INSERT INTO `chanter-dev`.`Menu` (`idMenu`, `Name`) VALUES (1, 'Main Menu');
+INSERT INTO `chanter-dev`.`Menu` (`idMenu`, `Name_fr`, `Name_de`) VALUES (1, 'Menu principal', 'Hauptmenu');
 
 COMMIT;
 

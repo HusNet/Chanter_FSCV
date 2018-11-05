@@ -16,10 +16,7 @@ exports.menu = function (req, res, next) {
 exports.insertMenu = function (req, res, next) {
 
 
-    console.log(req.body.title);
-
-
-    C.db.query(AdminMenuDb.insert(req.body.title), function(err, rows, fields) {
+    C.db.query(AdminMenuDb.insert(req.body.title_fr, req.body.title_de), function(err, rows, fields) {
         if (err) throw err;
 
         if(req.body.mainMenu)
@@ -90,20 +87,22 @@ let getMenuById_Data = function(menuId, callback){
                         let available_children = [];
                         menus.forEach(function(menu) {
                             available_children.push(new Menu_Child({
-                               idMenu: undefined,
-                               idChild: menu.idMenu,
-                               Name: menu.Name,
-                               IsMenu: 1,
-                               Order: undefined
+                                idMenu: undefined,
+                                idChild: menu.idMenu,
+                                Name_fr: menu.Name_fr,
+                                Name_de: menu.Name_de,
+                                IsMenu: 1,
+                                Order: undefined
                            }));
                         });
                         pages.forEach(function(page){
                            available_children.push(new Menu_Child({
-                              idMenu: undefined,
-                              idChild: page.PageId,
-                              Name: page.Title,
-                              IsMenu: 0,
-                              Order: undefined
+                                idMenu: undefined,
+                                idChild: page.PageId,
+                                Name_fr: page.Title,
+                                Name_de: page.Title,
+                                IsMenu: 0,
+                                Order: undefined
                            }));
                         });
 
@@ -127,12 +126,14 @@ let getMenuById_Data = function(menuId, callback){
 
 exports.getMenuByIdAsJSON = function (req, res, next){
     getMenuById_Data(req.query.id, function (data) {
+        data['lang'] = req.i18n_lang;
         res.json(data);
     });
 };
 
 exports.getMenuById = function (req, res, next) {
     getMenuById_Data(req.query.id, function (data) {
+        data['lang'] = req.i18n_lang;
         res.render('admin/menu/menu_edit_byId', data);
     });
 };
@@ -210,7 +211,7 @@ function rearrangeDb(idMenu){
 
 exports.updateMenu = function (req, res, next){
 
-    C.db.query(AdminMenuDb.update(req.body.id_selected_menu, req.body.title), function (err, rows, fields){
+    C.db.query(AdminMenuDb.update(req.body.id_selected_menu, req.body.title_fr, req.body.title_de), function (err, rows, fields){
         if(err) throw(err);
 
         if(req.body.mainMenu)

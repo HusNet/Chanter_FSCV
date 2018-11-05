@@ -16,6 +16,8 @@
   "USER": "Utilisateur",
   "EXPORT": "Export",
   "TITLE": "Titre",
+  "FR_TITLE": "Titre français",
+  "DE_TITLE": "Titre allemand",
   "CONTENT_NEWS": "Contenu de la news",
   "ADD_TRANSLATE": "Ajouter une traduction ?",
   "LASTNAME": "Nom de famille",

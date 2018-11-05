@@ -12,6 +12,7 @@ block edit_selected_id
     // pages
     // children
     // available_children
+    // lang
 
     form(method = 'POST' action = '/admin/menu/edit', id = 'edit_menu')
         div.form-group
@@ -19,8 +20,10 @@ block edit_selected_id
             div(class='row')
                 div(class='column')
                     input#id_edit_hidden(name='id_selected_menu', type='hidden', value=menu.idMenu)
-                    label(for='edit_title') #{translation.TITLE}:
-                    input#edit_title.form-control(type='text', placeholder='Title', name='title', required, value=menu.Name)
+                    label(for='edit_title_fr') #{translation.FR_TITLE}:
+                    input#edit_title_fr.form-control(type='text', placeholder='Fr Title', name='title_fr', required, value=menu.Name_fr)
+                    label(for='edit_title_de') #{translation.DE_TITLE}:
+                    input#edit_title_de.form-control(type='text', placeholder='De Title', name='title_de', required, value=menu.Name_de)
 
                 div(class='column')
                     label
@@ -36,7 +39,11 @@ block edit_selected_id
         br
         ul#collection_dyn.collection.with-header(onload="function(){showData();}")
             li.collection-header
-                div= menu.Name
+                div
+                    if (lang === 'fr')
+                        | #{menu.Name_fr}
+                    if (lang === 'de')
+                        | #{menu.Name_de}
                     a.dropdown-trigger_2.secondary-content(href="#", data-target='dropdown_menu_page_list')
                         i.material-icons add
                         ul#dropdown_menu_page_list.dropdown-content
@@ -47,7 +54,11 @@ block edit_selected_id
                                             | ↪&nbsp;&nbsp;
                                         else
                                             | 🖹&nbsp;
-                                            | #{child.Name}
+                                            if (lang === 'fr')
+                                                | #{child.Name_fr}
+                                            if (lang === 'de')
+                                                | #{child.Name_de}
+
 
 
     script.
@@ -57,6 +68,7 @@ block edit_selected_id
         var pages;
         var children;
         var available_children;
+        var lang;
         var cList;
 
         function showData() {
@@ -67,6 +79,7 @@ block edit_selected_id
                 pages = data.pages;
                 children = data.children;
                 available_children = data.available_children;
+                lang = data.lang;
 
                 $('ul#collection_dyn > :not(:first-child)').remove();
                 cList = $('ul#collection_dyn')
@@ -80,11 +93,19 @@ block edit_selected_id
                         .addClass('collection-item')
                         .appendTo(cList);
 
+                    console.log(lang);
+                    console.log(lang === 'fr');
+
                     var childName = "";
                     if (child.IsMenu)
-                        childName = "↪ " + child.Name;
+                        childName = "↪ ";
                     else
-                        childName = "🖹 " + child.Name;
+                        childName = "🖹 ";
+                    if (lang === 'fr')
+                        childName += child.Name_fr;
+                    else if (lang === 'de')
+                        childName += child.Name_de;
+
                     var div = $('<div/>')
                         .text(childName)
                         .appendTo(li);
