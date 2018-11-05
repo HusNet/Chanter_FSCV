@@ -30,6 +30,16 @@ block content
 
         input#contentde.validate(type='hidden' name='contentde')
 
+
+        p
+            label(for='formulaireForms') #{translation.ADDFORMULAIRECLIENT}:
+            input#formulaireForms.form-control(type='text', name='formulaireForms')
+
+        p
+            label(for='formulaireResult') #{translation.ADDFORMULAIRERESPONSE}:
+            input#formulaireResult.form-control(type='text', name='formulaireResult')
+
+
         p
             button.btn.waves-effect.waves-light(type='submit' name='action')
                 | #{translation.ADD}

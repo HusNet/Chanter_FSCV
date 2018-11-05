@@ -33,6 +33,8 @@ exports.add_news = function(req, res, next) {
     let date_publish = new Date().toISOString().slice(0, 19).replace('T', ' ');
     let idPageLang = 0; // id de la meme page mais dans l'autre langue
     let isNews = 1;
+    let formularForms = AdminUtilsDb.replaceSimpleQuote(req.body.formulaireForms);
+    let formularResult = AdminUtilsDb.replaceSimpleQuote(req.body.formulaireResult);
 
     let newsFr = new PageModel({
         Title: titleFr,
@@ -42,7 +44,9 @@ exports.add_news = function(req, res, next) {
         Updated_date: date_publish,
         Lang: 'fr',
         IsNews: isNews,
-        IdPageLang: idPageLang
+        IdPageLang: idPageLang,
+        FormularForms: formularForms,
+        FormularResult: formularResult
     });
 
     let newsDe = new PageModel({
@@ -53,7 +57,9 @@ exports.add_news = function(req, res, next) {
         Updated_date: date_publish,
         Lang: 'de',
         IsNews: isNews,
-        IdPageLang: idPageLang
+        IdPageLang: idPageLang,
+        FormularForms: formularForms,
+        FormularResult: formularResult
     });
 
     let queryFr = AdminPageDb.addNews(newsFr);

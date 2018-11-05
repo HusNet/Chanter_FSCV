@@ -139,5 +139,12 @@
   "NPA": "NPA",
   "CITY": "Stadt",
   "SEARCH_PERSON_SUCCESS": "Gefundene Person",
+  "SEARCH_PERSON_FAILURE": "Diese Person existiert nicht, bitte überprüfen Sie Ihre Angaben.",
+  "ADDFORMULAIRECLIENT": "Link zum Formular für den Kunden",
+  "ADDFORMULAIRERESPONSE": "Link zum Antwortformular"
   "SEARCH_PERSON_FAILURE": "Diese Person existiert nicht, bitte überprüfen Sie Ihre Angaben."
+  "LIST_CHOIR": "Chorliste",
+  "LANGUAGE": "SPRACHE",
+  "MEMBER": "Mitglied oder Nicht-Mitglied",
+  "CREATION_PERSON":"Neue Person"
 }
