@@ -18,8 +18,8 @@ html(lang='fr')
                     // mainMenu
                     each item in mainMenu
                         if (item.IsMenu)
-                            li #{item.Name}
-                                ul
+                            li.dropdown-trigger(data-target='dropdown_submenu') #{item.Name}
+                                ul#dropdown_submenu.dropdown-content
                                     each sub in item.content
                                         li
                                             a(href="/?id=" + sub.idChild) #{sub.Name}
@@ -41,3 +41,9 @@ html(lang='fr')
 
         block js
             script(src='/public/assets/js/materialize.min.js')
+
+            script.
+                document.addEventListener('DOMContentLoaded', function () {
+                    var element = document.querySelectorAll('.dropdown-trigger');
+                    var instances = M.Dropdown.init(element, {hover: true, constrainWidth: false, coverTrigger: false});
+                });

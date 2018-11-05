@@ -35,17 +35,19 @@ exports.index = function(req, res, next){
             //sort array by Order
             mainMenu.sort(function(a, b){return a.Order - b.Order});
 
-            if (req.query.id) {
+            if (req.query.err)
+                res.render('404', {mainMenu: mainMenu, title: '404 not found!'});
+            else if (req.query.id) {
                 C.db.query(MenuRenderDb.getPageContent(req.query.id), function(err, rows, fields){
                     if(err) throw(err);
-                    res.render('public/render', {page: rows[0], mainMenu: mainMenu});
+                    res.render('public/render', {page: rows[0], mainMenu: mainMenu, lang: req.i18n_lang});
                 });
             } else {
                 C.db.query(MenuRenderDb.getMainPageId(), function (err, rows, fields) {
                     let mainPageId = rows[0].HomePageId;
                     C.db.query(MenuRenderDb.getPageContent(mainPageId), function(err, rows, fields){
                         if(err) throw(err);
-                        res.render('public/render', {page: rows[0], mainMenu: mainMenu});
+                        res.render('public/render', {page: rows[0], mainMenu: mainMenu, lang: req.i18n_lang});
                     });
                 });
             }

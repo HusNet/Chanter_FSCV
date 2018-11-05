@@ -149,13 +149,6 @@ exports.export = function(req, res, next) {
 };
 
 exports.authenticationTest = function(req, res, next){
-    req.session.reload(function(err) {
-
-        // delete in prod
-        req.session.user = 1;
-        //
-
-        if(typeof req.session.user === 'undefined')
-            res.redirect('/admin');
-    });
+    if (typeof req.session.user === 'undefined')
+        res.redirect('/admin');
 };
