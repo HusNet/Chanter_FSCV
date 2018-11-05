@@ -2,18 +2,14 @@ exports.getRoleByName = function(roleName) {
     return "SELECT * FROM User INNER JOIN User_Role ON User.UserId = User_Role.UserId INNER JOIN Role ON User_Role.RoleId = Role.RoleId WHERE Role.Name = '" + roleName + "'";
 };
 
-exports.getAllChoir = function () {
-    return  "SELECT * " +
-            "FROM Choir " +
-                "INNER JOIN Effectif ON Choir.EffectifId = Effectif.EffectifId " +
-                "INNER JOIN Location ON Choir.LocationId = Location.LocationId";
-};
+exports.getExportChoir = function (name, fundationYear, church, gospel, language, effectif, npa) {
+    let query = "SELECT * " +
+                    "FROM `Choir` " +
+                    "INNER JOIN `Effectif` ON `Choir`.EffectifId = `Effectif`.EffectifId " +
+                    "INNER JOIN `Location` ON `Choir`.LocationId = `Location`.LocationId " +
+                    "WHERE 1 = 1 ";
 
-exports.getExportChoir = function (name, fundationYear, church, gospel, language, effectif, location) {
-    let query = "SELECT * FROM Choir";
-
-    if(name !== null || fundationYear !== null || church !== null || gospel !== null || language !== null || effectif !== null || location !== null) {
-        query += " WHERE ";
+    if(name !== null || fundationYear !== null || church !== null || gospel !== null || language !== null || effectif !== null || npa !== null) {
 
         if(name !== null)
             query += " AND `Name` = '" + name + "'";
@@ -31,10 +27,10 @@ exports.getExportChoir = function (name, fundationYear, church, gospel, language
             query += " AND `Language` = '" + language + "'";
 
         if(effectif !== null)
-            query += " AND `EffectifId` = " + effectif;
+            query += " AND `Effectif`.`NbMembers` = " + effectif;
 
-        if(location !== null)
-            query += " AND `LocationId` = '" + location + "'";
+        if(npa !== null)
+            query += " AND `Location`.`NPA` = '" + npa + "'";
     }
 
     return query;

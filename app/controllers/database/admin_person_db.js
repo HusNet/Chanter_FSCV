@@ -48,10 +48,38 @@ exports.deletePersonAndLocation = function (LocationId) {
 
 };
 
+exports.getExportPerson = function (lastname, firstname, phone, phoneProf, email, startAbo, newsletter, location) {
+    let query = "SELECT * " +
+                    "FROM `User` " +
+                    "JOIN `Location` ON `User`.LocationId = `Location`.LocationId " +
+                    "WHERE 1 = 1 ";
 
+    if(lastname !== null || firstname !== null || phone !== null || phoneProf !== null || email !== null || startAbo !== null || newsletter !== null || location !== null) {
 
-exports.getAllUsers = function () {
-    return  "SELECT * " +
-            "FROM `User` " +
-            "INNER JOIN Location ON User.LocationId = Location.LocationId";
+        if(lastname !== null)
+            query += " AND `Lastname` = '" + lastname + "'";
+
+        if(firstname !== null)
+            query += " AND `Firstname` = '" + firstname + "'";
+
+        if(phone !== null)
+            query += " AND `Phone` = '" + phone + "'";
+
+        if(phoneProf !== null)
+            query += " AND `PhoneProf` = '" + phoneProf + "'";
+
+        if(email !== null)
+            query += " AND `Email` = " + email;
+
+        if(startAbo !== null)
+            query += " AND `StartAbo` = '" + startAbo + "'";
+
+        if(newsletter !== null)
+            query += " AND `Newsletter` = '" + newsletter + "'";
+
+        if(location !== null)
+            query += " AND `Location`.`NPA` = '" + location + "'";
+    }
+
+    return query;
 };
