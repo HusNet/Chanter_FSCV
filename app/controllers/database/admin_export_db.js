@@ -24,7 +24,6 @@ exports.exportPersonData = function (rows) {
    let out = 'Data for persons:\n';
 
     rows.forEach(function (user) {
-        out += 'MemberId: ' + user.MemberId + '\n';
         out += 'Lastname: ' + user.Lastname + '\n';
         out += 'Firstname: ' + user.Firstname + '\n';
         out += 'Phone: ' + user.Phone + '\n';

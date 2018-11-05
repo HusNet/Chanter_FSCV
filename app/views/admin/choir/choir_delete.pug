@@ -1,3 +1,19 @@
 extends choir
 
 block delete_choir
+
+    script.
+
+        function confirmDelete(id, name) {
+            if (confirm("Delete " + name + " ?"))
+                window.location.href = '/admin/choir/delete?id=' + id;
+        }
+    br
+    br
+
+    h2.col.s12 #{translation.LIST_CHOIR}:
+
+
+    each choir in choirs
+        div
+            a(onclick='confirmDelete(' + choir.ChoirId + ', "' + choir.Name + '")')= choir.Name

@@ -1,7 +1,6 @@
 
 function user(rows) {
     this.UserId = rows.UserId;
-    this.MemberId = rows.MemberId;
     this.Lastname = rows.Lastname;
     this.Firstname = rows.Firstname;
     this.Phone = rows.Phone;

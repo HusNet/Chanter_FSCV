@@ -8,6 +8,8 @@ exports.index = function(req, res, next){
         let mainMenuId = rows[0].MainMenuId;
         C.db.query(MenuRenderDb.getMenus(), function(err, rows, fields){
 
+            // TODO : get pages from right lang (req.query.i18n_lang)
+
             // populate main menu
             let mainMenu = [];
             rows.forEach(function(item){
@@ -40,14 +42,14 @@ exports.index = function(req, res, next){
             else if (req.query.id) {
                 C.db.query(MenuRenderDb.getPageContent(req.query.id), function(err, rows, fields){
                     if(err) throw(err);
-                    res.render('public/render', {page: rows[0], mainMenu: mainMenu, lang: req.i18n_lang});
+                    res.render('public/render', {page: rows[0], mainMenu: mainMenu});
                 });
             } else {
                 C.db.query(MenuRenderDb.getMainPageId(), function (err, rows, fields) {
                     let mainPageId = rows[0].HomePageId;
                     C.db.query(MenuRenderDb.getPageContent(mainPageId), function(err, rows, fields){
                         if(err) throw(err);
-                        res.render('public/render', {page: rows[0], mainMenu: mainMenu, lang: req.i18n_lang});
+                        res.render('public/render', {page: rows[0], mainMenu: mainMenu});
                     });
                 });
             }

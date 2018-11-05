@@ -2,8 +2,7 @@ extends choir
 
 block add_choir
 
-    form.col.s12(id='myForm' method='POST' action='/admin/choir')
-
+    form.col.s12(id='myForm' method='POST' action='/admin/choir/add')
 
 
         .row
@@ -12,19 +11,19 @@ block add_choir
                 input#choeur_name.form-control(type='text' name='choeur_name' required)
             .input-field.col.s6
                 label(for='effectif') #{translation.EFFECTIVE}
-                input#effectif.form-control(type='text' name='effectif')
+                input#effectif.form-control(type='number' name='effectif' required)
 
         .row
             .input-field.col.s2
-                label(for='NPA') #{translation.POSTE_CODE}
-                input#NPA.form-control(type='text' name='npa' required)
+                label(for='npa') #{translation.POSTE_CODE}
+                input#NPA.form-control(type='number' name='npa' required)
             .input-field.col.s4
                 label(for='lieu') #{translation.LOCATION}
                 input#lieu.form-control(type='text' name='lieu' required)
 
             .input-field.col.s4
-                label(for='foundationDate') #{translation.DATE_FOUNDATION}
-                input#foundationDate.datepicker(type='date' name='foundationDate',placeholder='')
+                label(for='dateOfFundation') #{translation.DATE_FOUNDATION}
+                input#dateOfFundation.form-control(type='date' name='dateOfFundation',placeholder='date' required)
 
 
         .row
@@ -32,57 +31,41 @@ block add_choir
                 label(for='homepage') #{translation.HOMEPAGES}
                 input#homepage.form-control(type='text' name='homepage')
 
-            p.col.s2
-                label
-                    input(name='fr', type='checkbox')
-                    span #{translation.FRENCH}
-            p.col.s2
-                label
-                    input(name='de', type='checkbox')
-                    span #{translation.GERMAN}
+            select(name='language').browser-default.col.s4
+                option(value='', selected='') #{translation.LANGUAGE}
+                option(value='1') #{translation.FR}
+                option(value='2') #{translation.DE}
 
         .row
             p.col.s3 #{translation.SWISS_CHOIR_UNION}:
-            p.col.s2
-                label
-                    input(type='checkbox', name='USC')
-                    span #{translation.MEMBER_USC}
-            p.col.s3
-                label
-                    input(type='checkbox', name='noUSC')
-                    span #{translation.NOT_USC}
+            select(name='Usc').browser-default.col.s4
+                option(value='', disabled='', selected='') #{translation.MEMBER}
+                option(value='1') #{translation.MEMBER_USC}
+                option(value='2') #{translation.NOT_USC}
             .input-field.col.s4
-                input#dateUSC.datepicker(type='date', placeholder='', name='dateUSC')
+                input#dateUSC.form-control(type='date', placeholder='', name='dateUSC')
                 label(for='dateUSC') #{translation.DATE_USC}
 
         .row
             p.col.s3 #{translation.CANTONAL_FEDERATION}:
-            p.col.s2
-                label
-                    input(type='checkbox', name='fscv')
-                    span #{translation.MEMBER_FSCV}
-            p.col.s3
-                label
-                    input(type='checkbox', name='noFSCV')
-                    span #{translation.NOT_FSCV}
+            select(name='fscv').browser-default.col.s4
+                option(value='', disabled='', selected='') #{translation.MEMBER}
+                option(value='1') #{translation.FSCV}
+                option(value='2') #{translation.NOT_FSCV}
             .input-field.col.s4
                 label(for='dateFSCV') #{translation.DATE_FSCV}
-                input#dateFSCV.datepicker(type='date' name='dateFSCV', placeholder='')
+                input#dateFSCV.form-control(type='date' name='dateFSCV', placeholder='')
 
         .row
-            p.col.s3 #{translation.MAIL_ADDRESSING}:
-            p.col.s2
-                label
-                    input(name='president', type='checkbox')
-                    span #{translation.PRESIDENT}
-            p.col.s2
-                label
-                    input(name='director', type='checkbox')
-                    span #{translation.DIRECTOR}
+
+            select(name='mailing').browser-default.col.s4
+                option(value='0', selected='') #{translation.MAIL_ADDRESSING}
+                option(value='1') #{translation.PRESIDENT}
+                option(value='2') #{translation.DIRECTOR}
 
         .row
-            select.browser-default.col.s4
-                option(value='', disabled='', selected='', name='grpmts') #{translation.GRPMTS_REGION}
+            select(name='grpmts').browser-default.col.s4
+                option(value='', disabled='', selected='') #{translation.GRPMTS_REGION}
                 option(value='1') #{translation.GROUP_GSCBV}
                 option(value='2') #{translation.GROUP_UCC}
                 option(value='3') #{translation.GROUP_GCVC}
@@ -92,16 +75,16 @@ block add_choir
                 input#dateGrpmts.datepicker(type='date', placeholder='', name='dateGrpmts')
                 label(for='dateGrpmts') #{translation.DATE_GRPMTS}
         .row
-            select.browser-default.col.s4
-                option(value='', disabled='', selected='', name='decanat') #{translation.DECANAT}
+            select(name='decanat').browser-default.col.s4
+                option(value='', disabled='', selected='') #{translation.DECANAT}
                 option(value='1') #{translation.WELTICH}
                 option(value='2') #{translation.LEUK}
                 option(value='3') #{translation.RARON}
                 option(value='4') #{translation.BRIG}
                 option(value='5') #{translation.VISP}
                 option(value='6') #{translation.ERNEN}
-            select.browser-default.col.s4
-                option(value='', disabled='', selected='', name='typeChoeur') #{translation.TYPE_CHOIR}
+            select(name='typeChoeur').browser-default.col.s4
+                option(value='', disabled='', selected='') #{translation.TYPE_CHOIR}
                 option(value='1') #{translation.ADULT}
                 option(value='2') #{translation.TEEN}
                 option(value='3') #{translation.KID}
@@ -120,25 +103,25 @@ block add_choir
 
         .row
             .input-field.col.s4 #{translation.NAME_PRESIDENT}
-            select.browser-default.col.s4
-                option(value='',disabled='', selected='', name='presidentName') #{translation.PRESIDENT} #{translation.ALREADY_EXISTING}
+            select(name='presidentName').browser-default.col.s4
+                option(value='',disabled='', selected='') #{translation.PRESIDENT} #{translation.ALREADY_EXISTING}
                 each person in PersonPresident
                     option(value= person.Id)= person.Firstname + " " + person.Lastname
 
-
+            a.btn.btn-primary.col.s3(href="/admin/person/person_add") #{translation.CREATION_PERSON}
         .row
             .input-field.col.s4
                 p #{translation.NAME_DIRECTOR}
-            select.browser-default.col.s4
-                option(value='', disabled='', selected='', name='directorName') #{translation.DIRECTOR} #{translation.ALREADY_EXISTING}
+            select(name='directorName').browser-default.col.s4
+                option(value='', disabled='', selected='') #{translation.DIRECTOR} #{translation.ALREADY_EXISTING}
                 each person in PersonDirector
                     option(value= person.Id)= person.Firstname + " " + person.Lastname
 
         .row
             .input-field.col.s4
                 p #{translation.NAME_CASHIER}
-            select.browser-default.col.s4
-                option(value='', disabled='', selected='', name='cashier') #{translation.CASHIER} #{translation.ALREADY_EXISTING}
+            select(name='cashier').browser-default.col.s4
+                option(value='', disabled='', selected='') #{translation.CASHIER} #{translation.ALREADY_EXISTING}
                 each person in PersonCaissier
                     option(value= person.Id)= person.Firstname + " " + person.Lastname
 
@@ -146,8 +129,8 @@ block add_choir
         .row
             .input-field.col.s4
                 p #{translation.NAME_SECRETARIAT}
-            select.browser-default.col.s4
-                option(value='', disabled='', selected='', name='secretary') #{translation.SECRETARY} #{translation.ALREADY_EXISTING}
+            select(name='secretary').browser-default.col.s4
+                option(value='', disabled='', selected='') #{translation.SECRETARY} #{translation.ALREADY_EXISTING}
                 each person in PersonSecretaire
                     option(value= person.Id)= person.Firstname + " " + person.Lastname
 
@@ -168,7 +151,4 @@ block add_choir
             function myFunction() {
                 document.getElementById("myForm").reset();
             }
-
-
-
 

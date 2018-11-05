@@ -101,6 +101,24 @@ CREATE TABLE IF NOT EXISTS `chanter-dev`.`Effectif` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+-- -----------------------------------------------------
+-- Table `chanter-dev`.`Groups`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `chanter-dev`.`Groups` (
+  `GroupsId` INT(10) NOT NULL AUTO_INCREMENT,
+  `Name` INT(10) NOT NULL,
+  `SubGroups` INT(10) NULL DEFAULT NULL,
+  `USC` VARCHAR(64) NOT NULL,
+  `FSCV` VARCHAR(64) NOT NULL,
+  `DateUSC` DATE NULL DEFAULT NULL,
+  `DateFSCV` DATE NULL DEFAULT NULL,
+  `MembershipDate` DATE NOT NULL,
+  PRIMARY KEY (`GroupsId`),
+  UNIQUE INDEX `GroupsId` (`GroupsId` ASC))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
 
 -- -----------------------------------------------------
 -- Table `chanter-dev`.`Role`
@@ -121,31 +139,36 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `chanter-dev`.`Choir` (
   `ChoirId` INT(10) NOT NULL AUTO_INCREMENT,
-  `RoleId` INT(10) NULL DEFAULT NULL,
   `Name` VARCHAR(255) NOT NULL,
-  `FundationYear` DATE NULL DEFAULT NULL,
-  `Church` TINYINT(1) NOT NULL DEFAULT 0,
-  `Gospel` TINYINT(1) NOT NULL DEFAULT 0,
+  `FundationYear` DATE NOT NULL,
+  `Type` VARCHAR(64) NOT NULL,
+  `Church` TINYINT(1) NULL DEFAULT 0,
+  `Gospel` TINYINT(1) NULL DEFAULT 0,
   `Language` ENUM('Français', 'Deutsch') NOT NULL,
   `Remarks` VARCHAR(255) NULL DEFAULT NULL,
   `WebPage` VARCHAR(128) NULL DEFAULT NULL,
   `EffectifId` INT(10) NOT NULL,
   `Mailing` INT(10) NULL DEFAULT NULL,
   `LocationId` INT(10) NULL DEFAULT NULL,
+  `GroupsId` INT(10) NULL DEFAULT NULL,
+  `NamePresident` VARCHAR(255) NULL DEFAULT NULL,
+  `NameDirector` VARCHAR(255) NULL DEFAULT NULL,
+  `NameCashier` VARCHAR(255) NULL DEFAULT NULL,
+  `NameSecretary` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`ChoirId`),
   UNIQUE INDEX `ChoirId` (`ChoirId` ASC),
   INDEX `FKChoir605558` (`EffectifId` ASC),
-  INDEX `FKChoir973543` (`RoleId` ASC),
   INDEX `fk_Choir_Location1_idx` (`LocationId` ASC),
+  INDEX `FKChoir_Grou123541` (`GroupsId` ASC),
   CONSTRAINT `FKChoir605558`
     FOREIGN KEY (`EffectifId`)
     REFERENCES `chanter-dev`.`Effectif` (`EffectifId`),
-  CONSTRAINT `FKChoir973543`
-    FOREIGN KEY (`RoleId`)
-    REFERENCES `chanter-dev`.`Role` (`RoleId`),
   CONSTRAINT `fk_Choir_Location1`
     FOREIGN KEY (`LocationId`)
-    REFERENCES `chanter-dev`.`Location` (`LocationId`)
+    REFERENCES `chanter-dev`.`Location` (`LocationId`),
+  CONSTRAINT `FKChoir_Grou123541`
+	FOREIGN KEY (`GroupsId`)
+	REFERENCES `chanter-dev`.`Groups` (`GroupsId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -171,40 +194,6 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 
--- -----------------------------------------------------
--- Table `chanter-dev`.`Groups`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `chanter-dev`.`Groups` (
-  `GroupsId` INT(10) NOT NULL AUTO_INCREMENT,
-  `Name` VARCHAR(64) NOT NULL,
-  `SubGroupsId` INT(10) NULL DEFAULT NULL,
-  PRIMARY KEY (`GroupsId`),
-  UNIQUE INDEX `GroupsId` (`GroupsId` ASC),
-  INDEX `FKGroups401105` (`SubGroupsId` ASC),
-  CONSTRAINT `FKGroups401105`
-    FOREIGN KEY (`SubGroupsId`)
-    REFERENCES `chanter-dev`.`Groups` (`GroupsId`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `chanter-dev`.`Choir_Groups`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `chanter-dev`.`Choir_Groups` (
-  `ChoirId` INT(10) NOT NULL,
-  `GroupsId` INT(10) NOT NULL,
-  `MembershipDate` DATE NULL DEFAULT NULL,
-  PRIMARY KEY (`ChoirId`, `GroupsId`),
-  INDEX `FKChoir_Grou123541` (`GroupsId` ASC),
-  CONSTRAINT `FKChoir_Grou123541`
-    FOREIGN KEY (`GroupsId`)
-    REFERENCES `chanter-dev`.`Groups` (`GroupsId`),
-  CONSTRAINT `FKChoir_Grou410022`
-    FOREIGN KEY (`ChoirId`)
-    REFERENCES `chanter-dev`.`Choir` (`ChoirId`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -212,7 +201,8 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `chanter-dev`.`Menu` (
   `idMenu` INT(11) NOT NULL AUTO_INCREMENT,
-  `Name` VARCHAR(45) NOT NULL,
+  `Name_fr` VARCHAR(45) NOT NULL,
+  `Name_de` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idMenu`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 2
@@ -441,7 +431,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `chanter-dev`;
-INSERT INTO `chanter-dev`.`Menu` (`idMenu`, `Name`) VALUES (1, 'Main Menu');
+INSERT INTO `chanter-dev`.`Menu` (`idMenu`, `Name_fr`, `Name_de`) VALUES (1, 'Menu principal', 'Hauptmenu');
 
 COMMIT;
 

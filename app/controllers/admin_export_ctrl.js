@@ -28,10 +28,14 @@ exports.export_choir = function (req, res, next) {
         name = req.body.name;
     if(req.body.fundationYear !== '')
         fundationYear = req.body.fundationYear;
-    if(req.body.church !== '')
-        church = req.body.church;
-    if(req.body.gospel !== '')
-        gospel = req.body.gospel;
+    if(req.body.church === 'on')
+        church = 1;
+    else
+        church = 0;
+    if(req.body.gospel === 'on')
+        gospel = 1;
+    else
+        gospel = 0;
     if(req.body.language !== '')
         language = req.body.language;
     if(req.body.effectif !== '')
@@ -39,8 +43,7 @@ exports.export_choir = function (req, res, next) {
     if(req.body.location !== '')
         location = req.body.location;
 
-    //let query = AdminChoirDb.getExportChoir(name, fundationYear, 1, 1, language, effectif, location);
-    let query = AdminChoirDb.getAllChoir();
+    let query = AdminChoirDb.getExportChoir(name, fundationYear, church, gospel, language, effectif, location);
     let choosenFile = req.body.file;
 
     C.db.query(query, function (err, rows, fields) {
@@ -50,8 +53,6 @@ exports.export_choir = function (req, res, next) {
             // PDF
             let doc = new PDFDocument();
             let content = AdminExportDb.exportChoirData(rows);
-            console.log(rows);
-            console.log(content);
             doc.pipe(fs.createWriteStream('/out.pdf'));
             doc.pipe(res);
             doc.text(content);
@@ -122,37 +123,35 @@ exports.export_form_person = function (req, res, next) {
 };
 
 exports.export_person = function (req, res, next) {
-    let memberId = null;
     let lastname = null;
     let firstname = null;
     let phone = null;
-    let phoneProf = null;
+    let phoneP = null;
     let email = null;
     let startAbo = null;
     let newsletter = null;
     let location = null;
 
-    if(req.body.memberId !== '')
-        memberId = req.body.memberId;
     if(req.body.lastname !== '')
         lastname = req.body.lastname;
     if(req.body.firstname !== '')
         firstname = req.body.firstname;
     if(req.body.phone !== '')
         phone = req.body.phone;
-    if(req.body.phoneProf !== '')
-        phoneProf = req.body.phoneProf;
+    if(req.body.phoneP !== '')
+        phoneP = req.body.phoneP;
     if(req.body.email !== '')
         email = req.body.email;
     if(req.body.startAbo !== '')
         startAbo = req.body.startAbo;
-    if(req.body.newsletter !== '')
-        newsletter = req.body.newsletter;
+    if(req.body.newsletter === 'on')
+        newsletter = 1;
+    else
+        newsletter = 0;
     if(req.body.location !== '')
         location = req.body.location;
 
-    //let query = AdminChoirDb.getExportChoir(name, fundationYear, 1, 1, language, effectif, location);
-    let query = AdminUserDb.getAllUsers();
+    let query = AdminUserDb.getExportPerson(lastname, firstname, phone, phoneP, email, startAbo, newsletter, location);
     let choosenFile = req.body.file;
 
     C.db.query(query, function (err, rows, fields) {
@@ -162,8 +161,6 @@ exports.export_person = function (req, res, next) {
             // PDF
             let doc = new PDFDocument();
             let content = AdminExportDb.exportPersonData(rows);
-            console.log(rows);
-            console.log(content);
             doc.pipe(fs.createWriteStream('/out.pdf'));
             doc.pipe(res);
             doc.text(content);
@@ -171,14 +168,10 @@ exports.export_person = function (req, res, next) {
         } else if(choosenFile === 'xls') {
             // EXCEL
             let heading = [
-                ['MemberId', 'Lastname', 'Firstname', 'Phone', 'Phone prof', 'Email', 'Start Abo', 'Newsletter', 'Location']
+                ['Lastname', 'Firstname', 'Phone', 'Phone prof', 'Email', 'Start Abo', 'Newsletter', 'Location']
             ];
 
             let specification = {
-                memberId: { // <- the key should match the actual data key
-                    displayName: 'MemberId',
-                    width: 120
-                },
                 lastname: { // <- the key should match the actual data key
                     displayName: 'Lastname',
                     width: 120
@@ -215,7 +208,7 @@ exports.export_person = function (req, res, next) {
             let dataset = [];
 
             rows.forEach(function(d) {
-                dataset.push({memberId: d.MemberId, lastname: d.Lastname, firstname: d.Firstname, phone: d.Phone, phoneP: d.PhoneProf, email: d.Email, startAbo: d.StartAbo, newsletter: d.Newsletter, location: d.Address + " " + d.NPA + " " + d.City});
+                dataset.push({lastname: d.Lastname, firstname: d.Firstname, phone: d.Phone, phoneP: d.PhoneProf, email: d.Email, startAbo: d.StartAbo, newsletter: d.Newsletter, location: d.Address + " " + d.NPA + " " + d.City});
             });
 
             let merges = [];

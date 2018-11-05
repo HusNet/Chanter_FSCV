@@ -7,41 +7,37 @@ block content
     form.col.s12(method='POST' action='/admin/export/export_person')
 
         .input-field.col.s6
-            input.memberId.validate(type='text' name="memberId" id="memberId")
-            label(for='memberId') MemberId
-
-        .input-field.col.s6
             input.lastname.validate(type='text' name="lastname" id="lastname")
-            label(for='lastname') lastname
+            label(for='lastname') #{translation.LASTNAME}
 
         .input-field.col.s6
             input.firstname.validate(type='text' name="firstname" id="firstname")
-            label(for='firstname') firstname
+            label(for='firstname') #{translation.FIRSTNAME}
 
         .input-field.col.s6
             input.phone.validate(type='text' name="phone" id="phone")
-            label(for='phone') phone
+            label(for='phone') #{translation.PHONEPRIVATE}
 
         .input-field.col.s6
             input.phoneP.validate(type='text' name="phoneP" id="phoneP")
-            label(for='phoneP') phoneP
+            label(for='phoneP') #{translation.PHONEPROF}
 
         .input-field.col.s6
             input.email.validate(type='text' name="email" id="email")
-            label(for='email') email
+            label(for='email') #{translation.EMAIL}
 
         .input-field.col.s6
             input.startAbo.validate(type='text' name="startAbo" id="startAbo")
-            label(for='startAbo') startAbo
+            label(for='startAbo') #{translation.STARTABO}
+
+        .input-field.col.s6
+            input.location.validate(type='text' name="location", id="location")
+            label(for='location') #{translation.LOCATION}
 
         p
             label
                 input(type='checkbox', name="newsletter", id="newsletter")
-                span newsletter
-
-        .input-field.col.s6
-            input.location.validate(type='text' name="location", id="location")
-            label(for='location') location
+                span #{translation.NEWSLETTER}
 
         p
             label

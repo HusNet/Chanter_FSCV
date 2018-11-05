@@ -12,8 +12,10 @@ block add_menu
 
             div(class='row')
                 div(class='column')
-                    label(for='add_title') #{translation.TITLE}:
-                    input#add_title.form-control(type='text', placeholder='Title' name='title' required)
+                    label(for='add_title_fr') #{translation.FR_TITLE}:
+                    input#add_title_fr.form-control(type='text', placeholder='Fr Title' name='title_fr' required)
+                    label(for='add_title_de') #{translation.DE_TITLE}:
+                    input#add_title_de.form-control(type='text', placeholder='De Title' name='title_de' required)
 
                 div(class='column')
                     p
