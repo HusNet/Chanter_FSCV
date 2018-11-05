@@ -136,5 +136,7 @@
   "NPA": "NPA",
   "CITY": "Ville",
   "SEARCH_PERSON_SUCCESS": "Personne trouvée",
-  "SEARCH_PERSON_FAILURE": "Cette personne n'existe pas, veuillez controller vos champs"
+  "SEARCH_PERSON_FAILURE": "Cette personne n'existe pas, veuillez controller vos champs",
+  "ADDFORMULAIRECLIENT": "Lien du formulaire pour le client",
+  "ADDFORMULAIRERESPONSE": "Lien du formulaire de réponse"
 }

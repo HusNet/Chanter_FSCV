@@ -26,6 +26,7 @@
     "pug": "^2.0.3",
     "redis": "^2.8.0",
     "remove": "^0.1.5",
+    "restructure": "^0.5.4",
     "sequelize": "^4.39.0"
   }
 }

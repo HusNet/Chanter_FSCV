@@ -232,6 +232,8 @@ CREATE TABLE IF NOT EXISTS `chanter-dev`.`Page` (
   `IdPageLang` INT(11) NULL DEFAULT NULL,
   `IsNews` TINYINT(1) NOT NULL,
   `AdminId` INT(11) NOT NULL,
+  `FormularForms` LONGTEXT DEFAULT NULL,
+  `FormularResult` LONGTEXT DEFAULT NULL,
   PRIMARY KEY (`PageId`),
   UNIQUE INDEX `PageId` (`PageId` ASC),
   INDEX `FKPage265487` (`AdminId` ASC),
