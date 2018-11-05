@@ -9,6 +9,8 @@ function page(rows) {
     this.IdPageLang = rows.IdPageLang;
     this.IsNews = rows.IsNews;
     this.AdminId = rows.AdminId;
+    this.FormularForms = rows.FormularForms;
+    this.FormularResult = rows.FormularResult;
 }
 
 module.exports = page;

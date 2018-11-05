@@ -2,15 +2,17 @@ module.exports = function(app, router) {
 
     app.use(router);
     app.use(function(req, res){
-        res.status(404).render('404', {
-            title: 'Page not found (AKA 404 Error)'
-        });
+        res.status(404);
+        req.query.err = 404;
+        render.index(req, res);
     });
 
     //public routes
     let render = require('../app/controllers/render_ctrl');
     //admin login
     let admin = require('../app/controllers/admin_ctrl');
+    let calendar = require('../app/controllers/calendar_ctrl');
+
     let adminMenu = require('../app/controllers/admin_menu_ctrl');
     let adminPerson = require('../app/controllers/admin_person_ctrl');
     let adminPage = require('../app/controllers/admin_page_ctrl');
@@ -21,6 +23,10 @@ module.exports = function(app, router) {
 
     router.get('/', function(req, res, next) {
         render.index(req, res, next);
+    });
+
+    router.get('/calendar', function (req, res, next) {
+       calendar.calendar(req, res, next);
     });
 
     router.get('/admin', function(req, res, next) {

@@ -3,7 +3,10 @@ exports.getRoleByName = function(roleName) {
 };
 
 exports.getAllChoir = function () {
-    return "SELECT * FROM Choir";
+    return  "SELECT * " +
+            "FROM Choir " +
+                "INNER JOIN Effectif ON Choir.EffectifId = Effectif.EffectifId " +
+                "INNER JOIN Location ON Choir.LocationId = Location.LocationId";
 };
 
 exports.delete = function(id){

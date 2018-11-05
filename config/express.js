@@ -39,8 +39,7 @@ module.exports = function(app, config) {
         translationsPath: path.join(__dirname, '../public/locales'),
         siteLangs: ['fr', 'de'],
         defaultLocale: 'fr',
-        textsVarName: 'translation',
-
+        textsVarName: 'translation'
 
     }));
     app.use(bodyParser.urlencoded({ extended: false }));

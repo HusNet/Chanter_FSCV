@@ -33,15 +33,13 @@ block edit_selected_id
         br
 
     div(class='row')
-        div(class='column')
-            br
-            ul#collection_dyn.collection.with-header(onload="function(){showData();}")
-                li.collection-header
-                    div= menu.Name
-                        a.dropdown-trigger.secondary-content(href="#", data-target='dropdown_menu_page_list')
-                            i.material-icons add
-
-                        ul#dropdown_menu_page_list.dropdown-content(style="width: 100%;")
+        br
+        ul#collection_dyn.collection.with-header(onload="function(){showData();}")
+            li.collection-header
+                div= menu.Name
+                    a.dropdown-trigger_2.secondary-content(href="#", data-target='dropdown_menu_page_list')
+                        i.material-icons add
+                        ul#dropdown_menu_page_list.dropdown-content
                             each child in available_children
                                 li
                                     a(onclick="addChildInMenu(" + child.idChild +", " + child.IsMenu + ")")
@@ -49,7 +47,7 @@ block edit_selected_id
                                             | ↪&nbsp;&nbsp;
                                         else
                                             | 🖹&nbsp;
-                                        | #{child.Name}
+                                            | #{child.Name}
 
 
     script.
@@ -148,7 +146,9 @@ block edit_selected_id
 
         document.addEventListener('DOMContentLoaded', function () {
             var elems = document.querySelectorAll('.dropdown-trigger');
-            var instances = M.Dropdown.init(elems, {});
+            var elems_2 = document.querySelectorAll('.dropdown-trigger_2');
+            var instances = M.Dropdown.init(elems, {hover: true});
+            var instances_2 = M.Dropdown.init(elems_2, {hover: true, alignment: 'right', constrainWidth: false});
         });
 
     script(type='text/javascript')

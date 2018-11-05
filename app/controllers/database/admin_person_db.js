@@ -51,5 +51,7 @@ exports.deletePersonAndLocation = function (LocationId) {
 
 
 exports.getAllUsers = function () {
-    return "SELECT * FROM `User`";
+    return  "SELECT * " +
+            "FROM `User` " +
+            "INNER JOIN Location ON User.LocationId = Location.LocationId";
 };
