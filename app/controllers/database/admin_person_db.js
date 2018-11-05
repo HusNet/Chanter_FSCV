@@ -34,6 +34,10 @@ exports.editPerson = function(userIdEdit, editUserModel) {
     }
 
 };
+exports.getUserWithoutMail = function (lastname, firstname) {
+    return "SELECT * FROM `User` " +
+        "WHERE `Lastname` = '" + lastname + "' AND `Firstname` = '" + firstname + "'";
+};
 
 exports.getUser = function (lastname, firstname, email) {
     return "SELECT * FROM `User` " +

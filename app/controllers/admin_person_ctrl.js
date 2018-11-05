@@ -13,6 +13,29 @@ exports.person = function(req, res, next) {
     });
 };
 
+
+
+exports.admin_person_search = function(req, res, next) {
+
+    let lastname = req.body.lastnameP;
+    let firstname = req.body.firstnameP;
+
+    let queryUser = AdminUserDb.getUserWithoutMail(lastname, firstname);
+    C.db.query(queryUser, function (err, resListUser, fields) {
+        if (err) throw(err);
+        if (resUser.length === 0) // if the user doesn't exist
+        {
+            res.render('admin/person/person_searched', {success: false});
+        }
+        else {
+            res.render('admin/person/person_searched_list', {listUserFounded: resListUser});
+        }
+    });
+
+};
+
+
+
 exports.admin_person_edit = function(req, res, next) {
 
     let lastname = req.body.lastnameP;
@@ -28,7 +51,7 @@ exports.admin_person_edit = function(req, res, next) {
         if (err) throw(err);
         if (resUser.length === 0) // if the user doesn't exist
         {
-            res.render('admin/person/person_search_for_edit', {success: false});
+            res.render('admin/person/person_searched', {success: false});
         }
         if (resUser[0] !== undefined) {
             console.log('Name of User founded: ' + resUser[0].Lastname);
@@ -280,7 +303,7 @@ exports.admin_person_delete = function(req, res, next) {
         if (err) throw(err);
         if (resUser.length === 0) // if the user doesn't exist
         {
-            res.render('admin/person/person_search_for_edit', {success: false});
+            res.render('admin/person/person_searched', {success: false});
         }
         if (resUser[0] !== undefined){
             userId = (resUser[0].UserId); //Return the id user
