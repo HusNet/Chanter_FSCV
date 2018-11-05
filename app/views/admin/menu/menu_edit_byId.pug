@@ -54,10 +54,10 @@ block edit_selected_id
                                             | ↪&nbsp;&nbsp;
                                         else
                                             | 🖹&nbsp;
-                                            if (lang === 'fr')
-                                                | #{child.Name_fr}
-                                            if (lang === 'de')
-                                                | #{child.Name_de}
+                                        if (lang === 'fr')
+                                            | #{child.Name_fr}
+                                        if (lang === 'de')
+                                            | #{child.Name_de}
 
 
 
@@ -92,9 +92,6 @@ block edit_selected_id
                     var li = $('<li/>')
                         .addClass('collection-item')
                         .appendTo(cList);
-
-                    console.log(lang);
-                    console.log(lang === 'fr');
 
                     var childName = "";
                     if (child.IsMenu)
@@ -169,7 +166,7 @@ block edit_selected_id
             var elems = document.querySelectorAll('.dropdown-trigger');
             var elems_2 = document.querySelectorAll('.dropdown-trigger_2');
             var instances = M.Dropdown.init(elems, {hover: true});
-            var instances_2 = M.Dropdown.init(elems_2, {hover: true, alignment: 'right', constrainWidth: false});
+            var instances_2 = M.Dropdown.init(elems_2, {hover: true, constrainWidth: false});
         });
 
     script(type='text/javascript')

@@ -40,14 +40,29 @@ exports.index = function(req, res, next){
             if (req.query.err)
                 res.render('404', {mainMenu: mainMenu, title: '404 not found!'});
             else if (req.query.id) {
-                C.db.query(MenuRenderDb.getPageContent(req.query.id), function(err, rows, fields){
+                // multi lang
+                let query = "";
+                if (req.i18n_lang === 'fr')
+                    query = MenuRenderDb.getPageContent_FR(req.query.id);
+                else
+                    query = MenuRenderDb.getPageContent_DE(req.query.id);
+
+                C.db.query(query, function(err, rows, fields){
                     if(err) throw(err);
                     res.render('public/render', {page: rows[0], mainMenu: mainMenu});
                 });
             } else {
                 C.db.query(MenuRenderDb.getMainPageId(), function (err, rows, fields) {
                     let mainPageId = rows[0].HomePageId;
-                    C.db.query(MenuRenderDb.getPageContent(mainPageId), function(err, rows, fields){
+
+                    // multi lang
+                    let query = "";
+                    if (req.i18n_lang === 'fr')
+                        query = MenuRenderDb.getPageContent_FR(mainPageId);
+                    else
+                        query = MenuRenderDb.getPageContent_DE(mainPageId);
+
+                    C.db.query(query, function(err, rows, fields){
                         if(err) throw(err);
                         res.render('public/render', {page: rows[0], mainMenu: mainMenu});
                     });

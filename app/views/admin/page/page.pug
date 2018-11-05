@@ -13,7 +13,12 @@ block content
                         a.secondary-content(href='/admin/page/page_edit?id=' + val.PageId)
                             i.material-icons create
                         a.secondary-content
-                            i #{val.Lang} | &nbsp;
+                            i
+                                if(val.PageId === val.idFR)
+                                    | Fr&nbsp;
+                                else
+                                    | De&nbsp;
+                                | | &nbsp;
         else
             li.collection-item
                 div

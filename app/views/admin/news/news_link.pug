@@ -9,7 +9,7 @@ block content
             select#idFr(name='idFr')
                 option(value='', disabled='', selected='') Choose your option
                 each val in news
-                    if val.Lang === 'fr'
+                    if(val.PageId === val.idFR)
                         option(value=''+val.PageId) #{val.Title}
 
             label #{translation.FR}
@@ -20,7 +20,7 @@ block content
             select#idDe(name='idDe')
                 option(value='', disabled='', selected='') Choose your option
                 each val in news
-                    if val.Lang === 'de'
+                    if (val.PageId === val.idDE)
                         option(value=''+val.PageId) #{val.Title}
 
             label #{translation.DE}

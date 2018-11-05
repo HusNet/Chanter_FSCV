@@ -3,8 +3,8 @@
 **/
 
 exports.addNews = function(news) {
-    return  "INSERT INTO Page (`Title`, `Content`, `AdminId`, `Published_date`, `Updated_date`, `Lang`, `IdPageLang`, `IsNews`, `FormularForms`, `FormularResult`) " +
-            "VALUES ('" + news.Title + "', '" + news.Content + "', '" + news.AdminId + "', '" + news.Published_date + "', '" + news.Updated_date + "', '" + news.Lang + "', '" + news.IdPageLang + "', '" + news.IsNews + "', '" + news.FormularForms + "', '" + news.FormularResult + "')";
+    return  "INSERT INTO Page (`Title`, `Content`, `AdminId`, `Published_date`, `Updated_date`, `IsNews`, `FormularForms`, `FormularResult`) " +
+            "VALUES ('" + news.Title + "', '" + news.Content + "', '" + news.AdminId + "', '" + news.Published_date + "', '" + news.Updated_date + "', '" + news.IsNews + "', '" + news.FormularForms + "', '" + news.FormularResult + "')";
 };
 
 exports.editNews = function(id, title, content, updated_date) {
@@ -13,8 +13,11 @@ exports.editNews = function(id, title, content, updated_date) {
             "WHERE `PageId` = " + id;
 };
 
-exports.getNews = function() {
-    return "SELECT * FROM Page WHERE `IsNews` = 1";
+exports.getNews = function() {return "SELECT * FROM `Page` \n" +
+    "JOIN `Translations`\n" +
+    "ON `Page`.`PageId` = `Translations`.`idFR`\n" +
+    "OR `Page`.`PageId` = `Translations`.`idDE`\n" +
+    "WHERE `IsNews` = 1;";
 };
 
 exports.getNewsById = function (id) {
@@ -22,7 +25,7 @@ exports.getNewsById = function (id) {
 };
 
 exports.deleteNews = function(id) {
-  return "DELETE FROM Page WHERE `PageId` = " + id;
+    return "DELETE FROM `Translations` WHERE `idFR` = " + id + " OR `idDE` = " + id + ";";
 };
 
 /**
@@ -30,16 +33,20 @@ exports.deleteNews = function(id) {
  **/
 
 exports.getPages = function() {
-    return "SELECT * FROM Page WHERE `IsNews` = 0";
+    return "SELECT * FROM `Page` \n" +
+        "JOIN `Translations`\n" +
+        "ON `Page`.`PageId` = `Translations`.`idFR`\n" +
+        "OR `Page`.`PageId` = `Translations`.`idDE`\n" +
+        "WHERE `IsNews` = 0;";
 };
 
 exports.addPage = function(page) {
-    return  "INSERT INTO Page (`Title`, `Content`, `AdminId`, `Published_date`, `Updated_date`, `Lang`, `IdPageLang`, `IsNews`) " +
-        "VALUES ('" + page.Title + "', '" + page.Content + "', '" + page.AdminId + "', '" + page.Published_date + "', '" + page.Updated_date + "', '" + page.Lang + "', '" + page.IdPageLang + "', '" + page.IsNews + "')";
+    return  "INSERT INTO Page (`Title`, `Content`, `AdminId`, `Published_date`, `Updated_date`, `IsNews`) " +
+        "VALUES ('" + page.Title + "', '" + page.Content + "', '" + page.AdminId + "', '" + page.Published_date + "', '" + page.Updated_date + "', '" + page.IsNews + "')";
 };
 
 exports.deletePage = function(id) {
-    return "DELETE FROM Page WHERE `PageId` = " + id;
+    return "DELETE FROM `Translations` WHERE `idFR` = " + id + " OR `idDE` = " + id + ";";
 };
 
 exports.getPageById = function (id) {
@@ -52,12 +59,22 @@ exports.editPage = function(id, title, content, updated_date) {
             "WHERE `PageId` = " + id;
 };
 
-exports.linkPage = function (idPage, idToLink) {
-    return  "UPDATE Page " +
-            "SET `IdPageLang` = '" + idToLink + "'" +
-            "WHERE `PageId` = " + idPage;
+exports.linkPage = function (idFR, idDE) {
+    return  "INSERT INTO `Translations` (`idFR`, `idDE`) VALUES (" + idFR + ", " + idDE + ");";
 };
 
-exports.getCorrespondingPage = function (idPage) {
-    return "SELECT * FROM Page WHERE `IdPageLang` = " + idPage + " LIMIT 1";
+exports.getDEPage = function (idFR) {
+    return "SELECT * FROM `Page` WHERE `PageId` = (SELECT `idDE` FROM `Translations` WHERE `idFR` = " + idFR + " LIMIT 1);";
+};
+
+exports.getFRPage = function (idDE) {
+    return "SELECT * FROM `Page` WHERE `PageId` = (SELECT `idFR` FROM `Translations` WHERE `idDE` = " + idDE + " LIMIT 1);";
+};
+
+exports.getTranslation = function (idTranslation) {
+    return "SELECT * FROM `Translations` WHERE `idTranslation = " + idTranslation + ";";
+};
+
+exports.isFR = function (idPage) {
+    return "SELECT Count(*) FROM `Translations` WHERE `idFR` = " + idPage + ";";
 };

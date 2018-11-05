@@ -22,7 +22,12 @@ block content
                             a.secondary-content(href='' + val.FormularResult + '' target="_blank")
                                 i.material-icons remove_red_eye
                         a.secondary-content
-                            i #{val.Lang} | &nbsp;
+                            i
+                                if(val.PageId === val.idFR)
+                                    | Fr&nbsp;
+                                else
+                                    | De&nbsp;
+                                | &nbsp;
         else
             li.collection-item
                 div

@@ -1,19 +1,53 @@
 
 exports.getPages_MenusFromMenu = function (id) {
     return "SELECT * FROM \n" +
-        "    (SELECT * FROM (\n" +
-        "        SELECT `Menu_idMenu` AS `idMenu`, `PageId` AS `idChild`, `Title` AS `Name_fr`, `Title` AS `Name_de`, 0 AS `IsMenu`, `Order` FROM `Page`\n" +
-        "    JOIN `Menu_has_Page` ON `Page`.`PageId` = `Menu_has_Page`.`Page_PageId`\n" +
-        "    WHERE `PageId` IN (\n" +
-        "        SELECT `Page_PageId` FROM `Menu_has_Page`) ) sel_1\n" +
-        "    UNION ALL (\n" +
-        "        SELECT * FROM (\n" +
-        "        SELECT `Menu_idMenu` AS `idMenu`, `idMenu` AS `idChild`, `Name_fr`, `Name_de`, 1 AS `IsMenu`, `Order` FROM `Menu`\n" +
-        "    JOIN `Menu_has_Page` ON `Menu`.`idMenu` = `Menu_has_Page`.`Menu_SubMenu`\n" +
-        "    WHERE `idMenu` IN (\n" +
-        "        SELECT `Menu_SubMenu` FROM `Menu_has_Page`) ) sel_2)\n" +
-        "    ORDER BY `Order`) sel_3\n" +
-        "    WHERE `idMenu` = " + id + ";";
+        "(SELECT * FROM (\n" +
+        "SELECT \n" +
+        "`Menu_idMenu`,\n" +
+        "(SELECT `idTranslation` FROM `Translations` WHERE `idFR` = `PageId` OR `idDE` = `PageId`) AS `idChild`, \n" +
+        "(SELECT `Name_fr` FROM \n" +
+        "(SELECT `idTranslation`, `Title` AS `Name_fr` FROM \n" +
+        "(SELECT * FROM `Translations` WHERE `idFR` IN \n" +
+        "(SELECT `PageId` FROM `Page`)) se\n" +
+        "JOIN `Page` ON `PageId` = `idFR`)se2\n" +
+        "INNER JOIN \n" +
+        "(SELECT `idTranslation`, `Title` AS `Name_de`  FROM \n" +
+        "(SELECT * FROM `Translations` WHERE `idDE` IN \n" +
+        "(SELECT `PageId` FROM `Page`)) se\n" +
+        "JOIN `Page` ON `PageId` = `idDE`)se3\n" +
+        "ON se2.`idTranslation` = se3.`idTranslation`\n" +
+        "WHERE `se2`.`idTranslation` = `idChild`\n" +
+        ") AS `Name_fr`,\n" +
+        "(SELECT `Name_de` FROM \n" +
+        "(SELECT `idTranslation`, `Title` AS `Name_fr` FROM \n" +
+        "(SELECT * FROM `Translations` WHERE `idFR` IN \n" +
+        "(SELECT `PageId` FROM `Page`)) se\n" +
+        "JOIN `Page` ON `PageId` = `idFR`)se2\n" +
+        "INNER JOIN \n" +
+        "(SELECT `idTranslation`, `Title` AS `Name_de`  FROM \n" +
+        "(SELECT * FROM `Translations` WHERE `idDE` IN \n" +
+        "(SELECT `PageId` FROM `Page`)) se\n" +
+        "JOIN `Page` ON `PageId` = `idDE`)se3\n" +
+        "ON se2.`idTranslation` = se3.`idTranslation`\n" +
+        "WHERE `se2`.`idTranslation` = `idChild`\n" +
+        ") AS `Name_de`,\n" +
+        "0 AS `IsMenu`, \n" +
+        "`Order` \n" +
+        "FROM `Page`\n" +
+        "JOIN `Translations` \n" +
+        "ON `Page`.`PageId` = `Translations`.`idFR`\n" +
+        "OR `Page`.`PageId` = `Translations`.`idDE`\n" +
+        "JOIN `Menu_has_Page` ON `Translations`.`idTranslation` = `Menu_has_Page`.`Page_PageId`\n" +
+        "GROUP BY `idChild`\n" +
+        ") se4\n" +
+        "UNION ALL\n" +
+        "SELECT * FROM (\n" +
+        "SELECT `Menu_idMenu` AS `idMenu`, `idMenu` AS `idChild`, `Name_fr`, `Name_de`, 1 AS `IsMenu`, `Order` FROM `Menu`\n" +
+        "JOIN `Menu_has_Page` ON `Menu`.`idMenu` = `Menu_has_Page`.`Menu_SubMenu`\n" +
+        "WHERE `idMenu` IN (\n" +
+        "SELECT `Menu_SubMenu` FROM `Menu_has_Page`))sel1) sel_tot\n" +
+        "WHERE `Menu_idMenu` = " + id + "\n" +
+        "ORDER BY `Order`;";
 
 
 };
@@ -38,7 +72,7 @@ exports.addMenuInMenu = function(idMenu, idChild, Order){
 };
 
 exports.addPageInMenu = function(idMenu, idChild, Order){
-    return "INSERT INTO `Menu_has_Page` (`Menu_idMenu`, `Page_PageId`, `Order`) VALUE (" + idMenu + ", " + idChild + ", " + Order + ");";
+    return "INSERT INTO `Menu_has_Page` (`Menu_idMenu`, `Page_PageId`, `Order`) VALUE (" + idMenu + ", (SELECT `idTranslation` FROM `Translations` WHERE `idFR` = " + idChild + " OR `idDE` = " + idChild + " LIMIT 1), " + Order + ");";
 };
 
 exports.deleteMenuFromMenu = function(idMenu, idChild){

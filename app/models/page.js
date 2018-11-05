@@ -5,8 +5,6 @@ function page(rows) {
     this.Content = rows.Content;
     this.Published_date = rows.Published_date;
     this.Updated_date = rows.Updated_date;
-    this.Lang = rows.Lang;
-    this.IdPageLang = rows.IdPageLang;
     this.IsNews = rows.IsNews;
     this.AdminId = rows.AdminId;
     this.FormularForms = rows.FormularForms;

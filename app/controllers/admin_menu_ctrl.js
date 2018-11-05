@@ -95,6 +95,7 @@ let getMenuById_Data = function(menuId, callback){
                                 Order: undefined
                            }));
                         });
+
                         pages.forEach(function(page){
                            available_children.push(new Menu_Child({
                                 idMenu: undefined,
@@ -113,6 +114,9 @@ let getMenuById_Data = function(menuId, callback){
                                 return item.idChild === menu.idMenu;
                             }
                         ), 1);
+
+                        console.log(MenuHasPageDb.getPages_MenusFromMenu(menuId));
+                        console.log(pages_menus_in_menu);
 
                         callback({config: config[0], menus: menus, menu: menu, pages: pages, children: children, available_children: available_children});
 
@@ -160,13 +164,11 @@ exports.addChildInMenu = function (req, res, next) {
         let order = rows[0].Order;
 
         if (isMenu) {
-            console.log("Menu: " + MenuHasPageDb.addMenuInMenu(idMenu, idChild, order));
             C.db.query(MenuHasPageDb.addMenuInMenu(idMenu, idChild, order), function (err, rows, field) {
                 if (err) throw(err);
                 res.json(rows.affectedRows);
             });
         }else {
-            console.log("Page: " + MenuHasPageDb.addPageInMenu(idMenu, idChild, order));
             C.db.query(MenuHasPageDb.addPageInMenu(idMenu, idChild, order), function (err, rows, field) {
                 if (err) throw(err);
                 res.json(rows.affectedRows);
@@ -183,16 +185,12 @@ exports.deleteChildInMenu = function(req, res, next){
     if (isMenu) {
         C.db.query(MenuHasPageDb.deleteMenuFromMenu(idMenu, idChild), function(err, rows, field){
            if(err) throw(err);
-           console.log(MenuHasPageDb.deleteMenuFromMenu(idMenu, idChild));
-           console.log(rows);
            rearrangeDb(idMenu);
            res.json(rows.affectedRows);
         });
     }else {
         C.db.query(MenuHasPageDb.deletePageFromMenu(idMenu, idChild), function(err, rows, field){
             if(err) throw(err);
-            console.log(MenuHasPageDb.deletePageFromMenu(idMenu, idChild));
-            console.log(rows);
             rearrangeDb(idMenu);
             res.json(rows.affectedRows);
         });

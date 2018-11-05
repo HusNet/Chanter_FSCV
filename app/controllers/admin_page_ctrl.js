@@ -31,7 +31,6 @@ exports.add_news = function(req, res, next) {
     let contentDe = AdminUtilsDb.replaceSimpleQuote(req.body.contentde);
     let user = req.session.user;
     let date_publish = new Date().toISOString().slice(0, 19).replace('T', ' ');
-    let idPageLang = 0; // id de la meme page mais dans l'autre langue
     let isNews = 1;
     let formularForms = AdminUtilsDb.replaceSimpleQuote(req.body.formulaireForms);
     let formularResult = AdminUtilsDb.replaceSimpleQuote(req.body.formulaireResult);
@@ -42,9 +41,7 @@ exports.add_news = function(req, res, next) {
         AdminId: user,
         Published_date: date_publish,
         Updated_date: date_publish,
-        Lang: 'fr',
         IsNews: isNews,
-        IdPageLang: idPageLang,
         FormularForms: formularForms,
         FormularResult: formularResult
     });
@@ -55,9 +52,7 @@ exports.add_news = function(req, res, next) {
         AdminId: user,
         Published_date: date_publish,
         Updated_date: date_publish,
-        Lang: 'de',
         IsNews: isNews,
-        IdPageLang: idPageLang,
         FormularForms: formularForms,
         FormularResult: formularResult
     });
@@ -77,18 +72,11 @@ exports.add_news = function(req, res, next) {
 
             let insertedIdDe = rows.insertId;
             let queryLink = AdminPageDb.linkPage(insertedIdFr, insertedIdDe);
-            let queryLink2 = AdminPageDb.linkPage(insertedIdDe, insertedIdFr);
 
             // link fr to de
             C.db.query(queryLink, function (err, rows, fields) {
                 if (err) throw(err);
-
-                // link de to fr
-                C.db.query(queryLink2, function (err, rows, fields) {
-                    if (err) throw(err);
-
-                    res.redirect('/admin/news');
-                });
+                res.redirect('/admin/news');
             });
         });
     });
@@ -144,16 +132,10 @@ exports.link_news = function (req, res, next) {
     let idPageFr = req.body.idFr;
     let idPageDe = req.body.idDe;
     let query1 = AdminPageDb.linkPage(idPageFr, idPageDe);
-    let query2 = AdminPageDb.linkPage(idPageDe, idPageFr);
 
     C.db.query(query1, function (err, rows, fields) {
         if (err) throw(err);
-
-        C.db.query(query2, function (err, rows, fields) {
-            if (err) throw(err);
-
-            res.redirect('/admin/news/news_link');
-        });
+        res.redirect('/admin/news/news_link');
     });
 };
 
@@ -185,7 +167,6 @@ exports.add_page = function (req, res, next) {
     let contentDe = AdminUtilsDb.replaceSimpleQuote(req.body.contentde);
     let user = req.session.user;
     let date_publish = new Date().toISOString().slice(0, 19).replace('T', ' ');
-    let idPageLang = 0; // id de la meme page mais dans l'autre langue
     let isNews = 0;
 
     let newsFr = new PageModel({
@@ -194,9 +175,7 @@ exports.add_page = function (req, res, next) {
         AdminId: user,
         Published_date: date_publish,
         Updated_date: date_publish,
-        Lang: 'fr',
-        IsNews: isNews,
-        IdPageLang: idPageLang
+        IsNews: isNews
     });
 
     let newsDe = new PageModel({
@@ -205,9 +184,7 @@ exports.add_page = function (req, res, next) {
         AdminId: user,
         Published_date: date_publish,
         Updated_date: date_publish,
-        Lang: 'de',
-        IsNews: isNews,
-        IdPageLang: idPageLang
+        IsNews: isNews
     });
 
     let queryFr = AdminPageDb.addPage(newsFr);
@@ -225,18 +202,11 @@ exports.add_page = function (req, res, next) {
 
             let insertedIdDe = rows.insertId;
             let queryLink = AdminPageDb.linkPage(insertedIdFr, insertedIdDe);
-            let queryLink2 = AdminPageDb.linkPage(insertedIdDe, insertedIdFr);
 
             // link fr to de
             C.db.query(queryLink, function (err, rows, fields) {
                 if (err) throw(err);
-
-                // link de to fr
-                C.db.query(queryLink2, function (err, rows, fields) {
-                    if (err) throw(err);
-
-                    res.redirect('/admin/page');
-                });
+                res.redirect('/admin/page');
             });
         });
     });
@@ -296,15 +266,9 @@ exports.link_page = function (req, res, next) {
     let idPageFr = req.body.idFr;
     let idPageDe = req.body.idDe;
     let query1 = AdminPageDb.linkPage(idPageFr, idPageDe);
-    let query2 = AdminPageDb.linkPage(idPageDe, idPageFr);
 
     C.db.query(query1, function (err, rows, fields) {
         if (err) throw(err);
-
-        C.db.query(query2, function (err, rows, fields) {
-            if (err) throw(err);
-
-            res.redirect('/admin/page/page_link');
-        });
+        res.redirect('/admin/page/page_link');
     });
 };
