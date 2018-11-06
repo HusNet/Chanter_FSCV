@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.3'
 
 services:
 
@@ -7,11 +7,10 @@ services:
     restart: always
     build: .
     command: nodemon -L --watch views chanter.js
+    ports:
+    - "3000:3000"
     environment:
-      NODE_ENV: production
-      VIRTUAL_HOST: grp3.p645.hevs.ch
-      LETSENCRYPT_HOST: grp3.p645.hevs.ch
-      LETSENCRYPT_EMAIL: aurelie.glassey@students.hevs.ch
+    - NODE_ENV=development
     links:
     - mariadb
     depends_on:
@@ -21,13 +20,9 @@ services:
     container_name: mariadb
     restart: always
     image: mariadb
+    ports:
+    - "3307:3306"
     volumes:
     - /var/lib/mysql/data
     environment:
     - MYSQL_ROOT_PASSWORD=root
-
-
-networks:
-  default:
-    external:
-      name: webproxy
