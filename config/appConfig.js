@@ -24,7 +24,14 @@ const config = {
         app: {
             name: 'chanter-webapp'
         },
-        port: 80,
+        port: 3000,
+        db: db.createConnection({
+            host: "mariadb",
+            database: "chanter-dev",
+            user: "dev",
+            password: "unlucky",
+            multipleStatements: "true"
+        }),
     },
 
     i18n: {
