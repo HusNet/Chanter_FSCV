@@ -24,7 +24,7 @@ const config = {
         app: {
             name: 'chanter-webapp'
         },
-        port: 80,
+        port: 3000,
     },
 
     i18n: {
