@@ -28,7 +28,7 @@ const config = {
         db: db.createConnection({
             host: "mariadb",
             database: "chanter-dev",
-            user: "dev",
+            user: "prod",
             password: "unlucky",
             multipleStatements: "true"
         }),
