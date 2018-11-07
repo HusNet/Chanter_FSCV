@@ -16,12 +16,25 @@ services:
     depends_on:
     - mariadb
 
+  phpmyadmin:
+    image: bitnami/phpmyadmin:latest
+    restart: always
+    environment:
+      PMA_PORT: 3306
+      VIRTUAL_HOST: PHPMYADMINDOMAINS.grp3.p645.hevs.ch
+      LETSENCRYPT_HOST: PHPMYADMINDOMAINS.grp3.p645.hevs.ch
+      LETSENCRYPT_EMAIL: aurelie.glassey@students.hevs.ch
+    volumes:
+    - /sessions
+    depends_on:
+    - mariadb
+
+
   mariadb:
     restart: always
     image: mariadb
     environment:
     - MYSQL_ROOT_PASSWORD=root
-
 
 networks:
   default:

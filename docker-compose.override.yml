@@ -14,7 +14,7 @@ services:
     links:
     - mariadb
     depends_on:
-    - mariadb
+      - mariadb
 
   mariadb:
     container_name: mariadb
@@ -26,4 +26,10 @@ services:
     - /var/lib/mysql/data
     environment:
     - MYSQL_ROOT_PASSWORD=root
+
+  phpmyadmin:
+    ports:
+    - '5555:80'
+
+
 
