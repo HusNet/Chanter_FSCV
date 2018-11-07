@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
 
-  chanter:
+  app:
     build: .
     command: nodemon -L --watch views chanter.js
     environment:
@@ -20,10 +20,9 @@ services:
     restart: always
     environment:
       PMA_ARBITRARY: 1
-      PMA_HOST: mysql
+      PMA_HOST: mariadb
       PMA_USER: dev
       PMA_PASSWORD: unlucky
-      PMA_PORT: 3306
       VIRTUAL_HOST: phpmyadmindomains.grp3.p645.hevs.ch
       LETSENCRYPT_HOST: phpmyadmindomains.grp3.p645.hevs.ch
       LETSENCRYPT_EMAIL: aurelie.glassey@students.hevs.ch
