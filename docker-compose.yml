@@ -21,9 +21,6 @@ services:
     image: mariadb
     environment:
      MYSQL_ROOT_PASSWORD: root
-     MYSQL_DATABASE: dev-branch
-     MYSQL_USER: dev
-     MYSQL_PASSWORD: unlucky
 
 
 networks:
