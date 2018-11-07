@@ -42,7 +42,7 @@ services:
       MYSQL_DATABASE:      chanter-dev
       MYSQL_USER:          dev
       MYSQL_PASSWORD:      unlucky
-      DATABASE_PORT_NUMBER: 3307
+    command:               ["bash", "-c", 'docker-entrypoint.sh --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci']
     volumes:
       - /var/lib/mysql/data
 
