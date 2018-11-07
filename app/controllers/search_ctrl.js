@@ -1,9 +1,15 @@
 const C = require('../../config/appConfig');
 const AdminChoirDb = require('../controllers/database/admin_choir_db');
+const AdminUserDb = require('../controllers/database/admin_person_db');
 const MenuRender = require('../controllers/render_ctrl');
 
-exports.search_form_choir = function(req, res, next) {
+exports.search = function(req, res, next) {
+    MenuRender.menuRender(req, res, next, function(req, res, next, mainMenu) {
+        res.render('search/search', {mainMenu: mainMenu});
+    });
+};
 
+exports.search_form_choir = function(req, res, next) {
     MenuRender.menuRender(req, res, next, function(req, res, next, mainMenu) {
         res.render('search/search_choir', {mainMenu: mainMenu});
     });

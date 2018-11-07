@@ -2,5 +2,14 @@ extends ../layouts/_layout
 
 block content
 
-    each val in results
-        p= val.Name
+    h1.display-4.m-b-2 #{translation.TITLE_RESULT}
+
+    if results.length
+
+        each val in results
+
+            p= val.Name
+
+    else
+
+        p No data available

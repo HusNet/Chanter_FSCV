@@ -48,6 +48,7 @@
   "TITLE_ADMIN_NEWS_LINK": "Lier des news",
   "TITLE_ADMIN_EXPORT": "Exporter des données",
   "TITLE_ADMIN_EXPORT_CHOIR": "Exporter des choeurs",
+  "TITLE_SEARCH": "Rechercher",
   "TITLE_ADMIN_SEARCH_CHOIR": "Chercher des choeurs",
   "TITLE_ADMIN_SEARCH_PERSON": "Chercher des personnes",
   "TITLE_ADMIN_EXPORT_PERSON": "Exporter des personnes",
@@ -115,6 +116,7 @@
   "AUTRE": "Autre",
 
   "TITLE_ADMIN_MENU": "Menu",
+  "TITLE_RESULT": "Résultats",
   "IS_MAIN": "est le menu principal",
   "ADD_MENU": "Ajouter un menu",
   "UPDATE_MENU": "Modifier un menu",
@@ -154,7 +156,7 @@
   "LINK_SUCCESS": "Liaison réussie",
   "PERSON_CHOOSEN": "Personne choisie",
   "CHOIR_CHOOSEN": "Cette personne appartient au choeur: ",
-  "CHOIR_CHOSE": "Choisir le choeur"
+  "CHOIR_CHOSE": "Choisir le choeur",
   "CALENDAR": "Calendrier",
   "ACTUS": "Actualités"
 }

@@ -2,5 +2,12 @@ extends ../layouts/_layout
 
 block content
 
-    each val in results
-        p= val.Name
+    if results.length
+
+        each val in results
+
+            p= val.Name
+
+    else
+
+        p No data available

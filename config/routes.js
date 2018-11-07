@@ -35,18 +35,19 @@ module.exports = function(app, router) {
         news.news(req, res, next);
     });
 
-    router.get('/search_choir', function (req, res, next) {
-       search.search_form_choir(req, res, next);
-
     router.get('/search', function (req, res, next) {
-        search.search_form(req, res, next);
+        search.search(req, res, next);
+    });
+
+    router.get('/search/search_choir', function (req, res, next) {
+        search.search_form_choir(req, res, next);
     });
 
     router.post('/search/search_choir', function (req, res, next) {
         search.search_choir(req, res, next);
     });
 
-    router.get('/search_person', function (req, res, next) {
+    router.get('/search/search_person', function (req, res, next) {
         search.search_form_person(req, res, next);
     });
 
@@ -70,7 +71,6 @@ module.exports = function(app, router) {
         admin.authenticationTest(req, res, next);
         admin.dashboard(req, res, next);
     });
-
 
     router.get('/admin/service', function(req, res, next) {
         admin.authenticationTest(req, res, next);

@@ -37,8 +37,11 @@
   "UPDATE" : "Aktualisieren",
   "DELETE" : "Löschen",
   "LOGOUT" : "Abmeldung",
+  "CHORUS": "Chorale",
+  "LANGUAGE": "Sprache",
 
   "TITLE_ADMIN_USER": "Einen neuen Benutzer hinzufügen",
+  "TITLE_RESULT": "Ergebnisse",
   "TITLE_ADMIN_NEWS": "Alle Nachrichten",
   "TITLE_ADMIN_ADD_NEWS": "Eine Nachricht hinzufügen",
   "TITLE_ADMIN_ADD_PAGE": "Eine Seite hinzufügen",
@@ -47,6 +50,7 @@
   "TITLE_ADMIN_PAGE_LINK": "Verlinkung von Seiten",
   "TITLE_ADMIN_NEWS_LINK": "Link-Neuigkeiten",
   "TITLE_ADMIN_EXPORT": "Daten exportieren",
+  "TITLE_SEARCH": "Suchen",
   "TITLE_ADMIN_EXPORT_CHOIR": "Chöre exportieren",
   "TITLE_ADMIN_SEARCH_CHOIR": "Suche nach Chören",
   "TITLE_ADMIN_SEARCH_PERSON": "Suche nach Personen",
@@ -148,7 +152,7 @@
   "MEMBER": "Mitglied oder Nicht-Mitglied",
   "CREATION_PERSON":"Neue Person",
   "CALENDAR": "Kalender",
-  "ACTUS": "Aktualitäten"
+  "ACTUS": "Aktualitäten",
   "INFO_ADD_FOR_CHOIR": "Um zu wählen, zu welchem Chor diese Person gehört, gehen Sie bitte auf die Link Person/chor button.",
   "PERSON_LINK_CHOIR": "Link Person/Chor",
   "SELECT_CHOIR": "Ein Chor wählen",
