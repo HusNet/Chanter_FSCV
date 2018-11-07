@@ -146,5 +146,8 @@
   "SEARCH_PERSON_SUCCESS": "Personne trouvée",
   "SEARCH_PERSON_FAILURE": "Cette personne n'existe pas, veuillez controller vos champs",
   "ADDFORMULAIRECLIENT": "Lien du formulaire pour le client",
-  "ADDFORMULAIRERESPONSE": "Lien du formulaire de réponse"
+  "ADDFORMULAIRERESPONSE": "Lien du formulaire de réponse",
+  "CALENDAR": "Calendrier",
+  "SEARCH": "Rechercher",
+  "ACTUS": "Actualités"
 }

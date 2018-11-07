@@ -1,0 +1,21 @@
+extends ../layouts/_layout
+
+block content
+    br
+
+    div.row
+
+        each item in news
+            if (lang === 'fr')
+                if (item.PageId === item.idFR)
+                    div.row
+                        h3!= item.Title
+                        p!= item.Content
+                    hr
+            if (lang === 'de')
+                if (item.PageId === item.idDE)
+                    div.row
+                        h3!= item.Title
+                        p!= item.Content
+                    hr
+

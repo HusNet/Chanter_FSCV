@@ -146,7 +146,9 @@
   "ADDFORMULAIRERESPONSE": "Link zum Antwortformular",
   "SEARCH_PERSON_FAILURE": "Diese Person existiert nicht, bitte überprüfen Sie Ihre Angaben.",
   "LIST_CHOIR": "Chorliste",
-  "LANGUAGE": "SPRACHE",
   "MEMBER": "Mitglied oder Nicht-Mitglied",
-  "CREATION_PERSON":"Neue Person"
+  "CREATION_PERSON":"Neue Person",
+  "CALENDAR": "Kalender",
+  "SEARCH": "Suchen",
+  "ACTUS": "Aktualitäten"
 }
