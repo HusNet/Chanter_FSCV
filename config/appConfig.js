@@ -4,7 +4,7 @@ const path = require('path'),
     db = require('mysql');
 
 const config = {
-    development: {
+    /*development: {
         root: rootPath,
         app: {
             name: 'chanter-dev'
@@ -19,8 +19,8 @@ const config = {
         }),
     },
 
+*/
     production: {
-        root: rootPath,
         app: {
             name: 'chanter-webapp'
         },
