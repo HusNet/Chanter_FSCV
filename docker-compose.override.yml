@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+
+  chanter:
+    environment:
+    - NODE_ENV=development
+    restart: always
+    build: .
+    command: nodemon -L --watch views chanter.js
+    ports:
+    - "3000:3000"
+
+
+networks:
+  default:
