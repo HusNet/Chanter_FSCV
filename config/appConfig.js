@@ -25,12 +25,13 @@ const config = {
         app: {
             name: 'chanter-webapp'
         },
+        port: 3000,
         db: db.createConnection({
-            host: "mariadb",
+            host: "phpmyadmindomains.grp3.p645.hevs.ch",
             database: "chanter-dev",
             user: "dev",
             password: "unlucky",
-            multipleStatements: "true"
+            port: 3307
         }),
 
     },
