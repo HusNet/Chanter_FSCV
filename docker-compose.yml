@@ -8,9 +8,9 @@ services:
     command: nodemon -L --watch views chanter.js
     environment:
       NODE_ENV: production
-      VIRTUAL_HOST: ${DOMAINS}
-      LETSENCRYPT_HOST: ${DOMAINS}
-      LETSENCRYPT_EMAIL: ${EMAIL}
+      VIRTUAL_HOST: grp3.p645.hevs.ch
+      LETSENCRYPT_HOST: grp3.p645.hevs.ch
+      LETSENCRYPT_EMAIL: aurelie.glassey@students.hevs.ch
     links:
     - mariadb
     depends_on:
@@ -20,10 +20,10 @@ services:
     restart: always
     image: mariadb
     environment:
-     MYSQL_ROOT_PASSWORD: $DB_ROOT_PASSWORD
-     MYSQL_DATABASE: $DB_DATABASE
-     MYSQL_USER: $DB_USER
-     MYSQL_PASSWORD: $DB_PASSWORD
+     MYSQL_ROOT_PASSWORD: root
+     MYSQL_DATABASE: dev-branch
+     MYSQL_USER: dev
+     MYSQL_PASSWORD: unlucky
 
 
 networks:
