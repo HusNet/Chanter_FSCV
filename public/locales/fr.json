@@ -148,5 +148,14 @@
   "SEARCH_PERSON_SUCCESS": "Personne trouvée",
   "SEARCH_PERSON_FAILURE": "Cette personne n'existe pas, veuillez controller vos champs",
   "ADDFORMULAIRECLIENT": "Lien du formulaire pour le client",
-  "ADDFORMULAIRERESPONSE": "Lien du formulaire de réponse"
+  "ADDFORMULAIRERESPONSE": "Lien du formulaire de réponse",
+  "INFO_ADD_FOR_CHOIR": "Pour choisir à quelle choeur cette personne appartient, veuillez vous rendre sous l'onglet Associer une personne à un choeur",
+  "PERSON_LINK_CHOIR": "Associer personne/choeur",
+  "SELECT_CHOIR": "Sélectionner un choeur",
+  "LINK_FAILURE": "Problème avec la liaison",
+  "LINK_SUCCESS": "Liaison réussie",
+  "PERSON_CHOOSEN": "Personne choisie",
+  "CHOIR_CHOOSEN": "Cette personne appartient au choeur: ",
+  "CHOIR_CHOSE": "Choisir le choeur"
+
 }

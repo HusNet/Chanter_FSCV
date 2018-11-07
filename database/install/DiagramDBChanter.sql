@@ -48,7 +48,6 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `chanter-dev`.`User` (
   `UserId` INT(10) NOT NULL AUTO_INCREMENT,
-  `MemberId` INT(10) NULL DEFAULT NULL,
   `Lastname` VARCHAR(128) NOT NULL,
   `Firstname` VARCHAR(128) NOT NULL,
   `Phone` VARCHAR(20) NULL DEFAULT NULL,

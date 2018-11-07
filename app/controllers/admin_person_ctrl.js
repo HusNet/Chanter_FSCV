@@ -2,8 +2,10 @@ const C = require('../../config/appConfig');
 const UserModel = require('../models/user');
 const LocationModel = require('../models/location');
 const AdminUserDb = require('../controllers/database/admin_person_db');
+const AdminChoirDb = require('../controllers/database/admin_choir_db');
 const AdminRoleDb = require('../controllers/database/admin_role_db');
 const AdminRoleUserDb = require('../controllers/database/admin_user_role_db');
+const AdminUserChoirDb = require('../controllers/database/admin_user_choir_db');
 const AdminLocationDb = require('../controllers/database/admin_location_db');
 
 // Request the persone page with the tree butons add/modify/delete
@@ -13,27 +15,75 @@ exports.person = function(req, res, next) {
     });
 };
 
+exports.admin_findPersonLinkChoir = function(req, res, next) {
 
-
-exports.admin_person_search = function(req, res, next) {
-
+    // store the data to search the user
     let lastname = req.body.lastnameP;
     let firstname = req.body.firstnameP;
+    let email = req.body.emailP;
 
-    let queryUser = AdminUserDb.getUserWithoutMail(lastname, firstname);
-    C.db.query(queryUser, function (err, resListUser, fields) {
+    //Search the user in the DB with lastname, firstname an email
+    let queryUser = AdminUserDb.getUser(lastname, firstname, email);
+    C.db.query(queryUser, function (err, resUser, fields) {
         if (err) throw(err);
         if (resUser.length === 0) // if the user doesn't exist
         {
             res.render('admin/person/person_searched', {success: false});
         }
-        else {
-            res.render('admin/person/person_searched_list', {listUserFounded: resListUser});
+        else  { // if the user exist
+            let queryAllChoir = AdminChoirDb.getAllChoir();
+            C.db.query(queryAllChoir, function (err, resChoir, fields) {
+                if (err) throw(err);
+                res.render('admin/person/person_link_to_choir', {userLink: resUser, choirList: resChoir});
+            });
         }
     });
 
 };
 
+exports.admin_personLinkChoir= function(req, res, next) {
+
+    let choirId = req.body.choirId;
+    let userId = req.body.idUser;
+    console.log("Link : Choir id " + choirId + ", user id " + userId);
+
+    let queryLink = AdminUserChoirDb.insertUserChoir(userId, choirId);
+    C.db.query(queryLink, function (err, resUserChoir, fields) {
+        if (err) throw(err);
+        if (resUserChoir.length === 0) // if the user doesn't exist
+        {
+            res.render('admin/person/person_choir_linked', {success: false});
+
+        }
+        else {
+            console.log("bbbb");
+            res.render('admin/person/person_choir_linked', {success: true});
+        }
+
+    });
+
+};
+
+    /*
+    exports.admin_person_search = function(req, res, next) {
+
+        let lastname = req.body.lastnameP;
+        let firstname = req.body.firstnameP;
+
+        let queryUser = AdminUserDb.getUserWithoutMail(lastname, firstname);
+        C.db.query(queryUser, function (err, resListUser, fields) {
+            if (err) throw(err);
+            if (resUser.length === 0) // if the user doesn't exist
+            {
+                res.render('admin/person/person_searched', {success: false});
+            }
+            else {
+                res.render('admin/person/person_searched_list', {listUserFounded: resListUser});
+            }
+        });
+
+    };
+    */
 
 
 exports.admin_person_edit = function(req, res, next) {

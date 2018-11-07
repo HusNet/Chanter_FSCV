@@ -150,5 +150,13 @@
   "LIST_CHOIR": "Chorliste",
   "LANGUAGE": "SPRACHE",
   "MEMBER": "Mitglied oder Nicht-Mitglied",
-  "CREATION_PERSON":"Neue Person"
+  "CREATION_PERSON":"Neue Person",
+  "INFO_ADD_FOR_CHOIR": "Um zu wählen, zu welchem Chor diese Person gehört, gehen Sie bitte auf die Link Person/chor button.",
+  "PERSON_LINK_CHOIR": "Link Person/Chor",
+  "SELECT_CHOIR": "Ein Chor wählen",
+  "LINK_FAILURE": "Problem mit dem Link",
+  "LINK_SUCCESS": "Erfolgreiche Verbindung",
+  "PERSON_CHOOSEN": "gewählte Person",
+  "CHOIR_CHOOSEN": "Diese Person gehört dem Chor an: ",
+  "CHOIR_CHOSE": "Wählen Sie den Chor aus"
 }

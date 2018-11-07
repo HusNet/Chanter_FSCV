@@ -42,3 +42,12 @@ exports.getExportChoir = function (name, fundationYear, church, gospel, language
 
     return query;
 };
+
+
+exports.getAllChoir = function(){
+    return "SELECT * FROM `Choir`";
+};
+
+exports.getAllTest = function(){
+    return "SELECT * FROM `User`";
+};
