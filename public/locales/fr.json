@@ -61,7 +61,6 @@
   "CHOIR_NAME": "Nom du choeur",
   "EFFECTIVE": "Effectif",
   "POSTE_CODE": "NPA",
-  "LOCATION": "Lieu",
   "DATE_FOUNDATION": "Date de fondation",
   "DATE_FSCV":"Date d'entrée dans la Fédération",
   "DATE_USC":"Date d'entrée dans l'USC",
@@ -135,14 +134,12 @@
   "UPDATE_CHOIR": "Modifier un choeur",
   "DELETE_CHOIR": "Supprimer un choeur",
   "EDIT_PERSON": "Modifier une personne",
-  "SEARCH_PERSON" : "Rechercher",
   "SEARCH" : "Rechercher",
   "LIST_CHOIR": "Liste de Choeur",
   "LANGUAGE": "Langue",
   "CREATION_PERSON": "Nouvelle personne",
   "SEARCH_PERSON" : "Rechercher une personne",
   "EDIT": "Modification pour",
-  "NEWSLETTER": "Recevoir la newletter",
   "ADDRESS": "Adresse",
   "NPA": "NPA",
   "CITY": "Ville",
@@ -158,5 +155,6 @@
   "PERSON_CHOOSEN": "Personne choisie",
   "CHOIR_CHOOSEN": "Cette personne appartient au choeur: ",
   "CHOIR_CHOSE": "Choisir le choeur"
-
+  "CALENDAR": "Calendrier",
+  "ACTUS": "Actualités"
 }

@@ -13,6 +13,7 @@ module.exports = function(app, router) {
     let admin = require('../app/controllers/admin_ctrl');
     let calendar = require('../app/controllers/calendar_ctrl');
     let search = require('../app/controllers/search_ctrl');
+    let news = require('../app/controllers/news_ctrl');
 
     let adminMenu = require('../app/controllers/admin_menu_ctrl');
     let adminPerson = require('../app/controllers/admin_person_ctrl');
@@ -29,8 +30,16 @@ module.exports = function(app, router) {
        calendar.calendar(req, res, next);
     });
 
+
+    router.get('/news', function (req, res, next) {
+        news.news(req, res, next);
+    });
+
     router.get('/search_choir', function (req, res, next) {
        search.search_form_choir(req, res, next);
+
+    router.get('/search', function (req, res, next) {
+        search.search_form(req, res, next);
     });
 
     router.post('/search/search_choir', function (req, res, next) {
