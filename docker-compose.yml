@@ -22,6 +22,18 @@ services:
     environment:
     - MYSQL_ROOT_PASSWORD=root
 
+  phpmyadmin:
+    image: bitnami/phpmyadmin:latest
+    restart: always
+    environment:
+      PMA_PORT: 3306
+      VIRTUAL_HOST: PHPMYADMINDOMAINS.grp3.p645.hevs.ch
+      LETSENCRYPT_HOST: PHPMYADMINDOMAINS.grp3.p645.hevs.ch
+      LETSENCRYPT_EMAIL: aurelie.glassey@students.hevs.ch
+    volumes:
+    - /sessions
+    depends_on:
+    - mariadb
 
 networks:
   default:
