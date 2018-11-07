@@ -28,12 +28,6 @@ const config = {
     },
     */
 
-    i18n: {
-        translationsPath: path.join(__dirname, '../public/locales'),
-        siteLangs: ['fr', 'de'],
-        defaultLocale: 'fr',
-        textsVarName: 'translation'
-    }
 
 
 };
