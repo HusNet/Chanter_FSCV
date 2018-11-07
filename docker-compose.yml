@@ -5,22 +5,23 @@ services:
   chanter:
     restart: always
     build: .
+    command: nodemon -L --watch views chanter.js
     environment:
       NODE_ENV: production
       VIRTUAL_HOST: grp3.p645.hevs.ch
       LETSENCRYPT_HOST: grp3.p645.hevs.ch
       LETSENCRYPT_EMAIL: aurelie.glassey@students.hevs.ch
+    links:
+    - mariadb
     depends_on:
-      - mariadb
+    - mariadb
 
   mariadb:
     restart: always
     image: mariadb
     environment:
-     MYSQL_ROOT_PASSWORD: root
-     MYSQL_DATABASE: dev-branch
-     MYSQL_USER: dev
-     MYSQL_PASSWORD: unlucky
+    - MYSQL_ROOT_PASSWORD=root
+
 
 networks:
   default:

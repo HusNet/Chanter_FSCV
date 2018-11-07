@@ -8,22 +8,22 @@ services:
     build: .
     command: nodemon -L --watch views chanter.js
     ports:
-      - "3000:3000"
+    - "3000:3000"
     environment:
-      - NODE_ENV=development
+    - NODE_ENV=development
     links:
-      - mariadb
+    - mariadb
     depends_on:
-      - mariadb
+    - mariadb
 
   mariadb:
     container_name: mariadb
     restart: always
     image: mariadb
     ports:
-      - "3307:3306"
+    - "3307:3306"
     volumes:
-      - /var/lib/mysql/data
+    - /var/lib/mysql/data
     environment:
-      - MYSQL_ROOT_PASSWORD=root
+    - MYSQL_ROOT_PASSWORD=root
 
