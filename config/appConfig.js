@@ -22,11 +22,13 @@ const config = {
 */
     production: {
         app: {
-            name: 'chanter-webapp'
+            name: 'chanter-webapp',
+            port: 3000
         },
-        port: 3000,
+
         db: db.createConnection({
-            host: "mariadb",
+            host: "localhost",
+            port: 3307,
             database: "chanter-dev",
             user: "dev",
             password: "unlucky",
