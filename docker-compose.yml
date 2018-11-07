@@ -8,7 +8,7 @@ services:
     command: nodemon -L --watch views chanter.js
     environment:
       NODE_ENV: production
-      DB_CONNECTION: mysql://dev:unlucky@mariadb:3307/chanter-dev
+      DB_CONNECTION: http://localhost/phpmyadmin/db_structure.php?server=2&db=chanter-dev&token=664921db6bdfc23fa65126bfebc1ff6c
       VIRTUAL_HOST: grp3.p645.hevs.ch
       LETSENCRYPT_HOST: grp3.p645.hevs.ch
       LETSENCRYPT_EMAIL: aurelie.glassey@students.hevs.ch
@@ -42,6 +42,7 @@ services:
       MYSQL_DATABASE:      mariadb
       MYSQL_USER:          dev
       MYSQL_PASSWORD:      unlucky
+      DATABASE_PORT_NUMBER: 3307
     volumes:
     - /var/lib/mysql/data
 
