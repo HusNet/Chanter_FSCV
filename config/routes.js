@@ -12,6 +12,7 @@ module.exports = function(app, router) {
     //admin login
     let admin = require('../app/controllers/admin_ctrl');
     let calendar = require('../app/controllers/calendar_ctrl');
+    let search = require('../app/controllers/search_ctrl');
 
     let adminMenu = require('../app/controllers/admin_menu_ctrl');
     let adminPerson = require('../app/controllers/admin_person_ctrl');
@@ -20,13 +21,20 @@ module.exports = function(app, router) {
     let adminChoir = require('../app/controllers/admin_choir_ctrl');
 
 
-
     router.get('/', function(req, res, next) {
         render.index(req, res, next);
     });
 
     router.get('/calendar', function (req, res, next) {
        calendar.calendar(req, res, next);
+    });
+
+    router.get('/search', function (req, res, next) {
+       search.search_form(req, res, next);
+    });
+
+    router.post('/search/search_choir', function (req, res, next) {
+        search.search_choir(req, res, next);
     });
 
     router.get('/admin', function(req, res, next) {
