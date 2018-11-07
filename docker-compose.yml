@@ -8,6 +8,7 @@ services:
     command: nodemon -L --watch views chanter.js
     environment:
       NODE_ENV: production
+      DB_CONNECTION: mariadb://dev:unlucky@mariadb:3307/chanter-dev
       VIRTUAL_HOST: grp3.p645.hevs.ch
       LETSENCRYPT_HOST: grp3.p645.hevs.ch
       LETSENCRYPT_EMAIL: aurelie.glassey@students.hevs.ch
