@@ -11,7 +11,7 @@ services:
       LETSENCRYPT_HOST: grp3.p645.hevs.ch
       LETSENCRYPT_EMAIL: aurelie.glassey@students.hevs.ch
     depends_on:
-    - mariadb
+      - mariadb
 
   mariadb:
     restart: always
@@ -21,7 +21,6 @@ services:
      MYSQL_DATABASE: dev-branch
      MYSQL_USER: dev
      MYSQL_PASSWORD: unlucky
-
 
 networks:
   default:
