@@ -19,14 +19,14 @@ const config = {
         }),
     },
 
-
+*/
     production: {
         app: {
             name: 'chanter-webapp'
         },
 
     },
-    */
+
 
 
 
