@@ -19,13 +19,14 @@ const config = {
         }),
     },
 
-*/
+
     production: {
         app: {
             name: 'chanter-webapp'
         },
 
     },
+    */
 
     i18n: {
         translationsPath: path.join(__dirname, '../public/locales'),
