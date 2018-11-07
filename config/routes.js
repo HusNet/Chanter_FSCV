@@ -29,12 +29,20 @@ module.exports = function(app, router) {
        calendar.calendar(req, res, next);
     });
 
-    router.get('/search', function (req, res, next) {
-       search.search_form(req, res, next);
+    router.get('/search_choir', function (req, res, next) {
+       search.search_form_choir(req, res, next);
     });
 
     router.post('/search/search_choir', function (req, res, next) {
         search.search_choir(req, res, next);
+    });
+
+    router.get('/search_person', function (req, res, next) {
+        search.search_form_person(req, res, next);
+    });
+
+    router.post('/search/search_person', function (req, res, next) {
+        search.search_person(req, res, next);
     });
 
     router.get('/admin', function(req, res, next) {
