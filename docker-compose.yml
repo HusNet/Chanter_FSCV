@@ -3,7 +3,6 @@ version: '3.3'
 services:
 
   chanter:
-    container_name: chanter
     restart: always
     build: .
     command: nodemon -L --watch views chanter.js
@@ -17,12 +16,22 @@ services:
     - mariadb
 
   mariadb:
-    container_name: mariadb
     restart: always
     image: mariadb
+<<<<<<< HEAD
     ports:
     - "3307:3306"
     volumes:
     - /var/lib/mysql/data
     environment:
     - MYSQL_ROOT_PASSWORD=root
+=======
+    environment:
+    - MYSQL_ROOT_PASSWORD=root
+
+
+networks:
+  default:
+    external:
+      name: webproxy
+>>>>>>> origin/devBranch

@@ -2,7 +2,7 @@ extends ../layouts/_layout
 
 block content
 
-    h1.display-4.m-b-2 #{translation.TITLE_ADMIN_EXPORT_CHOIR}
+    h1.display-4.m-b-2 #{translation.TITLE_ADMIN_SEARCH_CHOIR}
 
     form.col.s12(method='POST' action='/search/search_choir')
 
@@ -38,6 +38,6 @@ block content
 
         p
             button.btn.waves-effect.waves-light(type='submit' name='action')
-                | #{translation.DOWNLOAD}
+                | #{translation.SEARCH}
                 i.material-icons.right search
 

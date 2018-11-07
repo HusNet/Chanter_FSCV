@@ -4,6 +4,7 @@ block resultSearch
 
     h2 #{translation.EDIT} #{userResult[0].Lastname} #{userResult[0].Firstname}
 
+
     br
 
     form(method='POST' action='/admin/person/person_edit_result')
@@ -12,7 +13,12 @@ block resultSearch
         input#idLocation.validate(type='hidden' name='idLocation' value='' + locationResult[0].LocationId)
 
         div.form-group
+
+            br
+
             div(class='row')
+
+
                 div(class='column')
                     label(for='lastnameP') #{translation.LASTNAME}:
                     input#lastnameP.form-control(type='text', value='' + userResult[0].Lastname, name='lastnameP', required)
@@ -55,6 +61,7 @@ block resultSearch
                     label
                         input(name='newsLetterP', type='checkbox', checked=(userResult[0].Newsletter === 1))
                         span #{translation.NEWSLETTER}
+
 
 
                 div(class='column')

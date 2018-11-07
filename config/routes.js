@@ -269,6 +269,27 @@ module.exports = function(app, router) {
         adminPerson.admin_person_delete(req, res, next);
     });
 
+    router.get('/admin/person/person_search_link_to_choir', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        res.render('admin/person/person_search_link_to_choir');
+    });
+
+    router.post('/admin/person/person_search_link_to_choir', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminPerson.admin_findPersonLinkChoir(req, res, next);
+    });
+
+    router.get('/admin/person/person_link_to_choir', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        res.render('admin/person/person_link_to_choir');
+    });
+
+    router.post('/admin/person/person_link_to_choir', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminPerson.admin_personLinkChoir(req, res, next);
+    });
+
+
     // *** END PERSON ROUTES
 
     // *** NEWS ROUTES
