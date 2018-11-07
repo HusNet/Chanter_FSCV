@@ -4,6 +4,9 @@ block person_add_block
 
     h2 #{translation.ADD_PERSON}
 
+
+    p *#{translation.INFO_ADD_FOR_CHOIR}
+
     br
 
     form(method='POST' action='/admin/person/person_add')
@@ -86,6 +89,7 @@ block person_add_block
                         label
                             input(name='autreP', type='checkbox')
                             span #{translation.AUTRE}
+
 
         button.btn.btn-primary(type='submit' name='action') #{translation.ADD}
 
