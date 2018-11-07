@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
 
-  app:
+  chanter:
     build: .
     command: nodemon -L --watch views chanter.js
     environment:
