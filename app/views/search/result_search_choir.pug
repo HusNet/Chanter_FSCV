@@ -1,0 +1,13 @@
+extends ../layouts/_layout
+
+block content
+
+    if results.length
+
+        each val in results
+
+            p= val.Name
+
+    else
+
+        p No data available
