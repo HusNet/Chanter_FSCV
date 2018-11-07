@@ -22,10 +22,9 @@ const config = {
 */
     production: {
         app: {
-            name: 'chanter-webapp',
-            port: 3000
+            name: 'chanter-webapp'
         },
-
+        port: 3000,
         db: db.createConnection({
             host: "localhost",
             port: 3307,
