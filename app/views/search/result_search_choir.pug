@@ -2,12 +2,58 @@ extends ../layouts/_layout
 
 block content
 
+    h1.display-4.m-b-2 #{translation.TITLE_RESULT}
+
     if results.length
 
-        each val in results
+        ul.collapsible
 
-            p= val.Name
+            each val in results
+
+                li
+                    .collapsible-header
+                        i.material-icons music_note
+                        |   #{val.Name}
+                    .collapsible-body
+                        table
+                            tbody
+
+                                tr
+                                    td #{translation.DATE_FOUNDATION}
+                                    td #{val.FundationYear}
+                                tr
+                                    td #{translation.TYPE_CHOIR}
+                                    td #{val.Type}
+                                tr
+                                    td #{translation.LANGUAGE}
+                                    td #{val.Language}
+                                tr
+                                    td #{translation.HOMEPAGE}
+                                    td #{val.WebPage}
+                                tr
+                                    td #{translation.EMAIL}
+                                    td #{val.Mailing}
+                                tr
+                                    td #{translation.ADDRESS}
+                                    td #{val.Address} #{val.NPA} #{val.City}
+                                tr
+                                    td #{translation.NAME_PRESIDENT}
+                                    td #{val.NamePresident}
+                                tr
+                                    td #{translation.NAME_DIRECTOR}
+                                    td #{val.NameDirector}
+                                tr
+                                    td #{translation.NAME_CASHIER}
+                                    td #{val.NameCashier}
+                                tr
+                                    td #{translation.NAME_SECRETARIAT}
+                                    td #{val.NameSecretary}
 
     else
 
         p No data available
+
+    script.
+        $(document).ready(function () {
+            $('.collapsible').collapsible();
+        });
