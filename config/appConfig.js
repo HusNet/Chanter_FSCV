@@ -27,11 +27,10 @@ const config = {
         },
         port: 3000,
         db: db.createConnection({
-            host: "phpmyadmindomains.grp3.p645.hevs.ch",
+            host: "mariadb",
             database: "chanter-dev",
             user: "dev",
-            password: "unlucky",
-            port: 3307
+            password: "unlucky"
         }),
 
     },
