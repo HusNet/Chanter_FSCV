@@ -21,8 +21,8 @@ services:
     environment:
       PMA_ARBITRARY: 1
       PMA_HOST: mariadb
-      PMA_USER: dev
-      PMA_PASSWORD: unlucky
+      PMA_USER: root
+      PMA_PASSWORD: root
       VIRTUAL_HOST: phpmyadmindomains.grp3.p645.hevs.ch
       LETSENCRYPT_HOST: phpmyadmindomains.grp3.p645.hevs.ch
       LETSENCRYPT_EMAIL: aurelie.glassey@students.hevs.ch
@@ -35,6 +35,11 @@ services:
   mariadb:
     image: mariadb
     restart: always
+    environment:
+      MYSQL_DATABASE:      chanter-dev
+      MYSQL_USER:          dev
+      MYSQL_PASSWORD:      unlucky
+      DATABASE_PORT_NUMBER: 3307
     volumes:
       - /var/lib/mysql/data
 
