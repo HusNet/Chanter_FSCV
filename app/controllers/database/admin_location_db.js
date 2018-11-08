@@ -3,6 +3,10 @@ exports.insertNewLocation = function (locationModel) {
         "VALUES ('" + locationModel.Address + "', '" + locationModel.NPA + "', '" + locationModel.City + "')";
 }
 
+exports.getLocation= function(locationModel){
+    return "SELECT * FROM `Location` WHERE  Address = '" + locationModel.Address + "' AND  NPA = '" + locationModel.NPA + "' AND City ='" + locationModel.City + "'";
+}
+
 
 
 exports.editLocation = function(idLocationToEdit, editLocationModel) {

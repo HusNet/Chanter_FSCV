@@ -2,7 +2,7 @@ extends choir
 
 block add_choir
 
-    form.col.s12(id='myForm' method='POST' action='/admin/choir/add')
+    form.col.s12(id='myForm' method='POST' action='/admin/choir/choir_add')
 
 
         .row
@@ -31,14 +31,14 @@ block add_choir
                 label(for='homepage') #{translation.HOMEPAGES}
                 input#homepage.form-control(type='text' name='homepage')
 
-            select(name='language').browser-default.col.s4
+            select(name='language' required).browser-default.col.s4
                 option(value='', selected='') #{translation.LANGUAGE}
                 option(value='1') #{translation.FR}
                 option(value='2') #{translation.DE}
 
         .row
             p.col.s3 #{translation.SWISS_CHOIR_UNION}:
-            select(name='Usc').browser-default.col.s4
+            select(name='Usc' required).browser-default.col.s4
                 option(value='', disabled='', selected='') #{translation.MEMBER}
                 option(value='1') #{translation.MEMBER_USC}
                 option(value='2') #{translation.NOT_USC}
@@ -48,7 +48,7 @@ block add_choir
 
         .row
             p.col.s3 #{translation.CANTONAL_FEDERATION}:
-            select(name='fscv').browser-default.col.s4
+            select(name='fscv' required).browser-default.col.s4
                 option(value='', disabled='', selected='') #{translation.MEMBER}
                 option(value='1') #{translation.FSCV}
                 option(value='2') #{translation.NOT_FSCV}
@@ -64,26 +64,26 @@ block add_choir
                 option(value='2') #{translation.DIRECTOR}
 
         .row
-            select(name='grpmts').browser-default.col.s4
-                option(value='', disabled='', selected='') #{translation.GRPMTS_REGION}
+            select(name='grpmts' required).browser-default.col.s4
+                option(value='', selected='', disabled) #{translation.GRPMTS_REGION}
                 option(value='1') #{translation.GROUP_GSCBV}
                 option(value='2') #{translation.GROUP_UCC}
                 option(value='3') #{translation.GROUP_GCVC}
                 option(value='4') #{translation.GROUP_OCV}
 
             .input-field.col.s3
-                input#dateGrpmts.datepicker(type='date', placeholder='', name='dateGrpmts')
+                input#dateGrpmts.datepicker(type='date', placeholder='', name='dateGrpmts' required)
                 label(for='dateGrpmts') #{translation.DATE_GRPMTS}
         .row
-            select(name='decanat').browser-default.col.s4
-                option(value='', disabled='', selected='') #{translation.DECANAT}
+            select(name='sousGrpmts').browser-default.col.s4
+                option(value='0', selected='') #{translation.DECANAT}
                 option(value='1') #{translation.WELTICH}
                 option(value='2') #{translation.LEUK}
                 option(value='3') #{translation.RARON}
                 option(value='4') #{translation.BRIG}
                 option(value='5') #{translation.VISP}
                 option(value='6') #{translation.ERNEN}
-            select(name='typeChoeur').browser-default.col.s4
+            select(name='typeChoeur' required).browser-default.col.s4
                 option(value='', disabled='', selected='') #{translation.TYPE_CHOIR}
                 option(value='1') #{translation.ADULT}
                 option(value='2') #{translation.TEEN}
@@ -137,8 +137,8 @@ block add_choir
 
         .row
             .input-field.col.s12
-                label.active(for='comments') #{translation.COMMENTS}
-                textarea#comments.materialize-textarea(name='comment')
+                label.active(for='comment') #{translation.COMMENTS}
+                textarea#comment.materialize-textarea(name='comment')
 
         .row
             button.btn.btn-primary.col.s3(type='submit') #{translation.ADD}

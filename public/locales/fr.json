@@ -19,6 +19,7 @@
   "FR_TITLE": "Titre français",
   "DE_TITLE": "Titre allemand",
   "CONTENT_NEWS": "Contenu de la news",
+  "MESSAGE": "Message",
   "ADD_TRANSLATE": "Ajouter une traduction ?",
   "LASTNAME": "Nom de famille",
   "FIRSTNAME": "Prénom",
@@ -32,6 +33,7 @@
   "STARTABO": "Début abonnement",
   "NEWSLETTER": "Newsletter",
   "LOCATION": "Lieu (NPA)",
+  "SEND": "Envoyer",
   "ADD" : "Ajouter",
   "DOWNLOAD" : "Télécharger",
   "LINK" : "Lier",
@@ -49,6 +51,7 @@
   "TITLE_ADMIN_EXPORT": "Exporter des données",
   "TITLE_ADMIN_EXPORT_CHOIR": "Exporter des choeurs",
   "TITLE_SEARCH": "Rechercher",
+  "TITLE_CONTACT": "Formulaire de contact",
   "TITLE_ADMIN_SEARCH_CHOIR": "Chercher des choeurs",
   "TITLE_ADMIN_SEARCH_PERSON": "Chercher des personnes",
   "TITLE_ADMIN_EXPORT_PERSON": "Exporter des personnes",
@@ -136,8 +139,8 @@
   "UPDATE_CHOIR": "Modifier un choeur",
   "DELETE_CHOIR": "Supprimer un choeur",
   "EDIT_PERSON": "Modifier une personne",
-  "SEARCH" : "Rechercher",
   "LIST_CHOIR": "Liste de Choeur",
+  "SEARCH" : "Rechercher",
   "LANGUAGE": "Langue",
   "CREATION_PERSON": "Nouvelle personne",
   "SEARCH_PERSON" : "Rechercher une personne",
@@ -158,5 +161,11 @@
   "CHOIR_CHOOSEN": "Cette personne appartient au choeur: ",
   "CHOIR_CHOSE": "Choisir le choeur",
   "CALENDAR": "Calendrier",
-  "ACTUS": "Actualités"
+  "ACTUS": "Actualités",
+  "SEARCH_CHOIR":"Rechercher un Choeur",
+  "SEARCH_CHOIR_SUCCESS": "Choeur trouvée",
+  "SEARCH_CHOIR_FAILURE": "Choeur inexistant",
+  "UPDATE_CHOIR_SUCCESS": "Actualisation réussi",
+  "UPDATE_CHOIR_FAILURE": "Actualisation échoué"
+
 }

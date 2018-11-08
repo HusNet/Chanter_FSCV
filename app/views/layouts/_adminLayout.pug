@@ -24,29 +24,40 @@ html(lang='fr')
                     li
                         a(href='/admin/page') #{translation.PAGE}
                     li
+                        a(href='/admin/news') #{translation.NEWS}
+                    li
                         a(href='/admin/choir') #{translation.CHOIR}
                     li
                         a(href='/admin/person') #{translation.PERSON}
                     li
-                        a(href='/admin/news') #{translation.NEWS}
-                    li
-                        a(href='/admin/service') #{translation.SERVICE}
-                    li
                         a(href='/admin/user') #{translation.USER}
                     li
                         a(href='/admin/export') #{translation.EXPORT}
+
+                ul.right
+                    li.dropdown-trigger(data-target='dropdown_lang') #{translation.LANGUAGE}
+                        ul#dropdown_lang.dropdown-content
+                            li
+                                a(href='?clang=fr') fr
+                            li
+                                a(href='?clang=de') de
                     li
                         a(href='/admin/logout_do') #{translation.LOGOUT}
-                    li
-                        a(href='?clang=fr') fr
-                    li
-                        a(href='?clang=de') de
 
-                a(href='/', class='right brand-logo', style='margin-right:15px') Chanter.ch
+
         div(class='container')
-            block content
+                block content
 
 
         block js
             script(src='/public/assets/js/materialize.min.js')
             script(src='/public/js/main.js')
+            script.
+                document.addEventListener('DOMContentLoaded', function () {
+                    var element = document.querySelectorAll('.dropdown-trigger');
+                    var instances = M.Dropdown.init(element, {
+                        hover: true,
+                        constrainWidth: false,
+                        coverTrigger: false
+                    });
+                });

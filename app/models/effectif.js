@@ -1,6 +1,6 @@
 function effectif(rows) {
     this.year = rows.nbYear;
-    this.nbMembre = rows.nbMembre;
+    this.membre = rows.nbMembre;
 }
 
 module.exports = effectif;

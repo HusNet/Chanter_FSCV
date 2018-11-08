@@ -1,0 +1,13 @@
+extends choir
+
+block result
+
+    br
+    br
+
+    if success
+        div.success
+        p #{translation.UPDATE_CHOIR_SUCCESS}
+    else
+        div.failed
+        p #{translation.UPDATE_CHOIR_FAILURE}

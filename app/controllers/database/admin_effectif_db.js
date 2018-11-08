@@ -1,9 +1,16 @@
 exports.insertNewEffectif = function (modelEffectif) {
     return "INSERT INTO Effectif (Year, NbMembers) " +
-        "VALUES ('" + modelEffectif.year + "', '" + modelEffectif.nbMembre + "')";
-}
+        "VALUES ('" + modelEffectif.year + "', '" + modelEffectif.membre + "')";
+};
 
-exports.deleteEffectif = function (EffectifId) {
-    return "DELETE FROM Effectif WHERE EffectifId =  '" + EffectifId + "'";
 
-}
+exports.getEffectifFromId = function (EffectifId) {
+    return "SELECT * FROM `Effectif` WHERE `EffectifId` =  '" + EffectifId + "'";
+
+};
+
+exports.editEffectif = function(EffectifId, modelUpdateEffectif) {
+    return  "UPDATE `Effectif` " +
+        "SET `Year` = '" + modelUpdateEffectif.year + "', `NbMembers` = '" + modelUpdateEffectif.membre + "'" +
+        "WHERE EffectifId = " + EffectifId;
+};

@@ -1,0 +1,13 @@
+extends choir
+
+block resultSearch
+
+    br
+    br
+
+    if success
+        div.success
+        p #{translation.SEARCH_CHOIR_SUCCESS}
+    else
+        div.failed
+        p #{translation.SEARCH_CHOIR_FAILURE}

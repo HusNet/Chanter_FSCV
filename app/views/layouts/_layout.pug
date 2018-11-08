@@ -5,6 +5,8 @@ html(lang='fr')
         meta(name='viewport', content='width=device-width')
         link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
 
+        script(src='/public/assets/js/jquery.js')
+
         title= title
         block css
             link(href='/public/assets/css/materialize.min.css', rel='stylesheet')
@@ -18,6 +20,8 @@ html(lang='fr')
                     // mainMenu
                     each item in mainMenu
                         if (item.IsMenu)
+                            li
+                                | &nbsp;&nbsp;
                             li.dropdown-trigger(data-target='dropdown_submenu_' + item.idChild)
                                 if (lang === 'fr')
                                     | #{item.Name_fr}
@@ -31,6 +35,8 @@ html(lang='fr')
                                                     | #{sub.Name_fr}
                                                 if (lang === 'de')
                                                     | #{sub.Name_de}
+                            li
+                                | &nbsp;&nbsp;&nbsp;&nbsp;
                         else
                             li
                                 a(href="/?id=" + item.idChild)

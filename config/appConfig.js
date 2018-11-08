@@ -19,7 +19,6 @@ const config = {
         }),
     },
 
-
     production: {
         root: rootPath,
         app: {
@@ -30,9 +29,9 @@ const config = {
             host: "mariadb",
             database: "chanter-prod",
             user: "prod",
-            password: "unlucky"
+            password: "unlucky",
+            multipleStatements: "true"
         }),
-
     },
 
 

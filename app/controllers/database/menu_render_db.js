@@ -66,3 +66,9 @@ exports.getPageContent_FR = function(id){
 exports.getPageContent_DE = function(id){
     return PageDb.getPageById("(SELECT `idDE` FROM `Translations` WHERE `idTranslation` = " + id + " LIMIT 1)");
 };
+
+
+
+
+
+

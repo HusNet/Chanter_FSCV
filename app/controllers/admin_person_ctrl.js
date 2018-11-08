@@ -208,6 +208,7 @@ exports.admin_person_edit_result = function(req, res, next){
     let idUserToEdit = req.body.idUser;
     let idLocationToEdit = req.body.idLocation;
 
+
     let arrayRoleSelected = [director, director2, president, secretary, cashier, committee, other];
     let arrayRoleNames = ['Director', 'Director_2', 'President', 'Secretary', 'Cashier', 'Committee', 'Other'];
     let arrayRolesForUser;
