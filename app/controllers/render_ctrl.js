@@ -8,8 +8,6 @@ exports.menuRender = function(req, res, next, callback){
         let mainMenuId = rows[0].MainMenuId;
         C.db.query(MenuRenderDb.getMenus(), function(err, rows, fields){
 
-            // TODO : get pages from right lang (req.query.i18n_lang)
-
             // populate main menu
             let mainMenu = [];
             rows.forEach(function(item){
@@ -18,19 +16,19 @@ exports.menuRender = function(req, res, next, callback){
             });
 
             mainMenu.forEach(function(item){
+
                 if (Boolean(item.IsMenu?1:0)){
                     let subMenuId = item.idChild;
                     let subMenu = [];
+
+
                     rows.forEach(function (item) {
                         if (item.idMenu === subMenuId) {
                             subMenu.push(new Menu_Child(item));
                         }
                     });
 
-                    mainMenu[mainMenu.findIndex(
-                        function(item){
-                            return item.idChild === subMenuId;
-                        })].content = subMenu;
+                    item.content = subMenu;
                 }
             });
 
