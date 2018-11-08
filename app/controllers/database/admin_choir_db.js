@@ -19,9 +19,9 @@ exports.getAllChoir = function () {
 
 
 exports.insert = function (modelChoir) {
-    return "INSERT INTO Choir (`Name`, `FundationYear`, `Church`, `Gospel`, `Language`, `Remarks`, `WebPage`, `EffectifId`, `Mailing`, `LocationId`, `NamePresident`, `NameDirector`, `NameCashier`, `NameSecretary`) " +
+    return "INSERT INTO Choir (`Name`, `FundationYear`, `Church`, `Gospel`, `Language`, `Remarks`, `WebPage`, `EffectifId`, `Mailing`, `LocationId`, `NamePresident`, `NameDirector`, `NameCashier`, `NameSecretary`, GroupsId) " +
     "VALUES ('" + modelChoir.Name + "', '" + modelChoir.FundationYear + "', '" + modelChoir.Church + "', " +
-    "'" + modelChoir.Gospel + "', '" + modelChoir.Language + "', '" + modelChoir.Comments + "', '" + modelChoir.Homepage + "', '" + modelChoir.EffectifId +"', '" + modelChoir.Mailing + "', '" + modelChoir.LocationId + "', '" + modelChoir.NamePresident + "', '" + modelChoir.NameDirector + "', '" + modelChoir.NameCashier + "', '" + modelChoir.NameSecretary + "')";
+    "'" + modelChoir.Gospel + "', '" + modelChoir.Language + "', '" + modelChoir.Comments + "', '" + modelChoir.Homepage + "', '" + modelChoir.EffectifId +"', '" + modelChoir.Mailing + "', '" + modelChoir.LocationId + "', '" + modelChoir.NamePresident + "', '" + modelChoir.NameDirector + "', '" + modelChoir.NameCashier + "', '" + modelChoir.NameSecretary + "', '" + modelChoir.GroupsId + "')";
 };
 
 exports.editChoir = function(choirId, modelUpdateChoir) {

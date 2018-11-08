@@ -141,7 +141,7 @@ CREATE TABLE IF NOT EXISTS `chanter-dev`.`Choir` (
   `ChoirId` INT(10) NOT NULL AUTO_INCREMENT,
   `Name` VARCHAR(255) NOT NULL,
   `FundationYear` DATE NOT NULL,
-  `Type` VARCHAR(64) NOT NULL,
+  `Type` VARCHAR(64) NULL DEFAULT 1,
   `Church` TINYINT(1) NULL DEFAULT 0,
   `Gospel` TINYINT(1) NULL DEFAULT 0,
   `Language` ENUM('Français', 'Deutsch') NOT NULL,

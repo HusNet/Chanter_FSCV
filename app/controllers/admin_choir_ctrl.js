@@ -59,7 +59,7 @@ var self = module.exports = {
                                 C.db.query(queryGroups, function(err, resGroups, fields){
                                     if(err) throw (err);
                                     if(resGroups){
-                                        console.log('Groups: ' + resGroups[0].groups);
+                                        console.log('Groups: ' + resGroups[0].Name);
                                         resGroups[0].MembershipDate = resGroups[0].MembershipDate.toISOString().slice(0,10);
 
                                         if(resGroups[0].DateUSC !='0000-00-00') {
@@ -599,7 +599,6 @@ var self = module.exports = {
 
                         //*** Group creation
                         let queryInsertGroup = AdminGroupDb.insertGroup(modelGroup);
-                        console.log(modelChoir);
                         C.db.query(queryInsertGroup, function (err,rowsGroup, fields){
                             if(err) throw(err);
                             if(rowsGroup.length === 0){
