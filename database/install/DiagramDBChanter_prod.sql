@@ -496,21 +496,21 @@ INSERT INTO `chanter-prod`.`Page` (`PageId`, `Title`, `Content`, `Published_date
 INSERT INTO `chanter-prod`.`Page` (`PageId`, `Title`, `Content`, `Published_date`, `Updated_date`, `IsNews`, `AdminId`)VALUES (36, 'Prochaine formation AVCC', '<h1><strong>Prochaine formation AVCC</strong></h1><p><span style="background-color: rgba(255, 255, 255, 0.8);"><img src="https://i1.wp.com/www.chanter.ch/wp/wp-content/uploads/2018/09/41659987_2126518937358621_2910742788683333632_n.jpg?resize=150%2C150" height="138" width="138"></span>Cette journée animée par Charles Barbier se veut interactive et propose de réfléchir aux aspects cachés de notre pratique de chefs de chœur, notamment la communication non verbale et les choix que nous faisons avant même d’être face au chœur. En choisissant comme fil rouge la prise de risque, nous aurons l’occasion de partager des regards neufs sur nos pratiques. Quels risques prend-on en élaborant un programme de concert ? Sans faire de mise en voix fait-on courir un risque aux chanteurs ? Y a-t-il un risque à ne pas prêter attention au choix de ses mots, en répétition ?</p><p>Cours gratuit pour les membres cotisants AVCC, 40.- CHF pour les non cotisants à l’AVCC / Repas : 25.- CHF / Encaissement sur place.</p><p>Inscriptions jusqu’au 10 novembre 2018 à associationavcc@gmail.com ou au 079 930 25 43. Merci d’indiquer si vous souhaitez partager le repas avec les autres participants.</p>', '2018-10-26 00:00:00', '2018-10-26 00:00:00', 0, 1);
 INSERT INTO `chanter-prod`.`Page` (`PageId`, `Title`, `Content`, `Published_date`, `Updated_date`, `IsNews`, `AdminId`)VALUES (37, 'Nächste AVCC-Schulung', '<h1><strong>Prochaine formation AVCC</strong></h1><p><span style="background-color: rgba(255, 255, 255, 0.8);"><img src="https://i1.wp.com/www.chanter.ch/wp/wp-content/uploads/2018/09/41659987_2126518937358621_2910742788683333632_n.jpg?resize=150%2C150" height="138" width="138"></span>Cette journée animée par Charles Barbier se veut interactive et propose de réfléchir aux aspects cachés de notre pratique de chefs de chœur, notamment la communication non verbale et les choix que nous faisons avant même d’être face au chœur. En choisissant comme fil rouge la prise de risque, nous aurons l’occasion de partager des regards neufs sur nos pratiques. Quels risques prend-on en élaborant un programme de concert ? Sans faire de mise en voix fait-on courir un risque aux chanteurs ? Y a-t-il un risque à ne pas prêter attention au choix de ses mots, en répétition ?</p><p>Cours gratuit pour les membres cotisants AVCC, 40.- CHF pour les non cotisants à l’AVCC / Repas : 25.- CHF / Encaissement sur place.</p><p>Inscriptions jusqu’au 10 novembre 2018 à associationavcc@gmail.com ou au 079 930 25 43. Merci d’indiquer si vous souhaitez partager le repas avec les autres participants.</p>', '2018-10-26 00:00:00', '2018-10-26 00:00:00', 0, 1); COMMIT;
 
-INSERT INTO `chanter-dev`.`Location` (`Address`, `NPA`, `City`) VALUES ('Route de Lausanne', '1950', 'Sion');
-INSERT INTO `chanter-dev`.`Location` (`Address`, `NPA`, `City`) VALUES ('Bellevue', '3960', 'Sierre');
-INSERT INTO `chanter-dev`.`Location` (`Address`, `NPA`, `City`) VALUES ('Lonza', '3930', 'Visp');
+INSERT INTO `chanter-prod`.`Location` (`Address`, `NPA`, `City`) VALUES ('Route de Lausanne', '1950', 'Sion');
+INSERT INTO `chanter-prod`.`Location` (`Address`, `NPA`, `City`) VALUES ('Bellevue', '3960', 'Sierre');
+INSERT INTO `chanter-prod`.`Location` (`Address`, `NPA`, `City`) VALUES ('Lonza', '3930', 'Visp');
 
-INSERT INTO `chanter-dev`.`Effectif` (`Year`, `NbMembers`) VALUES ('2009-01-01', '30');
-INSERT INTO `chanter-dev`.`Effectif` (`Year`, `NbMembers`) VALUES ('2016-01-01', '40');
-INSERT INTO `chanter-dev`.`Effectif` (`Year`, `NbMembers`) VALUES ('2009-01-01', '36');
+INSERT INTO `chanter-prod`.`Effectif` (`Year`, `NbMembers`) VALUES ('2009-01-01', '30');
+INSERT INTO `chanter-prod`.`Effectif` (`Year`, `NbMembers`) VALUES ('2016-01-01', '40');
+INSERT INTO `chanter-prod`.`Effectif` (`Year`, `NbMembers`) VALUES ('2009-01-01', '36');
 
-INSERT INTO `chanter-dev`.`Groups` (`Name`, `SubGroups`, `USC`, `FSCV`, `DateUSC`, `DateFSCV`, `MembershipDate`)
+INSERT INTO `chanter-prod`.`Groups` (`Name`, `SubGroups`, `USC`, `FSCV`, `DateUSC`, `DateFSCV`, `MembershipDate`)
 VALUES ('1', '1', 'Group1', 'SubGroup1', '2009-09-09', '2009-09-09', '2009-09-09');
-INSERT INTO `chanter-dev`.`Choir` (`Name`, `FundationYear`, `Type`, `Church`, `Gospel`, `Language`, `Remarks`, `WebPage`, `EffectifId`, `Mailing`, `LocationId`, `GroupsId`, `NamePresident`, `NameDirector`, `NameCashier`, `NameSecretary`)
+INSERT INTO `chanter-prod`.`Choir` (`Name`, `FundationYear`, `Type`, `Church`, `Gospel`, `Language`, `Remarks`, `WebPage`, `EffectifId`, `Mailing`, `LocationId`, `GroupsId`, `NamePresident`, `NameDirector`, `NameCashier`, `NameSecretary`)
 VALUES ('Sion choir', '2009-09-09', 'Mixte', 0, 0, 'Français', '', '', 1, 30, 1, 1, 'Jacques', 'charles', 'Jean', 'Aurelie');
-INSERT INTO `chanter-dev`.`Choir` (`Name`, `FundationYear`, `Type`, `Church`, `Gospel`, `Language`, `Remarks`, `WebPage`, `EffectifId`, `Mailing`, `LocationId`, `GroupsId`, `NamePresident`, `NameDirector`, `NameCashier`, `NameSecretary`)
+INSERT INTO `chanter-prod`.`Choir` (`Name`, `FundationYear`, `Type`, `Church`, `Gospel`, `Language`, `Remarks`, `WebPage`, `EffectifId`, `Mailing`, `LocationId`, `GroupsId`, `NamePresident`, `NameDirector`, `NameCashier`, `NameSecretary`)
 VALUES ('Sierre choir', '2016-09-09', 'Adultes', 0, 0, 'Français', '', '', 1, 90, 1, 1, 'Yvonne', 'Peter', 'Yannick', 'Maud');
-INSERT INTO `chanter-dev`.`Choir` (`Name`, `FundationYear`, `Type`, `Church`, `Gospel`, `Language`, `Remarks`, `WebPage`, `EffectifId`, `Mailing`, `LocationId`, `GroupsId`, `NamePresident`, `NameDirector`, `NameCashier`, `NameSecretary`)
+INSERT INTO `chanter-prod`.`Choir` (`Name`, `FundationYear`, `Type`, `Church`, `Gospel`, `Language`, `Remarks`, `WebPage`, `EffectifId`, `Mailing`, `LocationId`, `GroupsId`, `NamePresident`, `NameDirector`, `NameCashier`, `NameSecretary`)
 VALUES ('Visp choir', '2003-04-06', 'Femmes', 0, 0, 'Deutsch', '', '', 1, 90, 1, 1, 'Hans', 'Peter', 'Jan', 'Kika');
 
 INSERT INTO `Translations` (`idFR`, `idDE`) VALUES (1,38);
