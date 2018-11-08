@@ -1,14 +1,9 @@
 -- -----------------------------------------------------
 -- Schema chanter-prod
 -- -----------------------------------------------------
-<<<<<<< HEAD:database/install/DiagramDBChanter.sql
 CREATE SCHEMA IF NOT EXISTS `chanter-prod` DEFAULT CHARACTER SET utf8 ;
 USE `chanter-prod` ;
-=======
 
-CREATE SCHEMA IF NOT EXISTS `chanter-dev` DEFAULT CHARACTER SET utf8 ;
-USE `chanter-dev` ;
->>>>>>> origin/devBranch:database/install/DiagramDBChanter_dev.sql
 
 SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `Admin_Login`;
