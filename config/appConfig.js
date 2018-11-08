@@ -1,10 +1,10 @@
 const path = require('path'),
     rootPath = path.normalize(__dirname + '/..'),
-    env = process.env.NODE_ENV || 'production',
+    env = process.env.NODE_ENV || 'development',
     db = require('mysql');
 
 const config = {
-    /*development: {
+    development: {
         root: rootPath,
         app: {
             name: 'chanter-dev'
@@ -19,7 +19,7 @@ const config = {
         }),
     },
 
-*/
+
     production: {
         root: rootPath,
         app: {
@@ -28,8 +28,8 @@ const config = {
         port: 3000,
         db: db.createConnection({
             host: "mariadb",
-            database: "chanter-dev",
-            user: "dev",
+            database: "chanter-prod",
+            user: "prod",
             password: "unlucky"
         }),
 

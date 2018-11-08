@@ -36,8 +36,8 @@ services:
     image: mariadb
     restart: always
     environment:
-      MYSQL_DATABASE:      chanter-dev
-      MYSQL_USER:          dev
+      MYSQL_DATABASE:      chanter-prod
+      MYSQL_USER:          prod
       MYSQL_PASSWORD:      unlucky
       DATABASE_PORT_NUMBER: 3307
     volumes:
