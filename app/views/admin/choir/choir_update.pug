@@ -1,0 +1,19 @@
+extends choir
+
+block update_choir
+
+    h2 #{translation.EDIT_PERSON}
+
+    br
+
+    form(method='POST' action='/admin/choir/choir_update')
+
+        div.form-group
+
+            div(class='row')
+
+                label(for='nameChoir') #{translation.CHOIR_NAME}:
+                input#nameChoir.form-control(type='text', placeholder= translation.CHOIR_NAME, name='nameChoir', required)
+                
+        button.btn.btn-primary(type='submit' name='action') #{translation.SEARCH_CHOIR}
+

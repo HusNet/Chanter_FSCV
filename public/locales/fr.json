@@ -146,5 +146,11 @@
   "SEARCH_PERSON_SUCCESS": "Personne trouvée",
   "SEARCH_PERSON_FAILURE": "Cette personne n'existe pas, veuillez controller vos champs",
   "ADDFORMULAIRECLIENT": "Lien du formulaire pour le client",
-  "ADDFORMULAIRERESPONSE": "Lien du formulaire de réponse"
+  "ADDFORMULAIRERESPONSE": "Lien du formulaire de réponse",
+  "SEARCH_CHOIR":"Rechercher un Choeur",
+  "SEARCH_CHOIR_SUCCESS": "Choeur trouvée",
+  "SEARCH_CHOIR_FAILURE": "Choeur inexistant",
+  "UPDATE_CHOIR_SUCCESS": "Actualisation réussi",
+  "UPDATE_CHOIR_FAILURE": "Actualisation échoué"
+
 }

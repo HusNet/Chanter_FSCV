@@ -134,7 +134,7 @@
   "ADD_PERSON": "Jemand hinzufügen",
   "EDIT_PERSON": "Jemand veränderung",
   "DELETE_PERSON": "Jemand entfernen",
-  "SEARCH_PERSON" : "Jemand Suchen",
+  "SEARCH_PERSON" : "Suchen",
   "EDIT": "Modifikation für",
   "NEWSLETTER": "Newsletter erhalten",
   "ADDRESS": "Adresse",
@@ -148,5 +148,11 @@
   "LIST_CHOIR": "Chorliste",
   "LANGUAGE": "SPRACHE",
   "MEMBER": "Mitglied oder Nicht-Mitglied",
-  "CREATION_PERSON":"Neue Person"
+  "CREATION_PERSON":"Neue Person",
+  "SEARCH_CHOIR":"Suche nach einem Chor",
+  "SEARCH_CHOIR_SUCCESS": "Chor gefunden",
+  "SEARCH_CHOIR_FAILURE": "Chor nicht vorhanden",
+  "UPDATE_CHOIR_SUCCESS": "erfolgreiches Update",
+  "UPDATE_CHOIR_FAILURE": "fehlgeschlagenes Update"
+
 }
