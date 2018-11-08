@@ -27,19 +27,14 @@ const config = {
         port: 3000,
         db: db.createConnection({
             host: "mariadb",
-            database: "chanter-dev",
+            database: "chanter-prod",
             user: "prod",
             password: "unlucky",
             multipleStatements: "true"
         }),
     },
 
-    i18n: {
-        translationsPath: path.join(__dirname, '../public/locales'),
-        siteLangs: ['fr', 'de'],
-        defaultLocale: 'fr',
-        textsVarName: 'translation'
-    }
+
 
 
 };
