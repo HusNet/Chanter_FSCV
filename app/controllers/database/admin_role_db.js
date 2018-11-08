@@ -1,11 +1,11 @@
 exports.getIdRole = function (name) {
    return "SELECT RoleId FROM `Role` WHERE `Name` = '" + name + "'";
-}
+};
 
 
 exports.getNameRole = function (roleId) {
     return "SELECT * FROM `Role` WHERE `RoleId` = '" + roleId + "'";
-}
+};
 
 
 exports.getNameR = function (tabIdRole) {
@@ -23,7 +23,7 @@ exports.getNameR = function (tabIdRole) {
     return query;
 
 
-}
+};
 
 
 exports.getIdRoleFromNameRoleList = function (tabNameRole) {
@@ -41,7 +41,7 @@ exports.getIdRoleFromNameRoleList = function (tabNameRole) {
     return query;
 
 
-}
+};
 
 
 

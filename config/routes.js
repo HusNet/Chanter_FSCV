@@ -12,6 +12,8 @@ module.exports = function(app, router) {
     //admin login
     let admin = require('../app/controllers/admin_ctrl');
     let calendar = require('../app/controllers/calendar_ctrl');
+    let search = require('../app/controllers/search_ctrl');
+    let news = require('../app/controllers/news_ctrl');
 
     let adminMenu = require('../app/controllers/admin_menu_ctrl');
     let adminPerson = require('../app/controllers/admin_person_ctrl');
@@ -20,13 +22,37 @@ module.exports = function(app, router) {
     let adminChoir = require('../app/controllers/admin_choir_ctrl');
 
 
-
     router.get('/', function(req, res, next) {
         render.index(req, res, next);
     });
 
     router.get('/calendar', function (req, res, next) {
        calendar.calendar(req, res, next);
+    });
+
+
+    router.get('/news', function (req, res, next) {
+        news.news(req, res, next);
+    });
+
+    router.get('/search', function (req, res, next) {
+        search.search(req, res, next);
+    });
+
+    router.get('/search/search_choir', function (req, res, next) {
+        search.search_form_choir(req, res, next);
+    });
+
+    router.post('/search/search_choir', function (req, res, next) {
+        search.search_choir(req, res, next);
+    });
+
+    router.get('/search/search_person', function (req, res, next) {
+        search.search_form_person(req, res, next);
+    });
+
+    router.post('/search/search_person', function (req, res, next) {
+        search.search_person(req, res, next);
     });
 
     router.get('/admin', function(req, res, next) {
@@ -45,7 +71,6 @@ module.exports = function(app, router) {
         admin.authenticationTest(req, res, next);
         admin.dashboard(req, res, next);
     });
-
 
     router.get('/admin/service', function(req, res, next) {
         admin.authenticationTest(req, res, next);
@@ -272,6 +297,27 @@ module.exports = function(app, router) {
         admin.authenticationTest(req, res, next);
         adminPerson.admin_person_delete(req, res, next);
     });
+
+    router.get('/admin/person/person_search_link_to_choir', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        res.render('admin/person/person_search_link_to_choir');
+    });
+
+    router.post('/admin/person/person_search_link_to_choir', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminPerson.admin_findPersonLinkChoir(req, res, next);
+    });
+
+    router.get('/admin/person/person_link_to_choir', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        res.render('admin/person/person_link_to_choir');
+    });
+
+    router.post('/admin/person/person_link_to_choir', function(req, res, next) {
+        admin.authenticationTest(req, res, next);
+        adminPerson.admin_personLinkChoir(req, res, next);
+    });
+
 
     // *** END PERSON ROUTES
 

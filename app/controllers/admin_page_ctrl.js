@@ -210,10 +210,6 @@ exports.add_page = function (req, res, next) {
             });
         });
     });
-
-
-
-
 };
 
 exports.delete_page = function (req, res, next) {

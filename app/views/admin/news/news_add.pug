@@ -60,13 +60,11 @@ block content
         });
 
         quillFr.on('text-change', function () {
-            var justHtml = quillFr.root.innerHTML;
-            contentFr.value = justHtml;
+            contentFr.value = quillFr.root.innerHTML;
         });
 
         quillDe.on('text-change', function () {
-            var justHtml = quillFr.root.innerHTML;
-            contentDe.value = justHtml;
+            contentDe.value = quillDe.root.innerHTML;
         });
 
     script(src='//cdn.quilljs.com/1.3.6/quill.core.js')

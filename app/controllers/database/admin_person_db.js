@@ -58,8 +58,6 @@ exports.getExportPerson = function (lastname, firstname, phone, phoneProf, email
                     "JOIN `Location` ON `User`.LocationId = `Location`.LocationId " +
                     "WHERE 1 = 1";
 
-    console.log(lastname + '-' + firstname + '-' + phone + '-' + phoneProf + '-' + email + '-' + startAbo + '-' + newsletter + '-' + location);
-
     if(lastname !== null)
         query += " AND `User`.`Lastname` = '" + lastname + "'";
 

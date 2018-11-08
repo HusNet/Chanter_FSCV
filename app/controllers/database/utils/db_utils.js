@@ -17,9 +17,9 @@ exports.exportPageData = function (rows) {
         "USE `chanter-dev`;\n" ;
 
     pageModel.forEach(function (page) {
-        query += "INSERT INTO  `chanter-dev`.`Page` (`PageId`, `Title`, `Content`, `Published_date`, `Updated_date`, `Lang`, `IdPageLang`, `IsNews`, `AdminId`)" +
+        query += "INSERT INTO  `chanter-dev`.`Page` (`PageId`, `Title`, `Content`, `Published_date`, `Updated_date`, `IsNews`, `AdminId`)" +
             "VALUES (" + page.PageId + ", '" + DbUtils.replaceSimpleQuote(page.Title) + "', '" + DbUtils.replaceSimpleQuote(page.Content) + "', '" + new Date(page.Published_date).toISOString().slice(0, 19).replace('T', ' ') + "', '" + new Date(page.Updated_date).toISOString().slice(0, 19).replace('T', ' ') + "', " +
-            "'" + page.Lang + "', " + page.IdPageLang + ", "+ page.IsNews+", " + page.AdminId + ");\n";
+            page.IsNews + ", " + page.AdminId + ");\n";
     });
 
     query += "COMMIT;\n";

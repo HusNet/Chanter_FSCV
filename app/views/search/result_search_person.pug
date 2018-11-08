@@ -1,0 +1,44 @@
+extends ../layouts/_layout
+
+block content
+
+    h1.display-4.m-b-2 #{translation.TITLE_RESULT}
+
+    if results.length
+
+        ul.collapsible
+
+            each val in results
+
+                li
+                    .collapsible-header
+                        i.material-icons person
+                        |   #{val.Lastname} #{val.Firstname}
+                    .collapsible-body
+                        table
+                            tbody
+
+                                tr
+                                    td #{translation.PHONEPRIVATE}
+                                    td #{val.Phone}
+                                tr
+                                    td #{translation.PHONEPROF}
+                                    td #{val.PhoneProf}
+                                tr
+                                    td #{translation.EMAIL}
+                                    td #{val.Email}
+                                tr
+                                    td #{translation.STARTABO}
+                                    td #{val.StartAbo}
+                                tr
+                                    td #{translation.ADDRESS}
+                                    td #{val.Address} #{val.NPA} #{val.City}
+
+    else
+
+        p No data available
+
+    script.
+        $(document).ready(function () {
+            $('.collapsible').collapsible();
+        });

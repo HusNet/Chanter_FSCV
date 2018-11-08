@@ -1,6 +1,8 @@
+const MenuRender = require('../controllers/render_ctrl');
+
 exports.calendar = function(req, res, next) {
 
-
-
-    res.render('calendar/calendar');
+    MenuRender.menuRender(req, res, next, function(req, res, next, mainMenu) {
+        res.render('calendar/calendar', {mainMenu: mainMenu});
+    });
 };

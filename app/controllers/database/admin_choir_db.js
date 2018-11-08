@@ -6,23 +6,23 @@ exports.getMenuById = function(Id){
     return "SELECT * FROM Menu INNER JOIN Menu_has_Page ON Menu.idMenu = Menu_has_Page.Menu_idMenu INNER JOIN Page ON Menu_has_Page.Page_PageId = Page.PageId WHERE Menu.idMenu = '" + Id + "'";
 };
 
+exports.delete = function(id){
+    return "DELETE FROM Choir WHERE ChoirId = " + id;
+};
+
 exports.getAllChoir = function () {
     return  "SELECT * " +
-            "FROM Choir " +
-                "INNER JOIN Effectif ON Choir.EffectifId = Effectif.EffectifId " +
-                "INNER JOIN Location ON Choir.LocationId = Location.LocationId";
+        "FROM Choir " +
+        "INNER JOIN Effectif ON Choir.EffectifId = Effectif.EffectifId " +
+        "INNER JOIN Location ON Choir.LocationId = Location.LocationId";
 };
 
 
 exports.insert = function (modelChoir) {
-    return "INSERT INTO Choir (`Name`, `FundationYear`,`Church`, `Gospel`, `Language`,`Type`, `Remarks`, `WebPage`, `EffectifId`, `Mailing`, `LocationId`, `GroupsId`, `NamePresident`, `NameDirector`, `NameCashier`, `NameSecretary`) " +
+    return "INSERT INTO Choir (`Name`, `FundationYear`, `Church`, `Gospel`, `Language`, `Remarks`, `WebPage`, `EffectifId`, `Mailing`, `LocationId`, `NamePresident`, `NameDirector`, `NameCashier`, `NameSecretary`) " +
     "VALUES ('" + modelChoir.Name + "', '" + modelChoir.FundationYear + "', '" + modelChoir.Church + "', " +
-    "'" + modelChoir.Gospel + "', '" + modelChoir.Language + "','" + modelChoir.TypeChoir + "', '" + modelChoir.Remarks + "', '" + modelChoir.WebPage + "', '" + modelChoir.EffectifId +"', '" + modelChoir.Mailing + "', '" + modelChoir.LocationId + "','" + modelChoir.GroupsId + "', '" + modelChoir.NamePresident + "', '" + modelChoir.NameDirector + "', '" + modelChoir.NameCashier + "', '" + modelChoir.NameSecretary + "')";
-
-
+    "'" + modelChoir.Gospel + "', '" + modelChoir.Language + "', '" + modelChoir.Comments + "', '" + modelChoir.Homepage + "', '" + modelChoir.EffectifId +"', '" + modelChoir.Mailing + "', '" + modelChoir.LocationId + "', '" + modelChoir.NamePresident + "', '" + modelChoir.NameDirector + "', '" + modelChoir.NameCashier + "', '" + modelChoir.NameSecretary + "')";
 };
-
-
 
 exports.editChoir = function(choirId, modelUpdateChoir) {
     return  "UPDATE `Choir` " +
@@ -69,3 +69,10 @@ exports.getExportChoir = function (name, fundationYear, church, gospel, language
 };
 
 
+exports.getAllChoir = function(){
+    return "SELECT * FROM `Choir`";
+};
+
+exports.getAllTest = function(){
+    return "SELECT * FROM `User`";
+};
