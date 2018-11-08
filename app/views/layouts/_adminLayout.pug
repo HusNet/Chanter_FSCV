@@ -34,19 +34,19 @@ html(lang='fr')
                     li
                         a(href='/admin/export') #{translation.EXPORT}
 
-                    ul.right
-                        li.dropdown-trigger(data-target='dropdown_lang') #{translation.LANGUAGE}
-                            ul#dropdown_lang.dropdown-content
-                                li
-                                    a(href='?clang=fr') fr
-                                li
-                                    a(href='?clang=de') de
-                        li
-                            a(href='/admin/logout_do') #{translation.LOGOUT}
+                ul.right
+                    li.dropdown-trigger(data-target='dropdown_lang') #{translation.LANGUAGE}
+                        ul#dropdown_lang.dropdown-content
+                            li
+                                a(href='?clang=fr') fr
+                            li
+                                a(href='?clang=de') de
+                    li
+                        a(href='/admin/logout_do') #{translation.LOGOUT}
 
-                a(href='/', class='right brand-logo', style='margin-right:15px') Chanter.ch
+
         div(class='container')
-            block content
+                block content
 
 
         block js

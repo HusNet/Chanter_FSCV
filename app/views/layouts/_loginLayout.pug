@@ -18,13 +18,19 @@ html(lang='fr')
             div(class='nav-wrapper teal lighten-2')
                 ul(id='nav-mobile', class='left')
                     li
-                        a(href='/admin/logout_do') #{translation.LOGIN}
-                    li
-                        a(href='?clang=fr') fr
-                    li
-                        a(href='?clang=de') de
+                        a(href='/') Chanter.ch
 
-                a(href='/', class='right brand-logo', style='margin-right:15px') Chanter.ch
+                ul(class='right')
+                    li.dropdown-trigger(data-target='dropdown_lang') #{translation.LANGUAGE}
+                        ul#dropdown_lang.dropdown-content
+                            li
+                                a(href='?clang=fr') fr
+                            li
+                                a(href='?clang=de') de
+                    li
+                        | &nbsp;&nbsp;&nbsp;&nbsp;
+
+
         div(class='container')
             block content
 
@@ -32,3 +38,12 @@ html(lang='fr')
         block js
             script(src='/public/assets/js/materialize.min.js')
             script(src='/public/js/main.js')
+            script.
+                document.addEventListener('DOMContentLoaded', function () {
+                    var element = document.querySelectorAll('.dropdown-trigger');
+                    var instances = M.Dropdown.init(element, {
+                        hover: true,
+                        constrainWidth: false,
+                        coverTrigger: false
+                    });
+                });

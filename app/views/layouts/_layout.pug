@@ -20,6 +20,8 @@ html(lang='fr')
                     // mainMenu
                     each item in mainMenu
                         if (item.IsMenu)
+                            li
+                                | &nbsp;&nbsp;
                             li.dropdown-trigger(data-target='dropdown_submenu_' + item.idChild)
                                 if (lang === 'fr')
                                     | #{item.Name_fr}
@@ -33,6 +35,8 @@ html(lang='fr')
                                                     | #{sub.Name_fr}
                                                 if (lang === 'de')
                                                     | #{sub.Name_de}
+                            li
+                                | &nbsp;&nbsp;&nbsp;&nbsp;
                         else
                             li
                                 a(href="/?id=" + item.idChild)
