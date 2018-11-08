@@ -35,7 +35,6 @@ services:
   mariadb:
     image: mariadb
     restart: always
-    environment:
     volumes:
       - /var/lib/mysql/data
 
