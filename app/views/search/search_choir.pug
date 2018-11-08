@@ -1,0 +1,43 @@
+extends ../layouts/_layout
+
+block content
+
+    h1.display-4.m-b-2 #{translation.TITLE_ADMIN_SEARCH_CHOIR}
+
+    form.col.s12(method='POST' action='/search/search_choir')
+
+        .input-field.col.s6
+            input.name.validate(type='text' name="name" id="name")
+            label(for='name') #{translation.CHOIR_NAME}
+
+        .input-field.col.s6
+            input.fundationYear.validate(type='text' name="fundationYear" id="fundationYear")
+            label(for='fundationYear') #{translation.DATE_FOUNDATION}
+
+        p
+            label
+                input(type='checkbox', name="church", id="church")
+                span #{translation.CHURCH}
+
+        p
+            label
+                input(type='checkbox', name="gospel", id="gospel")
+                span #{translation.GOSPEL}
+
+        .input-field.col.s6
+            input.language.validate(type='text' name="language", id="language")
+            label(for='language') #{translation.LANGUAGE}
+
+        .input-field.col.s6
+            input.effectif.validate(type='text' name="effectif", id="effectif")
+            label(for='effectif') #{translation.EFFECTIVE}
+
+        .input-field.col.s6
+            input.location.validate(type='text' name="location", id="location")
+            label(for='location') #{translation.LOCATION}
+
+        p
+            button.btn.waves-effect.waves-light(type='submit' name='action')
+                | #{translation.SEARCH}
+                i.material-icons.right search
+

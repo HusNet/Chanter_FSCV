@@ -1,0 +1,25 @@
+extends ../layouts/_loginLayout
+
+block content
+    .main.container
+        .row
+            h3= title
+            .col-md-6.col-md-offset-3
+                h1.display-4.m-b-2 Logging in
+
+                if hasError
+                    div.card-panel.red= errorMessage
+
+                // login form
+                form(method='POST' action='/admin')
+                    div.form-group
+                        label(for='username') Username:
+                        input#username.form-control(type='text', placeholder='Username' name='username' required)
+                        label(for='pwd') Password
+                        input#pwd.form-control(type='password', placeholder='********' name='pwd' required)
+                    button.btn.btn-primary(type='submit') Log in
+
+
+
+
+                block error

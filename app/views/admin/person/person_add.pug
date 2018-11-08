@@ -1,0 +1,95 @@
+extends person
+
+block person_add_block
+
+    h2 #{translation.ADD_PERSON}
+
+
+    p *#{translation.INFO_ADD_FOR_CHOIR}
+
+    br
+
+    form(method='POST' action='/admin/person/person_add')
+
+        div.form-group
+
+            div(class='row')
+                div(class='column')
+                    label(for='lastnameP') #{translation.LASTNAME}:
+                    input#lastnameP.form-control(type='text', placeholder=translation.LASTNAME, name='lastnameP', required)
+
+                div(class='column')
+                    label(for='firstnameP') #{translation.FIRSTNAME}:
+                    input#firstnameP.form-control(type='text', placeholder=translation.FIRSTNAME, name='firstnameP', required)
+
+                div(class='column')
+                    label(for='phoneP') #{translation.PHONEPRIVATE}:
+                    input#phoneP.form-control(type='text', placeholder=translation.PHONEPRIVATE, name='phoneP', required)
+
+                div(class='column')
+                    label(for='phoneProfP') #{translation.PHONEPROF}:
+                    input#phoneProfP.form-control(type='text', placeholder=translation.PHONEPROF, name='phoneProfP')
+
+                div(class='column')
+                    label(for='emailP') #{translation.EMAIL}:
+                    input#emailP.form-control(type='text', placeholder=translation.EMAIL, name='emailP', required)
+
+                div(class='column')
+                    label(for='addressP') #{translation.ADDRESS}:
+                    input#addressP.form-control(type='text', placeholder=translation.ADDRESS, name='addressP', required)
+
+                div(class='column')
+                    label(for='npaP') #{translation.NPA}:
+                    input#npaP.form-control(type='number', placeholder=translation.NPA, name='npaP', required)
+
+                div(class='column')
+                    label(for='cityP') #{translation.CITY}:
+                    input#cityP.form-control(type='text', placeholder=translation.CITY, name='cityP', required)
+
+                div(class='column')
+                    label(for='startAboP') #{translation.STARTABO}:
+                    input#startAboP.form-control(type='date', name='startaboP')
+
+                div(class='column')
+                    P
+                    label
+                        input(name='newsLetterP', type='checkbox')
+                        span #{translation.NEWSLETTER}
+
+
+            div(class='row')
+                div(class='column')
+
+                    label #{translation.ROLE}:
+                    p
+                    label
+                        input(name='directorP', type='checkbox')
+                        span #{translation.DIRECTOR}
+                    p
+                    label
+                        input(name='director2P', type='checkbox')
+                        span #{translation.DIRECTOR} 2
+                    p
+                    label
+                        input(name='presidentP', type='checkbox')
+                        span #{translation.PRESIDENT}
+                    p
+                    label
+                        input(name='secretaryP', type='checkbox')
+                        span #{translation.SECRETARY}
+                    p
+                    label
+                        input(name='cashierP', type='checkbox')
+                        span #{translation.CASHIER}
+                    p
+                        label
+                            input(name='comiteP', type='checkbox')
+                            span #{translation.COMITE}
+                    p
+                        label
+                            input(name='autreP', type='checkbox')
+                            span #{translation.AUTRE}
+
+
+        button.btn.btn-primary(type='submit' name='action') #{translation.ADD}
+

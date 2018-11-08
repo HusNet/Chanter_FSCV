@@ -1,0 +1,21 @@
+extends ../../layouts/_adminLayout
+
+block content
+
+    h1.display-4.m-b-2 #{translation.TITLE_ADMIN_MENU}
+
+    a#a_menu_add.btn.btn-primary(href="/admin/menu/add") #{translation.ADD_MENU}
+    a#a_menu_edit.btn.btn-primary(href="/admin/menu/edit") #{translation.UPDATE_MENU}
+    a#a_menu_delete.btn.btn-primary(href="/admin/menu/delete") #{translation.DELETE_MENU}
+
+    // INSERT / EDIT / DELETE RESULT
+    block result
+
+    // ADD MENU
+    block add_menu
+
+    // EDIT MENU
+    block edit_menu
+
+    // DELETE MENU
+    block delete_menu

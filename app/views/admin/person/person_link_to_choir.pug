@@ -1,0 +1,39 @@
+extends person_search_link_to_choir
+
+block resultSearchLink
+
+    form(method='POST' action='/admin/person/person_link_to_choir')
+
+        input#idUser.validate(type='hidden' name='idUser' value='' + userLink[0].UserId)
+        br
+
+        div.form-group
+
+            label #{translation.PERSON_CHOOSEN}
+            select#personId(name='personId')
+                option(value='', disabled='', selected='') #{userLink[0].Lastname} #{userLink[0].Firstname}
+
+
+
+            p #{translation.CHOIR_CHOOSEN}
+
+            label #{translation.CHOIR_CHOSE}
+            select#choirId(name='choirId')
+                option(value='', disabled='', selected='') choose
+                each choir in choirList
+                    option(value='' + choir.ChoirId) #{choir.Name}
+
+            br
+
+        button.btn.btn-primary(type='submit' name='action') #{translation.PERSON_LINK_CHOIR}
+
+
+
+
+    script.
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('select');
+            var options = [];
+            var instances = M.FormSelect.init(elems, options);
+
+        });

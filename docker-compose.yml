@@ -1,40 +1,49 @@
-version: '3.'
+version: '3.7'
 
 services:
+
   chanter:
-    # uses: node:9.8.0
     build: .
-    volumes:
-    - .:/opt/node/app/chanter
-    ports:
-    - 3000:3000
+    command: nodemon -L --watch views chanter.js
     environment:
-    - NODE_ENV=development
-    - PORT=3000
-    - MYSQL_HOST=localhost
-    - MYSQL_USER=chanter.local
-    - MYSQL_PASSWORD=unlucky
-    command: 'true'
+      NODE_ENV: production
+      DB_CONNECTION: mariadb://dev:unlucky@mariadb:3307/chanter-dev
+      VIRTUAL_HOST: grp3.p645.hevs.ch
+      LETSENCRYPT_HOST: grp3.p645.hevs.ch
+      LETSENCRYPT_EMAIL: aurelie.glassey@students.hevs.ch
+    restart: always
     depends_on:
-    - mysql
-    - redis
-    container_name: ch.chanter.webapp
+    - mariadb
 
-  mysql:
-    # uses mysql:14.14
-    build: ./docker/mysql
-    ports:
-    - 3380:3306
-    volumes:
-    - mysql-data:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
     environment:
-    - MYSQL_ROOT_PASSWORD=root
-    container_name: ch.chanter.mysql
+      PMA_ARBITRARY: 1
+      PMA_HOST: mariadb
+      PMA_USER: root
+      PMA_PASSWORD: root
+      VIRTUAL_HOST: phpmyadmindomains.grp3.p645.hevs.ch
+      LETSENCRYPT_HOST: phpmyadmindomains.grp3.p645.hevs.ch
+      LETSENCRYPT_EMAIL: aurelie.glassey@students.hevs.ch
+    volumes:
+    - /sessions
+    depends_on:
+    - mariadb
 
-volumes:
-  mysql-data:
+
+  mariadb:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_DATABASE:      chanter-prod
+      MYSQL_USER:          prod
+      MYSQL_PASSWORD:      unlucky
+      DATABASE_PORT_NUMBER: 3307
+    volumes:
+      - /var/lib/mysql/data
 
 networks:
   default:
     external:
-      name: local
+      name: webproxy

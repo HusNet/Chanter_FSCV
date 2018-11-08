@@ -1,0 +1,190 @@
+extends choir_update
+
+block resultSearch
+
+    h2 #{translation.EDIT} #{choirResult[0].Name}
+
+    br
+
+    form.col.s12(id='myForm' method='POST' action='/admin/choir/choir_result')
+
+        input#idChoir.validate(type='hidden' name='idChoir' value='' + choirResult[0].ChoirId)
+        input#idLocation.validate(type='hidden' name='idLocation' value='' + locationResult[0].LocationId)
+        input#idEffectif.validate(type='hidden' name='idEffectif' value='' + effectifResult[0].EffectifId)
+        input#idGroups.validate(type='hidden' name='idGroups' value='' + groupsResult[0].GroupsId)
+
+
+        div.form-group
+            .row
+            .input-field.col.s6
+                label(for='choeur_name') #{translation.CHOIR_NAME}
+                input#choeur_name.form-control(type='text', value='' + choirResult[0].Name, name='choeur_name' required)
+            .input-field.col.s6
+                label(for='effectif') #{translation.EFFECTIVE}
+                input#effectif.form-control(type='number',value='' + effectifResult[0].NbMembers, name='nbeffectif' required)
+
+        .row
+            .input-field.col.s2
+                label(for='npa') #{translation.POSTE_CODE}
+                input#NPA.form-control(type='number',value='' + locationResult[0].NPA, name='npa' required)
+            .input-field.col.s4
+                label(for='lieu') #{translation.LOCATION}
+                input#lieu.form-control(type='text',value='' + locationResult[0].City, name='city' required)
+
+            .input-field.col.s4
+                label(for='dateOfFundation') #{translation.DATE_FOUNDATION}
+                input#dateOfFundation.form-control(type='date',value='' + choirResult[0].FundationYear, name='dateOfFundation',placeholder='date' required)
+
+
+        .row
+            .input-field.col.s8
+                label(for='homepage') #{translation.HOMEPAGES}
+                input#homepage.form-control(type='text', name='homepage',value='' + choirResult[0].WebPage)
+
+            select(name='language', myvalue=choirResult[0].Language).browser-default.col.s4
+                option(value='', selected='') #{translation.LANGUAGE}
+                option(value='1' ) #{translation.FR}
+                option(value='2') #{translation.DE}
+
+        .row
+            p.col.s3 #{translation.SWISS_CHOIR_UNION}:
+            select(name='usc' required , myvalue=groupsResult[0].USC).browser-default.col.s4
+                option(value='' , selected='') #{translation.MEMBER}
+                option(value='1' ) #{translation.MEMBER_USC}
+                option(value='2') #{translation.NOT_USC}
+            .input-field.col.s4
+                input#dateUSC.form-control(type='date', value='' + groupsResult[0].DateUSC, placeholder='', name='dateUSC')
+                label(for='dateUSC') #{translation.DATE_USC}
+
+        .row
+            p.col.s3 #{translation.CANTONAL_FEDERATION}:
+            select(name='fscv' required, myvalue=groupsResult[0].FSCV).browser-default.col.s4
+                option(value='' , selected='') #{translation.MEMBER}
+                option(value='1') #{translation.FSCV}
+                option(value='2') #{translation.NOT_FSCV}
+            .input-field.col.s4
+                label(for='dateFSCV') #{translation.DATE_FSCV}
+                input#dateFSCV.form-control(type='date', value='' + groupsResult[0].DateFSCV, name='dateFSCV', placeholder='')
+
+        .row
+
+            select(name='mailing', myvalue=choirResult[0].Mailing).browser-default.col.s4
+                option(value='0', selected='') #{translation.MAIL_ADDRESSING}
+                option(value='1') #{translation.PRESIDENT}
+                option(value='2') #{translation.DIRECTOR}
+
+        .row
+            select(name='grpmts' required, myvalue=groupsResult[0].Name).browser-default.col.s4
+                option(value='0', selected='') #{translation.GRPMTS_REGION}
+                option(value='1') #{translation.GROUP_GSCBV}
+                option(value='2') #{translation.GROUP_UCC}
+                option(value='3') #{translation.GROUP_GCVC}
+                option(value='4') #{translation.GROUP_OCV}
+
+            .input-field.col.s3
+                input#dateGrpmts.datepicker(type='date', value='' + groupsResult[0].MembershipDate, placeholder='', name='dateGrpmts' required)
+                label(for='dateGrpmts') #{translation.DATE_GRPMTS}
+        .row
+            select(name='sousGrpmts', myvalue=groupsResult[0].SubGroups).browser-default.col.s4
+                option(value='0', selected='') #{translation.DECANAT}
+                option(value='1') #{translation.WELTICH}
+                option(value='2') #{translation.LEUK}
+                option(value='3') #{translation.RARON}
+                option(value='4') #{translation.BRIG}
+                option(value='5') #{translation.VISP}
+                option(value='6') #{translation.ERNEN}
+
+            select(name='typeChoeur',myvalue=choirResult[0].Type).browser-default.col.s4
+                option(value='', disabled='', selected='' required) #{translation.TYPE_CHOIR}
+                option(value='1') #{translation.ADULT}
+                option(value='2') #{translation.TEEN}
+                option(value='3') #{translation.KID}
+                option(value='4') #{translation.MIXT}
+                option(value='5') #{translation.WOMEN}
+                option(value='6') #{translation.MEN}
+
+            p.col.s2
+                label
+                    if choirResult[0].Church == 1
+                        input(name='church_leader', type='checkbox', checked='checked')
+                    else
+                        input(name='church_leader', type='checkbox')
+                    span #{translation.CHURCH_LEADER}
+            p.col.s2
+                label
+                    if choirResult[0].Gospel == 1
+                        input(name='gospel_leader', type='checkbox', checked='checked')
+                    else
+                        input(name='gospel_leader', type='checkbox')
+                    span #{translation.GOSPEL_LEADER}
+
+        .row
+            .input-field.col.s4
+                p #{translation.NAME_PRESIDENT}
+            select(name='presidentName', myvalue='' + choirResult[0].NamePresident).browser-default.col.s4
+                option(value='',  selected='') #{translation.PRESIDENT} #{translation.ALREADY_EXISTING}
+                each person in PersonPresident
+                    option(value= person.Firstname + " " + person.Lastname)= person.Firstname + " " + person.Lastname
+
+
+
+            a.btn.btn-primary.col.s3(href="/admin/person/person_add") #{translation.CREATION_PERSON}
+        .row
+            .input-field.col.s4
+                p #{translation.NAME_DIRECTOR}
+            select(name='directorName', myvalue='' + choirResult[0].NameDirector ).browser-default.col.s4
+                option(value='',  selected='') #{translation.DIRECTOR} #{translation.ALREADY_EXISTING}
+                each person in PersonDirector
+                    option(value= person.Firstname + " " + person.Lastname)= person.Firstname + " " + person.Lastname
+
+        .row
+            .input-field.col.s4
+                p #{translation.NAME_CASHIER}
+            select(name='cashier', myvalue='' + choirResult[0].NameCashier).browser-default.col.s4
+                option(value='' , selected='') #{translation.CASHIER} #{translation.ALREADY_EXISTING}
+                each person in PersonCaissier
+                    option(value= person.Firstname + " " + person.Lastname)= person.Firstname + " " + person.Lastname
+
+
+        .row
+            .input-field.col.s4
+                p #{translation.NAME_SECRETARIAT}
+            select(name='secretary', myvalue=''+ choirResult[0].NameSecretary ).browser-default.col.s4
+                option(value='',  selected='') #{translation.SECRETARY} #{translation.ALREADY_EXISTING}
+                each person in PersonSecretaire
+                    option(value= person.Firstname + " " + person.Lastname)= person.Firstname + " " + person.Lastname
+
+        .row
+            .input-field.col.s12
+                label.active(for='comment') #{translation.COMMENTS}
+                textarea#comment.materialize-textarea(name='comment', value=''  + choirResult[0].Remarks)
+
+        .row
+            button.btn.btn-primary.col.s3(type='submit') #{translation.UPDATE}
+
+
+
+
+
+        script.
+            function setSelectValue() {
+                var list = document.querySelectorAll('select');
+                for(var i =0;i<list.length;i++){
+                    var current = list[i];
+                    if(current.attributes['myvalue'] && current.attributes['myvalue'].value != ''){
+                        var myvalue = current.attributes['myvalue'].value;
+                        for(var j = 0;j<current.children.length;j++){
+                            if(myvalue == current.children[j].attributes['value'].value){
+                                current.children[j].setAttribute('selected','selected');
+                            }else{
+                                current.children[j].removeAttribute('selected');
+                            }
+                        }
+                    }
+                }
+                var instances = M.FormSelect.init(list, {});
+            }
+            $(document).ready(function(){
+                setSelectValue();
+            })
+

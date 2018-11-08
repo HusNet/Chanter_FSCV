@@ -1,0 +1,35 @@
+extends menu
+
+block delete_menu
+
+    script.
+        document.getElementById('a_menu_add').classList.remove('active');
+        document.getElementById('a_menu_edit').classList.remove('active');
+        document.getElementById('a_menu_delete').classList.add('active');
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.dropdown-trigger');
+            var instances = M.Dropdown.init(elems, {});
+        });
+
+        function confirmDelete(id, name_fr, name_de) {
+            if (confirm("Delete " + name_fr + "/" + name_de + " ?"))
+                window.location.href = '/admin/menu/delete?id=' + id;
+        }
+    br
+    br
+    br
+    br
+
+    a.dropdown-trigger.btn(href="#", data-target='dropdown_menu_list') #{translation.SELECT_MENU}
+
+    ul#dropdown_menu_list.dropdown-content
+        each menu in menus
+            li
+                a(onclick='confirmDelete(' + menu.idMenu + ', "' + menu.Name_fr + '", "' + menu.Name_fr + '")')
+                if (lang === 'fr')
+                    | #{menu.Name_fr}
+                if (lang === 'de')
+                    | #{menu.Name_de}
+
+

@@ -1,0 +1,28 @@
+extends menu
+
+block add_menu
+
+    script.
+        document.getElementById('a_menu_add').classList.add('active');
+        document.getElementById('a_menu_edit').classList.remove('active');
+        document.getElementById('a_menu_delete').classList.remove('active');
+
+    form(method='POST' action='/admin/menu/add', id='add_menu')
+        div.form-group
+
+            div(class='row')
+                div(class='column')
+                    label(for='add_title_fr') #{translation.FR_TITLE}:
+                    input#add_title_fr.form-control(type='text', placeholder='Fr Title' name='title_fr' required)
+                    label(for='add_title_de') #{translation.DE_TITLE}:
+                    input#add_title_de.form-control(type='text', placeholder='De Title' name='title_de' required)
+
+                div(class='column')
+                    p
+                    label
+                        input#add_is_main(name='mainMenu', type='checkbox' value='true')
+                        span #{translation.IS_MAIN}
+
+
+        button.btn.btn-primary(type='submit') #{translation.ADD}
+

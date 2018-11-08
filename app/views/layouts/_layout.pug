@@ -1,0 +1,78 @@
+doctype html
+html(lang='fr')
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport', content='width=device-width')
+        link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
+
+        script(src='/public/assets/js/jquery.js')
+
+        title= title
+        block css
+            link(href='/public/assets/css/materialize.min.css', rel='stylesheet')
+            link(href='/public/css/chanter.css', rel='stylesheet')
+
+    body
+        nav
+
+            div(class='nav-wrapper teal lighten-2')
+                ul(id='nav-mobile', class='left')
+                    // mainMenu
+                    each item in mainMenu
+                        if (item.IsMenu)
+                            li
+                                | &nbsp;&nbsp;
+                            li.dropdown-trigger(data-target='dropdown_submenu_' + item.idChild)
+                                if (lang === 'fr')
+                                    | #{item.Name_fr}
+                                if (lang === 'de')
+                                    | #{item.Name_de}
+                                ul.dropdown-content(id='dropdown_submenu_' + item.idChild)
+                                    each sub in item.content
+                                        li
+                                            a(href="/?id=" + sub.idChild)
+                                                if (lang === 'fr')
+                                                    | #{sub.Name_fr}
+                                                if (lang === 'de')
+                                                    | #{sub.Name_de}
+                            li
+                                | &nbsp;&nbsp;&nbsp;&nbsp;
+                        else
+                            li
+                                a(href="/?id=" + item.idChild)
+                                    if (lang === 'fr')
+                                        | #{item.Name_fr}
+                                    if (lang === 'de')
+                                        | #{item.Name_de}
+                    li.dropdown-trigger(data-target='dropdown_submenu2') #{translation.ACTUS}
+                        ul#dropdown_submenu2.dropdown-content
+                            li
+                                a(href='/news') #{translation.NEWS}
+                            li
+                                a(href='/calendar') #{translation.CALENDAR}
+                ul.right
+                    li
+                        a(href='/search') #{translation.SEARCH}
+                    li.dropdown-trigger(data-target='dropdown_lang') #{translation.LANGUAGE}
+                        ul#dropdown_lang.dropdown-content
+                            li
+                                a(href='?clang=fr') fr
+                            li
+                                a(href='?clang=de') de
+                    li
+                        a(href="/admin") #{translation.LOGIN}
+
+
+
+        div(class='container')
+            block content
+
+
+        block js
+            script(src='/public/assets/js/materialize.min.js')
+
+            script.
+                document.addEventListener('DOMContentLoaded', function () {
+                    var element = document.querySelectorAll('.dropdown-trigger');
+                    var instances = M.Dropdown.init(element, {hover: true, constrainWidth: false, coverTrigger: false});
+                });

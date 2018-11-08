@@ -1,0 +1,39 @@
+extends ../../layouts/_adminLayout
+block content
+    h1 #{translation.TITLE_ADMIN_NEWS_LINK}
+
+
+    form.col.s12(method='POST' action='/admin/news/news_link')
+
+        .input-field.col.s12
+            select#idFr(name='idFr')
+                option(value='', disabled='', selected='') Choose your option
+                each val in news
+                    if(val.PageId === val.idFR)
+                        option(value=''+val.PageId) #{val.Title}
+
+            label #{translation.FR}
+
+        br
+
+        .input-field.col.s12
+            select#idDe(name='idDe')
+                option(value='', disabled='', selected='') Choose your option
+                each val in news
+                    if (val.PageId === val.idDE)
+                        option(value=''+val.PageId) #{val.Title}
+
+            label #{translation.DE}
+
+        p
+            button.btn.waves-effect.waves-light(type='submit' name='action')
+                | #{translation.LINK}
+                i.material-icons.right send
+
+
+    script.
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('select');
+            var options = [];
+            var instances = M.FormSelect.init(elems, options);
+        });

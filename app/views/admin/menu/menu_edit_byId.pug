@@ -1,0 +1,173 @@
+extends menu_edit
+
+block edit_selected_id
+
+    br
+    br
+
+
+    // config
+    // menus
+    // menu
+    // pages
+    // children
+    // available_children
+    // lang
+
+    form(method = 'POST' action = '/admin/menu/edit', id = 'edit_menu')
+        div.form-group
+
+            div(class='row')
+                div(class='column')
+                    input#id_edit_hidden(name='id_selected_menu', type='hidden', value=menu.idMenu)
+                    label(for='edit_title_fr') #{translation.FR_TITLE}:
+                    input#edit_title_fr.form-control(type='text', placeholder='Fr Title', name='title_fr', required, value=menu.Name_fr)
+                    label(for='edit_title_de') #{translation.DE_TITLE}:
+                    input#edit_title_de.form-control(type='text', placeholder='De Title', name='title_de', required, value=menu.Name_de)
+
+                div(class='column')
+                    label
+                        input(name='mainMenu', type='checkbox', checked=menu.idMenu===config.MainMenuId)
+                        span #{translation.IS_MAIN}
+
+
+        button.btn.btn-primary(type='submit') #{translation.UPDATE}
+
+        br
+
+    div(class='row')
+        br
+        ul#collection_dyn.collection.with-header(onload="function(){showData();}")
+            li.collection-header
+                div
+                    if (lang === 'fr')
+                        | #{menu.Name_fr}
+                    if (lang === 'de')
+                        | #{menu.Name_de}
+                    a.dropdown-trigger_2.secondary-content(href="#", data-target='dropdown_menu_page_list')
+                        i.material-icons add
+                        ul#dropdown_menu_page_list.dropdown-content
+                            each child in available_children
+                                li
+                                    a(onclick="addChildInMenu(" + child.idChild +", " + child.IsMenu + ")")
+                                        if (child.IsMenu)
+                                            | ↪&nbsp;&nbsp;
+                                        else
+                                            | 🖹&nbsp;
+                                        if (lang === 'fr')
+                                            | #{child.Name_fr}
+                                        if (lang === 'de')
+                                            | #{child.Name_de}
+
+
+
+    script.
+        var config;
+        var menus;
+        var menu;
+        var pages;
+        var children;
+        var available_children;
+        var lang;
+        var cList;
+
+        function showData() {
+            $.getJSON("/admin/menu/json/edit?id=" + document.getElementById('id_edit_hidden').value, function (data) {
+                config = data.config;
+                menus = data.menus;
+                menu = data.menu;
+                pages = data.pages;
+                children = data.children;
+                available_children = data.available_children;
+                lang = data.lang;
+
+                $('ul#collection_dyn > :not(:first-child)').remove();
+                cList = $('ul#collection_dyn')
+
+
+                $.each(children, function (index) {
+
+                    let child = this;
+
+                    var li = $('<li/>')
+                        .addClass('collection-item')
+                        .appendTo(cList);
+
+                    var childName = "";
+                    if (child.IsMenu)
+                        childName = "↪ ";
+                    else
+                        childName = "🖹 ";
+                    if (lang === 'fr')
+                        childName += child.Name_fr;
+                    else if (lang === 'de')
+                        childName += child.Name_de;
+
+                    var div = $('<div/>')
+                        .text(childName)
+                        .appendTo(li);
+
+                    var a1 = $('<a/>')
+                        .addClass('secondary-content')
+                        .click(function(){deleteChildFromMenu(child.idChild, child.IsMenu)})
+                        .appendTo(div);
+                    $('<i/>')
+                        .addClass('material-icons')
+                        .text("clear")
+                        .appendTo(a1);
+
+                    var a2 = $('<a/>')
+                        .addClass('secondary-content')
+                        .click(function(){invertChildOrder(child.Order, -1)})
+                        .appendTo(div);
+                    $('<i/>')
+                        .addClass('material-icons')
+                        .text("keyboard_arrow_up")
+                        .appendTo(a2);
+
+                    var a3 = $('<a/>')
+                        .addClass('secondary-content')
+                        .click(function(){invertChildOrder(child.Order, 1)})
+                        .appendTo(div);
+                    $('<i/>')
+                        .addClass('material-icons')
+                        .text("keyboard_arrow_down")
+                        .appendTo(a3);
+                });
+            })
+        }
+
+        function invertChildOrder(childOrder, nextChild) {
+            $.getJSON("/admin/menu/edit?id=" + document.getElementById('id_edit_hidden').value + "&childOrder=" + childOrder + "&nextChild=" + nextChild, function (data) {
+                if (data) {
+                    showData();
+                }
+            })
+
+        }
+
+        function addChildInMenu(idChild, isMenu){
+            $.getJSON("/admin/menu/edit?id=" + document.getElementById('id_edit_hidden').value + "&idChild=" + idChild + "&isMenu=" + isMenu, function (data) {
+                if (data) {
+                    showData();
+                }
+            })
+        }
+
+        function deleteChildFromMenu(idChild, isMenu){
+            $.getJSON("/admin/menu/edit?id=" + document.getElementById('id_edit_hidden').value + "&idChild=" + idChild + "&isMenu=" + isMenu + "&del=" + true, function (data){
+                if (data) {
+                    showData();
+                }
+            })
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.dropdown-trigger');
+            var elems_2 = document.querySelectorAll('.dropdown-trigger_2');
+            var instances = M.Dropdown.init(elems, {hover: true});
+            var instances_2 = M.Dropdown.init(elems_2, {hover: true, constrainWidth: false});
+        });
+
+    script(type='text/javascript')
+        | showData();

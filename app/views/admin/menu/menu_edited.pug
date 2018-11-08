@@ -1,0 +1,11 @@
+extends menu
+
+block result
+
+    br
+    br
+
+    if success
+        div.success #{translation.EDITION_SUCCESS}
+    else
+        div.failed #{translation.EDITION_FAILURE}
